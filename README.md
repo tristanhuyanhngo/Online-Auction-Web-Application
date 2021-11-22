@@ -6,7 +6,7 @@
 
 ## Installation
 
-- Cần cài đặt Visual Studio, Microsoft SQL Server, Microsoft SQL Management.
+- Cần cài đặt IntelliJ, Visual Studio Code, MySQL Server, XAMPP, ....
 - Still update ...
 
 ## Usage
