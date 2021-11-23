@@ -1,16 +1,22 @@
-var express = require('express');
-const handlebars = require('express-handlebars').create({ defaultLayout: 'main' })
-const path = require('path');
+import express from 'express';
+import { engine } from 'express-handlebars';
+import indexRoute from './routes/index.js'
+import path from 'path'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-var app = express();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.engine('handlebars', handlebars.engine)
-app.set('view engine', 'handlebars')
+
+const app = express();
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
+app.use('/', indexRoute)
 
 app.listen(3000);

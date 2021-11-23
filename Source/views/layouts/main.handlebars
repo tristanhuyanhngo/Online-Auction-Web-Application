@@ -5,26 +5,38 @@
     <meta charset="utf-8">
     <title>Example App</title>
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div>
-        <div className="container mx-auto xl:px-40">
-            <div className="relative flex items-center justify-between h-16">
-                <div>
-                    Cagtegory
-                </div>
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <div class="bg-blue-500 animate-none shadow-2xl">
+            <div class="container mx-auto xl:px-40">
+                <div class="relative flex items-center justify-between h-16">
+                    <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+                        <img class="block h-8 w-auto" src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg">
 
-                </div>
-                
+                        <div class="hiden md:block">
+                            <button class=" w-auto rounded-lg ml-4 p-2 px-3 hover:bg-blue-900 font-semibold duration-500">Category</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-1 items-center justify-end">
+                        <div class="rounded-lg bg-white">
+                            <i class="fa fa-search px-2 " aria-hidden="true"></i>
+                            <input type="search" class="w-64 p-1 h-auto rounded-lg">
+                        </div>
+                        <a href="/register" class="hiden md:block">
+                            <button class=" w-auto rounded-lg ml-4 p-2 px-3 hover:bg-blue-900 font-semibold duration-500">Register</button>
+                        </a>
 
+                        <a href="/login" class="hiden md:block">
+                            <button class=" w-auto rounded-lg ml-4 p-2 px-3 hover:bg-blue-900 font-semibold duration-500">Login</button>
+                        </a>
+                    </div>
+                </div>
             </div>
+
         </div>
-
-    </div>
-    {{{body}}}
-
+        {{{body}}}
 </body>
 
 </html>
