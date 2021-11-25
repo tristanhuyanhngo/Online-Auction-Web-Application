@@ -4,14 +4,22 @@ This is the final project of the course Web Application Development in HCMUS. In
 - See detail requirements at: https://hackmd.io/@nndkhoa9/BJKMTpH5r.
 - See source codes in directory `Source`.
 
-## Installation
+## Web application
+This is an online commerce web application which allows people to sell by aution.
 
-- Cần cài đặt IntelliJ, Visual Studio Code, MySQL Server, XAMPP, ....
-- Still update ...
+### Tools
 
-## Usage
+- IntelliJ/Visual Studio Code, MySQL Server, XAMPP
+- Still updating ...
 
-- Still update ...
+### Libraries
+
+- Knex.js, Tailwind, handlebars, express, morgan
+- Still updating ...
+
+## Server side
+
+The server relies on Raspberry Pi which is in-charge of a Nodejs server connecting to MySQL.
 
 ## Authors
 - [Thái Trần Hồng Phúc - 19KTPM - FIT HCMUS](https://github.com/thanhhoang4869)
