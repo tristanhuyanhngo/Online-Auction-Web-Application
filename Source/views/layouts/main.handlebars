@@ -6,109 +6,27 @@
     <title>Example App</title>
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="relative min-h-screen bg-white min-h-screen">
-    <div class="bg-white animate-none shadow-2xl relative">
-        <div class="container mx-auto xl:px-40">
-            <div class="relative flex items-center justify-between h-16">
-                <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-                    <a href="/"><img class="block h-8 w-auto ml-2"
-                            src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg">
-                    </a>
-                    <div class="group">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 hover:text-purple-700 font-light">Category</button>
-                        <ul
-                            class="bg-white p-3 ml-2  border absolute invisible group-hover:visible mt-4 duration-100 group-hover:mt-2 transition-all w-64">
-                            <li class=" p-1 hover:text-purple-700 cursor-pointer flex justify-between font-light">
-                                 Phone
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                            </li>
-                            <li class="p-1 hover:text-purple-700 cursor-pointer flex justify-between font-light">
-                                Laptop
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="flex flex-1 items-center justify-end">
-                    <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-black">
-                        <input type="search" class="w-64 p-1 h-auto focus:outline-none "
-                            placeholder="Search">
-                        <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
-                    </div>
+<body class="relative min-h-screen bg-gray-200 font-Roboto">
 
-                    {{#if user}}
-                    <button class="h-8 w-8 rounded-full border-2 bg-white"></button>
-                    {{else}}
+    {{> header/header}}
 
-                    <a href="/login" class="hiden md:block">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 hover:bg-gray-100 font-normal duration-500  border-solid border border-black">Login</button>
-                    </a>
-
-                    <a href="/register" class="hiden md:block">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 bg-black text-white font-normal duration-500">Register</button>
-                    </a>
-
-                    {{/if}}
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="padding-bottom: 350px;">
+    <div class="mt-2" style="padding-bottom: 350px;">
         {{{body}}}
     </div>
 
-    <div class="absolute mt-auto bottom-0 w-screen">
-        <footer class="footer bg-white relative pt-1 border-b-2 bg-white border border-black">
-            <div class="container mx-auto xl:px-40">
-
-                <div class="sm:flex sm:mt-8">
-                    <div class="mt-8 sm:mt-0 sm:w-full flex flex-col md:flex-row justify-between">
-                        <div class="flex justify-center items-center">
-                            <img class="block w-48 h-auto object-cover"
-                                src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg">
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span
-                                class="text-black text-md uppercase mb-2 font-bold text-center">CONTRACT</span>
-                            <ul class="text-black text-md">
-                                <li class="mb-2">
-                                    <p>University of Science, Ho Chi Minh city,</p>
-                                    <p>Viet Nam</p>
-                                    <a href="#">Email: @gmail.com</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span
-                                class="text-black text-md uppercase mb-2 font-bold text-center">SHARE
-                                US ON</span>
-                            <div class="flex justify-between mt-3 w-48">
-                                <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
-                                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
-                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container mx-auto px-6">
-                <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-                    <div class="sm:w-2/3 text-center py-6">
-                        <p class="text-sm text-black font-bold mb-2">
-                            © 2021
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    {{> footer/footer}}
 
 </body>
 
