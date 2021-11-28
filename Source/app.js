@@ -31,5 +31,4 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRoute)
 app.use('/product', productRoute)
 
-
 app.listen(3000);
