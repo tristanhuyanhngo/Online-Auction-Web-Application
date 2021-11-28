@@ -3,3 +3,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* @layer utilities{
+    .sub-dropdown: :hover>.sub-dropdown-content{
+        opacity: 1;
+        visibility: visible;
+        top: 0;
+    }
+
+    .sub-dropdown:hover>a{
+        back
+    }
+} */
