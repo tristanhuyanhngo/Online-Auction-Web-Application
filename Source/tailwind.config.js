@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        hor: {
+        blue: {
           light: '#85d7ff',
           cyan: '#0891B2',
           DEFAULT: '#4682B4',
