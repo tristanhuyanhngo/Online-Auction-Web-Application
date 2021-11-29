@@ -5,22 +5,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // transparent: 'transparent',
-        // current: 'currentColor',
-        // blue: {
-        //   light: '#85d7ff',
-        //   cyan: '#0891B2',
-        //   DEFAULT: '#4682B4',
-        //   royal: '#4169E1',
-        //   dark: '#009eeb',
-        
-        //}
-        blue: colors.cyan,
+        cyan: colors.cyan,
+        key: '#0E7490'
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+
+      display: ["group-hover", "hover"],
+      margin: ["group-hover"],
+      visibility: ["group-hover"],
+      backgroundColor: ['group-focus'],
+    
+    },
   },
   plugins: [],
 }
