@@ -13,9 +13,9 @@ module.exports = {
   variants: {
     extend: {
 
-      display: ["group-hover", "hover"],
-      margin: ["group-hover"],
-      visibility: ["group-hover"],
+      display: ["group-hover", "hover", "group-focus", "focus"],
+      margin: ["group-hover", "group-focus"],
+      visibility: ["group-hover", "group-focus"],
       backgroundColor: ['group-focus'],
     
     },

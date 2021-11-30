@@ -1,48 +1,48 @@
 <div class="bg-gray-50 animate-none shadow relative">
-            <div class="relative ml-2 mr-6 flex items-center justify-between h-16">
-                <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-                    <a href="/"><img class="block h-8 w-auto ml-2"
-                            src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg">
-                    </a>
-                    <div class="group">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 hover:text-purple-700 font-light">Category</button>
-                        <ul
-                            class="bg-white p-3 ml-2  border absolute invisible group-hover:visible mt-4 duration-100 group-hover:mt-2 transition-all w-64">
-                            <li class=" p-1 hover:text-purple-700 cursor-pointer flex justify-between font-light">
-                                 Phone
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                            </li>
-                            <li class="p-1 hover:text-purple-700 cursor-pointer flex justify-between font-light">
-                                Laptop
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="flex flex-1 items-center justify-end">
-                    <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-black">
-                        <input type="search" class="w-64 p-1 h-auto focus:outline-none "
-                            placeholder="Search">
-                        <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
-                    </div>
-
-                    {{#if user}}
-                    <button class="h-8 w-8 rounded-full border-2 bg-white"></button>
-                    {{else}}
-
-                    <a href="/login" class="hiden md:block">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 hover:bg-gray-100 font-normal duration-500  border-solid border border-black">Login</button>
-                    </a>
-
-                    <a href="/register" class="hiden md:block">
-                        <button
-                            class=" w-auto rounded-sm ml-4 p-2 px-3 bg-black text-white font-normal duration-500">Register</button>
-                    </a>
-
-                    {{/if}}
-
+    <div class="container mx-auto xl:px-10">
+        <div class="relative flex items-center justify-between h-16">
+            <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+                <a href="/"><img class="block h-8 w-auto ml-2"
+                        src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg">
+                </a>
+                <div class="group z-10">
+                    <button class=" w-auto rounded-sm ml-4 p-2 px-3 hover:text-cyan-700 font-light">Category</button>
+                    <ul
+                        class="bg-white p-3 ml-2  border absolute invisible group-hover:visible mt-4 duration-100 group-hover:mt-2 transition-all w-64">
+                        <li class=" p-1 hover:text-cyan-700 cursor-pointer flex justify-between font-light">
+                            Phone
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </li>
+                        <li class="p-1 hover:text-cyan-700 cursor-pointer flex justify-between font-light">
+                            Laptop
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div class="flex flex-1 items-center justify-end">
+                <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-black">
+                    <input type="search" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
+                    <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
+                </div>
+
+                {{#if user}}
+                <button class="h-8 w-8 rounded-full border-2 bg-white"></button>
+                {{else}}
+
+                <a href="/login" class="hiden md:block">
+                    <button
+                        class=" w-auto rounded-sm ml-4 p-2 px-3 hover:bg-gray-100 font-normal duration-500  border-solid border border-cyan-600 text-cyan-600">Login</button>
+                </a>
+
+                <a href="/register" class="hiden md:block">
+                    <button
+                        class=" w-auto rounded-sm ml-4 p-2 px-3 bg-cyan-600 hover:bg-cyan-900 text-white font-normal duration-500">Register</button>
+                </a>
+
+                {{/if}}
+
+            </div>
+        </div>
     </div>
+</div>
