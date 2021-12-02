@@ -27,6 +27,7 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+app.use(express.static('res')); 
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRoute)
