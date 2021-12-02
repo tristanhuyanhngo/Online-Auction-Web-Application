@@ -26,6 +26,18 @@ router.get('/wishlist', (req, res) => {
     });
 });
 
+router.get('/cart', (req, res) => {
+    res.render('bidder/cart',{
+        layout: 'account.handlebars'
+    });
+});
+
+router.get('/won-bid', (req, res) => {
+    res.render('bidder/won-bid',{
+        layout: 'account.handlebars'
+    });
+});
+
 // router.get('/register', (req, res) => {
 //     res.render('register');
 // });
