@@ -1,14 +1,14 @@
-<div class=" container mx-auto xl:px-40 py-1 text-xs font-light flex mt-2 justify-start">
+<div class=" container mx-auto xl:px-10 py-1 text-xs font-light flex mt-2 justify-start">
     <a class="  uppercase" href=""><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class=" ml-3">></div>
     <a class=" uppercase ml-3" href="">Phone</a>
 </div>
-<div class="container mx-auto xl:px-40 mt-3">
+<div class="container mx-auto xl:px-10 mt-3">
 
-    <div class=" uppercase text-2xl font-bold">Lamborghini</div>
-    <div class="flex justify-start text-sm font-light items-center mt-2">
-        <div class="px-3 border border-red-500 rounded-full">Phone</div>
-        <div class="px-3 border border-red-500 rounded-full ml-2">Electrical device</div>
+    <div class=" uppercase text-2xl font-bold">Jordan 11 Retro</div>
+    <div class="flex justify-start text-sm font-light items-center mt-2 text-cyan-900">
+        <div class="px-3 border border-cyan-700 rounded-full">Sneakers</div>
+        <div class="px-3 border border-cyan-700 rounded-full ml-2">Jordan</div>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-4">
         <div class="col-span-7">
@@ -16,30 +16,172 @@
                 src="https://images.stockx.com/360/Air-Jordan-11-Retro-Cool-Grey-2021/Images/Air-Jordan-11-Retro-Cool-Grey-2021/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1631898423&h=320&fm=webp"
                 alt="">
         </div>
-        <div class="col-span-5 h-96 text-xs ">
-            <div class=" border border-gray-400 rounded-md p-4">
-                <div class="grid grid-rows-3">
-                    <div class="flex items-center justify-between">
-                        <div class=" text-black text-base font-semibold">July 17, 2016</div>
-                        <div class=" text-black text-base font-semibold">3 hours</div>
-                    </div>
-                    <div class=" flex items-center">
-                        <button class=" w-1/3 py-2 bg-green-800">
-                            <div class=" font-semibold text-base text-white rounded">Buy</div>
-                        </button>
-                        <div class="ml-4 text-xl font-semibold ">$274</div>
-
-                    </div>
-                    <div class="mt-2 flex items-center">
-                        <button class=" w-1/3 py-2 bg-red-500">
-                            <div class=" font-semibold text-base text-white rounded">
-                                Sell
+        <div class="col-span-5 text-xs flex items-center">
+            <div class="">
+                <div class=" border border-cyan-700 rounded-md p-4">
+                    <div class="">
+                        <div class="flex items-center">
+                            <div class=" text-black text-base font-semibold">July 17, 2016</div>
+                        </div>
+                        <div x-data="{ open: false }" class="">
+                            <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
+                                x-transition:enter="transition duration-300"
+                                x-transition:enter-start="opacity-0 transform scale-90"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition duration-300"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-90">
+                                <input
+                                    class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
+                                <button class=" w-full py-2 bg-red-500">
+                                    <div class=" font-medium text-sm text-white rounded">
+                                        Confirm
+                                    </div>
+                                </button>
                             </div>
-                        </button>
-                        <div class="ml-4 text-xl font-semibold ">$274</div>
+                            <div class=" flex items-center justify-between mt-1">
+                                <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
+                                    <div class=" font-semibold text-base text-white rounded">Bid</div>
+                                </button>
+                                <div class="ml-4 text-xl font-semibold ">$274</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mt-2 flex items-center justify-between">
+                            <button class=" w-1/3 py-2 bg-red-500">
+                                <div class=" font-semibold text-base text-white rounded mt-1">
+                                    Sell
+                                </div>
+                            </button>
+                            <div class="ml-4 text-xl font-semibold ">$274</div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="flex justify-between mt-2 ">
+                    <div class=" text-red-600 flex items-center text-xl font-semibold px-6">3 hours</div>
+                    <div class="flex">
+                        <div x-data="{ showModal : false }">
+                            <button @click="showModal = !showModal"
+                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View
+                                Seller</button>
+                            <div x-show="showModal"
+                                class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                <div x-show="showModal"
+                                    class="bg-white shadow-2xl p-6 pb-4 sm:w-1/5 mx-10 border border-cyan-700 rounded"
+                                    @click.away="showModal = false"
+                                    x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 transform scale-90"
+                                    x-transition:enter-end="opacity-100 transform scale-100"
+                                    x-transition:leave="transition ease-in duration-300"
+                                    x-transition:leave-start="opacity-100 transform scale-100"
+                                    x-transition:leave-end="opacity-0 transform scale-90">
+                                    <div class=" h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
+                                    </div>
+                                    <div class="flex justify-between font-normal text-base">
+                                        <div>Name</div>
+                                        <div>NGO HUY ANH</div>
+                                    </div>
+                                    <div class="flex justify-between font-normal text-base">
+                                        <div>Point</div>
+                                        <div>9/10</div>
+                                    </div>
+
+                                    <div class=" flex justify-center mt-4">
+                                        <button @click="showModal = !showModal"
+                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div x-data="{ showModal : false }">
+                            <button @click="showModal = !showModal"
+                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View Bids</button>
+                            <div x-show="showModal"
+                                class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                <div x-show="showModal"
+                                    class="bg-white shadow-2xl p-6 pb-4 sm:w-2/5 mx-10 border border-cyan-700 rounded"
+                                    @click.away="showModal = false"
+                                    x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 transform scale-90"
+                                    x-transition:enter-end="opacity-100 transform scale-100"
+                                    x-transition:leave="transition ease-in duration-300"
+                                    x-transition:leave-start="opacity-100 transform scale-100"
+                                    x-transition:leave-end="opacity-0 transform scale-90">
+                                    <table class="table-auto  w-full text-base">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Name</th>
+                                                <th class="">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class=" text-cyan-700">
+                                                <td>THAI TRAN HONG PHUC</td>
+                                                <td class="text-center"><i class="fa fa-arrow-up animate-bounce"
+                                                        aria-hidden="true"></i> 195</td>
+                                            </tr>
+                                            <tr class="">
+                                                <td>PHAM MINH THUY</td>
+                                                <td class="text-center">102</td>
+                                            </tr>
+                                            <tr>
+                                                <td>HOANG NHU THANH</td>
+                                                <td class="text-center">59</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="flex justify-center mt-4">
+                                        <button @click="showModal = !showModal"
+                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+
+        </div>
+        <div class=" h-20 w-full col-span-6 col-start-4 flex justify-between gap-8">
+            <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                alt="" class=" object-cover object-center h-full w-full border border-gray-300">
+            <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                alt="" class=" object-cover object-center h-full w-full border border-gray-300">
+            <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                alt="" class=" object-cover object-center h-full w-full border border-gray-300">
+            <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                alt="" class=" object-cover object-center h-full w-full border border-gray-300">
         </div>
     </div>
-</div>
+
+    <div class="flex mt-8 border-t border-cyan-700">
+        <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Related Products</div>
+    </div>
+    <div class="multiple-items-small mt-4">
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+        {{> card/cardProduct}}
+    </div>
+
+    <div class="flex mt-8 border-t border-cyan-700">
+        <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
+    </div>
+    <div class="text-sm mt-4">
+        Product Description <br>
+        Since its debut in 2001, the Air Jordan 11 Cool Grey has become one of the most celebrated colorways in the
+        Jordan 11 catalog.<br>
+        <br>
+        The Air Jordan 11 Cool Grey (2021) features a Cool Grey Durabuck upper with patent leather overlays and and a
+        signature Jumpman embroidery on the collar. From there, a white midsole and an icy blue translucent outsole
+        completes the design.<br>
+        <br>
+        The Air Jordan 11 Cool Grey (2021) releases in December of 2021 and retails for $225.
+    </div>
