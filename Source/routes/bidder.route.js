@@ -20,6 +20,12 @@ router.get('/password', (req, res) => {
     });
 });
 
+router.get('/wishlist', (req, res) => {
+    res.render('bidder/wishlist',{
+        layout: 'account.handlebars'
+    });
+});
+
 // router.get('/register', (req, res) => {
 //     res.render('register');
 // });
