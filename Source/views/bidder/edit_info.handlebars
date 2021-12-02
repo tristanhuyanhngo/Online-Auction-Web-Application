@@ -1,104 +1,108 @@
 <div class="flex flex-wrap items-center space-x-4 p-1 mb-5">
     <table class="w-full divide-y divide-gray-200">
         <thead>
-            <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
+        <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
                 h-10 flex items-center px-4">
-                General settings
-            </div>
+            General settings
+        </div>
         </thead>
 
         <tbody class="bg-white divide-y divide-gray-200">
-            <tr x-data="{ edit: false }"
-            class="hover:bg-gray-200" >
-                <td class="py-4 whitespace-nowrap">
-                    <div class="items-center">
-                        <div class="ml-2">
-                            <div class="text-sm font-medium text-gray-900">
-                                Name
-                            </div>
-                        </div>
-                    </div>
-                </td>
-
-                <td class="py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                        <div class="ml-2">
-                            <label x-show="!edit"
-                                class="py-2 text-sm font-medium text-gray-500">
-                                Hoang Nhu Thanh
-                            </label>
-
-                            <input x-show="edit"
-                            class="appearance-none border-2 border-key rounded 
-                            rounded-xs w-wrap py-2 px-4 text-sm font-medium text-gray-500
-                            leading-tight 
-                            focus:bg-white
-                            focus:outline-none" 
-                            id="New name" type="text" placeholder="Edit name">
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="flex items-center justify-end mr-2">
-                        <button @click="edit = !edit"
-                        class="flex items-center bg-white hover:bg-key text-key
-                        font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
-                                <svg x-show="!edit"
-                                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            <span class="ml-2" x-show="!edit">Edit</span>
-                            <span x-show="edit">Save</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-
-            <tr  x-data="{ edit: false }" 
+        <tr x-data="{ edit: false }"
             class="hover:bg-gray-200">
-                <td class="py-4 whitespace-nowrap border-b">
-                    <div class="items-center">
-                        <div class="ml-2">
-                            <div class="text-sm font-medium text-gray-900">
-                                Email
-                            </div>
+            <td class="py-4 whitespace-nowrap">
+                <div class="items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-medium text-gray-900">
+                            Name
                         </div>
                     </div>
-                </td>
+                </div>
+            </td>
 
-                <td class="py-4 whitespace-nowrap border-b">
-                    <div class="items-center ml-2">
+            <td class="py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                    <div class="ml-2">
                         <label x-show="!edit"
-                                class="py-2 text-sm font-medium text-gray-500">
-                                thanhhoang4869@gmail.com
+                               class="py-2 text-sm font-medium text-gray-500">
+                            Hoang Nhu Thanh
                         </label>
 
                         <input x-show="edit"
-                        class="appearance-none border-2 border-key rounded 
+                               class="appearance-none border-2 border-key rounded
+                            rounded-xs w-wrap py-2 px-4 text-sm font-medium text-gray-500
+                            leading-tight 
+                            focus:bg-white
+                            focus:outline-none"
+                               id="New name" type="text" placeholder="Edit name">
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="flex items-center justify-end mr-2">
+                    <button @click="edit = !edit"
+                            class="flex items-center bg-white hover:bg-key text-key
+                        font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
+                        <svg x-show="!edit"
+                             xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                        </svg>
+                        <span class="ml-2" x-show="!edit">Edit</span>
+                        <span x-show="edit">Save</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+
+        <tr x-data="{ edit: false }"
+            class="hover:bg-gray-200">
+            <td class="py-4 whitespace-nowrap border-b">
+                <div class="items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-medium text-gray-900">
+                            Email
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td class="py-4 whitespace-nowrap border-b">
+                <div class="items-center ml-2">
+                    <label x-show="!edit"
+                           class="py-2 text-sm font-medium text-gray-500">
+                        thanhhoang4869@gmail.com
+                    </label>
+
+                    <input x-show="edit"
+                           class="appearance-none border-2 border-key rounded
                          rounded-xs w-wrap py-2 px-4 text-sm font-medium text-gray-500
                          leading-tight 
                          focus:bg-white
-                        focus:outline-none" 
-                        id="New email" type="email" placeholder="Edit email">
-                    </div>
-                </td>
+                        focus:outline-none"
+                           id="New email" type="email" placeholder="Edit email">
+                </div>
+            </td>
 
-                <td class="border-b">
-                    <div class="flex items-center justify-end mr-2">
-                        <button @click="edit = !edit"
-                        class="flex items-center bg-white hover:bg-key text-key
+            <td class="border-b">
+                <div class="flex items-center justify-end mr-2">
+                    <button @click="edit = !edit"
+                            class="flex items-center bg-white hover:bg-key text-key
                         font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
-                                <svg x-show="!edit"
-                                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            <span class="ml-2" x-show="!edit">Edit</span>
-                            <span x-show="edit">Save</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                        <svg x-show="!edit"
+                             xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                        </svg>
+                        <span class="ml-2" x-show="!edit">Edit</span>
+                        <span x-show="edit">Save</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
