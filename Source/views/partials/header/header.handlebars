@@ -1,11 +1,18 @@
-<div class="bg-gray-50 animate-none shadow relative border-b border-cyan-700">
-    <div class="container mx-auto xl:px-10">
-        <div class="relative flex items-center justify-between h-16">
+<div class="bg-gray-50 animate-none shadow border-b border-cyan-700">
+    <div class="container mx-auto xl:px-10 relative">
+        <div class="relative flex items-center justify-around md:justify-between h-16">
+            <div @click=" open = true " x-data="{open: false}"
+                class=" block md:hidden text-2xl hover:bg-cyan-600 px-3 py-1 rounded cursor-pointer">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                <div x-show="open" @click.away="open=false"
+                    class="fixed flex items-center z-50 bg-black bg-opacity-40 left-0 top-0 h-full w-1/3">
+
+                </div>
+            </div>
             <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-                <a href="/"><img class="block h-8 w-auto ml-2"
-                        src="logo.svg">
+                <a href="/"><img class="block h-8 w-auto md:ml-2" src="logo.svg">
                 </a>
-                <div class="group z-10">
+                <div class="group z-10 hidden md:block">
                     <button class=" w-auto rounded-sm ml-4 p-2 px-3 hover:text-cyan-700 font-light">Category</button>
                     <ul
                         class="bg-white p-3 ml-2  border absolute invisible group-hover:visible mt-4 duration-100 group-hover:mt-2 transition-all w-64">
@@ -20,7 +27,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="flex flex-1 items-center justify-end text-cyan-700">
+            <div class=" text-cyan-700 hidden md:flex md:flex-1 md:items-center md:justify-end">
                 <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-cyan-700">
                     <input type="search" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
                     <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
@@ -43,6 +50,18 @@
                 {{/if}}
 
             </div>
+            <div  x-data="{open: false} " @click="open = true"
+                class=" block md:hidden text-2xl hover:bg-cyan-600 px-3 py-1 rounded cursor-pointer">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <div x-show="open" @click.away="open=false"
+                    class="fixed flex items-center justify-center z-50 bg-black bg-opacity-40 left-0 top-0 w-full h-24">
+                    <div class="rounded-full bg-white flex items-center w-2/3 pl-4 pr-2 py-1 border border-cyan-700">
+                        <input type="search" class="w-full p-1 focus:outline-none text-base" placeholder="Search">
+                        <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
