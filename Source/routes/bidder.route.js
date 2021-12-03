@@ -3,19 +3,19 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('bidder/edit_info',{
+    res.render('bidder/edit-info',{
         layout: 'account.handlebars'
     });
 });
 
 router.get('/general', (req, res) => {
-    res.render('bidder/edit_info',{
+    res.render('bidder/edit-info',{
         layout: 'account.handlebars'
     });
 });
 
 router.get('/password', (req, res) => {
-    res.render('bidder/change_password',{
+    res.render('bidder/change-password',{
         layout: 'account.handlebars'
     });
 });
@@ -34,6 +34,12 @@ router.get('/cart', (req, res) => {
 
 router.get('/won-bid', (req, res) => {
     res.render('bidder/won-bid',{
+        layout: 'account.handlebars'
+    });
+});
+
+router.get('/feedback', (req, res) => {
+    res.render('bidder/feedback',{
         layout: 'account.handlebars'
     });
 });
