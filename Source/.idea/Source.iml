@@ -8,5 +8,6 @@
     <orderEntry type="library" name="alpine" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="slick-carousel" level="application" />
+    <orderEntry type="library" name="component" level="application" />
   </component>
 </module>
