@@ -18,4 +18,5 @@ router.get('/search', (req, res) => {
     res.render('search');
 });
 
+
 export default router;
