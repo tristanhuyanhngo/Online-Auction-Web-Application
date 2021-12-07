@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import indexRoute from './routes/index.js'
 import productRoute from './routes/product.js'
 import accountRoute from './routes/bidder.route.js'
+import adminRoute from './routes/admin.route.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRoute)
 app.use('/product', productRoute)
 app.use('/bidder',accountRoute)
+app.use('/admin',adminRoute)
 
 const port = 3000;
 app.listen(port, function () {
