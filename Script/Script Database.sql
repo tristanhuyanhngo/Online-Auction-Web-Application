@@ -1,9 +1,8 @@
-use test;
 SET NAMES utf8mb4;
 
 -- SET FOREIGN_KEY_CHECKS = 0;
 
--- ----------------------------
+-- ----------------------------anhsanpham
 -- Table structure for categories
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhMuc`;
@@ -68,9 +67,9 @@ CREATE TABLE `AnhSanPham` (
 -- Table structure for Description of Products
 -- ----------------------------
 DROP TABLE IF EXISTS `MoTaSanPham`;
-CREATE TABLE `MotaSanPham` (
+CREATE TABLE `MoTaSanPham` (
   `MaSanPham` int unsigned NOT NULL,
-  `NgayMoTa	` datetime NOT NULL,
+  `NgayMoTa` datetime NOT NULL,
   `NoiDungMoTa` text COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`MaSanPham`,`NgayMoTa`),
   FOREIGN KEY (`MaSanPham`) REFERENCES SanPham(`MaSanPham`)
