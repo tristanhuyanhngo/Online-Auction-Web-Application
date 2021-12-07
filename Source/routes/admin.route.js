@@ -2,10 +2,27 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/test', (req, res) => {
-    res.render('admin/account',{
+router.get('/', (req, res) => {
+    let gActive = true;
+    res.render('admin/viewuser',{
+        gActive,
         layout: 'admin.handlebars'
     });
 });
 
+router.get('/viewuser', (req, res) => {
+    let gActive = true;
+    res.render('admin/viewuser',{
+        gActive,
+        layout: 'admin.handlebars'
+    });
+});
+
+router.get('/viewrequest', (req, res) => {
+    let gActive = true;
+    res.render('admin/viewrequest',{
+        gActive,
+        layout: 'admin.handlebars'
+    });
+});
 export default router;
