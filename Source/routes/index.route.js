@@ -1,9 +1,13 @@
 import express from 'express';
+import productModel from "../models/home.model.js";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('home');
+router.get('/', async function (req, res) {
+    const list = await productModel.sortByPrice();
+    res.render('home', {
+        products: list[0]
+    });
 });
 
 router.get('/register', (req, res) => {

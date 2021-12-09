@@ -2,7 +2,7 @@
   <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
     <div class=" relative">
       <img class="object-cover h-52 w-full border-b border-gray-300"
-        src="https://images.stockx.com/360/Nike-Air-Force-1-Low-White-07/Images/Nike-Air-Force-1-Low-White-07/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1631122839&h=320&fm=webp"
+        src="/public/images/Product/Fashion/{{CatName}}/{{ProID}}/1.jfif"
         alt="Sunset in the mountains">
       <div
         class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
@@ -15,12 +15,12 @@
     </div>
     <div class="m-5 relative ">
       <div class="flex justify-between items-center font-semibold text-sm text-cyan-700">
-        <div class="">Air Force 1</div>
-        <div class="text-red-600">$1.000.000</div>
+        <div class="">{{ProName}}</div>
+        <div class="text-red-600">{{format_number Price}}</div>
       </div>
       <div class=" flex justify-between mt-2 font-light text-xs">
         <div class="">From HCM</div>
-        <div class="">July 17, 2016</div>
+        <div class="">{{format_date EndDate}}</div>
       </div>
 
       <div class=" h-1 border-t border-gray-400 mt-2"></div>
@@ -28,7 +28,7 @@
       <div class="flex text-xs mt-1 items-center justify-center">
         <div class="h-6 w-6 rounded-full bg-black"></div>
         <div class=" font-thin ml-1">BY</div>
-        <div class=" uppercase font-semibold ml-1 text-cyan-800">thai tran hong phuc</div>
+        <div class=" uppercase font-semibold ml-1 text-cyan-800">{{Seller}}</div>
       </div>
 
     </div>
