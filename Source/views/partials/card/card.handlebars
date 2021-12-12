@@ -2,7 +2,7 @@
   <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
     <div class=" relative">
       <img class="object-cover h-52 w-full border-b border-gray-300"
-        src="/public/images/Product/Fashion/{{CatName}}/{{ProID}}/1.jfif"
+        src="/public/images/Product/{{CatLevel}}/{{CatName}}/{{ProID}}/1.jfif"
         alt="Sunset in the mountains">
       <div
         class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
@@ -16,10 +16,10 @@
     <div class="m-5 relative ">
       <div class="flex justify-between items-center font-semibold text-sm text-cyan-700">
         <div class="">{{ProName}}</div>
-        <div class="text-red-600">{{format_number Price}}</div>
+        <div class="text-red-600">{{format_number OriginPrice}}</div>
       </div>
       <div class=" flex justify-between mt-2 font-light text-xs">
-        <div class="">From HCM</div>
+        <div class="">Buy Now: {{format_number Price_BuyNow}}</div>
         <div class="">{{format_date EndDate}}</div>
       </div>
 

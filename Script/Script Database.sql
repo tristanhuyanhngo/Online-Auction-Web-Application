@@ -2,14 +2,26 @@ SET NAMES utf8mb4;
 
 -- SET FOREIGN_KEY_CHECKS = 0;
 
--- ----------------------------anhsanpham
--- Table structure for categories
+-- ----------------------------
+-- Table structure for Cap Danh Muc
+-- ----------------------------
+DROP TABLE IF EXISTS `CapDanhMuc`;
+CREATE TABLE `CapDanhMuc` (
+  `MaCapDanhMuc` int unsigned NOT NULL AUTO_INCREMENT,
+  `TenCapDanhMuc` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`MaCapDanhMuc`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- ----------------------------
+-- Table structure for Danh Muc
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhMuc`;
 CREATE TABLE `DanhMuc` (
   `MaDanhMuc` int unsigned NOT NULL AUTO_INCREMENT,
   `TenDanhMuc` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`MaDanhMuc`)
+  `CapDanhMuc` int unsigned NOT NULL, 
+  PRIMARY KEY (`MaDanhMuc`),
+  FOREIGN KEY (`CapDanhMuc`) REFERENCES CapDanhMuc(`MaCapDanhMuc`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
@@ -184,16 +196,25 @@ CREATE TABLE `userRefreshTokenExt` (
 -- Records of Danh Muc
 -- ----------------------------
 BEGIN;
-INSERT INTO `DanhMuc` VALUES (1, 'Ring');
-INSERT INTO `DanhMuc` VALUES (2, 'Watch');
-INSERT INTO `DanhMuc` VALUES (3, 'Laptop');
-INSERT INTO `DanhMuc` VALUES (4, 'Mobile');
-INSERT INTO `DanhMuc` VALUES (5, 'Smart Watch');
-INSERT INTO `DanhMuc` VALUES (6, 'Clothing');
-INSERT INTO `DanhMuc` VALUES (7, 'Shoes');
+INSERT INTO `CapDanhMuc` VALUES (1, 'Accessories');
+INSERT INTO `CapDanhMuc` VALUES (2, 'Electronics');
+INSERT INTO `CapDanhMuc` VALUES (3, 'Fashion');
 COMMIT;
 
--- Admin (0) - Seller (1) - Bidder (2)users 
+-- ----------------------------
+-- Records of Danh Muc
+-- ----------------------------
+BEGIN;
+INSERT INTO `DanhMuc` VALUES (1, 'Ring',1);
+INSERT INTO `DanhMuc` VALUES (2, 'Watch',1);
+INSERT INTO `DanhMuc` VALUES (3, 'Laptop',2);
+INSERT INTO `DanhMuc` VALUES (4, 'Mobile',2);
+INSERT INTO `DanhMuc` VALUES (5, 'Smart Watch',2);
+INSERT INTO `DanhMuc` VALUES (6, 'Clothing',3);
+INSERT INTO `DanhMuc` VALUES (7, 'Shoes',3);
+COMMIT;
+
+-- Admin (0) - Seller (1) - Bidder (2) 
 -- ----------------------------
 -- Records of Nguoi Ban
 -- ----------------------------
@@ -242,12 +263,12 @@ INSERT INTO `sanpham` VALUES (38, 7, 'kysutainangqsb@gmail.com','Nike Air Force 
 INSERT INTO `sanpham` VALUES (39, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Brown', 200000, 2, 1000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (40, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (41, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Gray', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `sanpham` VALUES (42, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Red Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (42, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi RB', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (43, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Red', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (44, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Normal', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `sanpham` VALUES (45, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `sanpham` VALUES (46, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `sanpham` VALUES (47, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (45, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (46, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (47, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 COMMIT;
 
 -- ----------------------------
