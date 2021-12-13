@@ -5,14 +5,14 @@ export default {
         return db('product');
     },
 
-    // async findAllWithDetails() {
-    //     const sql = `select c.*, count(p.ProID) as ProductCount
-    //              from categories c
-    //                     left join products p on c.CatID = p.CatID
-    //              group by c.CatID, c.CatName`;
-    //     const raw = await db.raw(sql);
-    //     return raw[0];
-    // },
+    async findAllWithDetails(){
+        const sql = `select c.*, b.BigCatName, count(p.ProID) as ProCount
+                     from category c join big_category b on c.BigCat = b.BigCatID
+                                     left join product p on c.CatID = p.CatID
+                     group by c.CatID, c.CatName`;
+        const list = await db.raw(sql);
+        return list[0];
+    },
 
     async findById(id) {
         const list = await db('product').where('ProID', id);
