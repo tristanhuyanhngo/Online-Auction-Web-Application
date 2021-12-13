@@ -6,9 +6,14 @@ const router = express.Router();
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
-    const list = await productHome.sortByPrice();
+    const list_1 = await productHome.sortByEndDate();
+    const list_2 = await productHome.sortByBid();
+    const list_3 = await productHome.sortByPrice();
+
     res.render('home', {
-        products: list[0]
+        products: list_1[0],
+        products_1: list_2[0],
+        products_2: list_3[0]
     });
 });
 
