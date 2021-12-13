@@ -2,7 +2,7 @@ import db from '../utils/db.js';
 
 export default {
     findAll() {
-        return db('danhmuc');
+        return db('product');
     },
 
     // async findAllWithDetails() {
@@ -15,7 +15,7 @@ export default {
     // },
 
     async findById(id) {
-        const list = await db('danhmuc').where('MaDanhMuc', id);
+        const list = await db('product').where('ProID', id);
         if (list.length === 0)
             return null;
 

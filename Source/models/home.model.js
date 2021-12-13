@@ -2,36 +2,37 @@ import db from '../utils/db.js';
 
 export default {
     async sortByEndDate() {
-        const sql = ` select C.TenDanhMuc as CatName, L.TenCapDanhMuc as CatLevel, P.MaSanPham as ProID, P.TenSanPham as ProName, P.GiaKhoiDiem as OriginPrice, U.HoTen as Seller, P.GiaMuaNgay as Price_BuyNow, P.NgayKetThuc as EndDate
-                      from sanpham as P, users as U, danhmuc as C, capdanhmuc as L
-                      where P.EmailNguoiBan = U.Email and
-                            P.MaDanhMuc = C.MaDanhMuc and
-                            C.CapDanhMuc = L.MaCapDanhMuc
-                      order by P.NgayKetThuc - P.NgayDangSanPham ASC
+        const sql = `select C.CatName as CatName, L.BigCatName as CatLevel, P.ProID as ProID, P.ProName as ProName, P.StartPrice 
+        as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+                      from product as P, user as U, category as C, big_category as L
+                      where P.Seller = U.Email and
+                            P.CatID = C.CatID and
+                            C.BigCat = L.BigCatID
+                      order by P.EndDate - P.UploadDate ASC
                       limit 0, 4`;
         const raw = await db.raw(sql);
         return raw;
     },
 
     async sortByBid() {
-        const sql = ` select C.TenDanhMuc as CatName, L.TenCapDanhMuc as CatLevel, P.MaSanPham as ProID, P.TenSanPham as ProName, P.GiaKhoiDiem as OriginPrice, U.HoTen as Seller, P.GiaMuaNgay as Price_BuyNow, P.NgayKetThuc as EndDate
-                      from sanpham as P, users as U, danhmuc as C, capdanhmuc as L
-                      where P.EmailNguoiBan = U.Email and
-                            P.MaDanhMuc = 3 and
-                            P.MaDanhMuc = C.MaDanhMuc and
-                            C.CapDanhMuc = L.MaCapDanhMuc
+        const sql = ` select C.CatName as CatName, L.BigCatName as CatLevel, P.ProID as ProID, P.ProName as ProName, P.StartPrice as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+                      from product as P, user as U, category as C, big_category as L
+                      where P.Seller = U.Email and
+                            P.ProID = 3 and
+                            P.CatID = C.CatID and
+                            C.BigCat = L.BigCatID
                       limit 0, 4`;
         const raw = await db.raw(sql);
         return raw;
     },
 
     async sortByPrice() {
-        const sql = `select C.TenDanhMuc as CatName, L.TenCapDanhMuc as CatLevel, P.MaSanPham as ProID, P.TenSanPham as ProName, P.GiaKhoiDiem as OriginPrice, U.HoTen as Seller, P.GiaMuaNgay as Price_BuyNow, P.NgayKetThuc as EndDate
-                     from sanpham as P, users as U, danhmuc as C, capdanhmuc as L
-                     where P.EmailNguoiBan = U.Email and
-                         P.MaDanhMuc = C.MaDanhMuc and
-                         C.CapDanhMuc = L.MaCapDanhMuc
-                     order by P.GiaKhoiDiem DESC
+        const sql = `select C.CatName as CatName, L.BigCatName as CatLevel, P.ProID as ProID, P.ProName as ProName, P.StartPrice as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+                     from product as P, user as U, category as C, big_category as L
+                     where P.Seller = U.Email and
+                         P.CatID = C.CatID and
+                         C.BigCat = L.BigCatID
+                     order by P.StartPrice DESC
                      limit 0, 4`;
         const raw = await db.raw(sql);
         return raw;
