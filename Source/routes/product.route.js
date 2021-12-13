@@ -12,8 +12,8 @@ router.get('/byCat/:id', async function (req, res) {
     const page = req.query.page || 1;
 
     const limit =8;
-    const total = await productModel.countCatId(bigCatId);
-    console.log(total);
+    const raw = await productModel.countBigCatId(bigCatId);
+    const total = raw[0][0].amount;
 
     let nPage = Math.floor(total/limit);
     if(total%limit>0){
@@ -32,7 +32,6 @@ router.get('/byCat/:id', async function (req, res) {
 
     const offset = (page-1)*limit;
     const list = await productModel.findPageByBigCatId(bigCatId,limit,offset);
-    console.log(list[0])
     res.render('vwProduct/byCat', {
         products: list[0],
         empty: list.length === 0,

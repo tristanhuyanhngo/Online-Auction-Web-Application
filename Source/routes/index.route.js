@@ -34,6 +34,7 @@ router.get('/search', async function (req, res) {
     const offset = (page - 1) * limit;
 
     const total = await productSearch.countAllProducts();
+    console.log(total);
     let nPages = Math.floor(total / limit);
     if (total % limit > 0) {
         nPages++;

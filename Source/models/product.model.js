@@ -1,9 +1,20 @@
 import db from '../utils/db.js';
 
 export default {
-    async countCatId(catId){
-        const list = await db('product').where('CatID', catId).count({amount : 'ProID'} );
-        return list[0].amount;
+    // async countCatId(catId){
+    //     const list = await db('product').where('CatID', catId).count({amount : 'ProID'} );
+    //     return list[0].amount;
+    // },
+
+    async countBigCatId(bigCatId){
+        const sql = `select count(p.ProID) as amount
+                        from product p join
+                             (category c join big_category b
+                                 on c.BigCat = b.BigCatID)
+                             on p.CatID = c.CatID
+                        where BigCatID=${bigCatId}`;
+        const raw = await db.raw(sql);
+        return raw;
     },
 
     async findPageByBigCatId(bigCatId,limit,offset){

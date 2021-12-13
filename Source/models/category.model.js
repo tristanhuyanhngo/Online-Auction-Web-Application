@@ -6,10 +6,12 @@ export default {
     },
 
     async findAllWithDetails(){
-        const sql = `select c.*, b.BigCatName, count(p.ProID) as ProCount
-                     from category c join big_category b on c.BigCat = b.BigCatID
-                                     left join product p on c.CatID = p.CatID
-                     group by c.CatID, c.CatName`;
+        const sql = `select b.*, count(p.ProID) as ProCount
+                     from product p join
+                          (category c join big_category b
+                              on c.BigCat = b.BigCatID)
+                          on p.CatID = c.CatID
+                     group by b.BigCatID, b.BigCatName`;
         const list = await db.raw(sql);
         return list[0];
     },
