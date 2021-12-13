@@ -245,6 +245,22 @@ COMMIT;
 -- Records of San Pham
 -- ----------------------------
 BEGIN;
+
+-- Ring
+INSERT INTO `sanpham` VALUES (1, 1, 'kysutainangqsb@gmail.com','Ring 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (2, 1, 'kysutainangqsb@gmail.com','Ring 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (3, 1, 'kysutainangqsb@gmail.com','Ring 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (4, 1, 'kysutainangqsb@gmail.com','Ring 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (5, 1, 'kysutainangqsb@gmail.com','Ring 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+
+-- Watch
+INSERT INTO `sanpham` VALUES (6, 2, 'kysutainangqsb@gmail.com','Watch 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (7, 2, 'kysutainangqsb@gmail.com','Watch 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (8, 2, 'kysutainangqsb@gmail.com','Watch 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (9, 2, 'kysutainangqsb@gmail.com','Watch 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (10, 2, 'kysutainangqsb@gmail.com','Watch 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+
+-- Latop
 INSERT INTO `sanpham` VALUES (11, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 16 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (12, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 14 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (13, 3, 'kysutainangqsb@gmail.com','Apple Macbook Air 2020', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
@@ -252,13 +268,34 @@ INSERT INTO `sanpham` VALUES (14, 3, 'kysutainangqsb@gmail.com','Asus Rog Zephyr
 INSERT INTO `sanpham` VALUES (15, 3, 'kysutainangqsb@gmail.com','Asus Zenbook UX371EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (16, 3, 'kysutainangqsb@gmail.com','Asus Zenbook Duo UX482EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (17, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (18, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (19, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (20, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (21, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (22, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (23, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (24, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (25, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 
+-- Mobile
 INSERT INTO `sanpham` VALUES (26, 4, 'kysutainangqsb@gmail.com','Iphone 13 Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (27, 4, 'kysutainangqsb@gmail.com','Xiaomi 10T Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (28, 4, 'kysutainangqsb@gmail.com','Samsung Galaxy Z Flip 3 5G 256GB', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (29, 4, 'kysutainangqsb@gmail.com','Itel IT2171', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (30, 4, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 
+-- Smart Watch
+INSERT INTO `sanpham` VALUES (31, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (32, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (33, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (34, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (35, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+
+-- Clothing
+INSERT INTO `sanpham` VALUES (36, 6, 'kysutainangqsb@gmail.com','T Shirt', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (37, 6, 'kysutainangqsb@gmail.com','Jeans', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+
+-- Shoes
 INSERT INTO `sanpham` VALUES (38, 7, 'kysutainangqsb@gmail.com','Nike Air Force 1 07 QS', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (39, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Brown', 200000, 2, 1000000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (40, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
@@ -269,12 +306,35 @@ INSERT INTO `sanpham` VALUES (44, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid
 INSERT INTO `sanpham` VALUES (45, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (46, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 INSERT INTO `sanpham` VALUES (47, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (48, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (49, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (50, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (51, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (52, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (53, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (54, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (55, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (56, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (57, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (58, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (59, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `sanpham` VALUES (60, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
 COMMIT;
 
 -- ----------------------------
 -- Records of Mo ta San Pham
 -- ----------------------------
 BEGIN;
+INSERT INTO `motasanpham` VALUES (1, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (2, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (3, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (4, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (5, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (6, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (7, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (8, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (9, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (10, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (11, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (12, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (13, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
@@ -282,13 +342,26 @@ INSERT INTO `motasanpham` VALUES (14, '2021-12-07', '<P><STRONG>Jewelry Informat
 INSERT INTO `motasanpham` VALUES (15, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (16, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (17, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
-
+INSERT INTO `motasanpham` VALUES (18, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (19, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (20, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (21, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (22, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (23, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (24, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (25, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (26, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (27, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (28, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (29, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (30, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
-
+INSERT INTO `motasanpham` VALUES (31, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (32, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (33, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (34, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (35, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (36, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (37, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (38, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (39, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (40, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
@@ -299,4 +372,17 @@ INSERT INTO `motasanpham` VALUES (44, '2021-12-07', '<P><STRONG>Jewelry Informat
 INSERT INTO `motasanpham` VALUES (45, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (46, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `motasanpham` VALUES (47, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (48, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (49, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (50, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (51, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (52, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (53, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (54, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (55, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (56, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (57, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (58, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (59, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+INSERT INTO `motasanpham` VALUES (60, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 COMMIT;
