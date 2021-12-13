@@ -1,10 +1,11 @@
 import express from 'express';
-import productModel from "../models/home.model.js";
+import productHome from "../models/home.model.js";
+import productSearch from "../models/search.model.js";
 
 const router = express.Router();
 
 router.get('/', async function (req, res) {
-    const list = await productModel.sortByPrice();
+    const list = await productHome.sortByPrice();
     res.render('home', {
         products: list[0]
     });
@@ -18,9 +19,13 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/search', (req, res) => {
-    res.render('search');
+router.get('/search', async function (req, res) {
+    const list = await productSearch.findAll();
+    console.log(list[0][1]);
+    res.render('search', {
+        products: list[0],
+        is
+    });
 });
-
 
 export default router;
