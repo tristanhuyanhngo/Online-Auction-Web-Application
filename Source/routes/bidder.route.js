@@ -1,4 +1,5 @@
 import express from 'express';
+import bidderModel from '../models/bidder.model.js';
 
 const router = express.Router();
 
@@ -9,6 +10,28 @@ router.get('/', (req, res) => {
         layout: 'account.handlebars'
     });
 });
+
+// router.get('/general/edit-name', async (req, res) => {
+//     let gActive = true;
+//
+//     const username = req.query.username || 0;
+//     const user = await bidderModel.findByUsername(username);
+//
+//     if (user === null) {
+//         alert("No user found!");
+//     }
+//
+//     console.log("Category: ", category);
+//
+//     res.render('vwCategory/edit', {
+//         category: category
+//     });
+//
+//     res.render('bidder/edit-name', {
+//         gActive,
+//         layout: 'account.handlebars'
+//     });
+// });
 
 router.get('/general', (req, res) => {
     let gActive = true;

@@ -1,6 +1,25 @@
 import db from '../utils/db.js';
 
 export default {
+    async findAll(){
+        const product = await db.select().from('product');
+        return product;
+    },
+
+    async del(id){
+        return db('product').where('ProID',id).del();
+    },
+
+    async countProduct(){
+        const list = await db('products').select().from('product').count({amount : 'ProID'} );
+        return list[0].amount;
+    },
+
+    async findAllLimit(limit, offset){
+        const product = await db.select().from('product').limit(limit).offset(offset);
+        return product;
+    },
+
     async findDescriptionProduct(proId) {
         const sql = `select d.*
                      from product as p, description as d
