@@ -34,6 +34,14 @@ router.get('/account', (req, res) => {
     });
 });
 
+router.get('/account-request', (req, res) => {
+    let aActive = true;
+    res.render('admin/accountRequest',{
+        aActive,
+        layout: 'admin.handlebars'
+    });
+});
+
 // router.get('/viewuser', (req, res) => {
 //     let gActive = true;
 //     res.render('admin/viewuser',{
