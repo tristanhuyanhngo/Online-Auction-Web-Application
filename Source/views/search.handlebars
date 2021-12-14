@@ -6,12 +6,12 @@
         {{/each}}
     </div>
     <div class="flex justify-end mt-8">
-            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
-                {{#if isFirst}}
-                {{else}}
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                {{/if}}
-            </div>
+        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+            {{#if isFirst}}
+            {{else}}
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            {{/if}}
+        </div>
         <div class="flex h-12 font-medium rounded ">
             {{#each this.page_numbers}}
                 {{#if isCurrent}}
@@ -26,14 +26,15 @@
                 {{/if}}
             {{/each}}
             <div
-                class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
-                2</div>
-        </div>
-            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
-                {{#if isLast}}
-                {{else}}
-                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                {{/if}}
+                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                2
             </div>
+        </div>
+        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+            {{#if isLast}}
+            {{else}}
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            {{/if}}
+        </div>
     </div>
 </div>

@@ -9,94 +9,90 @@
         <div class="overflow-x-auto">
             <table class="table-auto w-full">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                    <tr>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Product's name</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Username</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Date</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Edit</div>
-                        </th>
-                    </tr>
+                <tr>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">ID</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Product name</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Seller</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Date</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-center">Edit</div>
+                    </th>
+                </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
+                {{#each this.product}}
                     <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Iphone 13 ProMax</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">Hoang Nhu Thanh</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-2 bg-red-700">DELETE</button>
-                        </td>
+                        <form method="post">
+                            <div>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="font-medium text-gray-800 form-control">
+                                        {{ProID}}
+                                    </div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="font-medium text-gray-800">{{ProName}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left">{{Seller}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap">
+                                    <div class="text-left">{{format_date UploadDate}}</div>
+                                </td>
+                                <td class="p-2 whitespace-nowrap form-group flex justify-center text-white space-x-4">
+                                    <button type="submit"
+                                            name="ProID"
+                                            value={{ProID}}
+                                            class="px-4 py-2 bg-red-700"
+                                            formaction="/admin/product/del">
+                                        DELETE
+                                    </button>
+                                </td>
+                            </div>
+                        </form>
                     </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Iphone 13 ProMax</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">Hoang Nhu Thanh</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-2 bg-red-700">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Iphone 13 ProMax</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">Hoang Nhu Thanh</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-2 bg-red-700">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Iphone 13 ProMax</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">Hoang Nhu Thanh</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-2 bg-red-700">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Iphone 13 ProMax</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">Hoang Nhu Thanh</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-2 bg-red-700">DELETE</button>
-                        </td>
-                    </tr>
+                {{/each}}
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="flex justify-end mt-5">
+        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+            {{#if isFirst}}
+            {{else}}
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            {{/if}}
+        </div>
+        <div class="flex h-12 font-medium rounded ">
+            {{#each this.page_numbers}}
+                {{#if isCurrent}}
+                    <div
+                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                        {{value}}</div>
+                {{else}}
+                    <div
+                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                        <a class="page-link" href="?page={{value}}">{{value}}</a>
+                    </div>
+                {{/if}}
+            {{/each}}
+            <div
+                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                2
+            </div>
+        </div>
+        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+            {{#if isLast}}
+            {{else}}
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            {{/if}}
         </div>
     </div>
 </div>

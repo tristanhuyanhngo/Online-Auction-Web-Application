@@ -11,7 +11,7 @@ export default function (app) {
                 return numeral(val).format('0,0');
             },
             format_date(val) {
-                return dateformat(val,"mmm dd yyyy HH:MM");
+                return dateformat(val,"mm/dd/yyyy HH:MM");
             },
             section: handlebars_sections()
         }

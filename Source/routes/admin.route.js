@@ -1,7 +1,9 @@
 import express from 'express';
-
+import productModel from '../models/product.model.js';
+import bodyParser from 'body-parser';
 const router = express.Router();
 
+router.use(bodyParser.urlencoded({ extended: false }))
 router.get('/', (req, res) => {
     let cActive = true;
     res.render('admin/category',{
@@ -18,11 +20,45 @@ router.get('/category', (req, res) => {
     });
 });
 
-router.get('/product', (req, res) => {
+router.post('/product/del',   async (req, res) => {
+    const ret = await productModel.del(req.body.ProID);
+    console.log(ret);
+    return res.redirect('/admin/product');
+});
+
+router.get('/product', async (req, res) => {
     let pActive = true;
-    res.render('admin/product',{
+    const page = req.query.page || 1;
+    const limit = 6;
+
+    const total = await productModel.countProduct();
+
+    let nPage = Math.floor(total/limit);
+    if(total%limit>0){
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page-1)*limit;
+
+    const product = await productModel.findAllLimit(limit,offset);
+
+    console.log(product);
+    res.render('admin/product', {
         pActive,
-        layout: 'admin.handlebars'
+        product,
+        layout: 'admin.handlebars',
+        empty: product.length === 0,
+        page_numbers,
+        isFirst: page_numbers[0].isCurrent,
+        isLast: page_numbers[nPage-1].isCurrent,
     });
 });
 
@@ -41,20 +77,4 @@ router.get('/account-request', (req, res) => {
         layout: 'admin.handlebars'
     });
 });
-
-// router.get('/viewuser', (req, res) => {
-//     let gActive = true;
-//     res.render('admin/viewuser',{
-//         gActive,
-//         layout: 'admin.handlebars'
-//     });
-// });
-
-// router.get('/viewrequest', (req, res) => {
-//     let gActive = true;
-//     res.render('admin/viewrequest',{
-//         gActive,
-//         layout: 'admin.handlebars'
-//     });
-// });
 export default router;
