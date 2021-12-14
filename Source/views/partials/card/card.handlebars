@@ -1,4 +1,4 @@
-<a href="/product">
+<a href="/product/detail/{{ProID}}">
   <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
     <div class=" relative">
       <img class="object-cover h-52 w-full border-b border-gray-300"
@@ -16,10 +16,10 @@
     <div class="m-5 relative ">
       <div class="flex justify-between items-center font-semibold text-sm text-cyan-700">
         <div class="">{{ProName}}</div>
-        <div class="text-red-600">{{format_number OriginPrice}}</div>
+        <div class="text-red-600">{{format_number StartPrice}}</div>
       </div>
       <div class=" flex justify-between mt-2 font-light text-xs">
-        <div class="">Buy Now: {{format_number Price_BuyNow}}</div>
+        <div class="">Buy Now: {{format_number SellPrice}}</div>
         <div class="">{{format_date EndDate}}</div>
       </div>
 

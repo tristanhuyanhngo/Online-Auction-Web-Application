@@ -1,8 +1,10 @@
 import db from '../utils/db.js';
 
 export default {
-    findAll() {
-        return db('product');
+    async findBigCategoryName(bigCatID) {
+        const sql = `select BC.BigCatName from big_category as BC where BC.BigCatID = ${bigCatID}`;
+        const list = await db.raw(sql);
+        return list[0];
     },
 
     async findAllWithDetails(){
@@ -14,32 +16,5 @@ export default {
                      group by b.BigCatID, b.BigCatName`;
         const list = await db.raw(sql);
         return list[0];
-    },
-
-    async findById(id) {
-        const list = await db('product').where('ProID', id);
-        if (list.length === 0)
-            return null;
-
-        return list[0];
-    },
-
-    // add(entity) {
-    //     return db('categories').insert(entity);
-    // },
-    //
-    // del(id) {
-    //     return db('categories')
-    //         .where('CatID', id)
-    //         .del();
-    // },
-    //
-    // patch(entity) {
-    //     const id = entity.CatID;
-    //     delete entity.CatID;
-    //
-    //     return db('categories')
-    //         .where('CatID', id)
-    //         .update(entity);
-    // },
+    }
 }

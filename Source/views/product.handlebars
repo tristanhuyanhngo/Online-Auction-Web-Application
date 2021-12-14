@@ -1,25 +1,28 @@
 <div class=" container mx-auto xl:px-10 py-1 text-xs font-light flex mt-2 justify-start text-cyan-800">
-    <a class="  uppercase" href=""><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+    <a class="  uppercase" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class=" ml-3">></div>
-    <a class=" uppercase ml-3" href="">Phone</a>
+    <a class=" uppercase ml-3" href="">{{this.product.BigCatName}}</a>
+    <div class=" ml-3">></div>
+    <a class=" uppercase ml-3" href="">{{this.product.CatName}}</a>
 </div>
 <div class=" container mx-auto xl:px-10 mt-3">
 
-    <div class=" uppercase text-2xl font-bold">Jordan 11 Retro</div>
+    <div class=" uppercase text-2xl font-bold">{{this.product.ProName}}</div>
     <div class="flex justify-start text-sm font-light items-center mt-2 text-cyan-900">
-        <div class="px-3 border border-cyan-700 rounded-full">Sneakers</div>
-        <div class="px-3 border border-cyan-700 rounded-full ml-2">Jordan</div>
+        <div class="px-3 border border-cyan-700 rounded-full">100% Authentic</div>
+        <div class="px-3 border border-cyan-700 rounded-full ml-2">New: 80%</div>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-4">
         <div class="col-span-full md:col-span-7">
             <div class="slider-for">
-                <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
-                    alt="" class=" object-cover object-center h-full w-full">
-                <img src="https://shopgiayreplica.com/wp-content/uploads/2020/07/Giay-Nike-Air-Jordan-4-Retro-Bred-replica5-1.jpg"
-                    alt="" class=" object-cover object-center h-full w-full">
-                <img src="https://shopgiayreplica.com/wp-content/uploads/2020/07/Giay-Nike-Air-Jordan-4-Retro-Bred-replica5-1.jpg"
-                    alt="" class=" object-cover object-center h-full w-full">
-
+                <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/1.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/2.jpg"
+                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/3.jpg"
+                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/4.jpg"
+                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
             </div>
         </div>
         <div class="col-span-5 text-xs hidden md:flex md:items-center">
@@ -27,7 +30,7 @@
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div class="">
                         <div class="flex items-center">
-                            <div class=" text-black text-base font-semibold">July 17, 2016</div>
+                            <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
                         </div>
                         <div x-data="{ open: false }" class="">
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
@@ -150,17 +153,16 @@
                 </div>
             </div>
 
-
         </div>
         <div class="slider-nav col-span-8 col-start-3">
-            <img src="https://images.stockx.com/360/Air-Jordan-12-Retro-Royalty-Taxi/Images/Air-Jordan-12-Retro-Royalty-Taxi/Lv2/img01.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
-                alt="" class=" object-cover object-center h-24 w-24 border border-gray-300">
-            <img src="https://shopgiayreplica.com/wp-content/uploads/2020/07/Giay-Nike-Air-Jordan-4-Retro-Bred-replica5-1.jpg"
-                alt="" class=" object-cover object-center h-24 w-24 border border-gray-300">
-            <img src="https://shopgiayreplica.com/wp-content/uploads/2020/07/Giay-Nike-Air-Jordan-4-Retro-Bred-replica5-1.jpg"
-                alt="" class=" object-cover object-center h-24 w-24 border border-gray-300">
-                <img src="https://shopgiayreplica.com/wp-content/uploads/2020/07/Giay-Nike-Air-Jordan-4-Retro-Bred-replica5-1.jpg"
-                alt="" class=" object-cover object-center h-24 w-24 border border-gray-300">
+            <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/1.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+            <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/2.jpg"
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+            <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/3.jpg"
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+            <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/4.jpg"
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
         </div>
         <div class="col-span-full text-xs md:hidden">
             <div class="">
@@ -298,26 +300,14 @@
         <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Related Products</div>
     </div>
     <div class="multiple-items-small mt-4">
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
-        {{> card/cardProduct}}
+        {{#each this.related_products}}
+            {{> card/cardRelatedProduct}}
+        {{/each}}
     </div>
 
     <div class="flex mt-8 border-t border-cyan-700">
         <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
     </div>
     <div class="text-sm mt-4">
-        Product Description <br>
-        Since its debut in 2001, the Air Jordan 11 Cool Grey has become one of the most celebrated colorways in the
-        Jordan 11 catalog.<br>
-        <br>
-        The Air Jordan 11 Cool Grey (2021) features a Cool Grey Durabuck upper with patent leather overlays and and a
-        signature Jumpman embroidery on the collar. From there, a white midsole and an icy blue translucent outsole
-        completes the design.<br>
-        <br>
-        The Air Jordan 11 Cool Grey (2021) releases in December of 2021 and retails for $225.
+        {{this.description}}
     </div>
