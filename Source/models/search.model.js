@@ -7,8 +7,8 @@ export default {
     },
 
     findAllPage(limit, offset) {
-        const sql = `select C.CatName as CatName, L.BigCatName as BigCatName, P.ProID as ProID, P.ProName as ProName, P.StartPrice as OriginPrice,
-                            U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+        const sql = `select C.CatName, L.BigCatName, P.ProID, P.ProName, P.StartPrice,
+                            U.Name as Seller, P.SellPrice, P.EndDate as EndDate
                      from product as P, user as U, category as C, big_category as L
                      where P.Seller = U.Email and
                          P.CatID = C.CatID and

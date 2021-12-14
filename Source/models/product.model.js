@@ -1,10 +1,55 @@
 import db from '../utils/db.js';
 
 export default {
-    // async countCatId(catId){
-    //     const list = await db('product').where('CatID', catId).count({amount : 'ProID'} );
-    //     return list[0].amount;
-    // },
+    async findAll(){
+        const product = await db.select().from('product');
+        return product;
+    },
+
+    async del(id){
+        return db('product').where('ProID',id).del();
+    },
+
+    async countProduct(){
+        const list = await db('products').select().from('product').count({amount : 'ProID'} );
+        return list[0].amount;
+    },
+
+    async findAllLimit(limit, offset){
+        const product = await db.select().from('product').limit(limit).offset(offset);
+        return product;
+    },
+
+    async findDescriptionProduct(proId) {
+        const sql = `select d.*
+                     from product as p, description as d
+                     where p.ProID = ${proId} and
+                           p.ProID = d.ProID`;
+        const raw = await db.raw(sql);
+        return raw[0][0];
+    },
+
+    async findByCatID(catId, proId) {
+        const sql = `select p.*, c.CatName, bc.BigCatName
+                     from product as p, category as c, big_category as bc
+                     where p.CatID = ${catId} and
+                           p.ProID != ${proId} and
+                           c.CatID = p.CatID and 
+                           bc.BigCatID = c.BigCat
+                     limit 5 offset 0`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async findByProID(proId) {
+        const sql = `select product.*, category.CatName, big_category.BigCatName
+                     from product, category, big_category
+                     where product.ProID = ${proId} and
+                         product.CatID = category.CatID and
+                         category.BigCat = big_category.BigCatID`;
+        const raw = await db.raw(sql);
+        return raw[0][0];
+    },
 
     async countBigCatId(bigCatId){
         const sql = `select count(p.ProID) as amount
@@ -30,8 +75,7 @@ export default {
     },
 
     async sortByEndDate() {
-        const sql = `select C.CatName as CatName, L.BigCatName as BigCatName, P.ProID as ProID, P.ProName as ProName, P.StartPrice 
-        as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+        const sql = `select C.CatName, L.BigCatName, P.ProID, P.ProName, P.StartPrice, U.Name as Seller, P.SellPrice, P.EndDate
                       from product as P, user as U, category as C, big_category as L
                       where P.Seller = U.Email and
                             P.CatID = C.CatID and
@@ -43,7 +87,7 @@ export default {
     },
 
     async sortByBid() {
-        const sql = ` select C.CatName as CatName, L.BigCatName as BigCatName, P.ProID as ProID, P.ProName as ProName, P.StartPrice as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+        const sql = ` select C.CatName, L.BigCatName, P.ProID, P.ProName, P.StartPrice, U.Name as Seller, P.SellPrice, P.EndDate
                       from product as P, user as U, category as C, big_category as L
                       where P.Seller = U.Email and
                             P.ProID = 3 and
@@ -55,7 +99,7 @@ export default {
     },
 
     async sortByPrice() {
-        const sql = `select C.CatName as CatName, L.BigCatName as BigCatName, P.ProID as ProID, P.ProName as ProName, P.StartPrice as OriginPrice, U.Name as Seller, P.SellPrice as Price_BuyNow, P.EndDate as EndDate
+        const sql = `select C.CatName, L.BigCatName, P.ProID, P.ProName, P.StartPrice, U.Name as Seller, P.SellPrice, P.EndDate
                      from product as P, user as U, category as C, big_category as L
                      where P.Seller = U.Email and
                          P.CatID = C.CatID and

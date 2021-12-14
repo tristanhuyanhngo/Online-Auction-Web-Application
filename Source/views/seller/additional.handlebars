@@ -1,0 +1,34 @@
+<div class="py-12 overflow-auto">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 bg-white border-b border-gray-200">
+                <form method="POST" action="action.php">
+                    <label class="">
+                        <label class="text-xl text-gray-600">Product <span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </label>
+                    <div class="mb-8">
+                        <label class="text-xl text-gray-600">Content <span class="text-red-500">*</span></label></br>
+                        <textarea name="content" class="border-2 border-gray-500 w-full">
+
+                            </textarea>
+                    </div>
+
+                   <div class="flex justify-center">
+                        <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('content');
+</script>

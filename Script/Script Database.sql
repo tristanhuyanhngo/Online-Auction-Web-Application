@@ -30,7 +30,7 @@ CREATE TABLE `category` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Email` char(50) COLLATE utf8_general_ci NOT NULL,
-  `Username` varchar(50) COLLATE utf8_general_ci NOT NULL,
+  `Username` varchar(50) COLLATE utf8_general_ci NOT NULL unique,
   `Password` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `Name` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
   `Address` nvarchar(80) COLLATE utf8_general_ci,
