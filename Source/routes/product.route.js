@@ -1,17 +1,36 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
+import categoryModel from '../models/category.model.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('product');
+router.get('/detail/:id', async function(req, res) {
+    const pro_id = req.params.id || 0;
+    const product = await productModel.findByProID(pro_id);
+
+    if (product === undefined) {
+        return res.redirect('/');
+    }
+
+    const description = await productModel.findDescriptionProduct(pro_id);
+
+    const related_products = await productModel.findByCatID(product.CatID, product.ProID);
+
+    res.render('product', {
+        product,
+        related_products,
+        description: description.Content
+    });
 });
 
 router.get('/byCat/:id', async function (req, res) {
-    const bigCatId = req.params.id||0;
+    const bigCatId = req.params.id || 0;
     const page = req.query.page || 1;
 
-    const limit =8;
+    const bigCategory_name = await categoryModel.findBigCategoryName(bigCatId)
+    const bigCat = bigCategory_name[0].BigCatName;
+
+    const limit = 8;
     const raw = await productModel.countBigCatId(bigCatId);
     const total = raw[0][0].amount;
 
@@ -28,8 +47,6 @@ router.get('/byCat/:id', async function (req, res) {
         });
     }
 
-    console.log(page_numbers)
-
     const offset = (page-1)*limit;
     const list = await productModel.findPageByBigCatId(bigCatId,limit,offset);
     res.render('vwProduct/byCat', {
@@ -37,7 +54,8 @@ router.get('/byCat/:id', async function (req, res) {
         empty: list.length === 0,
         page_numbers,
         isFirst: page_numbers[0].isCurrent,
-        isLast: page_numbers[nPage-1].isCurrent
+        isLast: page_numbers[nPage-1].isCurrent,
+        bigCategory: bigCat
     });
 });
 
