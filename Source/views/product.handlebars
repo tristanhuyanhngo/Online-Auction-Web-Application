@@ -297,18 +297,18 @@
     </div>
 
     <div class="flex mt-8 border-t border-cyan-700">
+        <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
+    </div>
+    <div class="text-sm mt-4">
+        {{{this.description}}}
+    </div>
+
+    <div class="flex mt-8 border-t border-cyan-700">
         <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Related Products</div>
     </div>
     <div class="multiple-items-small mt-4">
         {{#each this.related_products}}
             {{> card/cardRelatedProduct}}
         {{/each}}
-    </div>
-
-    <div class="flex mt-8 border-t border-cyan-700">
-        <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
-    </div>
-    <div class="text-sm mt-4">
-        {{{this.description}}}
     </div>
 </div>
