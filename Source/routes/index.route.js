@@ -17,16 +17,6 @@ router.get('/', async function (req, res) {
     });
 });
 
-// ---------------- REGISTER ---------------- //
-router.get('/register', (req, res) => {
-    res.render('register');
-});
-
-// ---------------- LOGIN ---------------- //
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-
 // ---------------- SEARCH ---------------- //
 router.get('/search', async function (req, res) {
     const limit = 8;
@@ -34,7 +24,7 @@ router.get('/search', async function (req, res) {
     const offset = (page - 1) * limit;
 
     const total = await productSearch.countAllProducts();
-    console.log(total);
+    //console.log(total);
     let nPages = Math.floor(total / limit);
     if (total % limit > 0) {
         nPages++;

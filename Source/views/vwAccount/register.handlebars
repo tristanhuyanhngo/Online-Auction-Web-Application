@@ -9,27 +9,32 @@
             const password = document.getElementById('txtPassword').value;
             const confirm_password = document.getElementById('txtConfirmPassword').value;
 
-        //*// Check Input
+            // Validate username
             if (username.length === 0) {
                 alert('Username must filled in!');
+                return;
+            }
+            // Validate email
+            if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+                alert("Invalid email !");
+                return;
+            }
+            // Validate password
+            if (!password) {
+                alert('Password must filled in!');
+                return;
+            }
+            if (!confirm_password) {
+                alert('Confirm password must filled in!');
                 return;
             }
             if (password !== confirm_password) {
                 alert("Passwords doesn't match");
                 return;
             }
-            if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                alert("Invalid email !");
-                return;
-            }
 
-            $.getJSON(`/account/is-available?user=${username}`, function (data) {
-                if (data === false) {
-                    alert('Not available!');
-                } else {
-                    $('#formRegister').off('submit').submit();
-                }
-            });
+
+            $('#formRegister').off('submit').submit();
         });
     </script>
 {{/section}}

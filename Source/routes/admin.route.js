@@ -50,7 +50,7 @@ router.get('/product', async (req, res) => {
 
     const product = await productModel.findAllLimit(limit,offset);
 
-    console.log(product);
+    //console.log(product);
     res.render('admin/product', {
         pActive,
         product,
