@@ -1,6 +1,6 @@
 import { engine, create } from 'express-handlebars';
 import numeral from 'numeral';
-import dateformat from 'dateformat'
+import moment from 'moment';
 import handlebars_sections from "express-handlebars-sections";
 
 export default function (app) {
@@ -11,7 +11,7 @@ export default function (app) {
                 return numeral(val).format('0,0');
             },
             format_date(val) {
-                return dateformat(val,"mm/dd/yyyy HH:MM");
+                return moment(val).format('YYYY-MM-DD, h:mm');
             },
             section: handlebars_sections()
         }
