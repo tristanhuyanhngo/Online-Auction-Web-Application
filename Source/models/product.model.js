@@ -15,6 +15,16 @@ export default {
         return list[0].amount;
     },
 
+    async countCatID(id){
+        const sql = `select count(p.ProID) as amount
+                     from product p join
+                          category c
+                          on p.CatID = c.CatID
+                     where c.CatID=${id}`;
+        const raw = await db.raw(sql);
+        return raw;
+    },
+
     async findAllLimit(limit, offset){
         const product = await db.select().from('product').limit(limit).offset(offset);
         return product;
@@ -72,6 +82,17 @@ export default {
                     limit ${limit} offset ${offset}`;
         const raw = await db.raw(sql);
         return raw;
+    },
+
+    async findPageByCatID(catId, limit, offset) {
+        const sql = `select p.*, c.CatName, bc.BigCatName
+                     from product as p, category as c, big_category as bc
+                     where p.CatID = ${catId} and
+                           c.CatID = p.CatID and 
+                           bc.BigCatID = c.BigCat
+                     limit ${limit} offset ${offset}`;
+        const raw = await db.raw(sql);
+        return raw[0];
     },
 
     async sortByEndDate() {
