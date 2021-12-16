@@ -76,7 +76,7 @@ router.post('/login',urlencodedParser, async function (req, res) {
     req.session.auth=true;
     req.session.authUser=user;
 
-    res.render('./home');
+    res.redirect('/home');
 });
 
 // ---------------- PROFILE ---------------- //

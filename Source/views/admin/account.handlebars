@@ -9,7 +9,7 @@
             const password = document.getElementById('txtPassword').value;
             const confirm_password = document.getElementById('txtConfirmPassword').value;
 
-            if (email.length === 0) {
+            if (email.length < 1) {
                 alert('Email must be filled in!');
                 return;
             }
@@ -20,7 +20,7 @@
             }
 
             // Validate username
-            if (username.length === 0) {
+            if (username.length < 1) {
                 alert('Username must be filled in!');
                 return;
             }
@@ -35,6 +35,7 @@
                 alert('Confirm password must filled in!');
                 return;
             }
+
             if (password !== confirm_password) {
                 alert("Passwords doesn't match!");
                 return;
@@ -44,10 +45,9 @@
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data === false) {
                     alert('Email is already in use. Please choose another email!');
-                    return;
                 } else {
+                    alert("Successful");
                     $('#addForm').off('submit').submit();
-                    alert("Added successfully!")
                 }
             });
         });
@@ -85,13 +85,14 @@
                      x-transition:leave-end="opacity-0 transform scale-90">
 
                     {{#if this.error}}
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                             role="alert">
                             <strong class="font-bold">Holy smokes!</strong>
                             <span class="block sm:inline">Something seriously bad happened.</span>
                         </div>
                     {{/if}}
 
-                    <form id="addForm" method="post">
+                    <form id="addForm" method="post" action="/admin/account/add">
                         <div class="flex justify-between font-normal text-base space-x-8 mt-2">
                             <div>Email</div>
                             <input class="border border-cyan-700 form-control"
@@ -108,12 +109,11 @@
                             <div>Full name</div>
                             <input class="border form-control border-cyan-700"
                                    type="text"
-                                   id="txtUsername" name="Full name">
+                                   id="txtName" name="Name">
                         </div>
                         <div class="flex justify-between font-normal text-base mt-2">
                             <div>Password</div>
                             <input type="password" class="form-control border border-cyan-700"
-                                   type="password"
                                    id="txtPassword" name="Password">
                         </div>
 
@@ -140,10 +140,8 @@
                         </div>
 
                         <div class=" flex justify-end mt-4 space-x-4">
-                            <button type="submit" @click="showModal = !showModal"
-                                    value="Save" id="addButton"
-                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700"
-                                    formaction="/admin/account/add">
+                            <button type="submit" id="btnAdd" value="Save"
+                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700">
                                 Add
                             </button>
                             <button @click="showModal = !showModal" type="button"
@@ -229,14 +227,14 @@
                                                            id="editUsername" value={{Email}}
                                                     >
                                                 </div>
-<!--                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">-->
-<!--                                                    <div>Username</div>-->
-<!--                                                    <input type="text" id="updUsername"-->
-<!--                                                           class="px-1 form-control border border-cyan-700"-->
-<!--                                                           name="Username"-->
-<!--                                                           id="editUsername" value={{Username}}-->
-<!--                                                    >-->
-<!--                                                </div>-->
+                                                <!--                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">-->
+                                                <!--                                                    <div>Username</div>-->
+                                                <!--                                                    <input type="text" id="updUsername"-->
+                                                <!--                                                           class="px-1 form-control border border-cyan-700"-->
+                                                <!--                                                           name="Username"-->
+                                                <!--                                                           id="editUsername" value={{Username}}-->
+                                                <!--                                                    >-->
+                                                <!--                                                </div>-->
                                                 <div class="form-control flex mt-2  justify-between font-normal text-base space-x-8">
                                                     <div>Full name</div>
                                                     <input type="text"

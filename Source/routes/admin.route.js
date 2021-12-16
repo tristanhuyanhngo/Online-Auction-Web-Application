@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/account/add',async function(req, res) {
+router.post('/account/add',async function(req, res)  {
     const rawPassword = req.body.Password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
@@ -33,7 +33,9 @@ router.post('/account/add',async function(req, res) {
         Type: req.body.Role,
         Rate: 0
     }
-    await userModel.addUser(user);
+    const ret = await userModel.addUser(user);
+    console.log(ret);
+    // return null;
     res.redirect('/admin/account');
 });
 
