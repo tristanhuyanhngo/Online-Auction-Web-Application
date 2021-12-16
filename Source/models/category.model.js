@@ -2,14 +2,22 @@ import db from '../utils/db.js';
 
 export default {
     async findBigCategoryName(bigCatID) {
-        const sql = `select BC.BigCatName from big_category as BC where BC.BigCatID = ${bigCatID}`;
+        const sql = `select BC.BigCatName
+                     from big_category as BC
+                     where BC.BigCatID = ${bigCatID}`;
         const list = await db.raw(sql);
         return list[0];
     },
 
-    async findAllWithDetails(){
+    async findFromBigCategory(bigCatID) {
+        const list = await db.select('*').from('category').join('big_category', {'category.BigCat': 'big_category.BigCatID'}).where('big_category.BigCatID',bigCatID);
+        return list;
+    },
+
+    async findAllWithDetails() {
         const sql = `select b.*, count(p.ProID) as ProCount
-                     from product p join
+                     from product p
+                              join
                           (category c join big_category b
                               on c.BigCat = b.BigCatID)
                           on p.CatID = c.CatID
