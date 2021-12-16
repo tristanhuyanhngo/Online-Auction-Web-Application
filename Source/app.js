@@ -8,8 +8,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 import activate_locals_middleware from './middlewares/locals.mdw.js';
 import activate_view_middleware from './middlewares/view.mdw.js';
 import activate_route_middleware from './middlewares/routes.mdw.js';
-import adminRoute from './routes/admin.route.js'
-import sellerRoute from './routes/seller.route.js'
 
 const app = express();
 
@@ -20,9 +18,6 @@ app.use('/public', express.static('public'));
 activate_view_middleware(app);
 activate_locals_middleware(app);
 activate_route_middleware(app);
-
-app.use('/admin',adminRoute)
-app.use('/seller',sellerRoute)
 
 const port = 3000;
 app.listen(port, function () {
