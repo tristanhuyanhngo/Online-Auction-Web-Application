@@ -43,6 +43,12 @@ router.post('/account/update',async function(req, res) {
     return res.redirect('/admin/account');
 });
 
+router.post('/account/del',   async (req, res) => {
+    const ret = await userModel.delUser(req.body.Email);
+    console.log(ret);
+    return res.redirect('/admin/account');
+});
+
 router.get('/category', (req, res) => {
     let cActive = true;
     res.render('admin/category',{

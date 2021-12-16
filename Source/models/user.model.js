@@ -22,6 +22,10 @@ export default {
         return db('user').insert(entity);
     },
 
+    async delUser(email) {
+        return db('user').where('Email',email).del();
+    },
+
     async updateUser(entity) {
         const email = entity.Email;
         delete entity.Email;

@@ -48,6 +48,18 @@ router.get('/is-available', async function (req, res) {
     }
 });
 
+router.get('/check-username', async function (req, res) {
+    const username = req.query.Username;
+    const user = await userModel.findByUsername(username);
+
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
 // ---------------- LOGIN ---------------- //
 router.get('/login', async function (req, res) {
     res.render('./vwAccount/login');
