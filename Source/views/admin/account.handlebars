@@ -46,30 +46,14 @@
                     alert('Email is already in use. Please choose another email!');
                     return;
                 } else {
+                    alert("Added successfully!")
                     $('#add').off('submit').submit();
                 }
             });
         });
 
         $('#editForm').on('submit', function (event) {
-            event.preventDefault();
-
-            const username = document.getElementById('updUsername').value;
-
-            // Validate username
-            if (username.length === 0) {
-                alert('Username must be filled in!');
-                return;
-            }
-
-            // Ajax
-            $.getJSON(`/account/check-username?user=${username}`, function (data) {
-                if (data === false) {
-                    alert('Username existed!');
-                } else {
-                    $('#edit').off('submit').submit();
-                }
-            });
+            alert("Successful!")
         });
         $('#txtEmail').select();
         $('#updUsername').select();
@@ -176,6 +160,9 @@
                         <div class="font-semibold text-left">Email</div>
                     </th>
                     <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Full name</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
                         <div class="font-semibold text-left">Role</div>
                     </th>
                     <th class="p-2 whitespace-nowrap">
@@ -194,6 +181,9 @@
                         </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-left">{{Email}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="text-left">{{Name}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-left">{{Type}}</div>
@@ -231,20 +221,20 @@
                                                            id="editUsername" value={{Email}}
                                                     >
                                                 </div>
-                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">
-                                                    <div>Username</div>
-                                                    <input type="text" id="updUsername"
-                                                           class="px-1 form-control border border-cyan-700"
-                                                           name="Username"
-                                                           id="editUsername" value={{Username}}
-                                                    >
-                                                </div>
+<!--                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">-->
+<!--                                                    <div>Username</div>-->
+<!--                                                    <input type="text" id="updUsername"-->
+<!--                                                           class="px-1 form-control border border-cyan-700"-->
+<!--                                                           name="Username"-->
+<!--                                                           id="editUsername" value={{Username}}-->
+<!--                                                    >-->
+<!--                                                </div>-->
                                                 <div class="form-control flex mt-2  justify-between font-normal text-base space-x-8">
                                                     <div>Full name</div>
                                                     <input type="text"
                                                            class="px-1 form-control border border-cyan-700"
                                                            name="Name"
-                                                           id="editUsername" value={{Name}}
+                                                           id="editName" value="{{Name}}"
                                                     >
                                                 </div>
 
