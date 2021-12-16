@@ -4,9 +4,13 @@
             <input type="search" class="w-64 px-1 h-auto focus:outline-none " placeholder="Search">
             <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
         </div>
+
         <div x-data="{ showModal : false }">
             <button @click="showModal = !showModal"
-                    class="font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-white hover:bg-gray-300"><i class="fa fa-plus" aria-hidden="true"></i> ADD</button>
+                    class="font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-white hover:bg-gray-300"><i
+                    class="fa fa-plus" aria-hidden="true">
+            </i> ADD
+            </button>
             <div x-show="showModal"
                  class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                 <div x-show="showModal"
@@ -18,135 +22,193 @@
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-90">
-                    <div class="flex justify-between font-normal text-base space-x-8">
-                        <div>Name</div>
-                        <input class="border border-cyan-700">
-                    </div>
-                    <div class="flex justify-between font-normal text-base mt-2">
-                        <div>Email</div>
-                        <input class="border border-cyan-700">
-                    </div>
+                    <form method="post">
+                        <div class="flex justify-between font-normal text-base space-x-8 mt-2">
+                            <div>Email</div>
+                            <input class="border border-cyan-700 form-control"
+                                   type="email"
+                                   id="txtEmail" name="Email" autofocus>
+                        </div>
+                        <div class="flex justify-between font-normal text-base mt-2 space-x-8">
+                            <div>Username</div>
+                            <input class="border form-control border-cyan-700"
+                                   type="text"
+                                   id="txtUsername" name="Username">
+                        </div>
+                        <div class="flex justify-between font-normal text-base mt-2 space-x-8">
+                            <div>Full name</div>
+                            <input class="border form-control border-cyan-700"
+                                   type="text"
+                                   id="txtUsername" name="Full name">
+                        </div>
+                        <div class="flex justify-between font-normal text-base mt-2">
+                            <div>Password</div>
+                            <input type="password" class="form-control border border-cyan-700"
+                                   type="password"
+                                   id="txtPassword" name="Password">
+                        </div>
 
-                    <div class="flex justify-between font-normal text-base mt-2">
-                        <div>Password</div>
-                        <input type="password" class="border border-cyan-700">
-                    </div>
+                        <div class="flex justify-between font-normal text-base mt-2">
+                            <div class="mr-2">Confirm password</div>
+                            <input type="password" class="form-control border border-cyan-700">
+                        </div>
 
-                    <div class="flex justify-between font-normal text-base mt-2">
-                        <div class="mr-2">Confirm password</div>
-                        <input type="password" class="border border-cyan-700">
-                    </div>
+                        <div class="flex justify-between font-normal text-base mt-2">
+                            <div>Role</div>
+                            <select name="Role"
+                                    class="border border-cyan-700 py-1 w-16 md:w-20">
+                                <option
+                                        value="2">bidder
+                                </option>
+                                <option
+                                        value="1">seller
+                                </option>
+                                <option
+                                        value="0">admin
+                                </option>
+                            </select>
+                        </div>
 
-                    <div class="flex justify-between font-normal text-base mt-2">
-                        <div>Role</div>
-                        <select class="border border-cyan-700 py-1 w-16 md:w-20">
-                            <option>Bidder</option>
-                            <option>Seller</option>
-                            <option>Admin</option>
-                        </select>
-                    </div>
-
-                    <div class=" flex justify-end mt-4 space-x-4">
-                        <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700">Save</button>
-                        <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel</button>
-                    </div>
+                        <div class=" flex justify-end mt-4 space-x-4">
+                            <button type="submit" @click="showModal = !showModal"
+                                    value="Save"
+                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700"
+                                    formaction="/admin/account/add">
+                                Save
+                            </button>
+                            <button @click="showModal = !showModal" type="button"
+                                    class="font-semibold text-md  px-6 py-2 text-white bg-red-700">Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+
     </div>
     <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
         <div class="overflow-x-auto">
             <table class="table-auto w-full">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                    <tr>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Username</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Email</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Role</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Day register</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Edit</div>
-                        </th>
-                    </tr>
+                <tr>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Username</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Email</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Role</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Day register</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-center">Edit</div>
+                    </th>
+                </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                    {{#each this.user}}
-                        <tr>
-                            <td class="p-2 whitespace-nowrap">
-                                <div class="font-medium text-gray-800">{{Username}}</div>
-                            </td>
-                            <td class="p-2 whitespace-nowrap">
-                                <div class="text-left">{{Email}}</div>
-                            </td>
-                            <td class="p-2 whitespace-nowrap">
-                                <div class="text-left">{{Type}}</div>
-                            </td>
-                            <td class="p-2 whitespace-nowrap">
-                                <div class="text-left">{{format_date RegisterDate}}</div>
-                            </td>
-<!--                            <td class="p-2 whitespace-nowrap flex justify-center space-x-4">-->
-<!--                                <select class="border border-black py-1 w-16 md:w-20">-->
-<!--                                    <option>View </option>-->
-<!--                                    <option>Update</option>-->
-<!--                                    <option>Delete</option>-->
-<!--                                </select>-->
-<!--                            </td>-->
-                            <td class="p-2 flex justify-center">
-                                <div x-data="{ showModal : false }">
-                                    <button @click="showModal = !showModal"
-                                            class="font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                {{#each this.user}}
+                    <tr>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="font-medium text-gray-800">{{Username}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="text-left">{{Email}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="text-left">{{Type}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="text-left">{{format_date RegisterDate}}</div>
+                        </td>
+
+                        <td class="p-2 flex justify-center">
+                            <div x-data="{ showModal : false }">
+                                <button @click="showModal = !showModal"
+                                        class="font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                </button>
+                                <div x-show="showModal"
+                                     class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                     <div x-show="showModal"
-                                         class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
-                                        <div x-show="showModal"
-                                             class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                                             @click.away="showModal = false"
-                                             x-transition:enter="transition ease-out duration-300"
-                                             x-transition:enter-start="opacity-0 transform scale-90"
-                                             x-transition:enter-end="opacity-100 transform scale-100"
-                                             x-transition:leave="transition ease-in duration-300"
-                                             x-transition:leave-start="opacity-100 transform scale-100"
-                                             x-transition:leave-end="opacity-0 transform scale-90">
-                                            <div class=" h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
-                                            </div>
-                                            <div class="flex justify-between font-normal text-base space-x-8">
-                                                <div>Name</div>
-                                                <input class="border border-cyan-700">
-                                            </div>
-                                            <div class="flex justify-between font-normal text-base mt-2">
-                                                <div>Email</div>
-                                                <input class="border border-cyan-700">
-                                            </div>
+                                         class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                         @click.away="showModal = false"
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 transform scale-90"
+                                         x-transition:enter-end="opacity-100 transform scale-100"
+                                         x-transition:leave="transition ease-in duration-300"
+                                         x-transition:leave-start="opacity-100 transform scale-100"
+                                         x-transition:leave-end="opacity-0 transform scale-90">
+                                        <form method="post">
+                                            <div>
+                                                <div class="h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
+                                                </div>
+                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">
+                                                    <div>Email</div>
+                                                    <input type="text"
+                                                           class="disable px-1 form-control bg-gray-200 border border-cyan-700"
+                                                           name="Email"
+                                                           id="editUsername" value={{Email}}
+                                                    >
+                                                </div>
+                                                <div class="flex justify-between font-normal text-base mt-2 space-x-8">
+                                                    <div>Username</div>
+                                                    <input type="text"
+                                                           class="px-1 form-control border border-cyan-700"
+                                                           name="Username"
+                                                           id="editUsername" value={{Username}}
+                                                           >
+                                                </div>
+                                                <div class="form-control flex mt-2  justify-between font-normal text-base space-x-8">
+                                                    <div>Full name</div>
+                                                    <input type="text"
+                                                           class="px-1 form-control border border-cyan-700"
+                                                           name="Name"
+                                                           id="editUsername" value={{Name}}
+                                                           >
+                                                </div>
 
-                                            <div class="flex justify-between font-normal text-base mt-2">
-                                                <div>Role</div>
-                                                <select class="border border-cyan-700 py-1 w-16 md:w-20">
-                                                    <option>Bidder</option>
-                                                    <option>Seller </option>
-                                                    <option>Admin</option>
-                                                </select>
-                                            </div>
+                                                <div class="form-control flex mt-2 justify-between font-normal text-base space-x-8">
+                                                    <div>Address</div>
+                                                    <input type="text"
+                                                           class="px-1 form-control border border-cyan-700"
+                                                           name="Address"
+                                                           id="editUsername" value={{Address}}>
+                                                </div>
 
-                                            <div class=" flex justify-end mt-4 space-x-4">
-                                                <button @click="showModal = !showModal"
-                                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700">Save</button>
-                                                <button @click="showModal = !showModal"
-                                                        class="font-semibold text-md  px-6 py-2 text-white  bg-red-700">Delete</button>
+                                                <div class="form-control flex mt-2 justify-between font-normal text-base mt-2">
+                                                    <div>Role</div>
+                                                    <select name ="Type" class="border border-cyan-700 py-1 w-16 md:w-20">
+                                                        <option value="" selected disabled hidden>{{Type}}</option>
+                                                        <option value="2">bidder</option>
+                                                        <option value="1">seller</option>
+                                                        <option value="0">admin</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class=" flex justify-end mt-4 space-x-4">
+                                                    <button type="submit"
+                                                            formaction="/admin/account/update"
+                                                            value="Save"
+                                                            @click="showModal = !showModal"
+                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">
+                                                        Save
+                                                    </button>
+                                                    <button @click="showModal = !showModal"
+                                                            class="font-semibold text-md  px-6 py-2 text-white  bg-red-700">
+                                                        Delete
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                    {{/each}}
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
                 </tbody>
             </table>
         </div>
@@ -171,8 +233,7 @@
                     </div>
                 {{/if}}
             {{/each}}
-            <div
-                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+            <div class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
                 2
             </div>
         </div>
