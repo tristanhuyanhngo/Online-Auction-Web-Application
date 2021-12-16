@@ -72,7 +72,11 @@ router.post('/login',urlencodedParser, async function (req, res) {
     const hash = bcrypt.hashSync(rawPassword, salt);
 
     const user = await userModel.validateAccount(email,hash);
-    res.render('./vwAccount/login');
+
+    req.session.auth=true;
+    req.session.authUser=user;
+
+    res.render('./home');
 });
 
 // ---------------- PROFILE ---------------- //

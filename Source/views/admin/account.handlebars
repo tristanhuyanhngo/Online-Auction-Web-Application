@@ -47,7 +47,7 @@
                     return;
                 } else {
                     alert("Added successfully!")
-                    $('#add').off('submit').submit();
+                    $('#addForm').off('submit').submit();
                 }
             });
         });
@@ -68,7 +68,7 @@
         </div>
 
         <div x-data="{ showModal : false }">
-            <button @click="showModal = !showModal"
+            <button @click="showModal=true"
                     class="font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-white hover:bg-gray-300"><i
                     class="fa fa-plus" aria-hidden="true">
             </i> ADD
@@ -83,6 +83,14 @@
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-90">
+
+                    {{#if this.error}}
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-bold">Holy smokes!</strong>
+                            <span class="block sm:inline">Something seriously bad happened.</span>
+                        </div>
+                    {{/if}}
+
                     <form id="addForm" method="post">
                         <div class="flex justify-between font-normal text-base space-x-8 mt-2">
                             <div>Email</div>
