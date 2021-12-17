@@ -11,7 +11,11 @@ export default function (app) {
                 return numeral(val).format('0,0');
             },
             format_date(val) {
-                return moment(val).format('YYYY-MM-DD, h:mm');
+                return moment(val).format('DD-MM-YYYY, h:mm');
+            },
+
+            format_no_h(val) {
+                return moment(val).format('DD-MM-YYYY');
             },
             section: handlebars_sections()
         }
