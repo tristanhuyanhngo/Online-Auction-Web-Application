@@ -29,8 +29,9 @@
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div class="">
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-between">
                             <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
+                            <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
                         </div>
                         <div x-data="{ open: false }" class="">
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
@@ -168,8 +169,9 @@
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div class="">
-                        <div class="flex items-center">
-                            <div class=" text-black text-base font-semibold">July 17, 2016</div>
+                        <div class="flex items-center justify-between">
+                            <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
+                            <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
                         </div>
                         <div x-data="{ open: false }" class="">
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"

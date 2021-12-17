@@ -1,69 +1,72 @@
-<div class="flex-wrap items-center 
-space-x-4 p-1 mb-5 w-full divide-y-2 divide-gray-200">
-    <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
-        h-10 flex items-center px-4">
-        Won bids
+<div class="w-full  max-w-4xl mx-auto mt-8">
+    <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full">
+                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <tr>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Product's name</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Seller's name</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Day</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Price</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="text-sm divide-y divide-gray-100">
+                <tr>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="font-medium text-gray-800">Iphone 13</div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left">Hoang Nhu Thanh</div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left">12/12/2021</div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left">32.000.000</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div>
-        <div class="mt-4 multiple-items">
-            {{> card/card}}
-            {{> card/card}}
-            {{> card/card}}
-        </div>
-
-        <div class="mt-4 multiple-items">
-            {{> card/card}}
-            {{> card/card}}
-            {{> card/card}}
-        </div>
-
-        <div class="mt-4 multiple-items">
-            {{> card/card}}
-            {{> card/card}}
-            {{> card/card}}
-        </div>
-
-        <div class="flex justify-end mt-8">
-            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded  cursor-pointer">
+    <div class="flex justify-end mt-5">
+        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+            {{#if isFirst}}
+            {{else}}
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            {{/if}}
+        </div>
+        <div class="flex h-12 font-medium rounded ">
+            {{#each this.page_numbers}}
+                {{#if isCurrent}}
+                    <div
+                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                        {{value}}</div>
+                {{else}}
+                    <div
+                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                        <a class="page-link" href="?page={{value}}">{{value}}</a>
+                    </div>
+                {{/if}}
+            {{/each}}
+            <div
+                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                2
             </div>
-            <div class="flex h-12 font-medium rounded ">
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    1
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700 ">
-                    2
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    3
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    ...
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    13
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    14
-                </div>
-                <div
-                        class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                    15
-                </div>
-                <div
-                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
-                    2
-                </div>
-            </div>
-            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+        </div>
+        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+            {{#if isLast}}
+            {{else}}
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </div>
+            {{/if}}
         </div>
     </div>
 </div>
