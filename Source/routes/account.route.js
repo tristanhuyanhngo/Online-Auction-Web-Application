@@ -48,6 +48,18 @@ router.get('/is-available', async function (req, res) {
     }
 });
 
+router.get('/check-username', async function (req, res) {
+    const username = req.query.Username;
+    const user = await userModel.findByUsername(username);
+
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
 // ---------------- LOGIN ---------------- //
 router.get('/login', async function (req, res) {
     res.render('./vwAccount/login');
@@ -55,12 +67,26 @@ router.get('/login', async function (req, res) {
 
 router.post('/login',urlencodedParser, async function (req, res) {
     const email = req.body.email;
-    const rawPassword = req.body.password;
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(rawPassword, salt);
 
-    const user = await userModel.validateAccount(email,hash);
-    res.render('./vwAccount/login');
+    const user = await userModel.findByEmail(email);
+    console.log(user);
+    if(user === null){
+        return res.render('./vwAccount/login',{
+            error: 'Invalid username or password.'
+        });
+    }
+
+    const ret = bcrypt.compareSync(req.body.password, user.Password);
+    if(ret===false){
+        return res.render('./vwAccount/login',{
+            error: 'Invalid username or password.'
+        });
+    }
+
+    req.session.auth=true;
+    req.session.authUser=user;
+
+    res.redirect('/home');
 });
 
 // ---------------- PROFILE ---------------- //
