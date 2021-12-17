@@ -2,6 +2,9 @@ import express from 'express';
 import productModel from '../models/product.model.js';
 import adminModel from '../models/admin.model.js';
 import bodyParser from 'body-parser';
+import bcrypt from "bcryptjs";
+import moment from "moment";
+import userModel from "../models/user.model.js";
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -11,6 +14,41 @@ router.get('/', (req, res) => {
         cActive,
         layout: 'admin.handlebars'
     });
+});
+
+router.post('/account/add',async function(req, res)  {
+    const rawPassword = req.body.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawPassword, salt);
+    const today = moment().format();
+
+    const user = {
+        Email: req.body.Email,
+        Username: req.body.Username,
+        Password: hash,
+        Name: req.body.Name,
+        Address: null,
+        DOB: null,
+        RegisterDate: today,
+        Type: req.body.Role,
+        Rate: 0
+    }
+    const ret = await userModel.addUser(user);
+    console.log(ret);
+    // return null;
+    res.redirect('/admin/account');
+});
+
+router.post('/account/update',async function(req, res) {
+    const ret = await userModel.updateUser(req.body);
+    console.log(ret);
+    return res.redirect('/admin/account');
+});
+
+router.post('/account/del',   async (req, res) => {
+    const ret = await userModel.delUser(req.body.Email);
+    console.log(ret);
+    return res.redirect('/admin/account');
 });
 
 router.get('/category-child', (req, res) => {
@@ -59,7 +97,6 @@ router.get('/product', async (req, res) => {
 
     const product = await productModel.findAllLimit(limit,offset);
 
-    //console.log(product);
     res.render('admin/product', {
         pActive,
         product,
@@ -129,4 +166,5 @@ router.get('/account-request', (req, res) => {
         layout: 'admin.handlebars'
     });
 });
+
 export default router;

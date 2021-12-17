@@ -20,10 +20,10 @@
                      x-transition:leave-end="opacity-0 transform -translate-x-60">
                     <div class="flex justify-center text-lg font-bold mb-3">Menu</div>
 
-                    <a href="./account/login">
+                    <a href="./login">
                         <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">login</button>
                     </a>
-                    <a href="./account/register">
+                    <a href="./register">
                         <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">register</button>
                     </a>
                 </div>
@@ -56,23 +56,25 @@
                 </div>
             </div>
             <div class=" text-cyan-700 hidden md:flex md:flex-1 md:items-center md:justify-end">
-                <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-cyan-700">
+                <div class="rounded-full mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
                     <input type="search" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
                     <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
                 </div>
 
-                {{#if user}}
-                    <button class="h-8 w-8 rounded-full border-2 bg-white"></button>
+                {{#if auth}}
+                    <button class="h-8 w-8 rounded-full border-2 bg-white">
+<!--                        Hi,{{authUser.Name}}!-->
+                    </button>
                 {{else}}
 
-                    <a href="/account/login" class="hiden md:block">
+                    <a href="./login" class="hiden md:block">
                         <button
                                 class=" w-auto rounded-sm ml-4 p-2 px-3 hover:bg-gray-100 font-normal duration-500  border-solid border border-cyan-700 text-cyan-700">
                             Login
                         </button>
                     </a>
 
-                    <a href="/account/register" class="hiden md:block">
+                    <a href="./register" class="hiden md:block">
                         <button
                                 class=" w-auto rounded-sm ml-4 p-2 px-3 bg-cyan-700 hover:bg-cyan-900 text-white font-normal duration-500">
                             Register
