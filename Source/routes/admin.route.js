@@ -7,15 +7,23 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
 router.get('/', (req, res) => {
     let cActive = true;
-    res.render('admin/category',{
+    res.render('admin/category-parent',{
         cActive,
         layout: 'admin.handlebars'
     });
 });
 
-router.get('/category', (req, res) => {
+router.get('/category-child', (req, res) => {
     let cActive = true;
-    res.render('admin/category',{
+    res.render('admin/category-child',{
+        cActive,
+        layout: 'admin.handlebars'
+    });
+});
+
+router.get('/category-parent', (req, res) => {
+    let cActive = true;
+    res.render('admin/category-parent',{
         cActive,
         layout: 'admin.handlebars'
     });
