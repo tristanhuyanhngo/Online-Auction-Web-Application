@@ -20,10 +20,10 @@
                      x-transition:leave-end="opacity-0 transform -translate-x-60">
                     <div class="flex justify-center text-lg font-bold mb-3">Menu</div>
 
-                    <a href="/login">
+                    <a href="./account/login">
                         <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">login</button>
                     </a>
-                    <a href="/register">
+                    <a href="./account/register">
                         <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">register</button>
                     </a>
                 </div>
@@ -34,21 +34,21 @@
                 </a>
                 <div class="dropdown relative z-10 ml-4 hidden md:block ">
                     <button class="txt font-medium text-key hover:text-cyan-800
-                     py-2 px-3 rounded inline-flex items-center">
+                     py-2 px-3 rounded inline-flex items-center hover:bg-gray-300">
                         <span>Category</span>
                     </button>
                     <ul class="dropdown-content absolute hidden pt-1 font-light w-48">
                         {{#each lcCategories}}
                         <li class="dropdown">
                             <a class="bg-gray-200 hover:bg-cyan-700 hover:text-white
-                            py-2 px-4 block whitespace-no-wrap" href="/product/byCat/{{BigCatID}}">
+                            py-2 px-4 block whitespace-no-wrap" href="/product/byBigCat/{{BigCatID}}">
                                 {{BigCatName}}
                             </a>
                             <ul class="dropdown-content absolute hidden text-gray-700 pl-1 left-full -mt-10 w-max">
-                                <li><a class="bg-gray-200 hover:bg-cyan-700 py-2 px-4 block whitespace-no-wrap"
-                                       href="#">Ring</a>
-                                <li><a class="bg-gray-200 hover:bg-cyan-700 py-2 px-4 block whitespace-no-wrap"
-                                       href="#">Watch</a>
+                                {{#each childCat}}
+                                    <li><a class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                                           href="/product/byCat/{{CatID}}">{{CatName}}</a>
+                                {{/each}}
                             </ul>
                         </li>
                         {{/each}}
@@ -56,23 +56,25 @@
                 </div>
             </div>
             <div class=" text-cyan-700 hidden md:flex md:flex-1 md:items-center md:justify-end">
-                <div class="rounded-full bg-white flex items-center pl-4 pr-2 border border-cyan-700">
+                <div class="rounded-full mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
                     <input type="search" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
                     <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
                 </div>
 
-                {{#if user}}
-                    <button class="h-8 w-8 rounded-full border-2 bg-white"></button>
+                {{#if auth}}
+                    <button class="h-8 w-8 rounded-full border-2 bg-white">
+<!--                        Hi,{{authUser.Name}}!-->
+                    </button>
                 {{else}}
 
-                    <a href="/login" class="hiden md:block">
+                    <a href="/account/login" class="hiden md:block">
                         <button
                                 class=" w-auto rounded-sm ml-4 p-2 px-3 hover:bg-gray-100 font-normal duration-500  border-solid border border-cyan-700 text-cyan-700">
                             Login
                         </button>
                     </a>
 
-                    <a href="/register" class="hiden md:block">
+                    <a href="/account/register" class="hiden md:block">
                         <button
                                 class=" w-auto rounded-sm ml-4 p-2 px-3 bg-cyan-700 hover:bg-cyan-900 text-white font-normal duration-500">
                             Register

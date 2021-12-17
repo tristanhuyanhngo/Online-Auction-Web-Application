@@ -14,10 +14,11 @@
       </div>
     </div>
     <div class="m-5 relative ">
-      <div class="flex justify-between items-center font-semibold text-sm text-cyan-700">
-        <div class="">{{ProName}}</div>
-        <div class="text-red-600">{{format_number StartPrice}}</div>
-      </div>
+      <div class=" items-center font-semibold text-sm text-cyan-700 truncate">{{ProName}}</div>
+        <div class="flex justify-between text-red-600 font-semibold text-base mt-2">
+            <div class="">{{format_number StartPrice}}</div>
+            <div>VND</div>
+        </div>
       <div class=" flex justify-between mt-2 font-light text-xs">
         <div class="">Buy Now: {{format_number SellPrice}}</div>
         <div class="">{{format_date EndDate}}</div>
@@ -34,10 +35,13 @@
     </div>
     <div
       class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0 bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
-      <div class="flex justify-between items-center font-semibold text-sm">
+      <div class="flex justify-center items-center font-semibold text-sm">
         <div class="text-yellow-600">HIGHEST</div>
-        <div class="text-yellow-600">$900.000</div>
       </div>
+        <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
+            <div class="">9000,000</div>
+            <div>VND</div>
+        </div>
       <div class=" flex justify-between mt-2 font-light text-xs">
         <div class="">From HCM</div>
         <div class="">July 17, 2016</div>

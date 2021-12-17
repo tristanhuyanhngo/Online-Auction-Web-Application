@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Example App</title>
+    <title>Horizon</title>
+    <link rel = "icon" href =
+            "https://i.imgur.com/WXpbdEa.png"
+          type = "image/x-icon">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,17 +35,17 @@
             class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
 
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-            class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
-            <div class="flex items-center justify-center h-16">
+            class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-white overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+            <div class="flex items-center justify-left h-16">
                 <div class="flex items-center">
-                    <a href="/"><img src="/logo.svg" alt="" class="p-2"></a>
+                    <a href="/"><img class="block h-8 pl-5 w-auto" src="/logo.svg">
                 </div>
             </div>
 
-            <nav class="text-gray-500">
+            <nav class="text-black">
                 <a class="flex items-center mt-4 py-2 px-6  hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100
                 {{#if pActive}}
-                       bg-gray-300 bg-opacity-25 text-gray-100
+                       bg-gray-300 bg-opacity-25 text-cyan-700
                 {{/if}}" href="/seller/post">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span class="mx-3">Post product</span>
@@ -50,9 +53,9 @@
 
                 <a class="flex items-center mt-4 py-2 px-6  hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100
                 {{#if aActive}}
-                       bg-gray-300 bg-opacity-25 text-gray-100
+                       bg-gray-300 bg-opacity-25 text-cyan-700
                 {{/if}}" href="/seller/additional">
-                    <i class="fa fa-archive fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
 
                     <span class="mx-3">Additional</span>
                 </a>
@@ -60,9 +63,12 @@
                 <div x-data="{ open: false }" class="w-full">
                     <div x-data="{ open: false }" class="">
                         <button @click=" open = !open "
-                            class="w-full flex items-center mt-4 py-2 px-6 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{#if vActive}}bg-gray-300 bg-opacity-25 text-gray-100 {{/if}}"><i
-                                class="fa fa-user fa-lg" aria-hidden="true"></i>
-                            <span class="mx-3">Product</span>
+                                class="w-full flex items-center justify-between mt-4 py-2 px-6 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{#if vActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
+                            <div>
+                                <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                                <span class="mx-3">Product</span>
+                            </div>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
                         <div x-show="open" class="flex-col divide-y bg-white text-cyan-700" @click.away="open = false"
                             x-transition:enter="transition duration-1000"
@@ -81,13 +87,16 @@
             </nav>
         </div>
         <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="flex justify-between items-center py-4 px-6 bg-gray-900 h-16">
+            <header class="flex justify-between items-center py-4 px-6 bg-white h-16 shadow-lg">
                 <div class="flex items-center">
                     <button @click="sidebarOpen = true"
-                        class="text-gray-500 hover:bg-gray-500 lg:hidden p-3 py-2 rounded">
-                        <i class="fa fa-bars fa-lg text-white" aria-hidden="true"></i>
+                            class="text-gray-500 border border-cyan-700 hover:bg-gray-500 lg:hidden p-3 py-2 rounded">
+                        <i class="fa fa-bars fa-lg text-gray-600" aria-hidden="true"></i>
                     </button>
                 </div>
+
+                <div class="block lg:hidden"><a href="/"><img src="/logo.svg" alt="" class="p-2 h-16"></a></div>
+
             </header>
             {{{body}}}
         </div>

@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.4.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "dateformat": "^5.0.2",
     "dayjs": "^1.10.7",
@@ -26,6 +27,8 @@
     "handlebars": "^4.7.7",
     "jquery": "^3.6.0",
     "knex": "^0.95.14",
+    "moment": "^2.29.1",
+    "momentjs": "^2.0.0",
     "mysql2": "^2.3.3",
     "numeral": "^2.0.6",
     "postcss": "^8.3.11",
@@ -34,6 +37,7 @@
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
+    "express-session": "^1.17.2",
     "nodemon": "^2.0.15"
   }
 }

@@ -35,7 +35,7 @@ CREATE TABLE `user` (
   `Name` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
   `Address` nvarchar(80) COLLATE utf8_general_ci,
   `DOB` date,
-  `ResgiterDate` date NOT NULL,
+  `RegisterDate` date NOT NULL,
   `Type` char(1) NOT NULL,
   `Rate` int unsigned,
   PRIMARY KEY (`Email`)

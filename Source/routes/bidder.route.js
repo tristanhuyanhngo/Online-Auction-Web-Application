@@ -1,5 +1,5 @@
 import express from 'express';
-import bidderModel from '../models/bidder.model.js';
+import userModel from '../models/user.model.js';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 //     let gActive = true;
 //
 //     const username = req.query.username || 0;
-//     const user = await bidderModel.findByUsername(username);
+//     const user = await userModel.findByUsername(username);
 //
 //     if (user === null) {
 //         alert("No user found!");
