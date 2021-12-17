@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
 router.get('/', (req, res) => {
     let cActive = true;
-    res.render('admin/category',{
+    res.render('admin/category-parent',{
         cActive,
         layout: 'admin.handlebars'
     });
@@ -51,9 +51,17 @@ router.post('/account/del',   async (req, res) => {
     return res.redirect('/admin/account');
 });
 
-router.get('/category', (req, res) => {
+router.get('/category-child', (req, res) => {
     let cActive = true;
-    res.render('admin/category',{
+    res.render('admin/category-child',{
+        cActive,
+        layout: 'admin.handlebars'
+    });
+});
+
+router.get('/category-parent', (req, res) => {
+    let cActive = true;
+    res.render('admin/category-parent',{
         cActive,
         layout: 'admin.handlebars'
     });
@@ -158,4 +166,5 @@ router.get('/account-request', (req, res) => {
         layout: 'admin.handlebars'
     });
 });
+
 export default router;

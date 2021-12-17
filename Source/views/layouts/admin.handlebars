@@ -43,13 +43,31 @@
         </div>
 
         <nav class="text-black">
-            <a class="flex items-center mt-4 py-2 px-6  hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100
-                {{#if cActive}}
-                       bg-gray-300 bg-opacity-25 text-cyan-700
-                {{/if}}" href="/admin/category">
-                <i class="fa fa-list-alt" aria-hidden="true"></i>
-                <span class="mx-3">Category</span>
-            </a>
+            <div x-data="{ open: false }" class="w-full">
+                <div x-data="{ open: false }" class="">
+                    <button @click=" open = !open "
+                            class="w-full flex items-center justify-between mt-4 py-2 px-6 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{#if cActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
+                        <div>
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            <span class="mx-3">Category</span>
+                        </div>
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </button>
+
+                    <div x-show="open" class="flex-col divide-y bg-white text-cyan-700" @click.away="open = false"
+                         x-transition:enter="transition duration-1000"
+                         x-transition:enter-start="opacity-0 transform -translate-y-12"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition duration-1000"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform -translate-y-12">
+                        <a href="/admin/category-parent"><div class="bg-gray-200 hover:bg-cyan-900 py-2 px-4 hover:text-white">Category parent</div></a>
+
+                        <a href="/admin/category-child"><div class="bg-gray-200 hover:bg-cyan-900 py-2 px-4 hover:text-white">Category child</div></a>
+
+                    </div>
+                </div>
+            </div>
 
             <a class="flex items-center mt-4 py-2 px-6  hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100
                 {{#if pActive}}
@@ -63,14 +81,14 @@
 
             <div x-data="{ open: false }" class="w-full">
                 <div x-data="{ open: false }" class="">
-                        <button @click=" open = !open "
-                                class="w-full flex items-center justify-between mt-4 py-2 px-6 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{#if aActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
-                            <div>
-                                <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                                <span class="mx-3">Account</span>
-                            </div>
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                        </button>
+                    <button @click=" open = !open "
+                            class="w-full flex items-center justify-between mt-4 py-2 px-6 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 {{#if aActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
+                        <div>
+                            <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                            <span class="mx-3">Account</span>
+                        </div>
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </button>
 
                     <div x-show="open" class="flex-col divide-y bg-white text-cyan-700" @click.away="open = false"
                          x-transition:enter="transition duration-1000"
