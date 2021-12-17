@@ -1,6 +1,6 @@
 {{#section 'js'}}
     <script>
-        $('#formRegister').on('submit', function (event) {
+        $('#formLogin').on('submit', function (event) {
             event.preventDefault();
 
             const email = document.getElementById('txtEmail').value;
@@ -12,23 +12,18 @@
             }
 
             // Ajax
-            $.getJSON(`/account/is-available?user=${email}`, function (data) {
-                if (data === false) {
-                    alert('Email already in use. Please choose another email !');
-                }
-                else {
-                    $('#formRegister').off('submit').submit();
-                }
-            });
+            $('#formLogin').off('submit').submit();
         });
-
         $('#txtFullName').select();
     </script>
 {{/section}}
 
-<form method="post">
+<form id="formLogin" method="post">
     <div class="container mx-auto flex justify-center pt-16">
     <div class="w-96  p-8 border border-cyan-700 shadow-2xl ">
+        {{#if error}}
+            <p class="text-red-600 text-center mb-4 "><strong>{{error}}</strong></p>
+        {{/if}}
         <input
             class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none"
             id="txtEmail"

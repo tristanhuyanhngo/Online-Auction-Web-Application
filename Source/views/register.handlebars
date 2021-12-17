@@ -34,14 +34,16 @@
             }
 
             // Ajax
-            $.getJSON(`/account/is-available?user=${email}`, function (data) {
+            $.getJSON(`/is-available?user=${email}`, function (data) {
                 if (data === false) {
                     alert('Email already in use. Please choose another email !');
                 }
                 else {
+                    alert('Congratulations ! Register successfully');
                     $('#formRegister').off('submit').submit();
                 }
             });
+
         });
 
         $('#txtFullName').select();
