@@ -5,37 +5,38 @@
                 <form method="POST" action="action.php">
                     <div class="mb-4">
                         <label class="text-xl text-gray-600">Title <span class="text-red-500">*</span></label></br>
-                        <input type="text" class="border-2 border-gray-300 p-2 w-full" name="title" id="title" value=""
-                            required>
+                        <input type="text" class="border border-cyan-700 p-2 w-full" name="title" id="title" value="" required>
+                    </div>
+
+                    <input type="file" class="file mb-4" multiple required>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-gray-600">Gia khoi diem <span class="text-red-500">*</span></label></br>
+                        <input type="text" class="border border-cyan-700 p-2 w-full" name="description"
+                            id="description"  required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Gia khoi diem</label></br>
-                        <input type="text" class="border-2 border-gray-300 p-2 w-full" name="description"
-                            id="description" placeholder="(Optional)">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="text-xl text-gray-600">Buoc gia</label></br>
-                        <input type="text" class="border-2 border-gray-300 p-2 w-full" name="description"
-                            id="description" placeholder="(Optional)">
+                        <label class="text-xl text-gray-600">Buoc gia <span class="text-red-500">*</span></label></br>
+                        <input type="text" class="border border-cyan-700 p-2 w-full" name="description"
+                            id="description" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-gray-600">Gia mua ngay</label></br>
-                        <input type="text" class="border-2 border-gray-300 p-2 w-full" name="description"
-                            id="description" placeholder="(Optional)">
+                        <input type="text" class="border border-cyan-700 p-2 w-full" name="description"
+                            id="description" >
                     </div>
 
                     <div class="mb-8">
                         <label class="text-xl text-gray-600">Content <span class="text-red-500">*</span></label></br>
-                        <textarea name="content" class="border-2 border-gray-500 w-full">
+                        <textarea name="content" class="border border-cyan-700 w-full">
 
                             </textarea>
                     </div>
 
                     <div class="flex justify-center">
-                        <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">Submit</button>
+                        <button class="px-6 py-1 bg-white text-black border border-cyan-700 hover:bg-gray-300 shadow">Submit</button>
                     </div>
 
                 </form>
