@@ -1,3 +1,13 @@
+{{#section 'js'}}
+    <script>
+        const test = function () {
+            document.querySelector(".testing").innerText = 1234;
+            console.log(0);
+        };
+        setInterval(test, 1000);
+    </script>
+{{/section}}
+
 <a href="/product/detail/{{ProID}}">
   <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
     <div class=" relative">
@@ -6,7 +16,7 @@
         alt="Sunset in the mountains">
       <div
         class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-        00:03:09
+        <h3 class="testing">00:03:09</h3>
       </div>
       <div
         class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">

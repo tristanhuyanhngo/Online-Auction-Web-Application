@@ -1,8 +1,18 @@
+{{#section 'js'}}
+    <script>
+        const test = function () {
+            document.querySelector(".testing").innerText = 1234;
+            console.log(0);
+        };
+        setInterval(test, 1000);
+    </script>
+{{/section}}
+
 <div class="container mx-auto xl:px-10">
     <div class="text-2xl font-semibold my-4 text-cyan-700">Top 4 sản phẩm gần kết thúc</div>
     <div class="mt-4 multiple-items">
         {{#each this.products}}
-        {{> card/card}}
+            {{> card/card}}
         {{/each}}
     </div>
 

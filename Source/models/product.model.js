@@ -1,6 +1,9 @@
 import db from '../utils/db.js';
 
 export default {
+    async countDown () {
+
+    },
     async findAll(){
         const product = await db.select().from('product');
         return product;
