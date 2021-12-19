@@ -137,4 +137,9 @@ router.post('/login',urlencodedParser, async function (req, res) {
     res.redirect('/home');
 });
 
+
+router.get('/profile', (req, res) => {
+    res.render('profile');
+})
+
 export default router;
