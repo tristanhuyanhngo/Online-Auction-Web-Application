@@ -38,13 +38,13 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Name</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Create at</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">số sản phẩm</div>
+                            <div class="font-semibold text-left">Product count</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center">Edit</div>
@@ -52,20 +52,21 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
+                {{#each this.bigcat}}
                     <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Alex Shatov</div>
+                            <div class="font-medium text-gray-800">{{BigCatID}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
+                            <div class="font-medium text-gray-800">{{BigCatName}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">230</div>
+                            <div class="text-left">{{ProCount}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap flex justify-center">
                             <div x-data="{ showModal : false }">
                                 <div @click="showModal = !showModal"
-                                        class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</div>
+                                     class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</div>
                                 <div x-show="showModal"
                                      class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                     <div x-show="showModal"
@@ -85,7 +86,7 @@
                                             <button @click="showModal = !showModal"
                                                     class="font-semibold text-md  px-6 py-2  border border-cyan-700">Save</button>
                                             <div @click="showModal = !showModal"
-                                                    class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel</div>
+                                                 class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel</div>
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +119,7 @@
                             </div>
                         </td>
                     </tr>
+                {{/each}}
                 </tbody>
             </table>
         </div>
