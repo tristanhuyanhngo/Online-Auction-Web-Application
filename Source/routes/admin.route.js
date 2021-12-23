@@ -33,8 +33,6 @@ router.get('/category-parent', async (req, res) => {
     });
 });
 
-
-
 router.post('/account/add',async function(req, res)  {
     const rawPassword = req.body.Password;
     const salt = bcrypt.genSaltSync(10);
@@ -70,10 +68,13 @@ router.post('/account/del',   async (req, res) => {
     return res.redirect('/admin/account');
 });
 
-router.get('/category-child', (req, res) => {
+router.get('/category-child', async (req, res) => {
     let cActive = true;
-    res.render('admin/category-child',{
+    const category = await categoryModel.findAllCat();
+
+    res.render('admin/category-child', {
         cActive,
+        category,
         layout: 'admin.handlebars'
     });
 });
