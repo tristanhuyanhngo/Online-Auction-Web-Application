@@ -43,15 +43,18 @@
         <div class="overflow-x-auto">
             <table class="table-auto w-full">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                    <tr>
+                <tr>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Name</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Create at</div>
+                            <div class="font-semibold text-left">Big Category</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">số sản phẩm</div>
+                            <div class="font-semibold text-left">Product count</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center">Edit</div>
@@ -59,15 +62,19 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
+                {{#each this.category}}
                     <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Alex Shatov</div>
+                            <div class="font-medium text-gray-800">{{CatID}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
+                            <div class="text-left">{{CatName}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">230</div>
+                            <div class="text-left">{{BigCatName}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="text-left">{{ProCount}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap flex justify-center">
                             <div x-data="{ showModal : false }">
@@ -132,6 +139,7 @@
                             </div>
                         </td>
                     </tr>
+                {{/each}}
                 </tbody>
             </table>
         </div>

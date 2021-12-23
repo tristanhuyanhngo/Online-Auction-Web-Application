@@ -1,6 +1,7 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
 import adminModel from '../models/admin.model.js';
+import categoryModel from '../models/category.model.js';
 import bodyParser from 'body-parser';
 import bcrypt from "bcryptjs";
 import moment from "moment";
@@ -8,10 +9,26 @@ import userModel from "../models/user.model.js";
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }))
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     let cActive = true;
-    res.render('admin/category-parent',{
+
+    const bigcat = await categoryModel.findAllWithDetails();
+    console.log(bigcat);
+    res.render('admin/category-parent', {
         cActive,
+        bigcat,
+        layout: 'admin.handlebars'
+    });
+});
+
+router.get('/category-parent', async (req, res) => {
+    let cActive = true;
+
+    const bigcat = await categoryModel.findAllWithDetails();
+    console.log(bigcat);
+    res.render('admin/category-parent', {
+        cActive,
+        bigcat,
         layout: 'admin.handlebars'
     });
 });
@@ -51,10 +68,13 @@ router.post('/account/del',   async (req, res) => {
     return res.redirect('/admin/account');
 });
 
-router.get('/category-child', (req, res) => {
+router.get('/category-child', async (req, res) => {
     let cActive = true;
-    res.render('admin/category-child',{
+    const category = await categoryModel.findAllCat();
+
+    res.render('admin/category-child', {
         cActive,
+        category,
         layout: 'admin.handlebars'
     });
 });
