@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8fb7f584-a380-43df-b3a3-c7f5fded44f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/views/profile.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Source/routes/index.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/layouts/admin.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/layouts/admin.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/seller/post-product.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/test.handlebars" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +34,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -39,6 +51,7 @@
       <updated>1639486126340</updated>
       <workItem from="1639486138535" duration="532000" />
       <workItem from="1639486741637" duration="107000" />
+      <workItem from="1639880856146" duration="6548000" />
     </task>
     <servers />
   </component>

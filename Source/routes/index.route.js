@@ -137,4 +137,19 @@ router.post('/login',urlencodedParser, async function (req, res) {
     res.redirect('/home');
 });
 
+
+router.get('/profile', (req, res) => {
+    res.render('profile');
+})
+
+router.get('/user/:username', async function (req, res) {
+    const Username = req.params.username || 0;
+
+    const user = await userModel.findByUsername(Username);
+
+    res.render('profileUserOther', {
+        user
+    });
+});
+
 export default router;
