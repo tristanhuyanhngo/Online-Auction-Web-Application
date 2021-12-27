@@ -1,6 +1,7 @@
 import express from 'express';
 import userModel from '../models/user.model.js'
 import bodyParser from "body-parser";
+import bcrypt from "bcryptjs";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -45,6 +46,35 @@ router.post('/setting/edit-info', async (req, res) => {
     req.session.authUser = ret[0];
     console.log(ret[0]);
     res.redirect('/account/setting');
+});
+
+router.post('/setting/password', async (req, res) => {
+    const isEqual = bcrypt.compareSync(req.body.OldPassword, res.locals.authUser.Password);
+    if(isEqual === false) {
+        console.log("Error");
+        return res.render('bidder/change-password', {
+            error: 'Incorrect password!',
+            layout: 'account.handlebars'
+        });
+    }
+
+    const newPassword = req.body.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(newPassword, salt);
+
+    const user = {
+        Email: req.body.Email,
+        Password: hash
+    }
+
+    const ret = await userModel.updatePassword(user);
+    res.locals.authUser = ret[0];
+    req.session.authUser = ret[0];
+    console.log(ret[0]);
+    return res.render('bidder/change-password', {
+        success: 'Password changed!',
+        layout: 'account.handlebars'
+    });
 });
 
 router.get('/setting/general', (req, res) => {
