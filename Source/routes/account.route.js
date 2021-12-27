@@ -53,6 +53,7 @@ router.post('/setting/password', async (req, res) => {
     if(isEqual === false) {
         console.log("Error");
         return res.render('bidder/change-password', {
+            pActive: true,
             error: 'Incorrect password!',
             layout: 'account.handlebars'
         });
@@ -72,6 +73,7 @@ router.post('/setting/password', async (req, res) => {
     req.session.authUser = ret[0];
     console.log(ret[0]);
     return res.render('bidder/change-password', {
+        pActive: true,
         success: 'Password changed!',
         layout: 'account.handlebars'
     });
