@@ -11,12 +11,6 @@ export default {
         return user[0] || null;
     },
 
-    async validateAccount(email, password){
-        const sql = `select * from user where user.Email = '${email}' and user.Password = '${password}'`;
-        const raw = await db.raw(sql);
-        return raw[0] || null;
-    },
-
     async addUser(entity) {
         return db('user').insert(entity);
     },

@@ -2,8 +2,8 @@
     <script>
         $(document.body).on('submit', "#editForm", function (event) {
             event.preventDefault();
-
-            const big_cat_name = document.getElementById('txtEditBigCatName').value;
+            console.log($(this).find("[id='txtEditBigCatName']"));
+            const big_cat_name = $(this).find("[id='txtEditBigCatName']").val();
             if (big_cat_name.length <1) {
                 alert('Name must be filled in!');
                 return;
