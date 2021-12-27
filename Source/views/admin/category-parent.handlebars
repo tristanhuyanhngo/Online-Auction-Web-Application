@@ -3,10 +3,12 @@
         $('#editForm').on('submit', function (event) {
             event.preventDefault();
             const big_cat_name = document.getElementById('txtEditBigCatName').value;
-
+            alert(big_cat_name);
             if (big_cat_name.length < 1) {
                 alert('Name must be filled in!');
                 return;
+            } else{
+                $('#editForm').off('submit').submit();
             }
         });
 
@@ -17,6 +19,8 @@
             if (big_cat_name.length < 1) {
                 alert('Name must be filled in!');
                 return;
+            } else{
+                $('#addForm').off('submit').submit();
             }
         });
 

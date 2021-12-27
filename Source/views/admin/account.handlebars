@@ -40,7 +40,6 @@
                 alert("Passwords doesn't match!");
                 return;
             }
-
             // Ajax
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data === false) {

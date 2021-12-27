@@ -13,6 +13,7 @@ export default function (app) {
     app.use('/profile', accountRoute);
     app.use('/bidder', bidderRoute);
     app.use('/admin', adminRoute);
+    app.use('/account', accountRoute);
     app.use('/seller',sellerRoute)
     app.use('/public',express.static('public'));
 }
