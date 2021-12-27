@@ -81,10 +81,20 @@ router.post('/account/del',   async (req, res) => {
 router.get('/category-child', async (req, res) => {
     let cActive = true;
     const category = await categoryModel.findAllCat();
+    const bigcat = await categoryModel.findAllWithDetails();
+
+    for (let i in category){
+        if(category[i].ProCount === 0){
+            category[i].hasProduct=false;
+        } else{
+            category[i].hasProduct=true;
+        }
+    }
 
     res.render('admin/category-child', {
         cActive,
         category,
+        bigcat,
         layout: 'admin.handlebars'
     });
 });
@@ -93,6 +103,12 @@ router.post('/category-parent/add', async (req, res) => {
     const ret = await categoryModel.addBigCat(req.body);
     console.log(ret);
     return res.redirect('/admin/category-parent');
+});
+
+router.post('/category-child/add',async function(req, res)  {
+    const ret = await categoryModel.addCat(req.body);
+    console.log(ret);
+    return res.redirect('/admin/category-child');
 });
 
 router.post('/category-parent/update',async function(req, res) {
@@ -105,6 +121,18 @@ router.post('/category-parent/del',async function(req, res) {
     const ret = await categoryModel.delBigCat(req.body.BigCatID);
     console.log(ret);
     return res.redirect('/admin/category-parent');
+});
+
+router.post('/category-child/del',async function(req, res) {
+    const ret = await categoryModel.delCat(req.body.CatID);
+    console.log(ret);
+    return res.redirect('/admin/category-child');
+});
+
+router.post('/category-child/update',async function(req, res) {
+    const ret = await categoryModel.updateCat(req.body);
+    console.log(ret);
+    return res.redirect('/admin/category-child');
 });
 
 router.post('/product/del',   async (req, res) => {

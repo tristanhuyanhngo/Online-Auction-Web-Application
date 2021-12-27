@@ -55,11 +55,25 @@ export default {
         return db('big_category').where('BigCatID',id).update(entity);
     },
 
+    async updateCat(entity) {
+        const id = entity.CatID;
+        delete entity.CatID;
+        return db('category').where('CatID',id).update(entity);
+    },
+
     async delBigCat(id){
         return db('big_category').where('BigCatID',id).del();
     },
 
+    async delCat(id){
+        return db('category').where('CatID',id).del();
+    },
+
     async addBigCat(entity){
         return db('big_category').insert(entity);
+    },
+
+    async addCat(entity){
+        return db('category').insert(entity);
     }
 }

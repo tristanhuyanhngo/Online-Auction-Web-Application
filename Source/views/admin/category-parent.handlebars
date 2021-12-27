@@ -1,7 +1,8 @@
 {{#section 'js'}}
     <script>
-        $('#editForm').on('submit', function (event) {
+        $(document.body).on('submit', "#editForm", function (event) {
             event.preventDefault();
+
             const big_cat_name = document.getElementById('txtEditBigCatName').value;
             if (big_cat_name.length <1) {
                 alert('Name must be filled in!');
@@ -57,7 +58,7 @@
                                    class="border border-cyan-700 form-control">
                         </div>
                         <div class=" flex justify-end mt-4 space-x-4">
-                            <button type="submit" formaction="/admin/parent-category/add"
+                            <button type="submit"
                                     class="font-semibold text-md  px-6 py-2  border border-cyan-700">
                                 Save
                             </button>
@@ -147,7 +148,7 @@
                                 </div>
                             </form>
 
-                            <form id="del" method="post" action="/admin/category-parent/del">
+                            <form id="delForm" method="post" action="/admin/category-parent/del">
                                 <div x-data="{ showModal : false }">
                                     <div
                                          {{#if hasProduct}}
