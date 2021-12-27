@@ -25,6 +25,15 @@ router.get('/category-parent', async (req, res) => {
     let cActive = true;
 
     const bigcat = await categoryModel.findAllWithDetails();
+
+    for (let i in bigcat){
+        if(bigcat[i].ProCount === 0){
+            bigcat[i].hasProduct=false;
+        } else{
+            bigcat[i].hasProduct=true;
+        }
+    }
+
     console.log(bigcat);
     res.render('admin/category-parent', {
         cActive,
@@ -102,12 +111,6 @@ router.post('/product/del',   async (req, res) => {
     const ret = await productModel.del(req.body.ProID);
     console.log(ret);
     return res.redirect('/admin/product');
-});
-
-router.post('/category-parent/add',   async (req, res) => {
-    const ret = await productModel.del(req.body.ProID);
-    console.log(ret);
-    return res.redirect('/admin/category-parent');
 });
 
 router.get('/product', async (req, res) => {

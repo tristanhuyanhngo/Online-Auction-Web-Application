@@ -52,6 +52,15 @@
         });
 
         $('#editForm').on('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('editName').value;
+            if (name.length<1) {
+                alert("Name must be filled in!");
+                return;
+            } else {
+                alert("Successful");
+                $('#editForm').off('submit').submit();
+            }
             alert("Successful!")
         });
         $('#txtEmail').select();
@@ -214,7 +223,8 @@
                                          x-transition:leave="transition ease-in duration-300"
                                          x-transition:leave-start="opacity-100 transform scale-100"
                                          x-transition:leave-end="opacity-0 transform scale-90">
-                                        <form id="editForm" method="post">
+                                        <form id="editForm" method="post"
+                                              action="/admin/account/update">
                                             <div>
                                                 <div class="h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
                                                 </div>
@@ -264,9 +274,7 @@
 
                                                 <div class=" flex justify-end mt-4 space-x-4">
                                                     <button type="submit" id="updateButton"
-                                                            formaction="/admin/account/update"
                                                             value="Save"
-                                                            @click="showModal = !showModal"
                                                             class="font-semibold text-md  px-6 py-2  border border-cyan-700">
                                                         Save
                                                     </button>
