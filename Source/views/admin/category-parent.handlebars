@@ -1,8 +1,8 @@
 {{#section 'js'}}
     <script>
-        $('#addForm').on('submit', function (event) {
+        $('#editForm').on('submit', function (event) {
             event.preventDefault();
-            const big_cat_name = document.getElementById('txtAddBigCatName').value;
+            const big_cat_name = document.getElementById('txtEditBigCatName').value;
 
             if (big_cat_name.length < 1) {
                 alert('Name must be filled in!');
@@ -10,9 +10,9 @@
             }
         });
 
-        $('#editForm').on('submit', function (event) {
+        $('#addForm').on('submit', function (event) {
             event.preventDefault();
-            const big_cat_name = document.getElementById('txtEditBigCatName').value;
+            const big_cat_name = document.getElementById('txtAddBigCatName').value;
 
             if (big_cat_name.length < 1) {
                 alert('Name must be filled in!');
@@ -127,7 +127,7 @@
                                                        id="txtEditBigCatName" name="BigCatName">
                                             </div>
                                             <div class=" flex justify-end mt-4 space-x-4">
-                                                <button @click="showModal = !showModal"
+                                                <button
                                                         class="font-semibold text-md  px-6 py-2  border border-cyan-700"
                                                         type="submit" id="btnUpdate" name="BigCatID"
                                                         value= {{{BigCatID}}}>
