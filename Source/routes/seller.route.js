@@ -4,6 +4,22 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     let pActive = true;
+
+    // Get information of user from session
+    const user = req.session.authUser || 0;
+    if (!user) {
+        console.log("Please login first ! ");
+        res.redirect('/');
+        return;
+    }
+
+    // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
+    const typeUser = req.session.typeUser;
+    if (+typeUser === 2) {
+        console.log("You don't have permission to access this page ! ");
+        res.redirect('/');
+        return;
+    }
     res.render('seller/post-product',{
         pActive,
         layout: 'seller.handlebars'

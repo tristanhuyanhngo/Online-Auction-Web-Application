@@ -133,15 +133,18 @@ router.post('/login',urlencodedParser, async function (req, res) {
 
     req.session.auth=true;
     req.session.authUser=user;
-
-    res.redirect('/home');
+    req.session.isSeller=user.Type === '1';
+    req.session.isAdmin=user.Type === '3';
+    console.log(req.session);
+    res.redirect('/');
 });
 
 // ---------------- LOGOUT ---------------- //
 router.post('/logout', async function(req, res) {
     req.session.auth = false;
     req.session.authUser = null;
-    console.log("Sign out");
+    req.session.isSeller = null;
+    req.session.isAdmin = null;
     const url = req.headers.referer || '/';
     res.redirect(url);
 });
