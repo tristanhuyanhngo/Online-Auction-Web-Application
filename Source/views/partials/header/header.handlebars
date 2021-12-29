@@ -86,14 +86,14 @@
 
                     {{#if auth}}
                         <a href="#">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">logout</button>
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Logout</button>
                         </a>
                     {{else}}
                         <a href="/login">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">login</button>
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Login</button>
                         </a>
                         <a href="/register">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">register</button>
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Register</button>
                         </a>
                     {{/if}}
                 </div>
@@ -146,7 +146,10 @@
                             <a href="/bidder/cart" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My cart</a>
                             <a href="/bidder/wishlist" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My wishlist</a>
                             <a href="/bidder/won-bid" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Won bids</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Logout</a>
+                            <form id="formLogout" action="/logout" method="post"></form>
+                            <a class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="javascript: $('#formLogout').submit();">
+                                Log out
+                            </a>
                         </div>
                     </div>
                 {{else}}

@@ -3,11 +3,13 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import moment from "moment";
 
+// import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 
 const router = express.Router();
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -54,8 +56,6 @@ router.get('/search', async function (req, res) {
         isLast: page_numbers[nPages-1].isCurrent
     });
 });
-
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ---------------- REGISTER ---------------- //
 router.get('/register', async function(req, res) {
@@ -135,6 +135,15 @@ router.post('/login',urlencodedParser, async function (req, res) {
     req.session.authUser=user;
 
     res.redirect('/home');
+});
+
+// ---------------- LOGOUT ---------------- //
+router.post('/logout', async function(req, res) {
+    req.session.auth = false;
+    req.session.authUser = null;
+    console.log("Sign out");
+    const url = req.headers.referer || '/';
+    res.redirect(url);
 });
 
 
