@@ -1,5 +1,4 @@
 import express from 'express';
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -14,8 +13,8 @@ router.get('/', (req, res) => {
     }
 
     // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
-    const typeUser = req.session.typeUser;
-    if (+typeUser === 2) {
+    const isSeller = req.session.isSeller;
+    if (!isSeller) {
         console.log("You don't have permission to access this page ! ");
         res.redirect('/');
         return;

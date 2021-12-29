@@ -132,7 +132,7 @@
                 </div>
 
                 {{#if auth}}
-                    <a href="/profile"><div class="font-semibold mr-2">Hi, {{authUser.Name}} !</div></a>
+                    <a href="/profile"><div class="font-semibold mr-2">Hi, <strong>{{authUser.Name}}</strong> !</div></a>
 
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
@@ -146,7 +146,6 @@
                                 <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Seller page</a>
                             {{/if}}
                             {{#if isAdmin}}
-                                <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Seller page</a>
                                 <a href="/admin" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Admin page</a>
                             {{/if}}
                             <a href="/bidder/cart" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My cart</a>

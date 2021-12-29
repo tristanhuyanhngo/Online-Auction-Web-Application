@@ -131,11 +131,17 @@ router.post('/login',urlencodedParser, async function (req, res) {
         });
     }
 
+    // 1 - Seller , 2 - Bidder, 3 - Admin
     req.session.auth=true;
     req.session.authUser=user;
-    req.session.isSeller=user.Type === '1';
-    req.session.isAdmin=user.Type === '3';
-    console.log(req.session);
+    if (user.Type === '3') {
+        req.session.isSeller = true;
+        req.session.isAdmin = true;
+    }
+    else if (user.Type === '1') {
+        req.session.isSeller = true;
+        req.session.isAdmin = false;
+    }
     res.redirect('/');
 });
 
@@ -148,11 +154,6 @@ router.post('/logout', async function(req, res) {
     const url = req.headers.referer || '/';
     res.redirect(url);
 });
-
-
-router.get('/profile', (req, res) => {
-    res.render('profile');
-})
 
 router.get('/user/:username', async function (req, res) {
     const Username = req.params.username || 0;

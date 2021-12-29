@@ -9,7 +9,6 @@ import sellerRoute from '../routes/seller.route.js'
 export default function (app) {
     app.use('/', indexRoute);
     app.use('/home', indexRoute);
-    app.use('/logout', accountRoute);
     app.use('/product', productRoute);
     app.use('/profile', accountRoute);
     app.use('/bidder', bidderRoute);
