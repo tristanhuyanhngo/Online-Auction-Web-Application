@@ -1,14 +1,10 @@
 {{#section 'js'}}
     <script>
-        $(document.body).on('submit', "#editForm", function (event) {
-            event.preventDefault();
-            console.log($(this).find("[id='txtEditBigCatName']"));
-            const big_cat_name = $(this).find("[id='txtEditBigCatName']").val();
+        $(".editForm").on('submit', function (event) {
+            const big_cat_name = $(this).find("input").val();
             if (big_cat_name.length <1) {
                 alert('Name must be filled in!');
-                return;
-            } else {
-                $('#editForm').off('submit').submit();
+                event.preventDefault();
             }
         });
 
@@ -107,7 +103,7 @@
                             <div class="text-left">{{ProCount}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap flex justify-center">
-                            <form id="editForm" method="post" >
+                            <form id="editForm_{{@index}}" class="editForm" method="post" action="/admin/category-parent/update">
                                 <div x-data="{ showModal : false }">
                                     <div @click="showModal = !showModal"
                                          class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300">
@@ -126,13 +122,12 @@
                                              x-transition:leave-end="opacity-0 transform scale-90">
                                             <div class="flex justify-between font-normal text-base space-x-8">
                                                 <div>Name</div>
-                                                <input class="border border-cyan-700 form-control"
+                                                <input class="txtEditBigCatName border border-cyan-700 form-control"
                                                        type="text"
-                                                       id="txtEditBigCatName" name="BigCatName">
+                                                       id="txtEditBigCatName_{{@index}}" name="BigCatName">
                                             </div>
                                             <div class=" flex justify-end mt-4 space-x-4">
                                                 <button
-                                                        formaction="/admin/category-parent/update"
                                                         class="font-semibold text-md  px-6 py-2  border border-cyan-700"
                                                         type="submit" id="btnUpdate" name="BigCatID"
                                                         value= {{{BigCatID}}}>

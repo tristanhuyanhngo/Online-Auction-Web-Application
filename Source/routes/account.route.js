@@ -2,6 +2,7 @@ import express from 'express';
 import userModel from '../models/user.model.js'
 import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
+import wishlistModel from "../models/wishlist.model.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -104,12 +105,66 @@ router.get('/setting/password', (req, res) => {
     });
 });
 
-router.get('/wishlist', (req, res) => {
+router.get('/wishlist', async (req, res) => {
     let wActive = true;
-    res.render('bidder/wishlist',{
+
+    const page = req.query.page || 1;
+    const email = req.session.authUser.Email;
+
+    const limit = 9;
+    const raw = await wishlistModel.countByEmail(email);
+    const total = raw[0][0].amount;
+
+    let nPage = Math.floor(total / limit);
+    if (total % limit > 0) {
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page - 1) * limit;
+    const list = await wishlistModel.findPageByEmail(email, limit, offset);
+
+    let isFirst = 1;
+    let isLast = 1;
+
+
+    if (list.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    for (let i in list){
+        if(list[i].ProState === false){
+            list[i].ProState="Sold";
+        } else{
+            list[i].ProState="On air";
+        }
+    }
+
+
+    res.render('bidder/wishlist', {
         wActive,
+        products: list,
+        empty: list.length === 0,
+        page_numbers,
+        isFirst,
+        isLast,
         layout: 'account.handlebars'
     });
+});
+
+router.post('/wishlist/del',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const ret = await wishlistModel.delPro(req.body.ProID,email);
+    console.log(ret);
+    return res.redirect('/account/wishlist');
 });
 
 router.get('/cart', (req, res) => {
