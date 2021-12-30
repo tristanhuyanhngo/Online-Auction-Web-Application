@@ -22,7 +22,8 @@
                 {{#each this.products}}
                     <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">{{ProName}}</div>
+                            <a href="/product/detail/{{ProID}}"
+                                    class="hover:text-key wishlist_link font-medium text-gray-800">{{ProName}}</a>
                         </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-left">{{Seller}}</div>

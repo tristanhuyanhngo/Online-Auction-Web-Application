@@ -1,3 +1,30 @@
+{{#section 'js'}}
+    <script>
+        $(".editForm").on('submit', function (event) {
+            const cat_name = $(this).find("input").val();
+            if (cat_name.length <1) {
+                alert('Name must be filled in!');
+                event.preventDefault();
+            }
+        });
+
+        $('#addForm').on('submit', function (event) {
+            event.preventDefault();
+            const big_cat_name = document.getElementById('txtAddCatName').value;
+
+            if (big_cat_name.length < 1) {
+                alert('Name must be filled in!');
+                return;
+            } else{
+                $('#addForm').off('submit').submit();
+            }
+        });
+
+        $('#txtAddCatName').select();
+    </script>
+{{/section}}
+
+
 <div class="w-full  max-w-4xl mx-auto mt-8">
     <div class="flex justify-between">
         <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
@@ -109,7 +136,7 @@
                                          x-transition:leave-start="opacity-100 transform scale-100"
                                          x-transition:leave-end="opacity-0 transform scale-90">
 
-                                        <form id="editForm" method="post">
+                                        <form id="editForm_{{@index}}" class="editForm" method="post">
                                             <div class="flex justify-between font-normal text-base space-x-8">
                                                 <div>Name</div>
                                                 <input class="border border-cyan-700 form-control"
