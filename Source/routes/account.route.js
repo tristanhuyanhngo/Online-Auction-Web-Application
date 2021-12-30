@@ -164,7 +164,24 @@ router.post('/wishlist/del',async function(req, res) {
     const email = res.locals.authUser.Email;
     const ret = await wishlistModel.delPro(req.body.ProID,email);
     console.log(ret);
-    return res.redirect('/account/wishlist');
+
+    const url = req.headers.referer || '/account/wishlist';
+    return res.redirect(url);
+});
+
+router.post('/wishlist/add',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const product = req.body.ProID;
+
+    const item = {
+        ProID: product,
+        Bidder: email
+    }
+    const ret = await wishlistModel.add(item);
+    console.log(ret);
+
+    const url = req.headers.referer || '/account/wishlist';
+    return res.redirect(url);
 });
 
 router.get('/cart', (req, res) => {

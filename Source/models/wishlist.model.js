@@ -16,6 +16,10 @@ export default {
         }).del();
     },
 
+    async add(entity){
+        return db('wish_list').insert(entity);
+    },
+
     async findPageByEmail(email, limit, offset) {
         const sql = `select w.*, p.ProName, u.Name as Seller, p.ProState
                      from wish_list w join product p
