@@ -1,44 +1,28 @@
 {{#section 'js'}}
     <script>
-        // $('#editEmailForm').on('submit', function (event) {
-        //     event.preventDefault();
-        //     const email = document.getElementById('txtEmail').value;
-        //     if (email.length < 1) {
-        //         alert('Email must be filled in!');
-        //         return;
-        //     }
-        //     if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-        //         alert("Invalid email!");
-        //         return;
-        //     }
-        //     $.getJSON(`/account/is-available?user=${email}`, function (data) {
-        //         if (data === false) {
-        //             alert('Email is already in use. Please choose another email!');
-        //         } else {
-        //             $('#addForm').off('submit').submit();
-        //         }
-        //     });
-        // });
-
-        $('#editUsernameForm').on('submit', function (event) {
+        $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
-            const username = document.getElementById('txtUsername').value;
-            if (username.length < 1) {
-                alert('Username must be filled in!');
+            const email = document.getElementById('txtEmail').value;
+            if (email.length < 1) {
+                alert('Email must be filled in!');
                 return;
             }
-            $.getJSON(`/account/username-available?user=${username}`, function (data) {
-                if (data === false) {
-                    alert('Username is already in use. Please choose another one!');
+            if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+                alert("Invalid email!");
+                return;
+            }
+            $.getJSON(`/account/is-available?user=${email}`, function (data) {
+                if (data == false) {
+                    alert('Email is already in use. Please choose another email!');
+                    return;
                 } else {
-                    $('#editUsernameForm').off('submit').submit();
+                    $('#editEmailForm').off('submit').submit();
                 }
             });
         });
-
-        $('#txtUsername').select();
     </script>
 {{/section}}
+
 <div class="flex flex-wrap items-center space-x-4 p-1 mb-5">
     <table class="w-full divide-y divide-gray-200">
         <thead>
@@ -62,90 +46,23 @@
                 </div>
             </td>
 
-            <!--            <form id="editEmailForm" method="post" action="/account/setting/edit-info">-->
-            <td class="py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                    <div class="ml-2">
-                        <label x-show="!edit"
-                               class="py-2 text-sm font-medium text-gray-500">
-                            {{authUser.Email}}
-                        </label>
-
-                        <!--                            <div x-show="edit"-->
-                        <!--                                 class="flex items-center">-->
-                        <!--                                <div class="ml-2">-->
-                        <!--                                    <input id="txtEmail" class="py-2 text-sm font-medium-->
-                        <!--                                text-gray-500 px-2 rounded border-2 border-key-->
-                        <!--                        focus:outline-none"-->
-                        <!--                                           name="Email"-->
-                        <!--                                           placeholder="{{authUser.Email}}" autofocus>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                    </div>
-                </div>
-            </td>
-
-            <td>
-                <div class="flex items-center justify-end mr-2">
-                    <!--                        <div x-show="!edit"-->
-                    <!--                             @click="edit = true"-->
-                    <!--                             class="flex items-center bg-white hover:bg-key text-key-->
-                    <!--                        font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">-->
-                    <!--                            <svg-->
-                    <!--                                    xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"-->
-                    <!--                                    stroke="currentColor">-->
-                    <!--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-                    <!--                                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>-->
-                    <!--                            </svg>-->
-                    <!--                            <span class="ml-2">Edit</span>-->
-                    <!--                        </div>-->
-
-                    <div>&nbsp;</div>
-
-                    <!--                        <button x-show="edit"-->
-                    <!--                                @click="edit = false"-->
-                    <!--                                type="submit"-->
-                    <!--                                name = "Email"-->
-                    <!--                                value = {{authUser.Email}}-->
-                    <!--                                        class="flex items-center bg-key hover:bg-cyan-800 text-white-->
-                    <!--                                font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded">-->
-                    <!--                        Save-->
-                    <!--                        </button>-->
-                </div>
-            </td>
-            <!--            </form>-->
-        </tr>
-
-        <tr x-data="{ edit: false }"
-            @click.away="edit=false"
-            class="hover:bg-gray-200">
-            <td class="py-4 whitespace-nowrap">
-                <div class="items-center">
-                    <div class="ml-2">
-                        <div class="text-sm font-medium text-gray-900">
-                            Username
-                        </div>
-                    </div>
-                </div>
-            </td>
-
-            <form id="editUsernameForm" method="post" action="/account/setting/edit-info">
+            <form id="editEmailForm" method="post" action="/account/setting/edit-email">
                 <td class="py-4 whitespace-nowrap">
                     <div class="flex items-center">
                         <div class="ml-2">
                             <label x-show="!edit"
                                    class="py-2 text-sm font-medium text-gray-500">
-                                {{authUser.Username}}
+                                {{authUser.Email}}
                             </label>
 
                             <div x-show="edit"
                                  class="flex items-center">
                                 <div class="ml-2">
-                                    <input id="txtUsername" class="py-2 text-sm font-medium
-                                text-gray-500 px-2 rounded border-2 border-key
-                        focus:outline-none"
-                                           name="Username"
-                                           placeholder="{{authUser.Username}}" autofocus>
+                                    <input id="txtEmail" class="py-2 text-sm font-medium
+                                                            text-gray-500 px-2 rounded border-2 border-key
+                                                    focus:outline-none"
+                                           name="Email"
+                                           placeholder="{{authUser.Email}}" autofocus>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +74,7 @@
                         <div x-show="!edit"
                              @click="edit = true"
                              class="flex items-center bg-white hover:bg-key text-key
-                        font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
+                                                font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -166,16 +83,15 @@
                             </svg>
                             <span class="ml-2">Edit</span>
                         </div>
-
+                        <input x-show="false"
+                                name = "Username" value = {{authUser.Username}}>
                         <button x-show="edit"
                                 @click="edit = false"
                                 type="submit"
-                                name="Email"
-                                value= {{authUser.Email}}
-                                        class="flex items-center bg-key hover:bg-cyan-800 text-white
-                                font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded
-                        ">
-                        Save
+                                id="test"
+                                class="flex items-center bg-key hover:bg-cyan-800 text-white
+                                    font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded">
+                            Save
                         </button>
                     </div>
                 </td>
@@ -208,8 +124,8 @@
                                  class="flex items-center">
                                 <div class="ml-2">
                                     <input id="txtName" class="py-2 text-sm font-medium
-                                text-gray-500 px-2 rounded border-2 border-key
-                        focus:outline-none"
+                                    text-gray-500 px-2 rounded border-2 border-key
+                            focus:outline-none"
                                            name="Name"
                                            placeholder="{{authUser.Name}}" autofocus>
                                 </div>
@@ -223,7 +139,7 @@
                         <div x-show="!edit"
                              @click="edit = true"
                              class="flex items-center bg-white hover:bg-key text-key
-                        font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
+                            font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -237,11 +153,10 @@
                                 @click="edit = false"
                                 type="submit"
                                 name="Email"
-                                value= {{authUser.Email}}
-                                        class="flex items-center bg-key hover:bg-cyan-800 text-white
-                                font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded
-                        ">
-                        Save
+                                value="{{authUser.Email}}"
+                                class="flex items-center bg-key hover:bg-cyan-800 text-white
+                                    font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded">
+                            Save
                         </button>
                     </div>
                 </td>

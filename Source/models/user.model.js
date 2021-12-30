@@ -26,11 +26,17 @@ export default {
         return db('user').where('Email', email);
     },
 
+    async updateEmail(entity) {
+        const username = entity.Username;
+        delete entity.Username;
+        await db('user').where('Username', username).update(entity);
+        return db('user').where('Username', username);
+    },
+
     async updatePassword(entity) {
         const email = entity.Email;
         delete entity.Email;
-        await
-            db('user').where('Email', email).update(entity);
+        await db('user').where('Email', email).update(entity);
         return db('user').where('Email', email);
     }
 }

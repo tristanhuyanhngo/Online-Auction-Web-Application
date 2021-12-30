@@ -48,6 +48,15 @@ router.post('/setting/edit-info', async (req, res) => {
     res.redirect('/account/setting');
 });
 
+router.post('/setting/edit-email', async (req, res) => {
+    const ret = await userModel.updateEmail(req.body);
+    res.locals.authUser = ret[0];
+    req.session.authUser = ret[0];
+    console.log(ret[0]);
+    console.log(req.session.authUser.Username);
+    res.redirect('/account/setting');
+});
+
 router.post('/setting/password', async (req, res) => {
     const isEqual = bcrypt.compareSync(req.body.OldPassword, res.locals.authUser.Password);
     if(isEqual === false) {
