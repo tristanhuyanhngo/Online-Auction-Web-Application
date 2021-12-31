@@ -29,8 +29,8 @@ CREATE TABLE `category` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `Email` char(50) COLLATE utf8_general_ci NOT NULL,
-  `Username` varchar(50) COLLATE utf8_general_ci NOT NULL unique,
+  `Email` char(50) COLLATE utf8_general_ci NOT NULL unique,
+  `Username` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `Name` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
   `Address` nvarchar(80) COLLATE utf8_general_ci,
@@ -38,7 +38,7 @@ CREATE TABLE `user` (
   `RegisterDate` date NOT NULL,
   `Type` char(1) NOT NULL,
   `Rate` int unsigned,
-  PRIMARY KEY (`Email`)
+  PRIMARY KEY (`Username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
@@ -56,7 +56,9 @@ CREATE TABLE `product` (
   `UploadDate` datetime NOT NULL,
   `EndDate` datetime,
   `AutoExtend` bit NOT NULL, 
+  `ProState` bit NOT NULL, 
   `SuccessBidder` char(50) COLLATE utf8_general_ci,
+  
   PRIMARY KEY (`ProID`),
   FOREIGN KEY (`CatID`) REFERENCES category(`CatID`),
   FOREIGN KEY (`Seller`) REFERENCES user(`Email`),
@@ -107,7 +109,18 @@ DROP TABLE IF EXISTS `wish_list`;
 CREATE TABLE `wish_list` (
   `ProID` int unsigned NOT NULL,
   `Bidder` char(50) COLLATE utf8_general_ci NOT NULL,
-  `ProState` bit NOT NULL,
+  PRIMARY KEY (`ProID`,`Bidder`),
+  FOREIGN KEY (`ProID`) REFERENCES product(`ProID`),
+  FOREIGN KEY (`Bidder`) REFERENCES user(`Email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- ----------------------------
+-- Gio hang
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `ProID` int unsigned NOT NULL,
+  `Bidder` char(50) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`ProID`,`Bidder`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`),
   FOREIGN KEY (`Bidder`) REFERENCES user(`Email`)
@@ -220,7 +233,7 @@ COMMIT;
 -- ----------------------------
 BEGIN;
 INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','seller1','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0);
-INSERT INTO `user` VALUES ('abc@gmail.com','seller2','seller2','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','1',0);
+INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$12$9SHTJ2A2i/6S7CYi.Ylt0u4pa5duhBCnka.JhKgJ3dmHj1QLADvfC','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','1',0);
 COMMIT;
 
 -- ----------------------------
@@ -247,78 +260,78 @@ COMMIT;
 BEGIN;
 
 -- Ring
-INSERT INTO `product` VALUES (1, 1, 'kysutainangqsb@gmail.com','Ring 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (2, 1, 'kysutainangqsb@gmail.com','Ring 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (3, 1, 'kysutainangqsb@gmail.com','Ring 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (4, 1, 'kysutainangqsb@gmail.com','Ring 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (5, 1, 'kysutainangqsb@gmail.com','Ring 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (1, 1, 'kysutainangqsb@gmail.com','Ring 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (2, 1, 'kysutainangqsb@gmail.com','Ring 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (3, 1, 'kysutainangqsb@gmail.com','Ring 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (4, 1, 'kysutainangqsb@gmail.com','Ring 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (5, 1, 'kysutainangqsb@gmail.com','Ring 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
 
 -- Watch
-INSERT INTO `product` VALUES (6, 2, 'kysutainangqsb@gmail.com','Watch 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (7, 2, 'kysutainangqsb@gmail.com','Watch 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (8, 2, 'kysutainangqsb@gmail.com','Watch 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (9, 2, 'kysutainangqsb@gmail.com','Watch 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (10, 2, 'kysutainangqsb@gmail.com','Watch 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (6, 2, 'kysutainangqsb@gmail.com','Watch 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (7, 2, 'kysutainangqsb@gmail.com','Watch 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (8, 2, 'kysutainangqsb@gmail.com','Watch 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (9, 2, 'kysutainangqsb@gmail.com','Watch 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (10, 2, 'kysutainangqsb@gmail.com','Watch 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Latop
-INSERT INTO `product` VALUES (11, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 16 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (12, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 14 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (13, 3, 'kysutainangqsb@gmail.com','Apple Macbook Air 2020', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (14, 3, 'kysutainangqsb@gmail.com','Asus Rog Zephyrus Gaming G14', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (15, 3, 'kysutainangqsb@gmail.com','Asus Zenbook UX371EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (16, 3, 'kysutainangqsb@gmail.com','Asus Zenbook Duo UX482EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (17, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (18, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (19, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (20, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (21, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (22, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (23, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (24, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (25, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (11, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 16 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (12, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 14 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (13, 3, 'kysutainangqsb@gmail.com','Apple Macbook Air 2020', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (14, 3, 'kysutainangqsb@gmail.com','Asus Rog Zephyrus Gaming G14', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (15, 3, 'kysutainangqsb@gmail.com','Asus Zenbook UX371EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (16, 3, 'kysutainangqsb@gmail.com','Asus Zenbook Duo UX482EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (17, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (18, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (19, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (20, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (21, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (22, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (23, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (24, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (25, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Mobile
-INSERT INTO `product` VALUES (26, 4, 'kysutainangqsb@gmail.com','Iphone 13 Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (27, 4, 'kysutainangqsb@gmail.com','Xiaomi 10T Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (28, 4, 'kysutainangqsb@gmail.com','Samsung Galaxy Z Flip 3 5G 256GB', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (29, 4, 'kysutainangqsb@gmail.com','Itel IT2171', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (30, 4, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (26, 4, 'kysutainangqsb@gmail.com','Iphone 13 Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (27, 4, 'kysutainangqsb@gmail.com','Xiaomi 10T Pro', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (28, 4, 'kysutainangqsb@gmail.com','Samsung Galaxy Z Flip 3 5G 256GB', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (29, 4, 'kysutainangqsb@gmail.com','Itel IT2171', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (30, 4, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Smart Watch
-INSERT INTO `product` VALUES (31, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (32, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (33, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (34, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (35, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (31, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (32, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (33, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (34, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (35, 5, 'kysutainangqsb@gmail.com','Energizer E20', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Clothing
-INSERT INTO `product` VALUES (36, 6, 'kysutainangqsb@gmail.com','T Shirt', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (37, 6, 'kysutainangqsb@gmail.com','Jeans', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (36, 6, 'kysutainangqsb@gmail.com','T Shirt', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (37, 6, 'kysutainangqsb@gmail.com','Jeans', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Shoes
-INSERT INTO `product` VALUES (38, 7, 'kysutainangqsb@gmail.com','Nike Air Force 1 07 QS', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (39, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Brown', 200000, 2, 1000000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (40, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (41, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Gray', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (42, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi RB', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (43, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Red', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (44, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Normal', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (45, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (46, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (47, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (48, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (49, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (50, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (51, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (52, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (53, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (54, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (55, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (56, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (57, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (58, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (59, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
-INSERT INTO `product` VALUES (60, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1, NULL);
+INSERT INTO `product` VALUES (38, 7, 'kysutainangqsb@gmail.com','Nike Air Force 1 07 QS', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (39, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Brown', 200000, 2, 1000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (40, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Black', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (41, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Gray', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (42, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi RB', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (43, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Red', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (44, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Normal', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (45, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (46, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (47, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (48, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (49, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (50, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (51, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (52, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (53, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (54, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (55, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (56, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (57, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (58, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (59, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (60, 7, 'kysutainangqsb@gmail.com','Nike Blazer Mid 77 Cozi Sky', 150000, 2, 2500000, '2021-12-07', '2021-12-31', 1,0, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -385,4 +398,40 @@ INSERT INTO `description` VALUES (57, '2021-12-07', '<P><STRONG>Jewelry Informat
 INSERT INTO `description` VALUES (58, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `description` VALUES (59, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
 INSERT INTO `description` VALUES (60, '2021-12-07', '<P><STRONG>Jewelry Information</STRONG></P>\r\n<UL>\r\n    <LI>Loại hàng: Hàng trong nước</LI>\r\n</UL>\r\n');
+COMMIT;
+
+-- ----------------------------
+-- Records of Wishlist
+-- ----------------------------
+
+BEGIN;
+INSERT INTO `wish_list` VALUES (1, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (2, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (35, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (20, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (3, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (22, 'abc@gmail.com');
+INSERT INTO `wish_list` VALUES (29, 'abc@gmail.com');
+COMMIT;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
+
+BEGIN;
+INSERT INTO `cart` VALUES (3, 'abc@gmail.com');
+INSERT INTO `cart` VALUES (5, 'abc@gmail.com');
+INSERT INTO `cart` VALUES (18, 'abc@gmail.com');
+INSERT INTO `cart` VALUES (10, 'abc@gmail.com');
+COMMIT;
+
+-- ----------------------------
+-- Records of won_bid
+-- ----------------------------
+
+BEGIN;
+INSERT INTO `success_bid` VALUES (7, 'abc@gmail.com');
+INSERT INTO `success_bid` VALUES (8, 'abc@gmail.com');
+INSERT INTO `success_bid` VALUES (30, 'abc@gmail.com');
+INSERT INTO `success_bid` VALUES (33, 'abc@gmail.com');
 COMMIT;

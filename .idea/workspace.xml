@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fb7f584-a380-43df-b3a3-c7f5fded44f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/views/profile.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Source/routes/index.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/views/layouts/admin.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/layouts/admin.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/seller/post-product.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/views/test.handlebars" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/routes/bidder.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Source/routes/bidder.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +49,7 @@
       <workItem from="1639486138535" duration="532000" />
       <workItem from="1639486741637" duration="107000" />
       <workItem from="1639880856146" duration="6548000" />
+      <workItem from="1640618148655" duration="84000" />
     </task>
     <servers />
   </component>
