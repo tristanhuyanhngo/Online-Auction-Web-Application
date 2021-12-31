@@ -1,19 +1,20 @@
 {{#section 'js'}}
     <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetswal/dist/sweetswal.min.js';
         $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
             const email = document.getElementById('txtEmail').value;
             if (email.length < 1) {
-                alert('Email must be filled in!');
+                swal('Email must be filled in!');
                 return;
             }
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                alert("Invalid email!");
+                swal("Invalid email!");
                 return;
             }
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data == false) {
-                    alert('Email is already in use. Please choose another email!');
+                    swal('Email is already in use. Please choose another email!');
                     return;
                 } else {
                     $('#editEmailForm').off('submit').submit();
@@ -26,12 +27,12 @@
         //     event.preventDefault();
         //     const username = document.getElementById('txtUsername').value;
         //     if (username.length < 1) {
-        //         alert('Username must be filled in!');
+        //         swal('Username must be filled in!');
         //         return;
         //     }
         //     $.getJSON(`/account/username-available?user=${username}`, function (data) {
         //         if (data === false) {
-        //             alert('Username is already in use. Please choose another one!');
+        //             swal('Username is already in use. Please choose another one!');
         //         } else {
         //             $('#editUsernameForm').off('submit').submit();
         //         }

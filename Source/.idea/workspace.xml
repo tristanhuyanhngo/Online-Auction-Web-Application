@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca60d8ec-0b97-47c9-b115-eca48cd93a81" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/HCMUS_PTUDW_Final-Project_Online-Auction.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Source.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/account.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/account.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/category-child.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/category-child.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/category-parent.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/category-parent.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/register.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.handlebars" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="app" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/views/product.handlebars" root0="SKIP_INSPECTION" root1="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="22HEKdPjaLxC94mUsPojwQ9POAJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="D:\IntelliJ IDEA 2021.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\models" />
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\middlewares" />
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\partials\header" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\res" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca60d8ec-0b97-47c9-b115-eca48cd93a81" name="Changes" comment="" />
+      <created>1639486067927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639486067927</updated>
+      <workItem from="1639486071286" duration="3393000" />
+      <workItem from="1639497201725" duration="11401000" />
+      <workItem from="1639509741295" duration="4407000" />
+      <workItem from="1639544372018" duration="52000" />
+      <workItem from="1639544578585" duration="2964000" />
+      <workItem from="1639547609910" duration="8006000" />
+      <workItem from="1639559403779" duration="49000" />
+      <workItem from="1639644450194" duration="3101000" />
+      <workItem from="1639648337535" duration="8348000" />
+      <workItem from="1639661040505" duration="4048000" />
+      <workItem from="1639668329801" duration="3224000" />
+      <workItem from="1639681410960" duration="19277000" />
+      <workItem from="1639740255373" duration="949000" />
+      <workItem from="1639742332536" duration="2663000" />
+      <workItem from="1639759131191" duration="632000" />
+      <workItem from="1639844556704" duration="402000" />
+      <workItem from="1640255466542" duration="8249000" />
+      <workItem from="1640590164806" duration="5735000" />
+      <workItem from="1640596230580" duration="12208000" />
+      <workItem from="1640610313808" duration="1962000" />
+      <workItem from="1640618377764" duration="18889000" />
+      <workItem from="1640693580366" duration="1611000" />
+      <workItem from="1640708956021" duration="13000" />
+      <workItem from="1640855969125" duration="18736000" />
+      <workItem from="1640885267888" duration="5262000" />
+      <workItem from="1640947069719" duration="3165000" />
+      <workItem from="1640951820822" duration="812000" />
+      <workItem from="1640952721551" duration="108000" />
+      <workItem from="1640967601896" duration="7293000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

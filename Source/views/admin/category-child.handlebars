@@ -1,9 +1,10 @@
 {{#section 'js'}}
     <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $(".editForm").on('submit', function (event) {
             const cat_name = $(this).find("input").val();
             if (cat_name.length <1) {
-                alert('Name must be filled in!');
+                swal('Name must be filled in!');
                 event.preventDefault();
             }
         });
@@ -13,7 +14,7 @@
             const big_cat_name = document.getElementById('txtAddCatName').value;
 
             if (big_cat_name.length < 1) {
-                alert('Name must be filled in!');
+                swal('Name must be filled in!');
                 return;
             } else{
                 $('#addForm').off('submit').submit();

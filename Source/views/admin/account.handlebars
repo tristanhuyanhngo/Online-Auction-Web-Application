@@ -1,5 +1,7 @@
 {{#section 'js'}}
     <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetswal/dist/sweetswal.min.js';
+
         $('#addForm').on('submit', function (event) {
 
             event.preventDefault();
@@ -10,42 +12,42 @@
             const confirm_password = document.getElementById('txtConfirmPassword').value;
 
             if (email.length < 1) {
-                alert('Email must be filled in!');
+                swal('Email must be filled in!');
                 return;
             }
 
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                alert("Invalid email!");
+                swal("Invalid email!");
                 return;
             }
 
             // Validate username
             if (username.length < 1) {
-                alert('Username must be filled in!');
+                swal('Username must be filled in!');
                 return;
             }
 
             // Validate password
             if (!password) {
-                alert('Password must filled in!');
+                swal('Password must filled in!');
                 return;
             }
 
             if (!confirm_password) {
-                alert('Confirm password must filled in!');
+                swal('Confirm password must filled in!');
                 return;
             }
 
             if (password !== confirm_password) {
-                alert("Passwords doesn't match!");
+                swal("Passwords doesn't match!");
                 return;
             }
             // Ajax
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data === false) {
-                    alert('Email is already in use. Please choose another email!');
+                    swal('Email is already in use. Please choose another email!');
                 } else {
-                    alert("Successful");
+                    swal("Successful");
                     $('#addForm').off('submit').submit();
                 }
             });
@@ -55,13 +57,13 @@
             event.preventDefault();
             const name = document.getElementById('editName').value;
             if (name.length<1) {
-                alert("Name must be filled in!");
+                swal("Name must be filled in!");
                 return;
             } else {
-                alert("Successful");
+                swal("Successful");
                 $('#editForm').off('submit').submit();
             }
-            alert("Successful!")
+            swal("Successful!")
         });
         $('#txtEmail').select();
         $('#updUsername').select();
@@ -94,7 +96,7 @@
 
                     {{#if this.error}}
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                             role="alert">
+                             role="swal">
                             <strong class="font-bold">Holy smokes!</strong>
                             <span class="block sm:inline">Something seriously bad happened.</span>
                         </div>

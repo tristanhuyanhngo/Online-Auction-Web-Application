@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     res.render('profile');
 });
 
-router.get('/profile', auth,async function (req, res) {
+router.get('/profile', async function (req, res) {
     res.render('./vwAccount/profile');
 });
 
@@ -45,7 +45,7 @@ router.get('/username-available', async function (req, res) {
 
 
 //==============BIDDER's FUNCTIONS=================
-router.get('/setting', auth,(req, res) => {
+router.get('/setting', (req, res) => {
     let gActive = true;
     res.render('bidder/edit-info',{
         gActive,
@@ -101,7 +101,7 @@ router.post('/setting/password', async (req, res) => {
     });
 });
 
-router.get('/setting/general', auth,(req, res) => {
+router.get('/setting/general',(req, res) => {
     let gActive = true;
     res.render('bidder/edit-info',{
         gActive,

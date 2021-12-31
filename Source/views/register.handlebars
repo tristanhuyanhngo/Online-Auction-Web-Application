@@ -1,5 +1,6 @@
 {{#section 'js'}}
     <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetswal/dist/sweetswal.min.js';
         $('#formRegister').on('submit', function (event) {
             event.preventDefault();
 
@@ -11,35 +12,35 @@
 
             // Validate username
             if (username.length === 0) {
-                alert('Username must filled in!');
+                swal('Username must filled in!');
                 return;
             }
             // Validate email
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                alert("Invalid email !");
+                swal("Invalid email !");
                 return;
             }
             // Validate password
             if (!password) {
-                alert('Password must filled in!');
+                swal('Password must filled in!');
                 return;
             }
             if (!confirm_password) {
-                alert('Confirm password must filled in!');
+                swal('Confirm password must filled in!');
                 return;
             }
             if (password !== confirm_password) {
-                alert("Passwords doesn't match");
+                swal("Passwords doesn't match");
                 return;
             }
 
             // Ajax
             $.getJSON(`/is-available?user=${email}`, function (data) {
                 if (data === false) {
-                    alert('Email already in use. Please choose another email !');
+                    swal('Email already in use. Please choose another email !');
                 }
                 else {
-                    alert('Congratulations ! Register successfully');
+                    swal('Congratulations ! Register successfully');
                     $('#formRegister').off('submit').submit();
                 }
             });
