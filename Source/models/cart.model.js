@@ -21,10 +21,15 @@ export default {
     },
 
     async findPageByEmail(email, limit, offset) {
-        const sql = `select c.*, p.ProName, u.Name as Seller, p.ProState, p.SellPrice
+        const sql = `select c.*, p.ProName, ct.CatName, b.BigCatName, u.Name as Seller, p.ProState, p.SellPrice
                      from cart c join product p
-                                           on c.ProID = p.ProID
-                                      join user u on p.Seller = u.Email
+                                      on c.ProID = p.ProID
+                                 join user u on p.Seller = u.Email
+                                 join category ct
+                                      on p.CatID = ct.CatID
+                                 join big_category b
+                                      on ct.BigCat = b.BigCatID
+
                      where Bidder = '${email}'
                      limit ${limit} offset ${offset}`;
         const raw = await db.raw(sql);
