@@ -57,21 +57,21 @@
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div class="">
                         <div class="flex items-center justify-between">
-                            <div class=" text-black text-base font-semibold">
+                            <div class=" text-black text-base font-semibold flex">
                                 <h3 class="day">Time</h3>
-                                <p>Day</p>
+                                <p class="ml-1"> d</p>
                             </div>
-                            <div class=" text-black text-base font-semibold">
+                            <div class=" text-black text-base font-semibold flex">
                                 <h3 class="hour">Time</h3>
-                                <p>Hour</p>
+                                <p class="ml-1">h</p>
                             </div>
-                            <div class=" text-black text-base font-semibold">
+                            <div class=" text-black text-base font-semibold flex">
                                 <h3 class="minute">Time</h3>
-                                <p>Minute</p>
+                                <p class="ml-1"> m</p>
                             </div>
-                            <div class=" text-black text-base font-semibold">
+                            <div class=" text-black text-base font-semibold flex">
                                 <h3 class="second">Time</h3>
-                                <p>Second</p>
+                                <p class="ml-1"> s</p>
                             </div>
                             <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
                         </div>
@@ -390,7 +390,7 @@
     <div class="flex mt-8 border-t border-cyan-700">
         <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
     </div>
-    <div class="text-sm mt-4">
+    <div class="text-sm mt-4 max-h-80 overflow-auto">
         {{{this.description}}}
     </div>
 
