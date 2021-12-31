@@ -7,6 +7,17 @@ const router = express.Router();
 router.get('/detail/:id', async function(req, res) {
     const pro_id = req.params.id || 0;
     const product = await productModel.findByProID(pro_id);
+    let user = null;
+    let inWish = false;
+
+    if(res.locals.auth != false){
+        user = req.session.authUser.Email;
+        const isWish = await productModel.isInWishList(pro_id,user);
+
+        if(isWish.length >0){
+            inWish = true;
+        }
+    }
 
     if (product === undefined) {
         return res.redirect('/');
@@ -18,6 +29,7 @@ router.get('/detail/:id', async function(req, res) {
 
     res.render('product', {
         product,
+        inWish,
         related_products,
         description: description.Content
     });
