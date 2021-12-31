@@ -1,3 +1,30 @@
+{{#section 'js'}}
+    <script src="./dist/jquery.countdown.js"></script>
+    <script>
+        const test = function () {
+            const countDate = new Date("{{this.product.EndDate}}").getTime();
+            const now = new Date().getTime();
+            const gap = countDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const textDay = Math.floor(gap / day);
+            const textHour = Math.floor((gap % day) / hour);
+            const textMinute = Math.floor((gap % hour) / minute);
+            const textSecond = Math.floor((gap % minute) / second);
+
+            document.querySelector(".day").innerText = textDay;
+            document.querySelector(".hour").innerText = textHour;
+            document.querySelector(".minute").innerText = textMinute;
+            document.querySelector(".second").innerText = textSecond;
+        };
+        setInterval(test, 1000);
+    </script>
+{{/section}}
+
 <div class=" container mx-auto xl:px-10 py-1 text-xs font-light flex mt-2 justify-start text-cyan-800">
     <a class="  uppercase" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class=" ml-3">></div>
@@ -28,9 +55,45 @@
         <div class="col-span-5 text-xs hidden md:flex md:items-center">
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
-                    <div class="">
-                        <div class="flex items-center">
-                            <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
+                    <div x-data="{ wish: false }">
+                        <div class="flex items-center justify-between">
+                            <div class=" text-black text-base font-semibold flex">
+                                <h3 class="day">Time</h3>
+                                <p class="ml-1"> d</p>
+                            </div>
+                            <div class=" text-black text-base font-semibold flex">
+                                <h3 class="hour">Time</h3>
+                                <p class="ml-1">h</p>
+                            </div>
+                            <div class=" text-black text-base font-semibold flex">
+                                <h3 class="minute">Time</h3>
+                                <p class="ml-1"> m</p>
+                            </div>
+                            <div class=" text-black text-base font-semibold flex">
+                                <h3 class="second">Time</h3>
+                                <p class="ml-1"> s</p>
+                            </div>
+
+                            <form id="formAddWishList" action = "/account/wishlist/add" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            <form id="formDelWishList" action = "/account/wishlist/del" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            {{#if this.inWish}}
+                                <a href="javascript: $('#formDelWishList').submit();">
+                                    <i class="fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                                       aria-hidden="true"></i>
+                                </a>
+
+                            {{else}}
+                                <a href="javascript: $('#formAddWishList').submit();">
+                                    <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+                                </a>
+                            {{/if}}
+
                         </div>
                         <div x-data="{ open: false }" class="">
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
@@ -42,15 +105,41 @@
                                 x-transition:leave-end="opacity-0 transform scale-90">
                                 <input
                                     class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
-                                <button class=" w-full py-2 bg-red-500">
-                                    <div class=" font-medium text-sm text-white rounded">
-                                        Confirm
+<!--                                <button class=" w-full py-2 bg-red-500">-->
+<!--                                    <div class=" font-medium text-sm text-white rounded">-->
+<!--                                        Confirm-->
+<!--                                    </div>-->
+<!--                                </button>-->
+                                <div x-data="{ showModal : false }">
+                                    <div @click="showModal = !showModal"
+                                         class="cursor-pointer font-semibold text-md  px-4 py-2  ml-2 bg-red-700 text-white hover:bg-red-900 text-center">CONFIRM</div>
+                                    <div x-show="showModal"
+                                         class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                        <div x-show="showModal"
+                                             class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                             @click.away="showModal = false"
+                                             x-transition:enter="transition ease-out duration-300"
+                                             x-transition:enter-start="opacity-0 transform scale-90"
+                                             x-transition:enter-end="opacity-100 transform scale-100"
+                                             x-transition:leave="transition ease-in duration-300"
+                                             x-transition:leave-start="opacity-100 transform scale-100"
+                                             x-transition:leave-end="opacity-0 transform scale-90">
+                                            <div>Are you sure?</div>
+                                            <div class=" flex justify-end mt-4 space-x-4">
+                                                <button
+                                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                    Confirm
+                                                </button>
+                                                <div @click="showModal = !showModal"
+                                                     class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </button>
+                                </div>
                             </div>
                             <div class=" flex items-center justify-between mt-1">
                                 <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                    <div class=" font-semibold text-base text-white rounded">Bid</div>
+                                    <div class=" font-semibold text-base text-white rounded">Place bid</div>
                                 </button>
                                 <div class="ml-4 text-xl font-semibold ">$274</div>
 
@@ -58,11 +147,33 @@
                         </div>
 
                         <div class="mt-2 flex items-center justify-between">
-                            <button class=" w-1/3 py-2 bg-red-500">
-                                <div class=" font-semibold text-base text-white rounded mt-1">
-                                    Sell
+                            <div x-data="{ showModal : false }" class="w-1/3">
+                                <div @click="showModal = !showModal"
+                                     class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
+                                    Buy now</div>
+                                <div x-show="showModal"
+                                     class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                    <div x-show="showModal"
+                                         class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                         @click.away="showModal = false"
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 transform scale-90"
+                                         x-transition:enter-end="opacity-100 transform scale-100"
+                                         x-transition:leave="transition ease-in duration-300"
+                                         x-transition:leave-start="opacity-100 transform scale-100"
+                                         x-transition:leave-end="opacity-0 transform scale-90">
+                                        <div>Are you sure?</div>
+                                        <div class=" flex justify-end mt-4 space-x-4">
+                                            <button
+                                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                Buy now
+                                            </button>
+                                            <div @click="showModal = !showModal"
+                                                 class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </button>
+                            </div>
                             <div class="ml-4 text-xl font-semibold ">$274</div>
                         </div>
                     </div>
@@ -167,11 +278,12 @@
         <div class="col-span-full text-xs md:hidden">
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
-                    <div class="">
-                        <div class="flex items-center">
-                            <div class=" text-black text-base font-semibold">July 17, 2016</div>
+                    <div x-data="{ open: false }">
+                        <div class="flex items-center justify-between">
+                            <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
+                            <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
                         </div>
-                        <div x-data="{ open: false }" class="">
+                        <div>
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
                                 x-transition:enter="transition duration-300"
                                 x-transition:enter-start="opacity-0 transform scale-90"
@@ -281,8 +393,8 @@
                                         </tbody>
                                     </table>
                                     <div class="flex justify-center mt-4">
-                                        <button @click="showModal = !showModal"
-                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
+                                        <div @click="showModal = !showModal"
+                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</div>
                                     </div>
                                 </div>
                             </div>
@@ -299,7 +411,7 @@
     <div class="flex mt-8 border-t border-cyan-700">
         <div class="bg-cyan-700 px-6 py-3 font-semibold text-base text-white">Product Details</div>
     </div>
-    <div class="text-sm mt-4">
+    <div class="text-sm mt-4 max-h-80 overflow-auto">
         {{{this.description}}}
     </div>
 

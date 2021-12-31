@@ -1,19 +1,29 @@
+{{#section 'js'}}
+    <script>
+        const test = function () {
+            document.querySelector(".testing").innerText = 1234;
+            console.log(0);
+        };
+        setInterval(test, 1000);
+    </script>
+{{/section}}
+
 <div class="container mx-auto xl:px-10">
-    <div class="text-2xl font-semibold my-4 text-cyan-700">Top 4 sản phẩm gần kết thúc</div>
+    <div class="text-2xl font-semibold my-4 text-cyan-700">Ending soon</div>
     <div class="mt-4 multiple-items">
         {{#each this.products}}
-        {{> card/card}}
+            {{> card/card}}
         {{/each}}
     </div>
 
-    <div class="text-2xl font-semibold my-4 text-cyan-700">Top 4 sản phẩm có nhiều lượt ra giá nhất</div>
+    <div class="text-2xl font-semibold my-4 text-cyan-700">Best bids</div>
     <div class="mt-4 multiple-items">
         {{#each this.products_1}}
             {{> card/card}}
         {{/each}}
     </div>
 
-    <div class="text-2xl font-semibold my-4 text-cyan-700">Top 4 sản phẩm có giá cao nhất</div>
+    <div class="text-2xl font-semibold my-4 text-cyan-700">Bids with highest prices</div>
     <div class="mt-4 multiple-items slick-carousel-1">
         {{#each this.products_2}}
             {{> card/card}}

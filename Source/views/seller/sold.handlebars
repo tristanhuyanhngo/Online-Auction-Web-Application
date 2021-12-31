@@ -20,7 +20,10 @@
                             <div class="font-semibold text-left">Time</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">view</div>
+                            <div class="font-semibold text-left">Price</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">evaluate</div>
                         </th>
                     </tr>
                 </thead>
@@ -35,64 +38,36 @@
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-left">07/12/2021</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">view</Video></button>
-                        </td>
-                    </tr>
-                    <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Philip Harbach</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">philip.h@gmail.com</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
+                            <div class="text-left">30.000.000</div>
                         </td>
                         <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">view</Video></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Mirko Fisuk</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">mirkofisuk@gmail.com</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">view</Video></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Olga Semklo</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">olga.s@cool.design</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">view</Video></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Burak Long</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">longburak@gmail.com</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <button class="px-4 py-1 bg-black hover:bg-gray-800 text-white border border-gray-200 shadow">view</Video></button>
+                            <div x-data="{ showModal : false }">
+                                <div @click="showModal = !showModal"
+                                     class=" cursor-pointer px-6 py-1  hover:bg-gray-300  border border-cyan-700 shadow">evaluate</div>
+                                <div x-show="showModal"
+                                     class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                    <div x-show="showModal"
+                                         class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
+                                         @click.away="showModal = false"
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 transform scale-90"
+                                         x-transition:enter-end="opacity-100 transform scale-100"
+                                         x-transition:leave="transition ease-in duration-300"
+                                         x-transition:leave-start="opacity-100 transform scale-100"
+                                         x-transition:leave-end="opacity-0 transform scale-90">
+                                        <textarea name="content" class="border-2 border-gray-500 w-full"></textarea>
+
+                                        <div class="flex justify-center items-center mt-4">
+                                            <i onclick="like(this)" class="fa fa-thumbs-up fa-2x cursor-pointer"></i>
+                                            <button @click="showModal = !showModal"
+                                                    class="ml-4 cursor-pointer font-semibold text-md  px-6 py-2  border border-cyan-700 hover:bg-gray-300">Send</button>
+                                            <button @click="showModal = !showModal"
+                                                 class="ml-4 cursor-pointer font-semibold text-md text-white  px-6 py-2 bg-red-500 hover:bg-red-700  border border-cyan-700">cancel the transaction</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -100,3 +75,16 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('content');
+</script>
+
+<script>
+    function like(x) {
+        x.classList.toggle("fa-thumbs-down");
+    }
+</script>

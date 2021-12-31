@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8fb7f584-a380-43df-b3a3-c7f5fded44f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/routes/bidder.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Source/routes/bidder.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +31,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -39,6 +48,8 @@
       <updated>1639486126340</updated>
       <workItem from="1639486138535" duration="532000" />
       <workItem from="1639486741637" duration="107000" />
+      <workItem from="1639880856146" duration="6548000" />
+      <workItem from="1640618148655" duration="84000" />
     </task>
     <servers />
   </component>

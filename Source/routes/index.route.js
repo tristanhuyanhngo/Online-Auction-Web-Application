@@ -1,8 +1,15 @@
 import express from 'express';
+import bodyParser from "body-parser";
+import bcrypt from "bcryptjs";
+import moment from "moment";
+
+// import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -10,8 +17,8 @@ router.get('/', async function (req, res) {
     const list_2 = await productHome.sortByBid();
     const list_3 = await productHome.sortByPrice();
 
-    console.log(req.session.auth);
-    console.log(req.session.authUser);
+    // console.log(req.session.auth);
+    // console.log(req.session.authUser);
 
     res.render('home', {
         products: list_1[0],
@@ -47,6 +54,114 @@ router.get('/search', async function (req, res) {
         page_numbers,
         isFirst: page_numbers[0].isCurrent,
         isLast: page_numbers[nPages-1].isCurrent
+    });
+});
+
+// ---------------- REGISTER ---------------- //
+router.get('/register', async function(req, res) {
+    res.render('register');
+});
+
+router.post('/register',urlencodedParser,async function(req, res) {
+    const rawPassword = req.body.password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawPassword, salt);
+    // const today = moment().format('YYYY-MM-DD');
+    const today = moment().format();
+
+    const user = {
+        Email: req.body.email,
+        Username: req.body.username,
+        Password: hash,
+        Name: req.body.fullName,
+        Address: null,
+        DOB: null,
+        RegisterDate: today,
+        Type: 2,
+        Rate: 0
+    }
+
+    await userModel.addUser(user);
+    res.render('register');
+});
+
+router.get('/is-available', async function (req, res) {
+    const email = req.query.user;
+    const user = await userModel.findByEmail(email);
+
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
+router.get('/check-username', async function (req, res) {
+    const username = req.query.Username;
+    const user = await userModel.findByUsername(username);
+
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
+// ---------------- LOGIN ---------------- //
+router.get('/login', async function (req, res) {
+    res.render('login');
+});
+
+router.post('/login',urlencodedParser, async function (req, res) {
+    const email = req.body.email;
+    const user = await userModel.findByEmail(email);
+
+    if(user === null){
+        return res.render('login',{
+            error: 'Invalid username or password !'
+        });
+    }
+
+    const ret = bcrypt.compareSync(req.body.password, user.Password);
+    if(ret === false){
+        return res.render('login',{
+            error: 'Invalid username or password !'
+        });
+    }
+
+    // 1 - Seller , 2 - Bidder, 3 - Admin
+    req.session.auth=true;
+    req.session.authUser=user;
+    if (user.Type === '3') {
+        req.session.isSeller = true;
+        req.session.isAdmin = true;
+    }
+    else if (user.Type === '1') {
+        req.session.isSeller = true;
+        req.session.isAdmin = false;
+    }
+    res.redirect('/');
+});
+
+// ---------------- LOGOUT ---------------- //
+router.post('/logout', async function(req, res) {
+    req.session.auth = false;
+    req.session.authUser = null;
+    req.session.isSeller = null;
+    req.session.isAdmin = null;
+    const url = req.headers.referer || '/';
+    res.redirect(url);
+});
+
+router.get('/user/:username', async function (req, res) {
+    const Username = req.params.username || 0;
+
+    const user = await userModel.findByUsername(Username);
+
+    res.render('profileUserOther', {
+        user
     });
 });
 
