@@ -127,13 +127,16 @@ router.post('/login',urlencodedParser, async function (req, res) {
     const ret = bcrypt.compareSync(req.body.password, user.Password);
     if(ret === false){
         return res.render('login',{
-            error: 'Invalid username or password !'
+            error: 'Invalid username or password!'
         });
     }
+
+    delete user.Password;
 
     // 1 - Seller , 2 - Bidder, 3 - Admin
     req.session.auth=true;
     req.session.authUser=user;
+
     if (user.Type === '3') {
         req.session.isSeller = true;
         req.session.isAdmin = true;
@@ -142,7 +145,9 @@ router.post('/login',urlencodedParser, async function (req, res) {
         req.session.isSeller = true;
         req.session.isAdmin = false;
     }
-    res.redirect('/');
+
+    const url = req.session.retUrl||'/';
+    res.redirect(url);
 });
 
 // ---------------- LOGOUT ---------------- //
@@ -151,6 +156,12 @@ router.post('/logout', async function(req, res) {
     req.session.authUser = null;
     req.session.isSeller = null;
     req.session.isAdmin = null;
+
+    res.locals.auth=req.session.auth;
+    res.locals.authUser=req.session.authUser;
+    res.locals.isSeller=req.session.isSeller;
+    res.locals.isAdmin=req.session.isAdmin;
+
     const url = req.headers.referer || '/';
     res.redirect(url);
 });

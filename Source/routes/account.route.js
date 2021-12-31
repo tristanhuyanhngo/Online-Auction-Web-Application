@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import wishlistModel from "../models/wishlist.model.js";
 import cartModel from "../models/cart.model.js";
-
+import auth from "../middlewares/auth.mdw.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     res.render('profile');
 });
 
-router.get('/profile', async function (req, res) {
+router.get('/profile', auth,async function (req, res) {
     res.render('./vwAccount/profile');
 });
 
@@ -46,7 +46,7 @@ router.get('/username-available', async function (req, res) {
 
 
 //==============BIDDER's FUNCTIONS=================
-router.get('/setting', (req, res) => {
+router.get('/setting', auth,(req, res) => {
     let gActive = true;
     res.render('bidder/edit-info',{
         gActive,
@@ -54,7 +54,7 @@ router.get('/setting', (req, res) => {
     });
 });
 
-router.post('/setting/edit-info', async (req, res) => {
+router.post('/setting/edit-info',async (req, res) => {
     const ret = await userModel.updateUser(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
@@ -62,7 +62,7 @@ router.post('/setting/edit-info', async (req, res) => {
     res.redirect('/account/setting');
 });
 
-router.post('/setting/edit-email', async (req, res) => {
+router.post('/setting/edit-email',async (req, res) => {
     const ret = await userModel.updateEmail(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
@@ -102,7 +102,7 @@ router.post('/setting/password', async (req, res) => {
     });
 });
 
-router.get('/setting/general', (req, res) => {
+router.get('/setting/general', auth,(req, res) => {
     let gActive = true;
     res.render('bidder/edit-info',{
         gActive,
@@ -110,7 +110,7 @@ router.get('/setting/general', (req, res) => {
     });
 });
 
-router.get('/setting/password', (req, res) => {
+router.get('/setting/password', auth,(req, res) => {
     let pActive = true;
     res.render('bidder/change-password',{
         pActive,
@@ -118,7 +118,7 @@ router.get('/setting/password', (req, res) => {
     });
 });
 
-router.get('/wishlist', async (req, res) => {
+router.get('/wishlist', auth,async (req, res) => {
     let wActive = true;
 
     const page = req.query.page || 1;
@@ -196,7 +196,7 @@ router.post('/wishlist/add',async function(req, res) {
     return res.redirect(url);
 });
 
-router.get('/cart', async (req, res) => {
+router.get('/cart', auth,async (req, res) => {
     let cActive = true;
 
     const page = req.query.page || 1;
@@ -257,7 +257,7 @@ router.get('/cart', async (req, res) => {
     });
 });
 
-router.get('/won-bid', (req, res) => {
+router.get('/won-bid', auth,(req, res) => {
     let wbActive = true;
     res.render('bidder/won-bid',{
         wbActive,
