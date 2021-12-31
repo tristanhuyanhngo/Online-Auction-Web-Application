@@ -6,6 +6,10 @@ import wishlistModel from "../models/wishlist.model.js";
 import cartModel from "../models/cart.model.js";
 
 
+const router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }))
+
+// ---------------- PROFILE ---------------- //
 router.get('/', (req, res) => {
     // Get information of user from session
     const user = req.session.authUser || 0;
@@ -16,10 +20,7 @@ router.get('/', (req, res) => {
     }
     res.render('profile');
 });
-const router = express.Router();
-router.use(bodyParser.urlencoded({ extended: false }));
 
-// ---------------- PROFILE ---------------- //
 router.get('/profile', async function (req, res) {
     res.render('./vwAccount/profile');
 });
