@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import wishlistModel from "../models/wishlist.model.js";
 import cartModel from "../models/cart.model.js";
-import auth from "../middlewares/auth.mdw.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -110,7 +109,7 @@ router.get('/setting/general', auth,(req, res) => {
     });
 });
 
-router.get('/setting/password', auth,(req, res) => {
+router.get('/setting/password', (req, res) => {
     let pActive = true;
     res.render('bidder/change-password',{
         pActive,
@@ -118,7 +117,7 @@ router.get('/setting/password', auth,(req, res) => {
     });
 });
 
-router.get('/wishlist', auth,async (req, res) => {
+router.get('/wishlist',async (req, res) => {
     let wActive = true;
 
     const page = req.query.page || 1;
@@ -196,7 +195,7 @@ router.post('/wishlist/add',async function(req, res) {
     return res.redirect(url);
 });
 
-router.get('/cart', auth,async (req, res) => {
+router.get('/cart', async (req, res) => {
     let cActive = true;
 
     const page = req.query.page || 1;
@@ -257,7 +256,7 @@ router.get('/cart', auth,async (req, res) => {
     });
 });
 
-router.get('/won-bid', auth,(req, res) => {
+router.get('/won-bid', (req, res) => {
     let wbActive = true;
     res.render('bidder/won-bid',{
         wbActive,
