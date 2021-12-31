@@ -10,63 +10,100 @@
 
 <body>
 <div class="flex flex-wrap items-center space-x-4 p-1 mb-5 pr-4">
-    <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
+    {{#if this.empty}}
+        <div class="ml-5">You cart is empty.</div>
+    {{else}}
+        <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
                 h-10 flex items-center px-4">
-        My cart
-    </div>
-    <div class="flex w-full">
-        <div class="w-3/5 divide-y w-full pr-4">
-            <div class="flex py-3">
-                <h3 class="font-semibold text-gray-600 text-xs
+            My cart
+        </div>
+        <div class="flex w-full">
+            <div class="w-3/5 divide-y w-full pr-4">
+                <div class="flex py-3">
+                    <h3 class="font-semibold text-gray-600 text-xs
                 h-5 flex item-center uppercase w-3/4">Product Details</h3>
-                <h3 class="font-semibold h-5 text-center
+                    <h3 class="font-semibold h-5 text-center
             text-gray-600 text-xs uppercase w-1/4">Price</h3>
-            </div>
-
-            {{#each this.products}}
-                <div class="items-center flex py-5 pl-2">
-                    <div class="flex w-3/4">
-                        <div class="w-20">
-                            <img src="/public/images/Product/{{BigCatName}}/{{CatName}}/{{ProID}}/1.jpg?auto=compress&w=100&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
-                                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
-                        </div>
-
-                        <div class="flex ml-7 flex-col justify-between flex-grow">
-                            <a href ="/product/detail/{{ProID}}" class="font-bold hover:text-key text-sm py-1">{{ProName}}</a>
-                            <span class="text-key text-xs py-1">Seller: {{Seller}}</span>
-                            <a href="#" class="font-semibold py-1 text-red-700 hover:text-red-900 text-xs">
-                                Remove</a>
-                        </div>
-                    </div>
-                    <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number SellPrice}}</span>
                 </div>
-            {{/each}}
-        </div>
-        <div class="w-2/5 flex">
-            <div>
-                <div class="border border-key bg-gray-100 py-3 px-8">
-                    <h1 class="font-semibold mb-3 text-lg text-gray-700 tracking-wide
+
+                {{#each this.products}}
+                    <div class="items-center flex py-5 pl-2">
+                        <div class="flex w-3/4">
+                            <div class="w-20">
+                                <img src="/public/images/Product/{{BigCatName}}/{{CatName}}/{{ProID}}/1.jpg?auto=compress&w=100&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
+                                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                            </div>
+
+                            <div class="flex ml-7 flex-col justify-between flex-grow">
+                                <a href ="/product/detail/{{ProID}}" class="font-bold hover:text-key text-sm py-1">{{ProName}}</a>
+                                <span class="text-key text-xs py-1">Seller: {{Seller}}</span>
+                                <a href="#" class="font-semibold py-1 text-red-700 hover:text-red-900 text-xs">
+                                    Remove</a>
+                            </div>
+                        </div>
+                        <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number SellPrice}}</span>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="w-2/5 flex">
+                <div>
+                    <div class="border border-key bg-gray-100 py-3 px-8">
+                        <h1 class="font-semibold mb-3 text-lg text-gray-700 tracking-wide
                 h-5 flex item-center">Order Summary</h1>
-                    <div class="flex justify-between pt-5 mb-5 border-t">
-                        <span class="font-semibold text-sm uppercase">Items (3)</span>
-                        <span class="font-semibold text-sm">$1200</span>
-                    </div>
-                    <!--                    <div class="flex justify-between pt-5 mb-5 border-t">-->
-                    <!--                        <span class="text-sm">Standard shipping</span>-->
-                    <!--                        <span class="text-sm">10$</span>-->
-                    <!--                    </div>-->
-                    <div class="border-t">
-                        <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-                            <span>Total cost</span>
-                            <span>$1210</span>
+                        <div class="flex justify-between pt-5 mb-5 border-t">
+                            <span class="font-semibold text-sm uppercase">Items ({{this.amountProduct}})</span>
                         </div>
-                        <button class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
-                            Checkout
-                        </button>
+                        <!--                    <div class="flex justify-between pt-5 mb-5 border-t">-->
+                        <!--                        <span class="text-sm">Standard shipping</span>-->
+                        <!--                        <span class="text-sm">10$</span>-->
+                        <!--                    </div>-->
+                        <div class="border-t">
+                            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+                                <span>Total cost</span>
+                                <span class="ml-5 text-red-700">{{format_number this.totalPrice}}</span>
+                            </div>
+                            <button class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
+                                Checkout
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="flex justify-end mt-5">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <div
+                                class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <div
+                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2
+                </div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+        </div>
+
+    {{/if}}
     </div>
 </body>

@@ -190,8 +190,10 @@ router.get('/cart', async (req, res) => {
 
     const page = req.query.page || 1;
     const email = req.session.authUser.Email;
+    let totalPrice = 0;
+    let amountProduct=0;
 
-    const limit = 9;
+    const limit = 4;
     const raw = await cartModel.countByEmail(email);
     const total = raw[0][0].amount;
 
@@ -222,6 +224,8 @@ router.get('/cart', async (req, res) => {
     }
 
     for (let i in list) {
+        totalPrice+=+list[i].SellPrice;
+        amountProduct++;
         if (list[i].ProState === false) {
             list[i].ProState = "Sold";
         } else {
@@ -232,6 +236,8 @@ router.get('/cart', async (req, res) => {
     res.render('bidder/cart', {
         cActive,
         products: list,
+        totalPrice,
+        amountProduct,
         empty: list.length === 0,
         page_numbers,
         isFirst,
