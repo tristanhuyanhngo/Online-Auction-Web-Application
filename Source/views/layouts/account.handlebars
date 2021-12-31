@@ -38,7 +38,7 @@
 <!--        </div>-->
         <ul class="space-y-2 text-sm">
             <li>
-                <a href="/bidder/general"
+                <a href="/account/setting"
                    class="flex items-center 
                    space-x-3 text-gray-700 p-2 rounded-md 
                    {{#if gActive}}
@@ -58,7 +58,7 @@
             </li>
 
             <li>
-                <a href="/bidder/password" class="flex items-center
+                <a href="/account/setting/password" class="flex items-center
                 {{#if pActive}}
                        bg-gray-200
                    {{/if}}
@@ -75,7 +75,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bidder/wishlist"
+                <a href="/account/wishlist"
                    class="flex items-center
                    {{#if wActive}}
                        bg-gray-200
@@ -92,7 +92,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bidder/cart"
+                <a href="/account/cart"
                    class="flex items-center
                    {{#if cActive}}
                        bg-gray-200
@@ -109,7 +109,7 @@
                 </a>
             </li>
             <li>
-                <a href="/bidder/won-bid"
+                <a href="/account/won-bid"
                    class="flex items-center
                    {{#if wbActive}}
                        bg-gray-200
@@ -158,6 +158,8 @@
         });
     });
 </script>
+
+{{{_sections.js}}}
 </body>
 
 </html>

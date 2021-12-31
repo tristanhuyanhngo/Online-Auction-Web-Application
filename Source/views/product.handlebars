@@ -55,7 +55,7 @@
         <div class="col-span-5 text-xs hidden md:flex md:items-center">
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
-                    <div class="">
+                    <div x-data="{ wish: false }">
                         <div class="flex items-center justify-between">
                             <div class=" text-black text-base font-semibold flex">
                                 <h3 class="day">Time</h3>
@@ -73,7 +73,27 @@
                                 <h3 class="second">Time</h3>
                                 <p class="ml-1"> s</p>
                             </div>
-                            <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+
+                            <form id="formAddWishList" action = "/account/wishlist/add" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            <form id="formDelWishList" action = "/account/wishlist/del" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            {{#if this.inWish}}
+                                <a href="javascript: $('#formDelWishList').submit();">
+                                    <i class="fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                                       aria-hidden="true"></i>
+                                </a>
+
+                            {{else}}
+                                <a href="javascript: $('#formAddWishList').submit();">
+                                    <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+                                </a>
+                            {{/if}}
+
                         </div>
                         <div x-data="{ open: false }" class="">
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
@@ -108,7 +128,7 @@
                                             <div class=" flex justify-end mt-4 space-x-4">
                                                 <button
                                                         class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                    CONFIRM
+                                                    Confirm
                                                 </button>
                                                 <div @click="showModal = !showModal"
                                                      class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
@@ -119,7 +139,7 @@
                             </div>
                             <div class=" flex items-center justify-between mt-1">
                                 <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                    <div class=" font-semibold text-base text-white rounded">Bid</div>
+                                    <div class=" font-semibold text-base text-white rounded">Place bid</div>
                                 </button>
                                 <div class="ml-4 text-xl font-semibold ">$274</div>
 
@@ -129,7 +149,8 @@
                         <div class="mt-2 flex items-center justify-between">
                             <div x-data="{ showModal : false }" class="w-1/3">
                                 <div @click="showModal = !showModal"
-                                     class="cursor-pointer font-semibold text-base text-white rounded mt-1 py-2 bg-red-500 text-center">Sell</div>
+                                     class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
+                                    Buy now</div>
                                 <div x-show="showModal"
                                      class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                     <div x-show="showModal"
@@ -145,7 +166,7 @@
                                         <div class=" flex justify-end mt-4 space-x-4">
                                             <button
                                                     class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                SELL
+                                                Buy now
                                             </button>
                                             <div @click="showModal = !showModal"
                                                  class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
@@ -257,12 +278,12 @@
         <div class="col-span-full text-xs md:hidden">
             <div class="">
                 <div class=" border border-cyan-700 rounded-md p-4">
-                    <div class="">
+                    <div x-data="{ open: false }">
                         <div class="flex items-center justify-between">
                             <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
                             <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
                         </div>
-                        <div x-data="{ open: false }" class="">
+                        <div>
                             <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
                                 x-transition:enter="transition duration-300"
                                 x-transition:enter-start="opacity-0 transform scale-90"

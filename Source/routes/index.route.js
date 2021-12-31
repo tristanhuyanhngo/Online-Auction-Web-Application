@@ -3,11 +3,13 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import moment from "moment";
 
+// import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 
 const router = express.Router();
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -54,8 +56,6 @@ router.get('/search', async function (req, res) {
         isLast: page_numbers[nPages-1].isCurrent
     });
 });
-
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // ---------------- REGISTER ---------------- //
 router.get('/register', async function(req, res) {
@@ -131,16 +131,29 @@ router.post('/login',urlencodedParser, async function (req, res) {
         });
     }
 
+    // 1 - Seller , 2 - Bidder, 3 - Admin
     req.session.auth=true;
     req.session.authUser=user;
-
-    res.redirect('/home');
+    if (user.Type === '3') {
+        req.session.isSeller = true;
+        req.session.isAdmin = true;
+    }
+    else if (user.Type === '1') {
+        req.session.isSeller = true;
+        req.session.isAdmin = false;
+    }
+    res.redirect('/');
 });
 
-
-router.get('/profile', (req, res) => {
-    res.render('profile');
-})
+// ---------------- LOGOUT ---------------- //
+router.post('/logout', async function(req, res) {
+    req.session.auth = false;
+    req.session.authUser = null;
+    req.session.isSeller = null;
+    req.session.isAdmin = null;
+    const url = req.headers.referer || '/';
+    res.redirect(url);
+});
 
 router.get('/user/:username', async function (req, res) {
     const Username = req.params.username || 0;

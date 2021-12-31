@@ -1,3 +1,30 @@
+{{#section 'js'}}
+    <script>
+        $(".editForm").on('submit', function (event) {
+            const cat_name = $(this).find("input").val();
+            if (cat_name.length <1) {
+                alert('Name must be filled in!');
+                event.preventDefault();
+            }
+        });
+
+        $('#addForm').on('submit', function (event) {
+            event.preventDefault();
+            const big_cat_name = document.getElementById('txtAddCatName').value;
+
+            if (big_cat_name.length < 1) {
+                alert('Name must be filled in!');
+                return;
+            } else{
+                $('#addForm').off('submit').submit();
+            }
+        });
+
+        $('#txtAddCatName').select();
+    </script>
+{{/section}}
+
+
 <div class="w-full  max-w-4xl mx-auto mt-8">
     <div class="flex justify-between">
         <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
@@ -6,60 +33,74 @@
         </div>
         <div x-data="{ showModal : false }">
             <div @click="showModal = !showModal"
-                    class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-white hover:bg-gray-300"><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+                 class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-white hover:bg-gray-300">
+                <i class="fa fa-plus" aria-hidden="true">
+                </i> ADD
+            </div>
             <div x-show="showModal"
                  class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                 <div x-show="showModal"
                      class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                     @click.away="showModal = false"
                      x-transition:enter="transition ease-out duration-300"
                      x-transition:enter-start="opacity-0 transform scale-90"
                      x-transition:enter-end="opacity-100 transform scale-100"
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-90">
-                    <div class="flex justify-between font-normal text-base space-x-8">
-                        <div>Name</div>
-                        <input class="border border-cyan-700">
-                    </div>
-                    <div class="flex justify-between font-normal text-base mt-2">
-                        <div>Category parent</div>
-                        <select class="border border-cyan-700 py-1 w-16 md:w-20">
-                            <option>a </option>
-                            <option>b</option>
-                        </select>
-                    </div>
-                    <div class=" flex justify-end mt-4 space-x-4">
-                        <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700">Save</button>
-                        <div @click="showModal = !showModal"
-                                class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel</div>
-                    </div>
+                    <form id="addForm" method="post" action="/admin/category-child/add">
+                        <div class="flex justify-between font-normal text-base space-x-8">
+                            <div>Name</div>
+                            <input id="txtAddCatName"
+                                   type="text" name="CatName"
+                                   class="border border-cyan-700 form-control">
+                        </div>
+                        <div class="flex justify-between font-normal text-base mt-2">
+                            <div>Category parent</div>
+                            <select name = "BigCat"
+                                    class="border border-cyan-700 py-1 w-16 md:w-20">
+                                {{#each this.bigcat}}
+                                    <option value = {{BigCatID}}>{{BigCatName}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class=" flex justify-end mt-4 space-x-4">
+                            <button type="submit"
+                            class="font-semibold text-md  px-6 py-2 border border-cyan-700">
+                                Save
+                            </button>
+                            <div @click="showModal = !showModal"
+                                 class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="text-2xl font-semibold my-4 text-cyan-700">Category</div>
+
     <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
         <div class="overflow-x-auto">
             <table class="table-auto w-full">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                 <tr>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">ID</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Name</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Big Category</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Product count</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Edit</div>
-                        </th>
-                    </tr>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">ID</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Name</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Big Category</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Product count</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-center">Edit</div>
+                    </th>
+                </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
                 {{#each this.category}}
@@ -79,7 +120,10 @@
                         <td class="p-2 whitespace-nowrap flex justify-center">
                             <div x-data="{ showModal : false }">
                                 <div @click="showModal = !showModal"
-                                     class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 hover:bg-gray-300"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</div>
+                                     class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2
+                                     hover:bg-gray-300"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                    Edit
+                                </div>
                                 <div x-show="showModal"
                                      class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                     <div x-show="showModal"
@@ -91,49 +135,69 @@
                                          x-transition:leave="transition ease-in duration-300"
                                          x-transition:leave-start="opacity-100 transform scale-100"
                                          x-transition:leave-end="opacity-0 transform scale-90">
-                                        <div class="flex justify-between font-normal text-base space-x-8">
-                                            <div>Name</div>
-                                            <input class="border border-cyan-700">
-                                        </div>
-                                        <div class="flex justify-between font-normal text-base mt-2">
-                                            <div>Category parent</div>
-                                            <select class="border border-cyan-700 py-1 w-16 md:w-20">
-                                                <option>a </option>
-                                                <option>b</option>
-                                            </select>
-                                        </div>
-                                        <div class=" flex justify-end mt-4 space-x-4">
-                                            <button @click="showModal = !showModal"
-                                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700">Save</button>
-                                            <div @click="showModal = !showModal"
-                                                 class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">Cancel</div>
-                                        </div>
+
+                                        <form id="editForm_{{@index}}" class="editForm" method="post">
+                                            <div class="flex justify-between font-normal text-base space-x-8">
+                                                <div>Name</div>
+                                                <input class="border border-cyan-700 form-control"
+                                                       type="text"
+                                                       id="txtEditCatName" name="CatName">
+                                            </div>
+                                            <div class=" flex justify-end mt-4 space-x-4">
+                                                <button
+                                                        formaction="/admin/category-child/update"
+                                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700"
+                                                        type="submit" id="btnUpdate" name="CatID"
+                                                        value= {{{CatID}}}>
+                                                    Save
+                                                </button>
+                                                <div @click="showModal = !showModal"
+                                                     class="cursor-pointer font-semibold text-md  px-6 py-2 text-white  bg-red-700">
+                                                    Cancel
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div x-data="{ showModal : false }">
-                                <div @click="showModal = !showModal"
-                                     class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-red-700 text-white hover:bg-red-900">DELETE</div>
+                                <div {{#if hasProduct}}
+                                disabled
+                                class="cursor-pointer disabled font-semibold text-md  px-4 py-1
+                                             border border-gray-700 ml-2 bg-gray-400 text-white"
+                                {{else}}
+                                @click="showModal = !showModal"
+                                class="cursor-pointer font-semibold text-md  px-4 py-1
+                                             border border-black ml-2 bg-red-700 text-white hover:bg-red-800"
+                                {{/if}}>
+                                    Delete
+                                </div>
                                 <div x-show="showModal"
                                      class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                     <div x-show="showModal"
                                          class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                                         @click.away="showModal = false"
                                          x-transition:enter="transition ease-out duration-300"
                                          x-transition:enter-start="opacity-0 transform scale-90"
                                          x-transition:enter-end="opacity-100 transform scale-100"
                                          x-transition:leave="transition ease-in duration-300"
                                          x-transition:leave-start="opacity-100 transform scale-100"
                                          x-transition:leave-end="opacity-0 transform scale-90">
-                                        <div>Are you sure?</div>
-                                        <div class=" flex justify-end mt-4 space-x-4">
-                                            <button
-                                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                DELETE
-                                            </button>
-                                            <div @click="showModal = !showModal"
-                                                 class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
-                                        </div>
+                                        <div>Are you sure to delete {{CatName}}?</div>
+                                        <form id="delForm" method="post" action="/admin/category-child/del">
+                                            <div class=" flex justify-end mt-4 space-x-4">
+                                                <button
+                                                        type="submit" id="btnDel" name="CatID" value="{{{CatID}}}"
+                                                        class="font-semibold text-md
+                                                px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                    Delete
+                                                </button>
+                                                <div @click="showModal = !showModal"
+                                                     class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
+                                                    Cancel
+                                                </div>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>

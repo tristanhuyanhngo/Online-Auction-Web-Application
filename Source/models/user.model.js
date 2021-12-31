@@ -1,20 +1,14 @@
 import db from '../utils/db.js';
 
 export default {
-    async findByEmail(email){
-        const user = await db('user').where('Email',email);
+    async findByEmail(email) {
+        const user = await db('user').where('Email', email);
         return user[0] || null;
     },
 
-    async findByUsername(username){
-        const user = await db('user').where('Username',username);
+    async findByUsername(username) {
+        const user = await db('user').where('Username', username);
         return user[0] || null;
-    },
-
-    async validateAccount(email, password){
-        const sql = `select * from user where user.Email = '${email}' and user.Password = '${password}'`;
-        const raw = await db.raw(sql);
-        return raw[0] || null;
     },
 
     async addUser(entity) {
@@ -22,12 +16,27 @@ export default {
     },
 
     async delUser(email) {
-        return db('user').where('Email',email).del();
+        return db('user').where('Email', email).del();
     },
 
     async updateUser(entity) {
         const email = entity.Email;
         delete entity.Email;
-        return db('user').where('Email',email).update(entity);
+        await db('user').where('Email', email).update(entity);
+        return db('user').where('Email', email);
+    },
+
+    async updateEmail(entity) {
+        const username = entity.Username;
+        delete entity.Username;
+        await db('user').where('Username', username).update(entity);
+        return db('user').where('Username', username);
+    },
+
+    async updatePassword(entity) {
+        const email = entity.Email;
+        delete entity.Email;
+        await db('user').where('Email', email).update(entity);
+        return db('user').where('Email', email);
     }
 }

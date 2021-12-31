@@ -26,7 +26,7 @@
                                     </button>
                                 </div>
                                 <div class="flex justify-center mt-1">
-                                    <div class="font-semibold mr-2">Hi,{{authUser.Name}}!</div>
+                                    <div class="font-semibold mr-2">Hi,{{authUser.Name}} !</div>
                                 </div>
                             </div>
 
@@ -85,15 +85,15 @@
                     </div>
 
                     {{#if auth}}
-                        <a href="#">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">logout</button>
+                        <a href="/">
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Logout</button>
                         </a>
                     {{else}}
                         <a href="/login">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">login</button>
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Login</button>
                         </a>
                         <a href="/register">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">register</button>
+                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Register</button>
                         </a>
                     {{/if}}
                 </div>
@@ -132,7 +132,7 @@
                 </div>
 
                 {{#if auth}}
-                    <a href="/profile"><div class="font-semibold mr-2">Hi,{{authUser.Name}}!</div></a>
+                    <a href="/profile"><div class="font-semibold mr-2">Hi, <strong>{{authUser.Name}}</strong> !</div></a>
 
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
@@ -142,11 +142,20 @@
 
                         <div x-show="dropdownOpen" class="absolute right-0 w-48 bg-white rounded-md overflow-hidden shadow-xl z-20 border border-cyan-700">
                             <a href="/profile" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My profile</a>
-                            <a href="/bidder/general" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Setting</a>
+                            {{#if isSeller}}
+                                <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Seller page</a>
+                            {{/if}}
+                            {{#if isAdmin}}
+                                <a href="/admin" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Admin page</a>
+                            {{/if}}
                             <a href="/bidder/cart" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My cart</a>
                             <a href="/bidder/wishlist" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My wishlist</a>
                             <a href="/bidder/won-bid" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Won bids</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Logout</a>
+                            <a href="/bidder/general" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Setting</a>
+                            <form id="formLogout" action="/logout" method="post"></form>
+                            <a class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="javascript: $('#formLogout').submit();">
+                                Log out
+                            </a>
                         </div>
                     </div>
                 {{else}}

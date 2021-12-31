@@ -5,9 +5,10 @@ export default function (app) {
         if(typeof (req.session.auth)==='undefined'){
             req.session.auth=false;
         }
-
         res.locals.auth=req.session.auth;
         res.locals.authUser=req.session.authUser;
+        res.locals.isSeller=req.session.isSeller;
+        res.locals.isAdmin=req.session.isAdmin;
         next();
     });
 
