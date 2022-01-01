@@ -145,7 +145,8 @@ DROP TABLE IF EXISTS `success_bid`;
 CREATE TABLE `success_bid` (
   `ProID` int unsigned NOT NULL,
   `Bidder` char(50) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`ProID`),
+  `OrderDate` datetime NOT NULL,
+  PRIMARY KEY (`ProID`,`Bidder`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`),
   FOREIGN KEY (`Bidder`) REFERENCES user(`Email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -281,7 +282,7 @@ INSERT INTO `product` VALUES (14, 3, 'kysutainangqsb@gmail.com','Asus Rog Zephyr
 INSERT INTO `product` VALUES (15, 3, 'kysutainangqsb@gmail.com','Asus Zenbook UX371EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (16, 3, 'kysutainangqsb@gmail.com','Asus Zenbook Duo UX482EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (17, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
-INSERT INTO `product` VALUES (18, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (18, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (19, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
 INSERT INTO `product` VALUES (20, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
 INSERT INTO `product` VALUES (21, 3, 'kysutainangqsb@gmail.com','HP Omen 15 EK0078TX i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
@@ -430,8 +431,8 @@ COMMIT;
 -- ----------------------------
 
 BEGIN;
-INSERT INTO `success_bid` VALUES (7, 'abc@gmail.com');
-INSERT INTO `success_bid` VALUES (8, 'abc@gmail.com');
-INSERT INTO `success_bid` VALUES (30, 'abc@gmail.com');
-INSERT INTO `success_bid` VALUES (33, 'abc@gmail.com');
+INSERT INTO `success_bid` VALUES (7, 'abc@gmail.com','2021-12-07');
+INSERT INTO `success_bid` VALUES (8, 'abc@gmail.com','2021-12-07');
+INSERT INTO `success_bid` VALUES (30, 'abc@gmail.com','2021-12-07');
+INSERT INTO `success_bid` VALUES (33, 'abc@gmail.com','2021-12-07');
 COMMIT;

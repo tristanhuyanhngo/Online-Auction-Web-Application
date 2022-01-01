@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7252318b-adf1-43c8-8361-c6ced9d8f2d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Source.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/wonbid.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/HCMUS_PTUDW_Final-Project_Online-Auction.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/dataSources.local.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/dataSources.xml" beforeDir="false" />
@@ -22,14 +16,20 @@
       <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Script/Script Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script Database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/cart.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/cart.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bidder/cart.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/cart.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bidder/wishlist.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/wishlist.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Source.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/06b2e95d-b7c7-456c-8710-a5532b8fd809.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/06b2e95d-b7c7-456c-8710-a5532b8fd809/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/06b2e95d-b7c7-456c-8710-a5532b8fd809/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/06b2e95d-b7c7-456c-8710-a5532b8fd809/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9bfc95c3-c5cf-4d4e-a81b-f074e0a30c95.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +130,7 @@
       <workItem from="1640951820822" duration="812000" />
       <workItem from="1640952721551" duration="108000" />
       <workItem from="1640967601896" duration="7293000" />
-      <workItem from="1641039589995" duration="4016000" />
+      <workItem from="1641039589995" duration="4318000" />
     </task>
     <servers />
   </component>
