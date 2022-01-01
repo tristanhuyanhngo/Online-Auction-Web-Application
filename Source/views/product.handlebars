@@ -82,16 +82,18 @@
                                 <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
                             </form>
 
-                            {{#if this.inWish}}
-                                <a href="javascript: $('#formDelWishList').submit();">
-                                    <i class="fa fa-heart fa-2x cursor-pointer" style ="color:red"
-                                       aria-hidden="true"></i>
-                                </a>
+                            {{#if auth}}
+                                {{#if this.inWish}}
+                                    <a href="javascript: $('#formDelWishList').submit();">
+                                        <i class="fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                                           aria-hidden="true"></i>
+                                    </a>
 
-                            {{else}}
-                                <a href="javascript: $('#formAddWishList').submit();">
-                                    <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
-                                </a>
+                                {{else}}
+                                    <a href="javascript: $('#formAddWishList').submit();">
+                                        <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+                                    </a>
+                                {{/if}}
                             {{/if}}
 
                         </div>

@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import wishlistModel from "../models/wishlist.model.js";
 import cartModel from "../models/cart.model.js";
+import wonbidModel from "../models/wonbid.model.js";
+import moment from "moment";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -153,7 +155,7 @@ router.get('/wishlist',async (req, res) => {
     }
 
     for (let i in list){
-        if(list[i].ProState === false){
+        if(list[i].ProState.readInt8() === 0){
             list[i].ProState="Sold";
         } else{
             list[i].ProState="On air";
@@ -195,6 +197,25 @@ router.post('/wishlist/add',async function(req, res) {
     return res.redirect(url);
 });
 
+router.post('/cart/checkout',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const today = moment().format();
+    const list = await cartModel.findProductToCheckout(email);
+
+    for(let i in list){
+        let item = {
+            ProID: list[i].ProID,
+            Bidder: email,
+            OrderDate: today
+        }
+        await cartModel.checkout(item);
+    }
+
+    await cartModel.delCart();
+    return res.redirect('/account/cart');
+});
+
+
 router.get('/cart', async (req, res) => {
     let cActive = true;
 
@@ -234,12 +255,12 @@ router.get('/cart', async (req, res) => {
     }
 
     for (let i in list) {
-        totalPrice+=+list[i].SellPrice;
-        amountProduct++;
-        if (list[i].ProState === false) {
-            list[i].ProState = "Sold";
+        if(list[i].ProState.readInt8()===1){
+            totalPrice+=+list[i].SellPrice;
+            amountProduct++;
+            list[i].ProState = 'On air';
         } else {
-            list[i].ProState = "On air";
+            list[i].ProState = 'Sold';
         }
     }
 
@@ -256,10 +277,47 @@ router.get('/cart', async (req, res) => {
     });
 });
 
-router.get('/won-bid', (req, res) => {
+router.get('/won-bid', async (req, res) => {
     let wbActive = true;
-    res.render('bidder/won-bid',{
+
+    const page = req.query.page || 1;
+    const email = req.session.authUser.Email;
+
+    const limit = 4;
+    const raw = await wonbidModel.countByEmail(email);
+    const total = raw[0][0].amount;
+
+    let nPage = Math.floor(total / limit);
+    if (total % limit > 0) {
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page - 1) * limit;
+    const list = await wonbidModel.findPageByEmail(email, limit, offset);
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (list.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    res.render('bidder/won-bid', {
         wbActive,
+        products: list,
+        empty: list.length === 0,
+        page_numbers,
+        isFirst,
+        isLast,
         layout: 'account.handlebars'
     });
 });
