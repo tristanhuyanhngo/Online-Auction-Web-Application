@@ -10,17 +10,17 @@
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Category parent<span class="text-red-500">*</span></label></br>
-                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="parent_category" id="parent_category" onChange="update()">
+                            <option value="Empty"> </option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
                         </select>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Category child <span class="text-red-500">*</span></label></br>
-                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="child_category" id="child_category" >
                         </select>
                     </div>
 
@@ -34,6 +34,9 @@
                             <section class="h-full overflow-auto p-8 w-full h-full flex flex-col">
                                 <header
                                     class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                                    <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center text-red-500">
+                                        <span>You can upload maximum 10 images </span>
+                                    </p>
                                     <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                         <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
                                     </p>
@@ -136,6 +139,30 @@
 
 <script>
     CKEDITOR.replace('content');
+</script>
+
+<script>
+    function update() {
+        const child_category = {
+          Accessories: ['Ring', 'Watch'],
+          Electronics: ['Laptop', 'Mobile', 'Smart Watch'],
+          Fashion: ['Clothing', 'Shoes']
+        };
+        const select = document.getElementById('parent_category');
+        const option = select.options[select.selectedIndex].value;
+
+        $("#child_category").empty();
+
+        let selectOption = "";
+        const list_option = child_category[option];
+        for (let i = 0; i < list_option.length; i++) {
+            selectOption = "";
+            selectOption += "<option value='" + list_option[i] + "'>" + list_option[i] + "</option>";
+            $('#child_category').append(selectOption);
+        }
+
+    };
+    update();
 </script>
 
 <script>

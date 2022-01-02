@@ -4,7 +4,22 @@ import multer from 'multer';
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
-const upload = multer({ dest: 'uploads/' });
+
+let numberOfImage = 0;
+
+const storage = multer.diskStorage({
+    destination: function (request, file, callback) {
+        let path = "./uploads" ;
+        callback(null, path);
+    },
+    filename: function (request, file, callback) {
+        ++numberOfImage
+        const name = numberOfImage.toString() + ".jpg"
+        callback(null, name);
+    }
+});
+
+const upload = multer({storage: storage});
 
 router.get('/', async (req, res) => {
     let pActive = true;
@@ -31,10 +46,9 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/',urlencodedParser, upload.single('img'), async(req, res) => {
+router.post('/',urlencodedParser, upload.array("img", 10),async(req, res) => {
     let pActive = true;
-    console.log(req.body);
-    console.log(req.file);
+
     res.render('seller/post-product',{
         pActive,
         layout: 'seller.handlebars'
