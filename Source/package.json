@@ -40,6 +40,7 @@
     "postcss-cli": "^9.0.2",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.3.3",
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {{#section 'js'}}
     <script>
-        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetswal/dist/sweetswal.min.js';
+        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
             const email = document.getElementById('txtEmail').value;
@@ -22,22 +22,16 @@
             });
         });
 
-
-        // $('#editUsernameForm').on('submit', function (event) {
-        //     event.preventDefault();
-        //     const username = document.getElementById('txtUsername').value;
-        //     if (username.length < 1) {
-        //         swal('Username must be filled in!');
-        //         return;
-        //     }
-        //     $.getJSON(`/account/username-available?user=${username}`, function (data) {
-        //         if (data === false) {
-        //             swal('Username is already in use. Please choose another one!');
-        //         } else {
-        //             $('#editUsernameForm').off('submit').submit();
-        //         }
-        //     });
-        // });
+        $('#editNameForm').on('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('txtName').value;
+            if (name.length < 1) {
+                swal('Name must be filled in!');
+                return;
+            } else {
+                $('#editNameForm').off('submit').submit();
+            }
+        });
     </script>
 {{/section}}
 
@@ -169,7 +163,7 @@
                             <span class="ml-2">Edit</span>
                         </div>
                         <input x-show="false"
-                                name = "Username" value = {{authUser.Username}}>
+                               name="Username" value= {{authUser.Username}}>
                         <button x-show="edit"
                                 @click="edit = false"
                                 type="submit"
