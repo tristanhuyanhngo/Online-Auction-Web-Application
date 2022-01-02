@@ -3,13 +3,27 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <form method="POST" action="action.php">
-                    <label class="">
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Parent Category <span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Child Category <span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label class="text-xl text-cyan-700">Product <span class="text-red-500">*</span></label></br>
                         <select class="form-select block mt-1 w-full p-2 border border-gray-500">
                             <option>Option 1</option>
                             <option>Option 2</option>
                         </select>
-                    </label>
+                    </div>
                     <div class="mb-8">
                         <label class="text-xl text-cyan-700">Content <span class="text-red-500">*</span></label></br>
                         <textarea name="content" class="border-2 border-gray-500 w-full">

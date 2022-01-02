@@ -11,15 +11,40 @@
             const hour = minute * 60;
             const day = hour * 24;
 
-            const textDay = Math.floor(gap / day);
-            const textHour = Math.floor((gap % day) / hour);
-            const textMinute = Math.floor((gap % hour) / minute);
-            const textSecond = Math.floor((gap % minute) / second);
+            let textDay = Math.floor(gap / day);
+            let textHour = Math.floor((gap % day) / hour);
+            let textMinute = Math.floor((gap % hour) / minute);
+            let textSecond = Math.floor((gap % minute) / second);
 
-            document.querySelector(".day").innerText = textDay;
-            document.querySelector(".hour").innerText = textHour;
-            document.querySelector(".minute").innerText = textMinute;
-            document.querySelector(".second").innerText = textSecond;
+            if (textDay < 0) {
+                textDay = 0;
+            }
+            if (textHour < 0) {
+                textHour = 0;
+            }
+            if (textMinute < 0) {
+                textMinute = 0;
+            }
+            if (textSecond < 0) {
+                textSecond = 0;
+            }
+
+            let timeOut = false;
+            if (textDay === 0 && textHour === 0 && textMinute === 0 && textSecond === 0) {
+                 timeOut = true;
+            }
+
+            if (!timeOut) {
+                document.querySelector(".day").innerText = textDay;
+                document.querySelector(".hour").innerText = textHour;
+                document.querySelector(".minute").innerText = textMinute;
+                document.querySelector(".second").innerText = textSecond;
+            }
+            else {
+                $("#duration").empty();
+                const message = `<p class="text-2xl font-semibold text-red-500">Time out</p>`;
+                $("#duration").append(message);
+            }
         };
         setInterval(test, 1000);
     </script>
@@ -57,21 +82,23 @@
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div x-data="{ wish: false }">
                         <div class="flex items-center justify-between">
-                            <div class=" text-black text-base font-semibold flex">
-                                <h3 class="day">Time</h3>
-                                <p class="ml-1"> d</p>
-                            </div>
-                            <div class=" text-black text-base font-semibold flex">
-                                <h3 class="hour">Time</h3>
-                                <p class="ml-1">h</p>
-                            </div>
-                            <div class=" text-black text-base font-semibold flex">
-                                <h3 class="minute">Time</h3>
-                                <p class="ml-1"> m</p>
-                            </div>
-                            <div class=" text-black text-base font-semibold flex">
-                                <h3 class="second">Time</h3>
-                                <p class="ml-1"> s</p>
+                            <div id="duration">
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="day">Time</h3>
+                                    <p class="ml-1"> d</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="hour">Time</h3>
+                                    <p class="ml-1">h</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="minute">Time</h3>
+                                    <p class="ml-1"> m</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="second">Time</h3>
+                                    <p class="ml-1"> s</p>
+                                </div>
                             </div>
 
                             <form id="formAddWishList" action = "/account/wishlist/add" method = "post">
@@ -180,7 +207,7 @@
                 </div>
 
                 <div class="flex justify-between mt-2 ">
-                    <div class=" text-red-600 flex items-center text-xl font-semibold px-6">3 hours</div>
+                    <div class=" text-red-600 flex items-center text-xl font-semibold px-6">{{format_date this.product.EndDate}}</div>
                     <div class="flex">
                         <div x-data="{ showModal : false }">
                             <button @click="showModal = !showModal"

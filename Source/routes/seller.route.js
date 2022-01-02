@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from "body-parser";
+import * as fs from 'fs';
 import multer from 'multer';
 
 const router = express.Router();
