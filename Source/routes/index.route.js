@@ -66,7 +66,6 @@ router.post('/register',urlencodedParser,async function(req, res) {
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
-    // const today = moment().format('YYYY-MM-DD');
     const today = moment().format();
 
     const user = {

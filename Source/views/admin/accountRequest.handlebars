@@ -1,126 +1,98 @@
-<div class="w-full  max-w-4xl mx-auto mt-8">
-    <div class="flex justify-start">
-        <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
-            <input type="search" class="w-64 px-1 h-auto focus:outline-none " placeholder="Search">
-            <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
+{{#if this.empty}}
+    <div class="w-full  max-w-4xl mx-auto mt-8">No request.</div>
+{{else}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        <div class="flex justify-start">
+            <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
+                <input type="search" class="w-64 px-1 h-auto focus:outline-none " placeholder="Search">
+                <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
+            </div>
         </div>
-    </div>
-    <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                <tr>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Name</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Email</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Role</div>
-                    </th>
+        <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                    <tr>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Name</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Email</div>
+                        </th>
 
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Day register</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-center">Edit</div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Alex Shatov</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">alexshatov@gmail.com</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Seller</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">07/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-blue-600">Accept</button>
-                        <button class="px-4 py-2 bg-red-700">DELETE</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Philip Harbach</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">philip.h@gmail.com</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Seller</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">07/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-blue-600">Accept</button>
-                        <button class="px-4 py-2 bg-red-700">DELETE</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Mirko Fisuk</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">mirkofisuk@gmail.com</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Seller</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">07/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-blue-600">Accept</button>
-                        <button class="px-4 py-2 bg-red-700">DELETE</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Olga Semklo</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">olga.s@cool.design</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Seller</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">07/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-blue-600">Accept</button>
-                        <button class="px-4 py-2 bg-red-700">DELETE</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Burak Long</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">longburak@gmail.com</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Seller</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">07/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                        <button class="px-4 py-2 bg-blue-600">Accept</button>
-                        <button class="px-4 py-2 bg-red-700">DELETE</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Request Time</div>
+                        </th>
+
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">&nbsp;</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                    {{#each this.request}}
+                        <tr>
+                            <td class="p-2 whitespace-nowrap">
+                                <div class="font-medium text-gray-800">{{Name}}</div>
+                            </td>
+                            <td class="p-2 whitespace-nowrap">
+                                <div class="text-left">{{Email}}</div>
+                            </td>
+                            <td class="p-2 whitespace-nowrap">
+                                <div class="text-left">{{format_date RequestTime}}</div>
+                            </td>
+                            <td class="p-2 whitespace-nowrap text-white flex justify-center space-x-4">
+                                <form id="acceptForm" method="post"
+                                      action="/admin/account-request/accept">
+                                    <button type="submit" name="Email"
+                                            value="{{Email}}"
+                                            class="px-4 py-2 bg-blue-600">Accept</button>
+                                </form>
+
+                                <form id="declineForm" method="post"
+                                      action="/admin/account-request/decline">
+                                    <button type="submit" name="Email"
+                                            value="{{Email}}"
+                                            class="px-4 py-2 bg-red-700">Decline</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-5">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <div
+                                class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <div class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2
+                </div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
+{{/if}}

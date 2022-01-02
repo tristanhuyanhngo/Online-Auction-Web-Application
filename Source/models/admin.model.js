@@ -15,9 +15,28 @@ export default {
         return list[0].amount;
     },
 
+    async countRequest(){
+        const list = await db('user').select().from('user').whereNotNull('RequestTime').count({amount : 'Email'} );
+        return list[0].amount;
+    },
+
     async findAllLimit(limit, offset){
         const user = await db.select().from('user').limit(limit).offset(offset);
         return user;
+    },
+
+    async findRequestLimit(limit, offset){
+        const user = await db.select().from('user').whereNotNull('RequestTime').orderBy('RequestTime','desc').limit(limit).offset(offset);
+        return user;
+    },
+
+    async declineReq(entity) {
+        const email = entity.Email;
+
+        const sql = `update user
+                        set RequestTime = NULL
+                        where Email = '${email}'`;
+        await db.raw(sql);
     },
 
     // async findDescriptionProduct(proId) {

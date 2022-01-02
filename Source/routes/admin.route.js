@@ -165,14 +165,23 @@ router.get('/product', async (req, res) => {
 
     const product = await productModel.findAllLimit(limit,offset);
 
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (product.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
     res.render('admin/product', {
         pActive,
         product,
         layout: 'admin.handlebars',
         empty: product.length === 0,
         page_numbers,
-        isFirst: page_numbers[0].isCurrent,
-        isLast: page_numbers[nPage-1].isCurrent,
+        isFirst,
+        isLast
     });
 });
 
@@ -199,6 +208,16 @@ router.get('/account', async (req, res) => {
     const offset = (page-1)*limit;
 
     const user = await adminModel.findAllLimit(limit,offset);
+
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (user.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
     let color = [];
     for(let i=0;i<user.length;i++){
         if(user[i].Type==='0'){
@@ -222,16 +241,61 @@ router.get('/account', async (req, res) => {
         layout: 'admin.handlebars',
         empty: user.length === 0,
         page_numbers,
-        isFirst: page_numbers[0].isCurrent,
-        isLast: page_numbers[nPage-1].isCurrent,
+        isFirst,
+        isLast
     });
 });
 
-router.get('/account-request', (req, res) => {
+router.post('/account-request/decline',   async (req, res) => {
+    await adminModel.declineReq(req.body);
+    return res.redirect('/admin/account-request');
+});
+
+router.post('/account-request/accept',   async (req, res) => {
+    const ret = await productModel.del(req.body.ProID);
+    console.log(ret);
+    return res.redirect('/admin/product');
+});
+
+router.get('/account-request', async (req, res) => {
     let aActive = true;
-    res.render('admin/accountRequest',{
+    const page = req.query.page || 1;
+    const limit = 6;
+
+    const total = await adminModel.countRequest();
+
+    let nPage = Math.floor(total / limit);
+    if (total % limit > 0) {
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page - 1) * limit;
+    const request = await adminModel.findRequestLimit(limit, offset);
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (request.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    res.render('admin/accountRequest', {
         aActive,
-        layout: 'admin.handlebars'
+        request,
+        layout: 'admin.handlebars',
+        empty: request.length === 0,
+        page_numbers,
+        isFirst,
+        isLast,
     });
 });
 

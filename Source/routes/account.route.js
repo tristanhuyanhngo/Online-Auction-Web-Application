@@ -119,6 +119,32 @@ router.get('/setting/password', (req, res) => {
     });
 });
 
+router.get('/request', (req, res) => {
+    let rActive = true;
+    console.log(res.locals.requested);
+    res.render('bidder/request',{
+        rActive,
+        layout: 'account.handlebars'
+    });
+});
+
+router.post('/request',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const time = moment().format();
+
+    const entity ={
+        Email: email,
+        RequestTime: time
+    }
+
+    const ret = await userModel.updateUser(entity);
+    res.locals.authUser = ret[0];
+    req.session.authUser = ret[0];
+
+    const url = '/account/request';
+    return res.redirect(url);
+});
+
 router.get('/wishlist',async (req, res) => {
     let wActive = true;
 
