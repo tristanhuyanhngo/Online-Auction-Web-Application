@@ -112,10 +112,10 @@ export default {
         return raw[0];
     },
 
-    async isInWishList(proID,email) {
+    async isInWishList(proID, email) {
         const sql = `select *
                      from wish_list w
-                     where ProID = ${proID} 
+                     where ProID = ${proID}
                        and w.Bidder = '${email}'`;
         const raw = await db.raw(sql);
         return raw[0];

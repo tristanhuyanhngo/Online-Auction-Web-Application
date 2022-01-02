@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fb7f584-a380-43df-b3a3-c7f5fded44f9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Source/routes/bidder.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Source/routes/bidder.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/admin/category-parent.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/Source/views/partials/header/header.handlebars" afterDir="false" />
+    <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/auth.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/auth.mdw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/product.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/product.route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,48 +16,45 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="22HETErCo0KYIXfP6ewHLsBY26M" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="238unCuQgv0HFwL2xzl97SCmlQQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="app.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8fb7f584-a380-43df-b3a3-c7f5fded44f9" name="Changes" comment="" />
-      <created>1639486126340</created>
+      <changelist id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="" />
+      <created>1641128208972</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1639486126340</updated>
-      <workItem from="1639486138535" duration="532000" />
-      <workItem from="1639486741637" duration="107000" />
-      <workItem from="1639880856146" duration="6548000" />
-      <workItem from="1640618148655" duration="84000" />
+      <updated>1641128208972</updated>
+      <workItem from="1641128211459" duration="4789000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

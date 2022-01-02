@@ -132,7 +132,7 @@
                 </div>
 
                 {{#if auth}}
-                    <a href="/profile"><div class="font-semibold mr-2">Hi, <strong>{{authUser.Name}}</strong> !</div></a>
+                    <a href="/profile"><div class="mr-2">Hi, <span class="font-bold">{{authUser.Name}}</span>!</div></a>
 
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
@@ -143,7 +143,7 @@
                         <div x-show="dropdownOpen" class="absolute right-0 w-48 bg-white rounded-md overflow-hidden shadow-xl z-20 border border-cyan-700">
                             <a href="/profile" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My profile</a>
                             {{#if isSeller}}
-                                <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Seller page</a>
+                                <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Mange product</a>
                             {{/if}}
                             {{#if isAdmin}}
                                 <a href="/admin" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Admin page</a>
@@ -151,7 +151,7 @@
                             <a href="/account/cart" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My cart</a>
                             <a href="/account/wishlist" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My wishlist</a>
                             <a href="/account/won-bid" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Won bids</a>
-                            <a href="/account/setting" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Setting</a>
+                            <a href="/account/setting" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Settings</a>
                             <form id="formLogout" action="/logout" method="post"></form>
                             <a class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="javascript: $('#formLogout').submit();">
                                 Log out

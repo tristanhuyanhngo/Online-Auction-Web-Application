@@ -11,7 +11,18 @@
 <body>
 <div class="flex flex-wrap items-center space-x-4 p-1 mb-5 pr-4">
     {{#if this.empty}}
-        <div class="ml-5">You cart is empty.</div>
+        <div>
+            <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
+                h-10 flex items-center px-4">
+                My cart
+            </div>
+            <div class="text-gray-700 h-10 ml-5">Your cart is empty!</div>
+
+            <a href="/" class="ml-5 bg-key hover:bg-cyan-800 text-white font-semibold mt-5 py-1 px-3 rounded">
+                <i class="fa fa-arrow-right"></i>
+                <span class="text-white ml-2">Shop now</span>
+            </a>
+        </div>
     {{else}}
         <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
                 h-10 flex items-center px-4">
@@ -21,9 +32,9 @@
             <div class="w-3/5 divide-y w-full pr-4">
                 <div class="flex py-3">
                     <h3 class="font-semibold text-gray-600 text-xs
-                h-5 flex item-center uppercase w-3/4">Product Details</h3>
+                h-5 flex item-center uppercase w-3/4">Product</h3>
                     <h3 class="font-semibold h-5 text-center
-            text-gray-600 text-xs uppercase w-1/4">Price</h3>
+            text-gray-600 text-xs uppercase w-1/4">Buy-now Price</h3>
                 </div>
 
                 {{#each this.products}}
@@ -35,13 +46,16 @@
                             </div>
 
                             <div class="flex ml-7 flex-col justify-between flex-grow">
-                                <a href ="/product/detail/{{ProID}}" class="font-bold hover:text-key text-sm py-1">{{ProName}}</a>
-                                <span class="text-key text-xs py-1">Seller: {{Seller}}</span>
-                                <a href="#" class="font-semibold py-1 text-red-700 hover:text-red-900 text-xs">
-                                    Remove</a>
+                                <a target="_blank" href="/product/detail/{{ProID}}"
+                                   class="font-bold hover:text-key text-sm py-1">{{ProName}}</a>
+                                <span class="font-semibold text-gray-500 text-xs py-1">Status: <span
+                                        class="text-key">{{ProState}}</span></span>
+                                <span class="font-semibold text-gray-900 text-xs py-1">Seller: <span
+                                        class="text-key">{{Seller}}</span></span>
                             </div>
                         </div>
-                        <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number SellPrice}}</span>
+                        <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number
+                                SellPrice}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -59,12 +73,16 @@
                         <!--                    </div>-->
                         <div class="border-t">
                             <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-                                <span>Total cost</span>
+                                <span>Total</span>
                                 <span class="ml-5 text-red-700">{{format_number this.totalPrice}}</span>
                             </div>
-                            <button class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
-                                Checkout
-                            </button>
+
+                            <form method="post" action="/account/cart/checkout">
+                                <button type="submit"
+                                        class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
+                                    Checkout
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -105,5 +123,5 @@
         </div>
 
     {{/if}}
-    </div>
+</div>
 </body>
