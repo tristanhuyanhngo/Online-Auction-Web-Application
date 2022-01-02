@@ -5,6 +5,7 @@ import categoryModel from '../models/category.model.js';
 const router = express.Router();
 
 router.get('/detail/:id', async function(req, res) {
+    req.session.retUrl = req.originalUrl;
     const pro_id = req.params.id || 0;
     const product = await productModel.findByProID(pro_id);
     let user = null;

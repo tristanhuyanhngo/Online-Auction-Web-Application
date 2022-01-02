@@ -10,7 +10,6 @@ export default function (app) {
     app.use('/', indexRoute);
     app.use('/home', indexRoute);
     app.use('/product', productRoute);
-    app.use('/profile', auth, accountRoute);
     app.use('/admin', auth, adminRoute);
     app.use('/account', auth, accountRoute);
     app.use('/seller', auth,sellerRoute)
