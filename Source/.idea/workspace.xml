@@ -7,7 +7,12 @@
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Script/Script Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/register.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/auth.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/auth.mdw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/account.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/account.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/bidder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -72,6 +77,7 @@
       <workItem from="1641149583985" duration="57000" />
       <workItem from="1641149674397" duration="15319000" />
       <workItem from="1641230883810" duration="136000" />
+      <workItem from="1641244715584" duration="4628000" />
     </task>
     <servers />
   </component>

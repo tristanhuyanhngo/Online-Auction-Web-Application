@@ -39,6 +39,28 @@ export default {
         await db.raw(sql);
     },
 
+    async acceptReq(entity) {
+        const email = entity.email;
+        const time = entity.time;
+
+        const sql = `update user
+                     set RequestTime = NULL,
+                         Type = '1',
+                         AcceptTime = '${time}'
+                     where Email = '${email}'`;
+        await db.raw(sql);
+        return db('user').where('Email',email);
+    },
+
+    async setBackBidder(email) {
+        const sql = `update user
+                     set AcceptTime = NULL,
+                         Type = '2'
+                     where Email = '${email}'`;
+        await db.raw(sql);
+        return db('user').where('Email',email);
+    },
+
     // async findDescriptionProduct(proId) {
     //     const sql = `select d.*
     //                  from product as p, description as d

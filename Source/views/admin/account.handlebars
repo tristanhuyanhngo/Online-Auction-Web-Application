@@ -99,14 +99,6 @@
                          x-transition:leave-start="opacity-100 transform scale-100"
                          x-transition:leave-end="opacity-0 transform scale-90">
 
-                        {{#if this.error}}
-                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                                 role="swal">
-                                <strong class="font-bold">Holy smokes!</strong>
-                                <span class="block sm:inline">Something seriously bad happened.</span>
-                            </div>
-                        {{/if}}
-
                         <form id="addForm" method="post" action="/admin/account/add">
                             <div class="flex justify-between font-normal text-base space-x-8 mt-2">
                                 <div>Email</div>

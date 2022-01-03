@@ -57,25 +57,12 @@
                 </div>
             </td>
 
-            <!--            <form id="editEmailForm" method="post" action="/account/setting/edit-info">-->
             <td class="py-4 whitespace-nowrap">
                 <div class="flex items-center">
                     <div class="ml-2">
                         <label x-show="!edit"
                                class="py-2 text-sm font-medium text-gray-500">
-                            {{authUser.Username}}
-                        </label>
-
-                        <!--                            <div x-show="edit"-->
-                        <!--                                 class="flex items-center">-->
-                        <!--                                <div class="ml-2">-->
-                        <!--                                    <input id="txtEmail" class="py-2 text-sm font-medium-->
-                        <!--                                text-gray-500 px-2 rounded border-2 border-key-->
-                        <!--                        focus:outline-none"-->
-                        <!--                                           name="Email"-->
-                        <!--                                           placeholder="{{authUser.Email}}" autofocus>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
+                            {{authUser.Username}}</label>
                     </div>
                 </div>
             </td>
@@ -109,6 +96,34 @@
                 </div>
             </td>
             <!--            </form>-->
+        </tr>
+
+        <tr
+            class="hover:bg-gray-200">
+            <td class="py-4 whitespace-nowrap">
+                <div class="items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-medium text-gray-900">
+                            Account type
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td class="py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                    <div class="ml-2">
+                        <label
+                               class="py-2 text-sm font-medium text-gray-500">
+                            {{this.Type}}
+                        </label>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div></div>
+            </td>
         </tr>
 
         <tr x-data="{ edit: false }"

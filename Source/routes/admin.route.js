@@ -252,9 +252,16 @@ router.post('/account-request/decline',   async (req, res) => {
 });
 
 router.post('/account-request/accept',   async (req, res) => {
-    const ret = await productModel.del(req.body.ProID);
-    console.log(ret);
-    return res.redirect('/admin/product');
+    const time = moment().format();
+    const entity={
+        email: req.body.Email,
+        time: time,
+    }
+    const ret = await adminModel.acceptReq(entity);
+    req.session.bidder = false;
+    req.session.authUser = ret[0];
+    res.locals.authUser = req.session.authUser;
+    return res.redirect('/admin/account-request');
 });
 
 router.get('/account-request', async (req, res) => {

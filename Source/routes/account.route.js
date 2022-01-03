@@ -49,8 +49,15 @@ router.get('/username-available', async function (req, res) {
 //==============BIDDER's FUNCTIONS=================
 router.get('/setting', (req, res) => {
     let gActive = true;
+    let Type = "Bidder";
+    if(res.locals.authUser.Type==='0'){
+        Type="Admin";
+    } else if(res.locals.authUser.Type==='1'){
+        Type = "Seller";
+    }
     res.render('bidder/edit-info',{
         gActive,
+        Type,
         layout: 'account.handlebars'
     });
 });
@@ -105,8 +112,15 @@ router.post('/setting/password', async (req, res) => {
 
 router.get('/setting/general',(req, res) => {
     let gActive = true;
+    let Type = "Bidder";
+    if(res.locals.authUser.Type==='0'){
+        Type="Admin";
+    } else if(res.locals.authUser.Type==='1'){
+        Type = "Seller";
+    }
     res.render('bidder/edit-info',{
         gActive,
+        Type,
         layout: 'account.handlebars'
     });
 });
