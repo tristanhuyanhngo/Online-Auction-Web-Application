@@ -63,6 +63,8 @@ router.get('/setting', (req, res) => {
 });
 
 router.post('/setting/edit-info',async (req, res) => {
+    const dob = moment(req.body.DOB).format();
+    req.body.DOB = dob;
     const ret = await userModel.updateUser(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];

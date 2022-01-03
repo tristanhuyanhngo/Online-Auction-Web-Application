@@ -15,7 +15,7 @@ export default async function auth(req, res, next) {
             req.session.bidder = true;
             req.session.requested = false;
         }
-        let accTime = moment(req.session.authUser.AcceptTime);
+        const accTime = moment(req.session.authUser.AcceptTime);
         if (accTime != null) {
             const now = moment();
             const gap = now.diff(accTime, 'seconds');
