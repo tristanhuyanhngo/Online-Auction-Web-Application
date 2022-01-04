@@ -7,6 +7,7 @@ import moment from "moment";
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
+import emailModel from "../models/email.models.js";
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -64,7 +65,7 @@ router.get('/register', async function(req, res) {
 });
 
 router.get('/forget-password', async function(req, res) {
-    res.render('forget-password');
+    res.render('otp/forget-password');
 });
 
 router.post('/forget-password', async function(req, res) {
@@ -72,19 +73,47 @@ router.post('/forget-password', async function(req, res) {
     const user = await userModel.findByEmail(email);
 
     if(user === null){
-        return res.render('forget-password',{
+        return res.render('otp/forget-password',{
             error: 'Email not found. Please try again!'
         });
     }
+
+    req.session.forgetUser = email;
+    console.log(req.session.forgetUser);
+    const otp = emailModel.sendOTP(email);
+    req.body.OTP = otp.toString();
+    await userModel.updateUser(req.body);
+
     return res.redirect('/confirm-otp');
 });
 
 router.get('/confirm-otp', async function(req, res) {
-    res.render('confirm-otp');
+    res.render('otp/confirm-otp');
+});
+
+router.get('/reset-success', async function(req, res) {
+    res.render('otp/reset-success');
 });
 
 router.post('/confirm-otp', async function(req, res) {
+    const email = req.session.forgetUser;
+    console.log(email);
+    const ret = await userModel.findOTP(email);
+    const otpInput = req.body.OTP;
 
+    if(otpInput !== ret.OTP){
+        return res.render('otp/confirm-otp',{
+            error: 'OTP is incorrect!'
+        });
+    }
+    const password = emailModel.sendNewPassword(email);
+    req.body.Email = email;
+    req.body.OTP = 'NULL';
+    req.body.Password = password;
+    await userModel.updateUser(req.body);
+
+    req.session.forgetUser = null;
+    return res.redirect('/reset-success');
 });
 
 router.post('/register',urlencodedParser,async function(req, res) {
