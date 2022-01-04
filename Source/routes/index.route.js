@@ -9,7 +9,8 @@ import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 
 const router = express.Router();
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+router.use(bodyParser.urlencoded({ extended: false }));
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -60,6 +61,30 @@ router.get('/search', async function (req, res) {
 // ---------------- REGISTER ---------------- //
 router.get('/register', async function(req, res) {
     res.render('register');
+});
+
+router.get('/forget-password', async function(req, res) {
+    res.render('forget-password');
+});
+
+router.post('/forget-password', async function(req, res) {
+    const email = req.body.Email;
+    const user = await userModel.findByEmail(email);
+
+    if(user === null){
+        return res.render('forget-password',{
+            error: 'Email not found. Please try again!'
+        });
+    }
+    return res.redirect('/confirm-otp');
+});
+
+router.get('/confirm-otp', async function(req, res) {
+    res.render('confirm-otp');
+});
+
+router.post('/confirm-otp', async function(req, res) {
+
 });
 
 router.post('/register',urlencodedParser,async function(req, res) {
