@@ -1,6 +1,8 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
 import categoryModel from '../models/category.model.js';
+//import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -28,13 +30,17 @@ router.get('/detail/:id', async function(req, res) {
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
-    console.log(product);
+    //console.log(product);
+
+    let seller  = await userModel.findByEmail(product.Seller);
+    console.log(seller);
 
     res.render('product', {
         product,
         inWish,
         related_products,
-        description: description.Content
+        description: description.Content,
+        seller
     });
 });
 
