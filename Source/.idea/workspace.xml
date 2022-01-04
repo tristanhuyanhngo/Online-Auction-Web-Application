@@ -8,12 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header/header.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/register.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.handlebars" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +63,7 @@
       <workItem from="1641224727625" duration="3452000" />
       <workItem from="1641299599459" duration="5982000" />
       <workItem from="1641308808684" duration="5626000" />
+      <workItem from="1641315054161" duration="5690000" />
     </task>
     <servers />
   </component>

@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form method="POST" id="formUploadProduct" enctype="multipart/form-data">
+                <form id="formUploadProduct" method="post"  name="formUploadProduct" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label class="text-xl text-gray-600">Title <span class="text-red-500">*</span></label></br>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="title" id="title" value="" required>
@@ -35,7 +35,7 @@
                                 <header
                                     class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                                     <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center text-red-500">
-                                        <span>You can upload maximum 10 images </span>
+                                        <span>You must upload at least <strong>3 images</strong> and less than <strong>10 images</strong></span>
                                     </p>
                                     <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                         <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Sell Price</label></br>
+                        <label class="text-xl text-gray-600">Sell Price <span class="text-red-500">*</span></label></br>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice" required>
                     </div>
 
@@ -270,12 +270,12 @@
         }
     };
 
-    // print all selected files
+    //print all selected files
     // document.getElementById("submit").onclick = () => {
     //     console.log(FILES);
     // };
 
-    // clear entire selection
+    //clear entire selection
     // document.getElementById("cancel").onclick = () => {
     //     while (gallery.children.length > 0) {
     //         gallery.lastChild.remove();
@@ -287,39 +287,7 @@
 </script>
 
 <script>
-    $('#formUploadProduct').on('submit', function (event) {
-        event.preventDefault();
 
-        const title = document.getElementById('title').value;
-        const parent_category = document.getElementById('parent_category').value;
-        const temp = document.getElementById('content').value;
-        const content = document.getElementById('content').value;
-        const numberImages = gallery.children.length;
-
-
-        if (title.length < 5) {
-            swal({
-                title: "Warning",
-                text: "Your title must have at least 5 characters",
-                icon: "warning",
-                button: true,
-                dangerMode: true,
-            })
-            return;
-        }
-
-        if (parent_category === 'Empty') {
-            swal({
-                title: "Warning",
-                text: "You must select parent and child category",
-                icon: "warning",
-                button: true,
-                dangerMode: true,
-            })
-            return;
-        }
-        $('#formUploadProduct').off('submit').submit();
-    });
 </script>
 
 <style>
