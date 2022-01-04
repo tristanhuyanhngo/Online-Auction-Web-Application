@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/auth.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/auth.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/product.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/product.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header/header.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/register.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +23,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="238unCuQgv0HFwL2xzl97SCmlQQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -51,6 +65,9 @@
       <option name="presentableId" value="Default" />
       <updated>1641128208972</updated>
       <workItem from="1641128211459" duration="4789000" />
+      <workItem from="1641224727625" duration="3452000" />
+      <workItem from="1641299599459" duration="5982000" />
+      <workItem from="1641308808684" duration="5626000" />
     </task>
     <servers />
   </component>

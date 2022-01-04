@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
 
 router.post('/',urlencodedParser, upload.array("img", 10),async(req, res) => {
     let pActive = true;
-
+    console.log(req.body);
     res.render('seller/post-product',{
         pActive,
         layout: 'seller.handlebars'

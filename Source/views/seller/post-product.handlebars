@@ -11,7 +11,7 @@
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Category parent<span class="text-red-500">*</span></label></br>
                         <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="parent_category" id="parent_category" onChange="update()">
-                            <option value="Empty"> </option>
+                            <option value="Empty"></option>
                             <option value="Accessories">Accessories</option>
                             <option value="Electronics">Electronics</option>
                             <option value="Fashion">Fashion</option>
@@ -121,12 +121,12 @@
 
                     <div class="mb-8">
                         <label class="text-xl text-gray-600">Content <span class="text-red-500">*</span></label></br>
-                        <textarea name="content" id="content" class="border border-gray-300 w-full" required></textarea>
+                        <textarea name="content" id="content" class="border border-gray-300 w-full"></textarea>
                     </div>
 
                     <div class="flex justify-center">
                         <button
-                            class="px-6 py-1 bg-white text-black border border-cyan-700 hover:bg-gray-300 shadow">Submit</button>
+                                class="px-6 py-1 bg-white text-black border border-cyan-700 hover:bg-gray-300 shadow" id="submit">Submit</button>
                     </div>
 
                 </form>
@@ -141,9 +141,12 @@
     CKEDITOR.replace('content');
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     function update() {
         const child_category = {
+          Empty: [],
           Accessories: ['Ring', 'Watch'],
           Electronics: ['Laptop', 'Mobile', 'Smart Watch'],
           Fashion: ['Clothing', 'Shoes']
@@ -160,8 +163,7 @@
             selectOption += "<option value='" + list_option[i] + "'>" + list_option[i] + "</option>";
             $('#child_category').append(selectOption);
         }
-
-    };
+    }
     update();
 </script>
 
@@ -215,6 +217,7 @@
     hidden.onchange = (e) => {
         for (const file of e.target.files) {
             addFile(gallery, file);
+            console.log(gallery.children.length);
         }
     };
 
@@ -268,21 +271,55 @@
     };
 
     // print all selected files
-    document.getElementById("submit").onclick = () => {
-        alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
-        console.log(FILES);
-    };
+    // document.getElementById("submit").onclick = () => {
+    //     console.log(FILES);
+    // };
 
     // clear entire selection
-    document.getElementById("cancel").onclick = () => {
-        while (gallery.children.length > 0) {
-            gallery.lastChild.remove();
-        }
-        FILES = {};
-        empty.classList.remove("hidden");
-        gallery.append(empty);
-    };
+    // document.getElementById("cancel").onclick = () => {
+    //     while (gallery.children.length > 0) {
+    //         gallery.lastChild.remove();
+    //     }
+    //     FILES = {};
+    //     empty.classList.remove("hidden");
+    //     gallery.append(empty);
+    // };
+</script>
 
+<script>
+    $('#formUploadProduct').on('submit', function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const parent_category = document.getElementById('parent_category').value;
+        const temp = document.getElementById('content').value;
+        const content = document.getElementById('content').value;
+        const numberImages = gallery.children.length;
+
+
+        if (title.length < 5) {
+            swal({
+                title: "Warning",
+                text: "Your title must have at least 5 characters",
+                icon: "warning",
+                button: true,
+                dangerMode: true,
+            })
+            return;
+        }
+
+        if (parent_category === 'Empty') {
+            swal({
+                title: "Warning",
+                text: "You must select parent and child category",
+                icon: "warning",
+                button: true,
+                dangerMode: true,
+            })
+            return;
+        }
+        $('#formUploadProduct').off('submit').submit();
+    });
 </script>
 
 <style>

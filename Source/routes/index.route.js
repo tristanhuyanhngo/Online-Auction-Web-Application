@@ -2,14 +2,18 @@ import express from 'express';
 import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import moment from "moment";
-
+import reCapt from 'express-recaptcha';
 // import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 
+const RC = reCapt.RecaptchaV3;
+const recaptcha = new RC('6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC', '6LfL_ukdAAAAAOymLm0tldwv1RZIyPDq27lmoBmt', {callback:'cb'});
+
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -110,8 +114,8 @@ router.get('/check-username', async function (req, res) {
 });
 
 // ---------------- LOGIN ---------------- //
-router.get('/login', async function (req, res) {
-    res.render('login');
+router.get('/login', async function(req, res){
+    res.render('login', { captcha:recaptcha.render() });
 });
 
 router.post('/login',urlencodedParser, async function (req, res) {
