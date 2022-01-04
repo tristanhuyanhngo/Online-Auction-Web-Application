@@ -21,7 +21,13 @@ activate_view_middleware(app);
 activate_locals_middleware(app);
 activate_route_middleware(app);
 
-const port = 3001;
+const port = 3000;
 app.listen(port, function () {
     console.log(`Example app listening at http://localhost:${port}`);
+});
+
+app.use(function (req, res, next) {
+    res.render('error/404', {
+        layout: false,
+    });
 });

@@ -170,6 +170,11 @@ router.get('/user/:username', async function (req, res) {
 
     const user = await userModel.findByUsername(Username);
 
+
+    if (user === null) {
+        return res.redirect('/');
+    }
+
     res.render('profileUserOther', {
         user
     });
