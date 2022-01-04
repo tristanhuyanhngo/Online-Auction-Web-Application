@@ -4,47 +4,61 @@
         $('#formRegister').on('submit', function (event) {
             event.preventDefault();
 
-            //const username = $('#txtFullName').val();
-            const username = document.getElementById('txtFullName').value;
+            const username = document.getElementById('txtUsername').value;
+            const name = document.getElementById('txtFullName').value;
             const email = document.getElementById('txtEmail').value;
             const password = document.getElementById('txtPassword').value;
             const confirm_password = document.getElementById('txtConfirmPassword').value;
 
             // Validate username
-            if (username.length === 0) {
-                swal('Username must filled in!');
+            if (username.length < 1) {
+                swal('Username must be filled in!');
+                return;
+            }
+            if (name.length <1 ) {
+                swal('Name must be filled in!');
                 return;
             }
             // Validate email
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                swal("Invalid email !");
+                swal("Invalid email!");
                 return;
             }
             // Validate password
             if (!password) {
-                swal('Password must filled in!');
+                swal('Password must be filled in!');
                 return;
             }
             if (!confirm_password) {
-                swal('Confirm password must filled in!');
+                swal('Confirm password must be filled in!');
                 return;
             }
             if (password !== confirm_password) {
-                swal("Passwords doesn't match");
+                swal("Passwords doesn't match!");
                 return;
             }
-
-            // Ajax
-            $.getJSON(`/is-available?user=${email}`, function (data) {
+            $.getJSON(`/username-available?username=${username}`, function (data) {
                 if (data === false) {
-                    swal('Email already in use. Please choose another email !');
-                }
-                else {
-                    swal('Congratulations ! Register successfully');
-                    $('#formRegister').off('submit').submit();
+                    swal('Username is already in use. Please choose another one!');
+                } else {
+
+                    $.getJSON(`/is-available-register?user=${email}`, function (data) {
+                        if (data === false) {
+                            swal('Email already in use. Please choose another email!');
+                        }
+                        else {
+                            swal("Congrats!","You have registered successfully! Please verify your account with an OTP that has been sent to your email!","success",{
+                                buttons:{
+                                    text: "Verify"
+                                }
+                            })
+                                    .then((value) => {
+                                        $('#formRegister').off('submit').submit();
+                                    });
+                        }
+                    });
                 }
             });
-
         });
 
         $('#txtFullName').select();

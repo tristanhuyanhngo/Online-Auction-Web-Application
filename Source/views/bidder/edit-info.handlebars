@@ -9,6 +9,7 @@
         $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
             const email = document.getElementById('txtEmail').value;
+            const username = document.getElementById('txtUsername').value;
             if (email.length < 1) {
                 swal('Email must be filled in!');
                 return;
@@ -17,9 +18,10 @@
                 swal("Invalid email!");
                 return;
             }
+
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data == false) {
-                    swal('Email is already in use. Please choose another email!');
+                    swal('Email is already in use. Please choose another one!');
                     return;
                 } else {
                     $('#editEmailForm').off('submit').submit();

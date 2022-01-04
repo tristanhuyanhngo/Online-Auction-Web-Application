@@ -16,6 +16,20 @@ export default{
         return otp;
     },
 
+    sendOTPRegister(receiver){
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        const otpStr = 'This is your OTP. Please do not share it with anyone.\n' + otp;
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Account verification',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+        return otp;
+    },
+
     sendNewPassword(receiver){
         let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let passwordLength = 8;

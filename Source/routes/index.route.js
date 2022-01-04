@@ -121,6 +121,7 @@ router.post('/register',urlencodedParser,async function(req, res) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
     const today = moment().format();
+    const otp = emailModel.sendOTPRegister(req.body.email);
 
     const user = {
         Email: req.body.email,
@@ -131,11 +132,42 @@ router.post('/register',urlencodedParser,async function(req, res) {
         DOB: null,
         RegisterDate: today,
         Type: 2,
-        Rate: 0
+        Rate: 0,
+        OTP: otp.toString(),
+        Valid: false
     }
 
     await userModel.addUser(user);
-    res.render('register');
+    req.session.registerUser = req.body.email;
+
+    res.redirect('/confirm-register');
+});
+
+router.get('/confirm-register', async function(req, res) {
+    res.render('otp/otp-register');
+});
+
+router.get('/register-success', async function(req, res) {
+    res.render('otp/register-success');
+});
+
+router.post('/confirm-register', async function(req, res) {
+    const email = req.session.registerUser;
+    const ret = await userModel.findOTP(email);
+    const otpInput = req.body.OTP;
+
+    if(otpInput !== ret.OTP){
+        return res.render('otp/confirm-otp',{
+            error: 'OTP is incorrect!'
+        });
+    }
+    req.body.Email = email;
+    req.body.OTP = 'NULL';
+    req.body.Valid = true;
+    await userModel.updateUser(req.body);
+
+    req.session.registerUser = null;
+    return res.redirect('/register-success');
 });
 
 router.get('/is-available', async function (req, res) {
@@ -150,10 +182,33 @@ router.get('/is-available', async function (req, res) {
     }
 });
 
+router.get('/is-available-register', async function (req, res) {
+    const email = req.query.user;
+    const user = await userModel.findByEmailRegister(email);
+
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
 router.get('/check-username', async function (req, res) {
     const username = req.query.Username;
     const user = await userModel.findByUsername(username);
 
+    if (user === null) {
+        return res.json(true);
+    }
+    else {
+        return res.json(false);
+    }
+});
+
+router.get('/username-available', async function (req, res) {
+    const username = req.query.username;
+    const user = await userModel.findByUsernameRegister(username);
     if (user === null) {
         return res.json(true);
     }

@@ -5,19 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/models/email.models.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/email.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/otp/reset-success.handlebars" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/otp/otp-register.handlebars" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/otp/register-success.handlebars" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Script/Script Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Source.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/email.models.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/email.models.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/confirm-otp.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/otp/confirm-otp.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/forget-password.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/otp/forget-password.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/edit-info.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/otp/confirm-otp.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/otp/confirm-otp.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/register.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +46,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/otp" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
