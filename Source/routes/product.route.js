@@ -28,6 +28,8 @@ router.get('/detail/:id', async function(req, res) {
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
+    console.log(product);
+
     res.render('product', {
         product,
         inWish,
