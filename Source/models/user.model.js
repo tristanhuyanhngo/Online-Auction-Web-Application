@@ -11,6 +11,10 @@ export default {
         return user[0] || null;
     },
 
+    async addReview(entity) {
+        await db('rating').insert(entity);
+    },
+
     async findByEmailRegister(email) {
         const user = await db('user').where({
             Email: email,

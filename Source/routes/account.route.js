@@ -239,6 +239,25 @@ router.post('/wishlist/add',async function(req, res) {
     return res.redirect(url);
 });
 
+router.post('/review',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const product = req.body.ProID;
+    const receiver = req.body.Seller;
+    const comment = req.body.content;
+    const item = {
+        Sender: email,
+        Receiver: receiver,
+        Comment: comment,
+        ProID: product,
+        Type: true,
+        Rate: true
+    }
+    await userModel.addReview(item);
+
+    const url = req.headers.referer || '/account/won-bid';
+    return res.redirect(url);
+});
+
 router.post('/cart/checkout',async function(req, res) {
     const email = res.locals.authUser.Email;
     const today = moment().format();
