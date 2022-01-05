@@ -14,7 +14,13 @@ export default {
     },
 
     async del(id) {
+        await db('description').where('ProID',id).del();
         return db('product').where('ProID', id).del();
+    },
+
+    async delBySeller(id, seller) {
+        await db('description').where('ProID',id).del();
+        await db('product').where('Seller', seller).del();
     },
 
     async countProduct() {

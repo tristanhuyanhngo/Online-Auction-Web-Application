@@ -1,4 +1,5 @@
 import db from '../utils/db.js';
+import productModel from '../models/product.model.js';
 
 export default {
     async findAll(){
@@ -7,7 +8,12 @@ export default {
     },
 
     async del(email){
-        return db('user').where('Email',email).del();
+        await db('bidding').where('Bidder',email).del();
+        const list = await db('product').where('Seller',email);
+        for(let i in list){
+            await productModel.delBySeller(list[i].ProID, email);
+        }
+        await db('user').where('Email',email).del();
     },
 
     async countUser(){

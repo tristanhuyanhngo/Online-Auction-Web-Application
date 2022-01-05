@@ -1,4 +1,5 @@
 import db from '../utils/db.js';
+import productModel from "./product.model.js";
 
 export default {
     async findByEmail(email) {
@@ -43,6 +44,11 @@ export default {
     },
 
     async delUser(email) {
+        await db('bidding').where('Bidder',email).del();
+        const list = await db('product').where('Seller',email);
+        for(let i in list){
+            await productModel.delBySeller(list[i].ProID, email);
+        }
         return db('user').where('Email', email).del();
     },
 
