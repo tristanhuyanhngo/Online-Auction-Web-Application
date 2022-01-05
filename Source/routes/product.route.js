@@ -1,6 +1,8 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
 import categoryModel from '../models/category.model.js';
+//import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -11,11 +13,16 @@ router.get('/detail/:id', async function(req, res) {
     let user = null;
     let inWish = false;
 
+    let bidding = await productModel.findBidding(pro_id);
+    let biddingHighest
+    if(bidding != null)
+        biddingHighest = bidding[0]
+
     if(res.locals.auth != false){
         user = req.session.authUser.Email;
         const isWish = await productModel.isInWishList(pro_id,user);
 
-        if(isWish.length >0){
+        if(isWish.length > 0){
             inWish = true;
         }
     }
@@ -28,11 +35,18 @@ router.get('/detail/:id', async function(req, res) {
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
+    //console.log(product);
+
+    let seller  = await userModel.findByEmail(product.Seller);
+
     res.render('product', {
         product,
         inWish,
         related_products,
-        description: description.Content
+        description: description.Content,
+        seller,
+        bidding,
+        biddingHighest
     });
 });
 

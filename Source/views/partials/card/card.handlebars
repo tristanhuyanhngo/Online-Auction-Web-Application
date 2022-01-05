@@ -1,69 +1,89 @@
 {{#section 'js'}}
     <script>
-        const test = function () {
-            document.querySelector(".testing").innerText = 1234;
-            console.log(0);
-        };
-        setInterval(test, 1000);
+        // const test = function () {
+        //     document.querySelector(".testing").innerText = 1234;
+        //     console.log(0);
+        // };
+        // setInterval(test, 1000);
+
     </script>
 {{/section}}
 
-<a href="/product/detail/{{ProID}}">
-  <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
-    <div class=" relative">
-      <img class="object-cover h-52 w-full border-b border-gray-300"
-        src="/public/images/Product/{{BigCatName}}/{{CatName}}/{{ProID}}/1.jpg"
-        alt="Sunset in the mountains">
-      <div
-        class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-        <h3 class="testing">00:03:09</h3>
-      </div>
-      <div
-        class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-        95
-      </div>
+<div class="relative">
+    <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
+        <a href="/product/detail/{{ProID}}">
+            <div class=" relative">
+                <img class="object-cover h-52 w-full border-b border-gray-300"
+                     src="/public/images/Product/{{BigCatName}}/{{CatName}}/{{ProID}}/1.jpg"
+                     alt="Sunset in the mountains">
+                <div
+                        class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
+                    <h3 id="duration" class="testing">{{format_relative EndDate}}</h3>
+                </div>
+                <div
+                        class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
+                    95
+                </div>
+            </div>
+            <div class="m-5 relative ">
+                <div class=" items-center font-semibold text-sm text-cyan-700 truncate">{{ProName}}</div>
+                <div class="flex justify-between text-red-600 font-semibold text-base mt-2">
+                    <div class="">{{format_number StartPrice}}</div>
+                    <div>VND</div>
+                </div>
+                <div class=" flex justify-between mt-2 font-light text-xs">
+                    <div class="">Buy Now: {{format_number SellPrice}}</div>
+                    <div class="">{{format_date EndDate}}</div>
+                </div>
+
+                <div class=" h-1 border-t border-gray-400 mt-2"></div>
+
+                <div class="flex text-xs mt-1 items-center justify-center">
+                    <div class="h-6 w-6 rounded-full bg-black"></div>
+                    <div class=" font-thin ml-1">BY</div>
+                    <div class=" uppercase font-semibold ml-1 text-cyan-800 truncate">{{Seller}}</div>
+                </div>
+
+            </div>
+            <div
+                    class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0 bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
+                <div class="flex justify-center items-center font-semibold text-sm">
+                    <div class="text-yellow-600">HIGHEST</div>
+                </div>
+                <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
+                    <div class="">9000,000</div>
+                    <div>VND</div>
+                </div>
+                <div class=" flex justify-between mt-2 font-light text-xs">
+                    <div class="">From HCM</div>
+                    <div class="">July 17, 2016</div>
+                </div>
+
+                <div class=" h-1 border-t border-gray-400 mt-2"></div>
+
+                <div class="flex text-xs mt-1 items-center justify-center">
+                    <div class="h-6 w-6 rounded-full bg-black"></div>
+                    <div class=" font-thin ml-1">BY</div>
+                    <div class=" uppercase font-semibold ml-1">hoang nhu thanh</div>
+                </div>
+            </div>
+        </a>
     </div>
-    <div class="m-5 relative ">
-      <div class=" items-center font-semibold text-sm text-cyan-700 truncate">{{ProName}}</div>
-        <div class="flex justify-between text-red-600 font-semibold text-base mt-2">
-            <div class="">{{format_number StartPrice}}</div>
-            <div>VND</div>
-        </div>
-      <div class=" flex justify-between mt-2 font-light text-xs">
-        <div class="">Buy Now: {{format_number SellPrice}}</div>
-        <div class="">{{format_date EndDate}}</div>
-      </div>
 
-      <div class=" h-1 border-t border-gray-400 mt-2"></div>
-
-      <div class="flex text-xs mt-1 items-center justify-center">
-        <div class="h-6 w-6 rounded-full bg-black"></div>
-        <div class=" font-thin ml-1">BY</div>
-        <div class=" uppercase font-semibold ml-1 text-cyan-800">{{Seller}}</div>
-      </div>
-
-    </div>
-    <div
-      class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0 bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
-      <div class="flex justify-center items-center font-semibold text-sm">
-        <div class="text-yellow-600">HIGHEST</div>
-      </div>
-        <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
-            <div class="">9000,000</div>
-            <div>VND</div>
-        </div>
-      <div class=" flex justify-between mt-2 font-light text-xs">
-        <div class="">From HCM</div>
-        <div class="">July 17, 2016</div>
-      </div>
-
-      <div class=" h-1 border-t border-gray-400 mt-2"></div>
-
-      <div class="flex text-xs mt-1 items-center justify-center">
-        <div class="h-6 w-6 rounded-full bg-black"></div>
-        <div class=" font-thin ml-1">BY</div>
-        <div class=" uppercase font-semibold ml-1">hoang nhu thanh</div>
-      </div>
-    </div>
-  </div>
-</a>
+    {{#if authUser}}
+        {{#if this.inWish}}
+            <a href="javascript: $('#formDelWishList').submit();">
+                <i class="absolute top-0 right-0 fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                   aria-hidden="true"></i>
+            </a>
+        {{else}}
+            <a href="javascript: $('#formAddWishList').submit();">
+                <i class="absolute top-0 right-0 fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+            </a>
+        {{/if}}
+    {{else}}
+        <a href="/login">
+            <i class="absolute top-0 right-0 fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+        </a>
+    {{/if}}
+</div>

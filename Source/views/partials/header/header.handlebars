@@ -26,7 +26,7 @@
                                     </button>
                                 </div>
                                 <div class="flex justify-center mt-1">
-                                    <div class="font-semibold mr-2">Hi,{{authUser.Name}} !</div>
+                                    <div class="font-semibold mr-2">Hi,{{authUser.Username}}!</div>
                                 </div>
                             </div>
 
@@ -39,7 +39,7 @@
                                  x-transition:leave-end="opacity-0 transform scale-90">
                                 <ul>
                                     <li class="dropdown">
-                                        <a href="/profile" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My profile</a>
+                                        <a href="/user/{{authUser.Username}}" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My profile</a>
                                         <a href="/account/setting" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">Setting</a>
                                         <a href="/account/cart" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My cart</a>
                                         <a href="/account/wishlist" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My wishlist</a>
@@ -85,8 +85,9 @@
                     </div>
 
                     {{#if auth}}
-                        <a href="/">
-                            <button class="py-2 hover:bg-cyan-900 w-full text-left pl-3">Logout</button>
+                        <form id="formLogout" action="/logout" method="post"></form>
+                        <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3" href="javascript: $('#formLogout').submit();">
+                            Log out
                         </a>
                     {{else}}
                         <a href="/login">
@@ -132,8 +133,9 @@
                 </div>
 
                 {{#if auth}}
-                    <a href="/profile"><div class="mr-2">Hi, <span class="font-bold">{{authUser.Name}}</span>!</div></a>
-
+                    <div class="hidden lg:block">
+                        <a href="/profile"><div class="mr-2">Hi, <span class="font-bold truncate">{{authUser.Username}}</span>!</div></a>
+                    </div>
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
                         </button>
@@ -141,7 +143,7 @@
                         <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
                         <div x-show="dropdownOpen" class="absolute right-0 w-48 bg-white rounded-md overflow-hidden shadow-xl z-20 border border-cyan-700">
-                            <a href="/profile" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My profile</a>
+                            <a href="/user/{{authUser.Username}}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">My profile</a>
                             {{#if isSeller}}
                                 <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Manage product</a>
                             {{/if}}

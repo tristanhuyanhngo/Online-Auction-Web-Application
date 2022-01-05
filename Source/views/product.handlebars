@@ -1,5 +1,4 @@
 {{#section 'js'}}
-    <script src="./dist/jquery.countdown.js"></script>
     <script>
         const test = function () {
             const countDate = new Date("{{this.product.EndDate}}").getTime();
@@ -53,9 +52,7 @@
 <div class=" container mx-auto xl:px-10 py-1 text-xs font-medium flex mt-2 justify-start text-cyan-800">
     <a class="  uppercase" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class=" ml-3">></div>
-    <a class=" uppercase ml-3" href="">{{this.product.BigCatName}}</a>
-    <div class=" ml-3">></div>
-    <a class=" uppercase ml-3" href="">{{this.product.CatName}}</a>
+    <a class=" uppercase ml-3" href="/product/byCat/{{this.product.CatID}}">{{this.product.CatName}}</a>
 </div>
 <div class=" container mx-auto xl:px-10 mt-3">
 
@@ -68,17 +65,17 @@
         <div class="col-span-full md:col-span-7">
             <div class="slider-for">
                 <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/1.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
-                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-96">
                 <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/2.jpg"
-                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-96">
                 <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/3.jpg"
-                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                    alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-96">
                 <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/4.jpg"
-                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                     alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-96">
             </div>
         </div>
         <div class="col-span-5 text-xs hidden md:flex md:items-center">
-            <div class="">
+            <div class="w-full">
                 <div class=" border border-cyan-700 rounded-md p-4">
                     <div x-data="{ wish: false }">
                         <div class="flex items-center justify-between">
@@ -127,24 +124,73 @@
                             {{/if}}
 
                         </div>
-                        <div x-data="{ open: false }" class="">
-                            <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
-                                x-transition:enter="transition duration-300"
-                                x-transition:enter-start="opacity-0 transform scale-90"
-                                x-transition:enter-end="opacity-100 transform scale-100"
-                                x-transition:leave="transition duration-300"
-                                x-transition:leave-start="opacity-100 transform scale-100"
-                                x-transition:leave-end="opacity-0 transform scale-90">
-                                <input
-                                    class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
-<!--                                <button class=" w-full py-2 bg-red-500">-->
-<!--                                    <div class=" font-medium text-sm text-white rounded">-->
-<!--                                        Confirm-->
-<!--                                    </div>-->
-<!--                                </button>-->
-                                <div x-data="{ showModal : false }">
+                        {{#if auth}}
+                            <div x-data="{ open: false }" class="">
+                                <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
+                                     x-transition:enter="transition duration-300"
+                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                     x-transition:leave="transition duration-300"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                    <input
+                                            class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
+                                    <!--                                <button class=" w-full py-2 bg-red-500">-->
+                                    <!--                                    <div class=" font-medium text-sm text-white rounded">-->
+                                    <!--                                        Confirm-->
+                                    <!--                                    </div>-->
+                                    <!--                                </button>-->
+                                    <div x-data="{ showModal : false }">
+                                        <div @click="showModal = !showModal"
+                                             class="cursor-pointer font-semibold text-md  px-4 py-2  ml-2 bg-red-700 text-white hover:bg-red-900 text-center">CONFIRM</div>
+                                        <div x-show="showModal"
+                                             class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                            <div x-show="showModal"
+                                                 class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                 @click.away="showModal = false"
+                                                 x-transition:enter="transition ease-out duration-300"
+                                                 x-transition:enter-start="opacity-0 transform scale-90"
+                                                 x-transition:enter-end="opacity-100 transform scale-100"
+                                                 x-transition:leave="transition ease-in duration-300"
+                                                 x-transition:leave-start="opacity-100 transform scale-100"
+                                                 x-transition:leave-end="opacity-0 transform scale-90">
+                                                <div>Are you sure?</div>
+                                                <div class=" flex justify-end mt-4 space-x-4">
+                                                    <button
+                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                        Confirm
+                                                    </button>
+                                                    <div @click="showModal = !showModal"
+                                                         class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" flex items-center justify-between mt-1">
+                                    <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
+                                        <div class=" font-semibold text-base text-white rounded">Place bid</div>
+                                    </button>
+                                    <div class="ml-4 text-xl font-semibold ">$274</div>
+
+                                </div>
+                            </div>
+                        {{else}}
+                            <div class=" flex items-center justify-between mt-1">
+                                <a class=" w-1/3 py-2 bg-green-800" href="/login">
+                                    <div class=" font-semibold text-base text-white rounded text-center">Place bid</div>
+                                </a>
+                                <div class="ml-4 text-xl font-semibold ">$274</div>
+
+                            </div>
+                        {{/if}}
+
+                        {{#if auth}}
+                            <div class="mt-2 flex items-center justify-between">
+                                <div x-data="{ showModal : false }" class="w-1/3">
                                     <div @click="showModal = !showModal"
-                                         class="cursor-pointer font-semibold text-md  px-4 py-2  ml-2 bg-red-700 text-white hover:bg-red-900 text-center">CONFIRM</div>
+                                         class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
+                                        Buy now</div>
                                     <div x-show="showModal"
                                          class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                         <div x-show="showModal"
@@ -160,7 +206,7 @@
                                             <div class=" flex justify-end mt-4 space-x-4">
                                                 <button
                                                         class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                    Confirm
+                                                    Buy now
                                                 </button>
                                                 <div @click="showModal = !showModal"
                                                      class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
@@ -168,55 +214,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="ml-4 text-xl font-semibold ">$274</div>
                             </div>
+                        {{else}}
                             <div class=" flex items-center justify-between mt-1">
-                                <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                    <div class=" font-semibold text-base text-white rounded">Place bid</div>
-                                </button>
+                                <a class=" w-1/3" href="/login">
+                                    <div class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">Buy now</div>
+                                </a>
                                 <div class="ml-4 text-xl font-semibold ">$274</div>
 
                             </div>
-                        </div>
-
-                        <div class="mt-2 flex items-center justify-between">
-                            <div x-data="{ showModal : false }" class="w-1/3">
-                                <div @click="showModal = !showModal"
-                                     class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
-                                    Buy now</div>
-                                <div x-show="showModal"
-                                     class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
-                                    <div x-show="showModal"
-                                         class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                                         @click.away="showModal = false"
-                                         x-transition:enter="transition ease-out duration-300"
-                                         x-transition:enter-start="opacity-0 transform scale-90"
-                                         x-transition:enter-end="opacity-100 transform scale-100"
-                                         x-transition:leave="transition ease-in duration-300"
-                                         x-transition:leave-start="opacity-100 transform scale-100"
-                                         x-transition:leave-end="opacity-0 transform scale-90">
-                                        <div>Are you sure?</div>
-                                        <div class=" flex justify-end mt-4 space-x-4">
-                                            <button
-                                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                Buy now
-                                            </button>
-                                            <div @click="showModal = !showModal"
-                                                 class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ml-4 text-xl font-semibold ">$274</div>
-                        </div>
+                        {{/if}}
                     </div>
                 </div>
 
                 <div class="flex justify-between mt-2 ">
-                    <div class=" text-red-600 flex items-center text-xl font-semibold px-6">{{format_date this.product.EndDate}}</div>
+                    <div class=" text-cyan-700 flex items-center text-sm md:text-base font-semibold">{{format_no_h this.product.UploadDate}}</div>
                     <div class="flex">
                         <div x-data="{ showModal : false }">
                             <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View
+                                class="font-semibold text-md px-4 lg:px-6 py-2  border border-cyan-700 ml-2">View
                                 Seller</button>
                             <div x-show="showModal"
                                 class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
@@ -233,11 +250,11 @@
                                     </div>
                                     <div class="flex justify-between font-normal text-base space-x-8">
                                         <div>Name</div>
-                                        <div>NGO HUY ANH</div>
+                                        <div>{{seller.Name}}</div>
                                     </div>
                                     <div class="flex justify-between font-normal text-base">
                                         <div>Point</div>
-                                        <div>9/10</div>
+                                        <div>{{seller.Rate}}</div>
                                     </div>
 
                                     <div class=" flex justify-center mt-4">
@@ -249,7 +266,7 @@
                         </div>
                         <div x-data="{ showModal : false }">
                             <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View Bids</button>
+                                class="font-semibold text-md px-4 lg:px-6 py-2  border border-cyan-700 ml-2">View Bids</button>
                             <div x-show="showModal"
                                 class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                 <div x-show="showModal"
@@ -261,29 +278,35 @@
                                     x-transition:leave="transition ease-in duration-300"
                                     x-transition:leave-start="opacity-100 transform scale-100"
                                     x-transition:leave-end="opacity-0 transform scale-90">
-                                    <table class="table-auto  w-full text-base">
-                                        <thead>
+                                    {{#if bidding}}
+                                        <table class="table-auto  w-full text-base">
+                                            <thead>
                                             <tr>
+                                                <th class="">Time</th>
                                                 <th class="">Name</th>
                                                 <th class="">Price</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class=" text-cyan-700">
-                                                <td class="pr-5">THAI TRAN HONG PHUC</td>
-                                                <td class="text-center"><i class="fa fa-arrow-up animate-bounce"
-                                                        aria-hidden="true"></i> 195</td>
-                                            </tr>
-                                            <tr class="">
-                                                <td>PHAM MINH THUY</td>
-                                                <td class="text-center">102</td>
-                                            </tr>
-                                            <tr>
-                                                <td>HOANG NHU THANH</td>
-                                                <td class="text-center">59</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+<!--                                            <tr class=" text-cyan-700">-->
+<!--                                                <td class="pr-8 text-center">{{format_date biddingHighest.Time}}</td>-->
+<!--                                                <td class="px-8 text-center">{{biddingHighest.Bidder}}</td>-->
+<!--                                                <td class="pl-8 text-center" text-center><i class="fa fa-arrow-up animate-bounce"-->
+<!--                                                                           aria-hidden="true"></i>{{format_number biddingHighest.Price}}</td>-->
+<!--                                            </tr>-->
+                                            {{#each bidding}}
+                                                <tr class="">
+                                                    <td class="pr-8 text-center">{{format_date Time}}</td>
+                                                    <td class="px-8 text-center">{{Bidder}}</td>
+                                                    <td class="pl-8 text-center">{{format_number Price}}</td>
+
+                                                </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    {{else}}
+                                        <div>don't bidding</div>
+                                    {{/if}}
                                     <div class="flex justify-center mt-4">
                                         <button @click="showModal = !showModal"
                                             class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
@@ -299,134 +322,251 @@
         </div>
         <div class="slider-nav col-span-8 col-start-3">
             <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/1.jpg?auto=compress&w=480&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
-                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-28 px-4">
             <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/2.jpg"
-                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-28 px-4">
             <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/3.jpg"
-                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-28 px-4">
             <img src="/public/images/Product/{{this.product.BigCatName}}/{{this.product.CatName}}/{{this.product.ProID}}/4.jpg"
-                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
+                 alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-28 px-4">
         </div>
         <div class="col-span-full text-xs md:hidden">
-            <div class="">
+            <div class="w-full">
                 <div class=" border border-cyan-700 rounded-md p-4">
-                    <div x-data="{ open: false }">
+                    <div x-data="{ wish: false }">
                         <div class="flex items-center justify-between">
-                            <div class=" text-black text-base font-semibold">Upload Date: {{format_date this.product.UploadDate}}</div>
-                            <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
-                        </div>
-                        <div>
-                            <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
-                                x-transition:enter="transition duration-300"
-                                x-transition:enter-start="opacity-0 transform scale-90"
-                                x-transition:enter-end="opacity-100 transform scale-100"
-                                x-transition:leave="transition duration-300"
-                                x-transition:leave-start="opacity-100 transform scale-100"
-                                x-transition:leave-end="opacity-0 transform scale-90">
-                                <input
-                                    class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
-                                <button class=" w-full py-2 bg-red-500">
-                                    <div class=" font-medium text-sm text-white rounded">
-                                        Confirm
-                                    </div>
-                                </button>
+                            <div class = "flex" id="duration">
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="day">Time</h3>
+                                    <p class="mr-1"> d</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="hour">Time</h3>
+                                    <p class="mr-1">h</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="minute">Time</h3>
+                                    <p class="mr-1"> m</p>
+                                </div>
+                                <div class=" text-black text-base font-semibold flex">
+                                    <h3 class="second">Time</h3>
+                                    <p class="mr-1"> s</p>
+                                </div>
                             </div>
+
+                            <form id="formAddWishList" action = "/account/wishlist/add" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            <form id="formDelWishList" action = "/account/wishlist/del" method = "post">
+                                <input x-show ="false" name = "ProID" value = {{this.product.ProID}}>
+                            </form>
+
+                            {{#if auth}}
+                                {{#if this.inWish}}
+                                    <a href="javascript: $('#formDelWishList').submit();">
+                                        <i class="fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                                           aria-hidden="true"></i>
+                                    </a>
+                                {{else}}
+                                    <a href="javascript: $('#formAddWishList').submit();">
+                                        <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+                                    </a>
+                                {{/if}}
+                            {{else}}
+                                <a href="/login">
+                                    <i class="fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
+                                </a>
+                            {{/if}}
+
+                        </div>
+
+                        {{#if auth}}
+                            <div x-data="{ open: false }" class="">
+                                <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
+                                     x-transition:enter="transition duration-300"
+                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                     x-transition:leave="transition duration-300"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                    <input
+                                            class="w-full col-span-2 border border-black rounded text-base font-semibold text-right px-2">
+                                    <!--                                <button class=" w-full py-2 bg-red-500">-->
+                                    <!--                                    <div class=" font-medium text-sm text-white rounded">-->
+                                    <!--                                        Confirm-->
+                                    <!--                                    </div>-->
+                                    <!--                                </button>-->
+                                    <div x-data="{ showModal : false }">
+                                        <div @click="showModal = !showModal"
+                                             class="cursor-pointer font-semibold text-md  px-4 py-2  ml-2 bg-red-700 text-white hover:bg-red-900 text-center">CONFIRM</div>
+                                        <div x-show="showModal"
+                                             class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                            <div x-show="showModal"
+                                                 class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                 @click.away="showModal = false"
+                                                 x-transition:enter="transition ease-out duration-300"
+                                                 x-transition:enter-start="opacity-0 transform scale-90"
+                                                 x-transition:enter-end="opacity-100 transform scale-100"
+                                                 x-transition:leave="transition ease-in duration-300"
+                                                 x-transition:leave-start="opacity-100 transform scale-100"
+                                                 x-transition:leave-end="opacity-0 transform scale-90">
+                                                <div>Are you sure?</div>
+                                                <div class=" flex justify-end mt-4 space-x-4">
+                                                    <button
+                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                        Confirm
+                                                    </button>
+                                                    <div @click="showModal = !showModal"
+                                                         class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" flex items-center justify-between mt-1">
+                                    <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
+                                        <div class=" font-semibold text-base text-white rounded">Place bid</div>
+                                    </button>
+                                    <div class="ml-4 text-xl font-semibold ">$274</div>
+
+                                </div>
+                            </div>
+                        {{else}}
                             <div class=" flex items-center justify-between mt-1">
-                                <button @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                    <div class=" font-semibold text-base text-white rounded">Bid</div>
-                                </button>
+                                <a class=" w-1/3 py-2 bg-green-800" href="/login">
+                                    <div class=" font-semibold text-base text-white rounded text-center">Place bid</div>
+                                </a>
                                 <div class="ml-4 text-xl font-semibold ">$274</div>
 
                             </div>
-                        </div>
+                        {{/if}}
 
-                        <div class="mt-2 flex items-center justify-between">
-                            <button class=" w-1/3 py-2 bg-red-500">
-                                <div class=" font-semibold text-base text-white rounded mt-1">
-                                    Sell
+                        {{#if auth}}
+                            <div class="mt-2 flex items-center justify-between">
+                                <div x-data="{ showModal : false }" class="w-1/3">
+                                    <div @click="showModal = !showModal"
+                                         class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
+                                        Buy now</div>
+                                    <div x-show="showModal"
+                                         class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                        <div x-show="showModal"
+                                             class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                             @click.away="showModal = false"
+                                             x-transition:enter="transition ease-out duration-300"
+                                             x-transition:enter-start="opacity-0 transform scale-90"
+                                             x-transition:enter-end="opacity-100 transform scale-100"
+                                             x-transition:leave="transition ease-in duration-300"
+                                             x-transition:leave-start="opacity-100 transform scale-100"
+                                             x-transition:leave-end="opacity-0 transform scale-90">
+                                            <div>Are you sure?</div>
+                                            <div class=" flex justify-end mt-4 space-x-4">
+                                                <button
+                                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                    Buy now
+                                                </button>
+                                                <div @click="showModal = !showModal"
+                                                     class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </button>
-                            <div class="ml-4 text-xl font-semibold ">$274</div>
-                        </div>
+                                <div class="ml-4 text-xl font-semibold ">$274</div>
+                            </div>
+                        {{else}}
+                            <div class=" flex items-center justify-between mt-1">
+                                <a class=" w-1/3" href="/login">
+                                    <div class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">Buy now</div>
+                                </a>
+                                <div class="ml-4 text-xl font-semibold ">$274</div>
+
+                            </div>
+                        {{/if}}
                     </div>
                 </div>
 
                 <div class="flex justify-between mt-2 ">
-                    <div class=" text-red-600 flex items-center text-xl font-semibold px-6">3 hours</div>
+                    <div class=" text-cyan-700 flex items-center text-sm md:text-base font-semibold">{{format_no_h this.product.UploadDate}}</div>
                     <div class="flex">
                         <div x-data="{ showModal : false }">
                             <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View
+                                    class="font-semibold text-md px-6 py-2  border border-cyan-700 ml-2">View
                                 Seller</button>
                             <div x-show="showModal"
-                                class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                 class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                 <div x-show="showModal"
-                                    class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
-                                    @click.away="showModal = false"
-                                    x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 transform scale-90"
-                                    x-transition:enter-end="opacity-100 transform scale-100"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 transform scale-100"
-                                    x-transition:leave-end="opacity-0 transform scale-90">
+                                     class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                     @click.away="showModal = false"
+                                     x-transition:enter="transition ease-out duration-300"
+                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                     x-transition:leave="transition ease-in duration-300"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-90">
                                     <div class=" h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
                                     </div>
                                     <div class="flex justify-between font-normal text-base space-x-8">
                                         <div>Name</div>
-                                        <div>NGO HUY ANH</div>
+                                        <div>{{seller.Name}}</div>
                                     </div>
                                     <div class="flex justify-between font-normal text-base">
                                         <div>Point</div>
-                                        <div>9/10</div>
+                                        <div>{{seller.Rate}}</div>
                                     </div>
 
                                     <div class=" flex justify-center mt-4">
                                         <button @click="showModal = !showModal"
-                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
+                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div x-data="{ showModal : false }">
                             <button @click="showModal = !showModal"
-                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 ml-2">View Bids</button>
+                                    class="font-semibold text-md px-6 py-2  border border-cyan-700 ml-2">View Bids</button>
                             <div x-show="showModal"
-                                class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                 class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
                                 <div x-show="showModal"
-                                    class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
-                                    @click.away="showModal = false"
-                                    x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 transform scale-90"
-                                    x-transition:enter-end="opacity-100 transform scale-100"
-                                    x-transition:leave="transition ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 transform scale-100"
-                                    x-transition:leave-end="opacity-0 transform scale-90">
-                                    <table class="table-auto  w-full text-base">
-                                        <thead>
+                                     class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
+                                     @click.away="showModal = false"
+                                     x-transition:enter="transition ease-out duration-300"
+                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                     x-transition:leave="transition ease-in duration-300"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                    {{#if bidding}}
+                                        <table class="table-auto  w-full text-base">
+                                            <thead>
                                             <tr>
+                                                <th class="">Time</th>
                                                 <th class="">Name</th>
                                                 <th class="">Price</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class=" text-cyan-700">
-                                                <td class="pr-5">THAI TRAN HONG PHUC</td>
-                                                <td class="text-center"><i class="fa fa-arrow-up animate-bounce"
-                                                        aria-hidden="true"></i> 195</td>
-                                            </tr>
-                                            <tr class="">
-                                                <td>PHAM MINH THUY</td>
-                                                <td class="text-center">102</td>
-                                            </tr>
-                                            <tr>
-                                                <td>HOANG NHU THANH</td>
-                                                <td class="text-center">59</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            <!--                                            <tr class=" text-cyan-700">-->
+                                            <!--                                                <td class="pr-8 text-center">{{format_date biddingHighest.Time}}</td>-->
+                                            <!--                                                <td class="px-8 text-center">{{biddingHighest.Bidder}}</td>-->
+                                            <!--                                                <td class="pl-8 text-center" text-center><i class="fa fa-arrow-up animate-bounce"-->
+                                            <!--                                                                           aria-hidden="true"></i>{{format_number biddingHighest.Price}}</td>-->
+                                            <!--                                            </tr>-->
+                                            {{#each bidding}}
+                                                <tr class="">
+                                                    <td class="pr-8 text-center">{{format_date Time}}</td>
+                                                    <td class="px-8 text-center">{{Bidder}}</td>
+                                                    <td class="pl-8 text-center">{{format_number Price}}</td>
+
+                                                </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    {{else}}
+                                        <div>don't bidding</div>
+                                    {{/if}}
                                     <div class="flex justify-center mt-4">
-                                        <div @click="showModal = !showModal"
-                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</div>
+                                        <button @click="showModal = !showModal"
+                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
                                     </div>
                                 </div>
                             </div>
@@ -435,8 +575,6 @@
 
                 </div>
             </div>
-
-
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 import { engine, create } from 'express-handlebars';
 import numeral from 'numeral';
 import moment from 'moment';
+import 'moment-countdown';
 import handlebars_sections from "express-handlebars-sections";
 
 export default function (app) {
@@ -16,6 +17,12 @@ export default function (app) {
 
             format_no_h(val) {
                 return moment(val).format('DD-MM-YYYY');
+            },
+            format_relative(val) {
+                if(val - moment.now() < 0)
+                    return 'Time Out';
+                else
+                    return moment().from(val);
             },
             section: handlebars_sections()
         }

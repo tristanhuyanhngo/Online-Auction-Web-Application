@@ -1,4 +1,5 @@
 import db from '../utils/db.js';
+import asyncErrors from 'express-async-errors'
 
 export default {
     async countDown() {
@@ -117,6 +118,15 @@ export default {
                      from wish_list w
                      where ProID = ${proID}
                        and w.Bidder = '${email}'`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async findBidding (proID) {
+        const sql = `select *
+                     from bidding b
+                     where ProID = ${proID}
+                     order by b.Price DESC limit 0, 5`;
         const raw = await db.raw(sql);
         return raw[0];
     },
