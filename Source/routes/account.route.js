@@ -248,6 +248,7 @@ router.post('/review',async function(req, res) {
         Sender: email,
         Receiver: receiver,
         Comment: comment,
+        Time: moment().format(),
         ProID: product,
         Type: true,
         Rate: true
