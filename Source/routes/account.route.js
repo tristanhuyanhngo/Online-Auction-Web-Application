@@ -252,8 +252,6 @@ router.post('/cart/checkout',async function(req, res) {
         }
         await cartModel.checkout(item);
     }
-
-    await cartModel.delCart();
     return res.redirect('/account/cart');
 });
 

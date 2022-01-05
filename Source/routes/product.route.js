@@ -95,6 +95,12 @@ router.get('/detail/:id', async function (req, res) {
     const pro_id = req.params.id || 0;
     const product = await productModel.findByProID(pro_id);
 
+    if(product.ProState.readInt8()===1){
+        product.Onair = true;
+    }
+
+    console.log(product.Onair);
+
     let user = null;
     let inWish = false;
 
@@ -120,8 +126,6 @@ router.get('/detail/:id', async function (req, res) {
     const description = await productModel.findDescriptionProduct(pro_id);
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
-
-    //console.log(product);
 
     let seller = await userModel.findByEmail(product.Seller);
 
