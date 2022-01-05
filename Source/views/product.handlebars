@@ -50,13 +50,10 @@
     </script>
 {{/section}}
 
-
 <div class=" container mx-auto xl:px-10 py-1 text-xs font-medium flex mt-2 justify-start text-cyan-800">
     <a class="  uppercase" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class=" ml-3">></div>
-    <a class=" uppercase ml-3" href="">{{this.product.BigCatName}}</a>
-    <div class=" ml-3">></div>
-    <a class=" uppercase ml-3" href="">{{this.product.CatName}}</a>
+    <a class=" uppercase ml-3" href="/product/byCat/{{this.product.CatID}}">{{this.product.CatName}}</a>
 </div>
 <div class=" container mx-auto xl:px-10 mt-3">
 
@@ -282,29 +279,35 @@
                                     x-transition:leave="transition ease-in duration-300"
                                     x-transition:leave-start="opacity-100 transform scale-100"
                                     x-transition:leave-end="opacity-0 transform scale-90">
-                                    <table class="table-auto  w-full text-base">
-                                        <thead>
+                                    {{#if bidding}}
+                                        <table class="table-auto  w-full text-base">
+                                            <thead>
                                             <tr>
+                                                <th class="">Time</th>
                                                 <th class="">Name</th>
                                                 <th class="">Price</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class=" text-cyan-700">
-                                                <td class="pr-5">THAI TRAN HONG PHUC</td>
-                                                <td class="text-center"><i class="fa fa-arrow-up animate-bounce"
-                                                        aria-hidden="true"></i> 195</td>
-                                            </tr>
-                                            <tr class="">
-                                                <td>PHAM MINH THUY</td>
-                                                <td class="text-center">102</td>
-                                            </tr>
-                                            <tr>
-                                                <td>HOANG NHU THANH</td>
-                                                <td class="text-center">59</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+<!--                                            <tr class=" text-cyan-700">-->
+<!--                                                <td class="pr-8 text-center">{{format_date biddingHighest.Time}}</td>-->
+<!--                                                <td class="px-8 text-center">{{biddingHighest.Bidder}}</td>-->
+<!--                                                <td class="pl-8 text-center" text-center><i class="fa fa-arrow-up animate-bounce"-->
+<!--                                                                           aria-hidden="true"></i>{{format_number biddingHighest.Price}}</td>-->
+<!--                                            </tr>-->
+                                            {{#each bidding}}
+                                                <tr class="">
+                                                    <td class="pr-8 text-center">{{format_date Time}}</td>
+                                                    <td class="px-8 text-center">{{Bidder}}</td>
+                                                    <td class="pl-8 text-center">{{format_number Price}}</td>
+
+                                                </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    {{else}}
+                                        <div>don't bidding</div>
+                                    {{/if}}
                                     <div class="flex justify-center mt-4">
                                         <button @click="showModal = !showModal"
                                             class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>
@@ -533,29 +536,35 @@
                                      x-transition:leave="transition ease-in duration-300"
                                      x-transition:leave-start="opacity-100 transform scale-100"
                                      x-transition:leave-end="opacity-0 transform scale-90">
-                                    <table class="table-auto  w-full text-base">
-                                        <thead>
-                                        <tr>
-                                            <th class="">Name</th>
-                                            <th class="">Price</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr class=" text-cyan-700">
-                                            <td class="pr-5">THAI TRAN HONG PHUC</td>
-                                            <td class="text-center"><i class="fa fa-arrow-up animate-bounce"
-                                                                       aria-hidden="true"></i> 195</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td>PHAM MINH THUY</td>
-                                            <td class="text-center">102</td>
-                                        </tr>
-                                        <tr>
-                                            <td>HOANG NHU THANH</td>
-                                            <td class="text-center">59</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    {{#if bidding}}
+                                        <table class="table-auto  w-full text-base">
+                                            <thead>
+                                            <tr>
+                                                <th class="">Time</th>
+                                                <th class="">Name</th>
+                                                <th class="">Price</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!--                                            <tr class=" text-cyan-700">-->
+                                            <!--                                                <td class="pr-8 text-center">{{format_date biddingHighest.Time}}</td>-->
+                                            <!--                                                <td class="px-8 text-center">{{biddingHighest.Bidder}}</td>-->
+                                            <!--                                                <td class="pl-8 text-center" text-center><i class="fa fa-arrow-up animate-bounce"-->
+                                            <!--                                                                           aria-hidden="true"></i>{{format_number biddingHighest.Price}}</td>-->
+                                            <!--                                            </tr>-->
+                                            {{#each bidding}}
+                                                <tr class="">
+                                                    <td class="pr-8 text-center">{{format_date Time}}</td>
+                                                    <td class="px-8 text-center">{{Bidder}}</td>
+                                                    <td class="pl-8 text-center">{{format_number Price}}</td>
+
+                                                </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    {{else}}
+                                        <div>don't bidding</div>
+                                    {{/if}}
                                     <div class="flex justify-center mt-4">
                                         <button @click="showModal = !showModal"
                                                 class="font-semibold text-md  px-6 py-2  border border-cyan-700">OK</button>

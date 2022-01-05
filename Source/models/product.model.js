@@ -122,6 +122,15 @@ export default {
         return raw[0];
     },
 
+    async findBidding (proID) {
+        const sql = `select *
+                     from bidding b
+                     where ProID = ${proID}
+                     order by b.Price DESC limit 0, 5`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
     async sortByEndDate() {
         const sql = `select C.CatName,
                             L.BigCatName,

@@ -40,6 +40,8 @@ CREATE TABLE `user` (
   `Rate` int unsigned,
   `RequestTime` datetime,
   `AcceptTime` datetime,
+  `Valid` bit NOT NULL,
+  `OTP` char(6),
   PRIMARY KEY (`Username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -135,7 +137,9 @@ DROP TABLE IF EXISTS `bidding`;
 CREATE TABLE `bidding` (
   `ProID` int unsigned NOT NULL,
   `Bidder` char(50) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`ProID`,`Bidder`),
+  `Time` datetime NOT NULL,
+  `Price` int unsigned NOT NULL,
+  PRIMARY KEY (`ProID`,`Bidder`,`Time`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`),
   FOREIGN KEY (`Bidder`) REFERENCES user(`Email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -235,26 +239,26 @@ COMMIT;
 -- Records of Nguoi Ban
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','seller1','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL);
-INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$12$9SHTJ2A2i/6S7CYi.Ylt0u4pa5duhBCnka.JhKgJ3dmHj1QLADvfC','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','1',0,NULL,NULL);
+INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','seller1','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$12$9SHTJ2A2i/6S7CYi.Ylt0u4pa5duhBCnka.JhKgJ3dmHj1QLADvfC','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 COMMIT;
 
 -- ----------------------------
 -- Records of Admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('huyanhngo@gmail.com','admin1','admin1','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','0',0,NULL,NULL);
+INSERT INTO `user` VALUES ('huyanhngo@gmail.com','admin1','admin1','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','0',0,NULL,NULL,true,NULL);
 COMMIT;
 
 -- ----------------------------
 -- Records of Nguoi Mua
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('springfieldcaptain@gmail.com','bidder1','bidder1','Ngô Minh Triết','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','2',0,NULL,NULL);
-INSERT INTO `user` VALUES ('xyz@gmail.com','bidder2','bidder2','Ngô Ngọc Đăng Khôi','157 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-03-01','2021-12-07','2',0,NULL,NULL);
-INSERT INTO `user` VALUES ('a@gmail.com','bidder3','$2a$12$ByiS6Z1yxCa6RT5TmQFueOtPath3trUECegh8JQGdoFP8YwtrbDTC','Ngô Ngọc Đăng Minh','158 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-04-01','2021-12-07','2',0,NULL,NULL);
-INSERT INTO `user` VALUES ('b@gmail.com','bidder4','$2a$12$nz8f4u/XW3p4yDjwus6wIeTQv0pS1CXXgwQ2Yxx4GI/t1PHlDjsXG','Ngô Ngọc Đăng Khánh','159 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-05-01','2021-12-07','2',0,NULL,NULL);
-INSERT INTO `user` VALUES ('c@gmail.com','bidder5','bidder5','Ngô Ngọc Đăng Huy','160 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-06-01','2021-12-07','2',0,NULL,NULL);
+INSERT INTO `user` VALUES ('springfieldcaptain@gmail.com','bidder1','bidder1','Ngô Minh Triết','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('xyz@gmail.com','bidder2','bidder2','Ngô Ngọc Đăng Khôi','157 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-03-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('a@gmail.com','bidder3','$2a$12$ByiS6Z1yxCa6RT5TmQFueOtPath3trUECegh8JQGdoFP8YwtrbDTC','Ngô Ngọc Đăng Minh','158 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-04-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('b@gmail.com','bidder4','$2a$12$nz8f4u/XW3p4yDjwus6wIeTQv0pS1CXXgwQ2Yxx4GI/t1PHlDjsXG','Ngô Ngọc Đăng Khánh','159 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-05-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('c@gmail.com','bidder5','bidder5','Ngô Ngọc Đăng Huy','160 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-06-01','2021-12-07','2',0,NULL,NULL,true,NULL);
 COMMIT;
 
 -- ----------------------------
@@ -263,22 +267,22 @@ COMMIT;
 BEGIN;
 
 -- Ring
-INSERT INTO `product` VALUES (1, 1, 'kysutainangqsb@gmail.com','Ring 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (2, 1, 'kysutainangqsb@gmail.com','Ring 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (3, 1, 'kysutainangqsb@gmail.com','Ring 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (4, 1, 'kysutainangqsb@gmail.com','Ring 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (5, 1, 'kysutainangqsb@gmail.com','Ring 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (1, 1, 'kysutainangqsb@gmail.com','Ring 1', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (2, 1, 'kysutainangqsb@gmail.com','Ring 2', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (3, 1, 'kysutainangqsb@gmail.com','Ring 3', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (4, 1, 'kysutainangqsb@gmail.com','Ring 4', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (5, 1, 'kysutainangqsb@gmail.com','Ring 5', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
 
 -- Watch
-INSERT INTO `product` VALUES (6, 2, 'kysutainangqsb@gmail.com','Watch 1', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
-INSERT INTO `product` VALUES (7, 2, 'kysutainangqsb@gmail.com','Watch 2', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
-INSERT INTO `product` VALUES (8, 2, 'kysutainangqsb@gmail.com','Watch 3', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (9, 2, 'kysutainangqsb@gmail.com','Watch 4', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
-INSERT INTO `product` VALUES (10, 2, 'kysutainangqsb@gmail.com','Watch 5', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (6, 2, 'kysutainangqsb@gmail.com','Watch 1', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (7, 2, 'kysutainangqsb@gmail.com','Watch 2', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (8, 2, 'kysutainangqsb@gmail.com','Watch 3', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (9, 2, 'kysutainangqsb@gmail.com','Watch 4', 200000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,1, NULL);
+INSERT INTO `product` VALUES (10, 2, 'kysutainangqsb@gmail.com','Watch 5', 100000, 50000, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 
 -- Latop
-INSERT INTO `product` VALUES (11, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 16 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
-INSERT INTO `product` VALUES (12, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 14 M1 Max 2021', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (11, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 16 M1 Max 2021', 2000000, 100000, 20000000, '2021-12-07', '2021-12-31', 1,0, NULL);
+INSERT INTO `product` VALUES (12, 3, 'kysutainangqsb@gmail.com','Apple Macbook Pro 14 M1 Max 2021', 2000000, 100000, 20000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (13, 3, 'kysutainangqsb@gmail.com','Apple Macbook Air 2020', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (14, 3, 'kysutainangqsb@gmail.com','Asus Rog Zephyrus Gaming G14', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
 INSERT INTO `product` VALUES (15, 3, 'kysutainangqsb@gmail.com','Asus Zenbook UX371EA i7', 100000, 2, 2000000, '2021-12-07', '2021-12-31', 1,0, NULL);
@@ -437,4 +441,19 @@ INSERT INTO `success_bid` VALUES (7, 'abc@gmail.com','2021-12-07');
 INSERT INTO `success_bid` VALUES (8, 'abc@gmail.com','2021-12-07');
 INSERT INTO `success_bid` VALUES (30, 'abc@gmail.com','2021-12-07');
 INSERT INTO `success_bid` VALUES (33, 'abc@gmail.com','2021-12-07');
+COMMIT;
+
+-- ----------------------------
+-- Records of bidding
+-- ----------------------------
+
+BEGIN;
+INSERT INTO `bidding` VALUES (1, 'a@gmail.com','2021-12-07 12:45:00',800000);
+INSERT INTO `bidding` VALUES (1, 'b@gmail.com','2021-12-07 12:42:00',750000);
+INSERT INTO `bidding` VALUES (1, 'c@gmail.com','2021-12-07 12:40:00',700000);
+INSERT INTO `bidding` VALUES (1, 'bb@gmail.com','2021-12-07 12:36:00',650000);
+INSERT INTO `bidding` VALUES (1, 'a@gmail.com','2021-12-07 12:35:00',600000);
+INSERT INTO `bidding` VALUES (2, 'b@gmail.com','2021-12-07 12:35:00',600000);
+INSERT INTO `bidding` VALUES (2, 'c@gmail.com','2021-12-07 12:32:00',550000);
+INSERT INTO `bidding` VALUES (2, 'abc@gmail.com','2021-12-07 12:20:00',500000);
 COMMIT;
