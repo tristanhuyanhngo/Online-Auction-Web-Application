@@ -7,9 +7,9 @@
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/admin.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/bid.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/bid.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
       <workItem from="1641298849235" duration="6116000" />
       <workItem from="1641373127715" duration="7541000" />
       <workItem from="1641386003379" duration="17176000" />
-      <workItem from="1641408650245" duration="2555000" />
+      <workItem from="1641408650245" duration="5316000" />
     </task>
     <servers />
   </component>

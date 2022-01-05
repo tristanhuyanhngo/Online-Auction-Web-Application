@@ -6,6 +6,16 @@ export default {
         return db('bidding').insert(entity);
     },
 
+
+    async findMax (entity) {
+        const sql = `select ProID, Bidder, MAX(Price) as MaxPrice
+                        from bidding
+                        group by ProID`;
+        const ret = await db.raw(sql);
+        return ret[0];
+    },
+
+
     async updateBidding (entity) {
         const proid = entity.ProID;
         const bidder = entity.Bidder;

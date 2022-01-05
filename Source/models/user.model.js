@@ -1,5 +1,6 @@
 import db from '../utils/db.js';
 import productModel from "./product.model.js";
+import bidModel from "./bid.model.js";
 
 export default {
     async findByEmail(email) {
@@ -44,7 +45,27 @@ export default {
     },
 
     async delUser(email) {
+        const listPro = await db('bidding').where('Bidder',email);
+        for(let i in listPro){
+            const entity = {
+                ProID: listPro[i].ProID,
+                CurrentWinner: 'NULL',
+                MaxPrice: 'NULL'
+            }
+            await productModel.updateProduct(entity);
+        }
         await db('bidding').where('Bidder',email).del();
+
+        const listMaxBid = await bidModel.findMax();
+        for(let i in listMaxBid){
+            const entity = {
+                ProID: listMaxBid[i].ProID,
+                CurrentWinner: listMaxBid[i].Bidder,
+                MaxPrice: listMaxBid[i].MaxPrice
+            }
+            await productModel.updateProduct(entity);
+        }
+
         const list = await db('product').where('Seller',email);
         for(let i in list){
             await productModel.delBySeller(list[i].ProID, email);

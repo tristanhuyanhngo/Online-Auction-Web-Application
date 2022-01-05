@@ -62,20 +62,23 @@ router.post('/account/add',async function(req, res)  {
     const ret = await userModel.addUser(user);
     console.log(ret);
     // return null;
-    res.redirect('/admin/account');
+    const url = req.headers.referer || '/admin/account';
+    return res.redirect(url);
 });
 
 router.post('/account/update',async function(req, res) {
     const ret = await userModel.updateUser(req.body);
     console.log(ret);
-    return res.redirect('/admin/account');
+    const url = req.headers.referer || '/admin/account';
+    return res.redirect(url);
 });
 
 
 router.post('/account/del',   async (req, res) => {
     const ret = await userModel.delUser(req.body.Email);
     console.log(ret);
-    return res.redirect('/admin/account');
+    const url = req.headers.referer || '/admin/account';
+    return res.redirect(url);
 });
 
 router.get('/category-child', async (req, res) => {
@@ -102,43 +105,50 @@ router.get('/category-child', async (req, res) => {
 router.post('/category-parent/add', async (req, res) => {
     const ret = await categoryModel.addBigCat(req.body);
     console.log(ret);
-    return res.redirect('/admin/category-parent');
+    const url = req.headers.referer || '/admin/category-parent';
+    return res.redirect(url);
 });
 
 router.post('/category-child/add',async function(req, res)  {
     const ret = await categoryModel.addCat(req.body);
     console.log(ret);
-    return res.redirect('/admin/category-child');
+    const url = req.headers.referer || '/admin/category-child';
+    return res.redirect(url);
 });
 
 router.post('/category-parent/update',async function(req, res) {
     const ret = await categoryModel.updateBigCat(req.body);
     console.log(ret);
-    return res.redirect('/admin/category-parent');
+    const url = req.headers.referer || '/admin/category-parent';
+    return res.redirect(url);
 });
 
 router.post('/category-parent/del',async function(req, res) {
     const ret = await categoryModel.delBigCat(req.body.BigCatID);
     console.log(ret);
-    return res.redirect('/admin/category-parent');
+    const url = req.headers.referer || '/admin/category-parent';
+    return res.redirect(url);
 });
 
 router.post('/category-child/del',async function(req, res) {
     const ret = await categoryModel.delCat(req.body.CatID);
     console.log(ret);
-    return res.redirect('/admin/category-child');
+    const url = req.headers.referer || '/admin/category-child';
+    return res.redirect(url);
 });
 
 router.post('/category-child/update',async function(req, res) {
     const ret = await categoryModel.updateCat(req.body);
     console.log(ret);
-    return res.redirect('/admin/category-child');
+    const url = req.headers.referer || '/admin/category-child';
+    return res.redirect(url);
 });
 
 router.post('/product/del',   async (req, res) => {
     const ret = await productModel.del(req.body.ProID);
     console.log(ret);
-    return res.redirect('/admin/product');
+    const url = req.headers.referer || '/admin/product';
+    return res.redirect(url);
 });
 
 router.get('/product', async (req, res) => {
@@ -248,7 +258,8 @@ router.get('/account', async (req, res) => {
 
 router.post('/account-request/decline',   async (req, res) => {
     await adminModel.declineReq(req.body);
-    return res.redirect('/admin/account-request');
+    const url = req.headers.referer || '/admin/account-request';
+    return res.redirect(url);
 });
 
 router.post('/account-request/accept',   async (req, res) => {
@@ -261,7 +272,8 @@ router.post('/account-request/accept',   async (req, res) => {
     req.session.bidder = false;
     req.session.authUser = ret[0];
     res.locals.authUser = req.session.authUser;
-    return res.redirect('/admin/account-request');
+    const url = req.headers.referer || '/admin/account-request';
+    return res.redirect(url);
 });
 
 router.get('/account-request', async (req, res) => {
@@ -305,6 +317,5 @@ router.get('/account-request', async (req, res) => {
         isLast,
     });
 });
-
 
 export default router;
