@@ -74,10 +74,12 @@
                 if (data === false) {
                     swal("Sorry!","There is someone who is willing to pay more!","warning").then((value) => {
                         $('#formPlaceBid').off('submit').submit();
+                        return;
                     });
                 } else {
                     swal("Congrats!","Your bid is accepted!","success").then((value) => {
                         $('#formPlaceBid').off('submit').submit();
+                        return;
                     });
                 }
             });
@@ -181,7 +183,7 @@
                                              x-transition:leave-start="opacity-100 transform scale-100"
                                              x-transition:leave-end="opacity-0 transform scale-90">
                                             <input id="txtPlaceBid" name = "queryPrice"
-                                                   placeholder="Step price: {{format_number this.product.StepPrice}}"
+                                                   placeholder="Suggest price: {{format_number this.suggestPrice}}"
                                                    class="w-full col-span-2 border border-black rounded
                                             text-base font-semibold text-left px-2"
                                                    type="number">

@@ -7,7 +7,7 @@ export default {
     },
 
 
-    async findMax (entity) {
+    async findMax () {
         const sql = `select ProID, Bidder, MAX(Price) as MaxPrice
                         from bidding
                         group by ProID`;

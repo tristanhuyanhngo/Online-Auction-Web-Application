@@ -39,6 +39,8 @@ router.post('/detail/:id', async function (req, res) {
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
 
+    const url = '/product/detail/'+ProID;
+
     if (product.CurrentWinner === null) {
         const bid = {
             ProID: ProID,
@@ -54,6 +56,7 @@ router.post('/detail/:id', async function (req, res) {
             MaxPrice: queryPrice
         }
         await productModel.updateProduct(productEntity);
+        return res.redirect(url);
     }
 
     if (queryPrice <= maxPrice) {
@@ -64,6 +67,7 @@ router.post('/detail/:id', async function (req, res) {
             Price: queryPrice
         }
         await bidModel.updateBidding(bid);
+        return res.redirect(url);
     }
 
     else{
@@ -84,9 +88,8 @@ router.post('/detail/:id', async function (req, res) {
             MaxPrice: queryPrice
         }
         await productModel.updateProduct(productEntity);
+        return res.redirect(url);
     }
-    const url = '/product/detail/'+ProID;
-    return res.redirect(url);
 });
 
 
@@ -106,9 +109,14 @@ router.get('/detail/:id', async function (req, res) {
 
     let bidding = await productModel.findBidding(pro_id);
     let biddingHighest = null;
+    let suggestPrice = +product.StartPrice + +product.StepPrice;
+    console.log(suggestPrice);
 
-    if (bidding != null)
+    if (bidding.length > 0){
         biddingHighest = bidding[0];
+        console.log(bidding);
+        suggestPrice = +bidding[0].Price + +product.StepPrice;
+    }
 
     if (res.locals.auth != false) {
         user = req.session.authUser.Email;
@@ -131,6 +139,7 @@ router.get('/detail/:id', async function (req, res) {
 
     res.render('product', {
         product,
+        suggestPrice,
         inWish,
         related_products,
         description: description.Content,
