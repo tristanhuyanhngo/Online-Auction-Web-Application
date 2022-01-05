@@ -274,9 +274,8 @@ router.post('/logout', async function(req, res) {
     res.redirect(url);
 });
 
-router.get('/user/:username', async function (req, res) {
+router.get('/profile/:username', async function (req, res) {
     const Username = req.params.username || 0;
-
     const user = await userModel.findByUsername(Username);
 
     res.render('profileUserOther', {

@@ -190,7 +190,9 @@
                     {{#each this.user}}
                         <tr>
                             <td class="p-2 whitespace-nowrap">
-                                <div class="font-medium text-gray-800">{{Username}}</div>
+                                <a href="/profile/{{Username}}"
+                                        class="font-medium hover:text-key text-gray-800">
+                                    {{Username}}</a>
                             </td>
                             <td class="p-2 whitespace-nowrap">
                                 <div class="text-left">{{Email}}</div>

@@ -33,7 +33,8 @@
                     {{#each this.request}}
                         <tr>
                             <td class="p-2 whitespace-nowrap">
-                                <div class="font-medium text-gray-800">{{Name}}</div>
+                                <a href="/profile/{{Username}}"
+                                        class="font-medium hover:text-key text-gray-800">{{Name}}</a>
                             </td>
                             <td class="p-2 whitespace-nowrap">
                                 <div class="text-left">{{Email}}</div>
