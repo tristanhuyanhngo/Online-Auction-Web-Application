@@ -26,8 +26,3 @@ app.listen(port, function () {
     console.log(`Example app listening at http://localhost:${port}`);
 });
 
-app.use(function (req, res, next) {
-    res.render('error/404', {
-        layout: false,
-    });
-});

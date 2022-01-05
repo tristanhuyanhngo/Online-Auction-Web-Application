@@ -170,14 +170,29 @@ router.get('/user/:username', async function (req, res) {
 
     const user = await userModel.findByUsername(Username);
 
+    //console.log(res.locals);
+
 
     if (user === null) {
         return res.redirect('/');
     }
 
-    res.render('profileUserOther', {
-        user
-    });
+    if(res.locals.auth == true) {
+        if(res.locals.authUser.Username === Username) {
+            res.render('profile', {
+            });
+        }
+        else {
+            res.render('profileUserOther', {
+                user
+            });
+        }
+    }
+    else {
+        res.render('profileUserOther', {
+            user
+        });
+    }
 });
 
 export default router;

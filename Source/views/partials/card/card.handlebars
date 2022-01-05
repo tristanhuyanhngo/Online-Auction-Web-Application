@@ -1,10 +1,10 @@
 {{#section 'js'}}
     <script>
-        const test = function () {
-            document.querySelector(".testing").innerText = 1234;
-            console.log(0);
-        };
-        setInterval(test, 1000);
+        // const test = function () {
+        //     document.querySelector(".testing").innerText = 1234;
+        //     console.log(0);
+        // };
+        // setInterval(test, 1000);
     </script>
 {{/section}}
 
@@ -17,7 +17,7 @@
                      alt="Sunset in the mountains">
                 <div
                         class=" absolute right-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-                    <h3 class="testing">00:03:09</h3>
+                    <h3 id="duration" class="testing">{{format_relative EndDate}}</h3>
                 </div>
                 <div
                         class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
@@ -68,8 +68,7 @@
             </div>
         </a>
     </div>
-
-    {{#if auth}}
+    {{#if authUser}}
         {{#if this.inWish}}
             <a href="javascript: $('#formDelWishList').submit();">
                 <i class="absolute top-0 right-0 fa fa-heart fa-2x cursor-pointer" style ="color:red"

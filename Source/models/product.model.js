@@ -1,4 +1,5 @@
 import db from '../utils/db.js';
+import asyncErrors from 'express-async-errors'
 
 export default {
     async countDown() {
