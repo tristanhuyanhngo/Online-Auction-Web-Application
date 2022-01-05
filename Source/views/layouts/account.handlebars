@@ -22,6 +22,7 @@
             font-family: 'Montserrat', sans-serif;
         }
     </style>
+    {{{_sections.css}}}
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
@@ -31,11 +32,11 @@
 
 <div class="flex bg-white w-full min-h-screen height-200 pb-72 md:pb-40">
     <div class="w-2/12 md:w-3/12 bg-white rounded p-3 shadow-lg">
-<!--        <div class="flex items-center space-x-4 p-2 mb-1">-->
-<!--            <div class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide h-10 flex items-center">-->
-<!--                Account Management-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="flex items-center space-x-4 p-2 mb-1">-->
+        <!--            <div class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide h-10 flex items-center">-->
+        <!--                Account Management-->
+        <!--            </div>-->
+        <!--        </div>-->
         <ul class="space-y-2 text-sm">
             <li>
                 <a href="/account/setting"
@@ -125,6 +126,26 @@
                     <div class="hidden md:block">Won bids</div>
                 </a>
             </li>
+
+            {{#if bidder}}
+                <li>
+                    <a href="/account/request"
+                       class="flex items-center
+                   {{#if rActive}}
+                       bg-gray-200
+                   {{/if}}
+                   space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline">
+                    <span class="text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </span>
+                        <div class="hidden md:block">Upgrade account</div>
+                    </a>
+                </li>
+            {{/if}}
         </ul>
     </div>
 

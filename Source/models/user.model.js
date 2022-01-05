@@ -2,12 +2,39 @@ import db from '../utils/db.js';
 
 export default {
     async findByEmail(email) {
-        const user = await db('user').where('Email', email);
+        const user = await db('user').where({
+            Email: email,
+            Valid: true
+        });
+        return user[0] || null;
+    },
+
+    async findByEmailRegister(email) {
+        const user = await db('user').where({
+            Email: email,
+        });
+        return user[0] || null;
+    },
+
+    async findOTP(email) {
+        const user = await db('user').select('OTP').where({
+            Email: email
+        });
         return user[0] || null;
     },
 
     async findByUsername(username) {
-        const user = await db('user').where('Username', username);
+        const user = await db('user').where({
+            Username: username,
+            Valid: true
+        });
+        return user[0] || null;
+    },
+
+    async findByUsernameRegister(username) {
+        const user = await db('user').where({
+            Username: username,
+        });
         return user[0] || null;
     },
 

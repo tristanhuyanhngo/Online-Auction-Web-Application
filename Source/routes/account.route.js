@@ -49,13 +49,22 @@ router.get('/username-available', async function (req, res) {
 //==============BIDDER's FUNCTIONS=================
 router.get('/setting', (req, res) => {
     let gActive = true;
+    let Type = "Bidder";
+    if(res.locals.authUser.Type==='0'){
+        Type="Admin";
+    } else if(res.locals.authUser.Type==='1'){
+        Type = "Seller";
+    }
     res.render('bidder/edit-info',{
         gActive,
+        Type,
         layout: 'account.handlebars'
     });
 });
 
 router.post('/setting/edit-info',async (req, res) => {
+    const dob = moment(req.body.DOB).format();
+    req.body.DOB = dob;
     const ret = await userModel.updateUser(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
@@ -105,8 +114,15 @@ router.post('/setting/password', async (req, res) => {
 
 router.get('/setting/general',(req, res) => {
     let gActive = true;
+    let Type = "Bidder";
+    if(res.locals.authUser.Type==='0'){
+        Type="Admin";
+    } else if(res.locals.authUser.Type==='1'){
+        Type = "Seller";
+    }
     res.render('bidder/edit-info',{
         gActive,
+        Type,
         layout: 'account.handlebars'
     });
 });
@@ -117,6 +133,32 @@ router.get('/setting/password', (req, res) => {
         pActive,
         layout: 'account.handlebars'
     });
+});
+
+router.get('/request', (req, res) => {
+    let rActive = true;
+    console.log(res.locals.requested);
+    res.render('bidder/request',{
+        rActive,
+        layout: 'account.handlebars'
+    });
+});
+
+router.post('/request',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const time = moment().format();
+
+    const entity ={
+        Email: email,
+        RequestTime: time
+    }
+
+    const ret = await userModel.updateUser(entity);
+    res.locals.authUser = ret[0];
+    req.session.authUser = ret[0];
+
+    const url = '/account/request';
+    return res.redirect(url);
 });
 
 router.get('/wishlist',async (req, res) => {

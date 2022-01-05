@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Script/Script Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/account.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/account.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/accountRequest.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/accountRequest.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +40,32 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="jdk.selected.JAVA_MODULE" value="16" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="ts.external.directory.path" value="D:\IntelliJ IDEA 2021.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\otp" />
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views" />
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\bidder" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\otp" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="app.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
@@ -60,10 +81,12 @@
       <option name="presentableId" value="Default" />
       <updated>1641128208972</updated>
       <workItem from="1641128211459" duration="4789000" />
-      <workItem from="1641224727625" duration="3452000" />
-      <workItem from="1641299599459" duration="5982000" />
-      <workItem from="1641308808684" duration="5626000" />
-      <workItem from="1641315054161" duration="5690000" />
+      <workItem from="1641149583985" duration="57000" />
+      <workItem from="1641149674397" duration="15319000" />
+      <workItem from="1641230883810" duration="136000" />
+      <workItem from="1641244715584" duration="6412000" />
+      <workItem from="1641298849235" duration="6116000" />
+      <workItem from="1641373127715" duration="7541000" />
     </task>
     <servers />
   </component>

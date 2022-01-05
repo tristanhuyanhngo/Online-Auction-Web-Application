@@ -4,47 +4,61 @@
         $('#formRegister').on('submit', function (event) {
             event.preventDefault();
 
-            //const username = $('#txtFullName').val();
-            const username = document.getElementById('txtFullName').value;
+            const username = document.getElementById('txtUsername').value;
+            const name = document.getElementById('txtFullName').value;
             const email = document.getElementById('txtEmail').value;
             const password = document.getElementById('txtPassword').value;
             const confirm_password = document.getElementById('txtConfirmPassword').value;
 
             // Validate username
-            if (username.length === 0) {
-                swal('Username must filled in!');
+            if (username.length < 1) {
+                swal('Username must be filled in!');
+                return;
+            }
+            if (name.length <1 ) {
+                swal('Name must be filled in!');
                 return;
             }
             // Validate email
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                swal("Invalid email !");
+                swal("Invalid email!");
                 return;
             }
             // Validate password
             if (!password) {
-                swal('Password must filled in!');
+                swal('Password must be filled in!');
                 return;
             }
             if (!confirm_password) {
-                swal('Confirm password must filled in!');
+                swal('Confirm password must be filled in!');
                 return;
             }
             if (password !== confirm_password) {
-                swal("Passwords doesn't match");
+                swal("Passwords doesn't match!");
                 return;
             }
-
-            // Ajax
-            $.getJSON(`/is-available?user=${email}`, function (data) {
+            $.getJSON(`/username-available?username=${username}`, function (data) {
                 if (data === false) {
-                    swal('Email already in use. Please choose another email !');
-                }
-                else {
-                    swal('Congratulations ! Register successfully');
-                    $('#formRegister').off('submit').submit();
+                    swal('Username is already in use. Please choose another one!');
+                } else {
+
+                    $.getJSON(`/is-available-register?user=${email}`, function (data) {
+                        if (data === false) {
+                            swal('Email already in use. Please choose another email!');
+                        }
+                        else {
+                            swal("Congrats!","You have registered successfully! Please verify your account with an OTP that has been sent to your email!","success",{
+                                buttons:{
+                                    text: "Verify"
+                                }
+                            })
+                                    .then((value) => {
+                                        $('#formRegister').off('submit').submit();
+                                    });
+                        }
+                    });
                 }
             });
-
         });
 
         $('#txtFullName').select();
@@ -52,49 +66,52 @@
 {{/section}}
 
 <form id="formRegister" method="post">
-    <div class="container mx-auto flex justify-center pt-16 ">
-        <div class="w-96  p-8 border border-cyan-700 shadow-2xl">
-            <input
-                    id="txtFullName" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none"
-                    placeholder="Full name" name="fullName"/>
+    <div class="min-h-screen h-100">
+        <div class="container mx-auto flex justify-center pt-5">
+            <div class="w-96  p-8 border border-cyan-700 shadow-2xl">
+                <input
+                        id="txtFullName" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none"
+                        placeholder="Full name" name="fullName"/>
 
-            <input
-                    id="txtEmail" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
-                    placeholder="Email" name="email"/>
-            <input
-                    id="txtUsername" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
-                    placeholder="Username" name="username"/>
-            <input
-                    id="txtPassword" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
-                    type="password" placeholder="Password" name="password"/>
+                <input
+                        id="txtEmail" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
+                        placeholder="Email" name="email"/>
+                <input
+                        id="txtUsername" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
+                        placeholder="Username" name="username"/>
+                <input
+                        id="txtPassword" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
+                        type="password" placeholder="Password" name="password"/>
 
-            <input
-                    id="txtConfirmPassword" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
-                    type="password" placeholder="Confirm password" name="confirm_password"/>
-            <button
-                    type="submit" class="bg-cyan-700 w-full mt-2 shadow-md py-2 px-4 hover:bg-cyan-800 font-medium transition duration-500 text-white" name="register_button">REGISTER</button>
+                <input
+                        id="txtConfirmPassword" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
+                        type="password" placeholder="Confirm password" name="confirm_password"/>
+                <button
+                        type="submit" class="bg-cyan-700 w-full mt-2 shadow-md py-2 px-4 hover:bg-cyan-800 font-medium transition duration-500 text-white" name="register_button">REGISTER</button>
 
-            <div class="flex flex-row my-2">
-                <div class="h-3 w-full border-b border-black">
+                <div class="flex flex-row my-2">
+                    <div class="h-3 w-full border-b border-black">
 
+                    </div>
+                    <div class="mx-2">  OR  </div>
+                    <div class="h-3 w-full border-b border-black"></div>
                 </div>
-                <div class="mx-2">  OR  </div>
-                <div class="h-3 w-full border-b border-black"></div>
-            </div>
 
-            <div class="grid gap-4 grid-cols-2">
-                <button type="button"
-                        class="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
-                    <i class="fa fa-facebook mr-2" aria-hidden="true"></i>
-                    Facebook
-                </button>
-                <button type="button"
-                        class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
-                    <i class="fa fa-google mr-2" aria-hidden="true"></i>
-                    Google
-                </button>
-            </div>
+                <div class="grid gap-4 grid-cols-2">
+                    <button type="button"
+                            class="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
+                        <i class="fa fa-facebook mr-2" aria-hidden="true"></i>
+                        Facebook
+                    </button>
+                    <button type="button"
+                            class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
+                        <i class="fa fa-google mr-2" aria-hidden="true"></i>
+                        Google
+                    </button>
+                </div>
 
+            </div>
         </div>
+
     </div>
 </form>
