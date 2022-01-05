@@ -1,13 +1,4 @@
-{{#section 'js'}}
-    <script>
-        // const test = function () {
-        //     document.querySelector(".testing").innerText = 1234;
-        //     console.log(0);
-        // };
-        // setInterval(test, 1000);
 
-    </script>
-{{/section}}
 
 <div class="relative">
     <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
@@ -51,12 +42,11 @@
                     <div class="text-yellow-600">HIGHEST</div>
                 </div>
                 <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
-                    <div class="">9000,000</div>
+                    <div class="">{{format_number biddingHighest.Price}}</div>
                     <div>VND</div>
                 </div>
-                <div class=" flex justify-between mt-2 font-light text-xs">
-                    <div class="">From HCM</div>
-                    <div class="">July 17, 2016</div>
+                <div class=" mt-2 font-light text-xs">
+                    <div class="">{{format_date biddingHighest.Time}}</div>
                 </div>
 
                 <div class=" h-1 border-t border-gray-400 mt-2"></div>
@@ -64,20 +54,20 @@
                 <div class="flex text-xs mt-1 items-center justify-center">
                     <div class="h-6 w-6 rounded-full bg-black"></div>
                     <div class=" font-thin ml-1">BY</div>
-                    <div class=" uppercase font-semibold ml-1">hoang nhu thanh</div>
+                    <div class=" uppercase font-semibold ml-1">{{biddingHighest.Bidder}}</div>
                 </div>
             </div>
         </a>
     </div>
 
-    {{#if authUser}}
-        {{#if this.inWish}}
-            <a href="javascript: $('#formDelWishList').submit();">
+    {{#if user}}
+        {{#if this.isWish}}
+            <a data-id="{{ProID}}" class="delItemWish" href="#" role="button">
                 <i class="absolute top-0 right-0 fa fa-heart fa-2x cursor-pointer" style ="color:red"
                    aria-hidden="true"></i>
             </a>
         {{else}}
-            <a href="javascript: $('#formAddWishList').submit();">
+            <a data-id="{{ProID}}" class="addItemWish" href="#" role="button">
                 <i class="absolute top-0 right-0 fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
             </a>
         {{/if}}

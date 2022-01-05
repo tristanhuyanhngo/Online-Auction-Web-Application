@@ -15,8 +15,9 @@ router.get('/detail/:id', async function(req, res) {
 
     let bidding = await productModel.findBidding(pro_id);
     let biddingHighest
-    if(bidding != null)
-        biddingHighest = bidding[0]
+    if(bidding != null) {
+        biddingHighest = bidding.shift();
+    }
 
     if(res.locals.auth != false){
         user = req.session.authUser.Email;

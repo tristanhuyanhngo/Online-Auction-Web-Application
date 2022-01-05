@@ -23,8 +23,51 @@ router.get('/', async function (req, res) {
     const list_2 = await productHome.sortByBid();
     const list_3 = await productHome.sortByPrice();
 
-    // console.log(req.session.auth);
-    // console.log(req.session.authUser);
+
+    for(let i = 0; i < list_1[0].length; i++) {
+        let bidding = await productHome.findBidding(list_1[0][i].ProID);
+        list_1[0][i].biddingHighest = bidding.shift();
+        list_1[0][i].user = res.locals.authUser;
+
+        if(res.locals.auth != false){
+            let isWish = await productHome.isInWishList(list_1[0][i].ProID,req.session.authUser.Email);
+
+            if(isWish.length > 0){
+                list_1[0][i].isWish = true;
+            }
+        }
+    }
+
+    for(let i = 0; i < list_2[0].length; i++) {
+        let bidding = await productHome.findBidding(list_2[0][i].ProID);
+        list_2[0][i].biddingHighest = bidding.shift();
+        list_2[0][i].user = res.locals.authUser;
+
+        if(res.locals.auth != false){
+            let isWish = await productHome.isInWishList(list_2[0][i].ProID,req.session.authUser.Email);
+
+            if(isWish.length > 0){
+                list_2[0][i].isWish = true;
+            }
+        }
+    }
+
+    for(let i = 0; i < list_3[0].length; i++) {
+        let bidding = await productHome.findBidding(list_3[0][i].ProID);
+        list_3[0][i].biddingHighest = bidding.shift();
+        list_3[0][i].user = res.locals.authUser;
+
+        if(res.locals.auth != false){
+            let isWish = await productHome.isInWishList(list_3[0][i].ProID,req.session.authUser.Email);
+
+            if(isWish.length > 0){
+                list_3[0][i].isWish = true;
+            }
+        }
+    }
+
+    // list_1[0][0].user = res.locals.authUser;
+    //console.log(list_1[0][0]);
 
     res.render('home', {
         products: list_1[0],

@@ -1,12 +1,26 @@
 {{#section 'js'}}
     <script>
-        // const test = function () {
-        //     document.querySelector(".testing").innerText = 1234;
-        //     console.log(0);
-        // };
-        // setInterval(test, 1000);
+        $(".addItemWish").click(function (e) {
+            const id = $(this).data('id');
+            $('#txtProIDAdd').val(id);
+            $('#formAddWishList').submit();
+        })
+
+        $(".delItemWish").click(function (e) {
+            const id = $(this).data('id');
+            $('#txtProIDDel').val(id);
+            $('#formDelWishList').submit();
+        })
     </script>
 {{/section}}
+
+<form class="hidden" id="formAddWishList" action = "/account/wishlist/add" method = "post">
+    <input x-show ="false" name = "ProID" id="txtProIDAdd">
+</form>
+
+<form class="hidden" id="formDelWishList" action = "/account/wishlist/del" method = "post">
+    <input x-show ="false" name = "ProID" id="txtProIDDel">
+</form>
 
 
 <div class="container mx-auto xl:px-10">
