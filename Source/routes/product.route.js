@@ -123,9 +123,8 @@ router.get('/detail/:id', async function (req, res) {
     console.log(suggestPrice);
 
     if (bidding.length > 0) {
-        // biddingHighest = bidding[0];
         suggestPrice = +bidding[0].Price + +product.StepPrice;
-        biddingHighest = bidding.shift();
+        biddingHighest = bidding[0];
     }
 
     if (res.locals.auth != false) {

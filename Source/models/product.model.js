@@ -223,7 +223,7 @@ export default {
                             P.StartPrice,
                             U.Name as Seller,
                             P.SellPrice,
-                            P.EndDate
+                            P.EndDate, u.Name as SellerName
                      from product as P,
                           user as U,
                           category as C,
@@ -241,7 +241,7 @@ export default {
         const sql = `select C.CatName,
                             L.BigCatName,
                             P.ProID,
-                            P.ProName,
+                            P.ProName,u.Name as SellerName,
                             P.StartPrice,
                             U.Name as Seller,
                             P.SellPrice,
@@ -273,7 +273,7 @@ export default {
                             U.Name as Seller,
                             P.SellPrice,
                             P.EndDate,
-                            B.ProID,
+                            B.ProID,u.Name as SellerName,
                             MAX(B.Price) AS max
                      from product as P,
                          user as U,
