@@ -1,6 +1,5 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
-import categoryModel from '../models/category.model.js';
 import bidModel from "../models/bid.model.js";
 import userModel from "../models/user.model.js";
 import emailModel from "../models/email.models.js";
