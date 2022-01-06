@@ -55,13 +55,13 @@ router.post('/account/add',async function(req, res)  {
         Name: req.body.Name,
         Address: null,
         DOB: null,
+        Valid: true,
         RegisterDate: today,
         Type: req.body.Role,
         Rate: 0
     }
     const ret = await userModel.addUser(user);
     console.log(ret);
-    // return null;
     const url = req.headers.referer || '/admin/account';
     return res.redirect(url);
 });

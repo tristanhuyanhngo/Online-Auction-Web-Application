@@ -17,8 +17,8 @@
                 swal('Name must be filled in!');
                 return;
             } else{
-                $('#addForm').off('submit').submit();
-            }
+                swal("Added successfully").then((value) => {
+                    $('#addForm').off('submit').submit();});            }
         });
 
         $('#txtAddCatName').select();

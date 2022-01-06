@@ -74,21 +74,27 @@
                                                 </textarea>
 
                                                     <input hidden name = "ProID" value="{{ProID}}">
-                                                    <input hidden name = "Seller" value="{{Seller}}">
+                                                    <input hidden name = "SellerMail" value="{{SellerMail}}">
 
                                                     <div class="flex justify-center items-center mt-4">
-                                                        <i onclick="like(this)"
-                                                           class="fa fa-thumbs-up fa-2x cursor-pointer"></i>
+                                                        <select class ="py-2 px-1 border border-key"
+                                                                name="Rate" id="cars">
+                                                            <option class = "text-center" value="1">
+                                                            👍 (+1)
+                                                            </option>
+                                                            <option class = "text-center" value="0">
+                                                            👎 (-1)
+                                                            </option>
+                                                        </select>
                                                         <button type="submit"
-                                                                class="ml-4 cursor-pointer font-semibold text-md  px-6 py-2
-                                                        border border-cyan-700 hover:bg-gray-300">Send
+                                                                class="ml-4 cursor-pointer font-semibold text-md px-6 py-2
+                                                        border border-cyan-700 bg-key hover:bg-cyan-800 text-white">Send
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
                                 {{/if}}
                             </td>
                         </tr>

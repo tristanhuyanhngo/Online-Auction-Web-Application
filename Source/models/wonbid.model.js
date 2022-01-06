@@ -10,7 +10,7 @@ export default {
     },
 
     async findPageByEmail(email, limit, offset) {
-        const sql = `select w.*, p.ProName, u.Name as Seller, p.ProState
+        const sql = `select w.*, p.ProName, u.Email as SellerMail, u.Name as Seller, p.ProState
                      from success_bid w join product p
                                            on w.ProID = p.ProID
                                       join user u on p.Seller = u.Email

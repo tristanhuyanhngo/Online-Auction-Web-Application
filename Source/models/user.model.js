@@ -15,6 +15,33 @@ export default {
         await db('rating').insert(entity);
     },
 
+    async updateRate(email){
+        const total = await this.countRate(email);
+        const up = await this.countUp(email);
+
+        const rate = (up/total).toFixed(10)*100;
+        const sql = `update user
+                        set Rate = ${rate}
+                        where Email = '${email}'`;
+        await db.raw(sql);
+    },
+
+    async countUp(email){
+        const sql = `select count(Receiver) as up
+                        from rating
+                        where Receiver = '${email}' and Rate = true`
+        const ret = await db.raw(sql);
+        return ret[0][0].up;
+    },
+
+    async countRate(email){
+        const sql = `select count(Receiver) as total
+                        from rating
+                        where Receiver = '${email}'`
+        const ret = await db.raw(sql);
+        return ret[0][0].total;
+    },
+
     async findByEmailRegister(email) {
         const user = await db('user').where({
             Email: email,
@@ -35,6 +62,15 @@ export default {
             Valid: true
         });
         return user[0] || null;
+    },
+
+    async findRating(email) {
+        const sql = `select r.*, u.Name, u.Username as Seller from rating r
+                        join user u
+                        on r.Sender = u.Email
+                        where Receiver = '${email}'`;
+        const ret = await db.raw(sql);
+        return ret[0] || null;
     },
 
     async findByUsernameRegister(username) {

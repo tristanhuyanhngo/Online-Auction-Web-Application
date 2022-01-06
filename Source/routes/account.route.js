@@ -242,17 +242,22 @@ router.post('/wishlist/add',async function(req, res) {
 router.post('/review',async function(req, res) {
     const email = res.locals.authUser.Email;
     const product = req.body.ProID;
-    const receiver = req.body.Seller;
+    const receiver = req.body.SellerMail;
     const comment = req.body.content;
+    let rate = true;
+    if(req.body.Rate === '0'){
+        rate = false;
+    }
     const item = {
         Sender: email,
         Receiver: receiver,
         Comment: comment,
         Time: moment().format(),
         ProID: product,
-        Rate: true
+        Rate: rate,
     }
     await userModel.addReview(item);
+    await userModel.updateRate(receiver);
 
     const url = req.headers.referer || '/account/won-bid';
     return res.redirect(url);

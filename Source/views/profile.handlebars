@@ -7,17 +7,17 @@
                          src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                          alt="">
                 </div>
-                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{authUser.Username}}</h1>
+                <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{this.user.Username}}</h1>
                 <ul
                         class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                     <li class="flex items-center py-3">
                         <span>Point</span>
                         <span class="ml-auto"><span
-                                class="bg-green-500 py-1 px-2 rounded text-white text-sm">{{auth.Rate}}</span></span>
+                                class="bg-green-500 py-1 px-2 rounded text-white text-sm">{{this.user.Rate}}%</span></span>
                     </li>
                     <li class="flex items-center py-3">
                         <span>Member since</span>
-                        <span class="ml-auto">{{format_no_h auth.RegisterDate}}</span>
+                        <span class="ml-auto">{{format_no_h this.user.RegisterDate}}</span>
                     </li>
                 </ul>
             </div>
@@ -33,57 +33,59 @@
                     <div class="grid md:grid-cols-2 text-sm">
                         <div class="grid grid-cols-4">
                             <div class="px-4 py-2 font-semibold">Name</div>
-                            <div class="px-4 py-2 col-span-3">{{authUser.Name}}</div>
+                            <div class="px-4 py-2 col-span-3">{{this.user.Name}}</div>
                         </div>
-                        <div class="grid grid-cols-4">
-                            <div class="px-4 py-2 font-semibold">Address</div>
-                            <div class="px-4 py-2 col-span-3">{{authUser.Address}}</div>
-                        </div>
-                        <div class="grid grid-cols-4">
-                            <div class="px-4 py-2 font-semibold">Email</div>
-                            <div class="px-4 py-2 col-span-3">
-                                <a class="text-blue-800" href="mailto:jane@example.com">{{authUser.Email}}</a>
+                        {{#if this.user.Address}}
+                            <div class="grid grid-cols-4">
+                                <div class="px-4 py-2 font-semibold">Address</div>
+                                <div class="px-4 py-2 col-span-3">{{this.user.Address}}</div>
                             </div>
-                        </div>
+                        {{/if}}
+
+                        {{#if this.viewSelf}}
+                            <div class="grid grid-cols-4">
+                                <div class="px-4 py-2 font-semibold">Email</div>
+                                <div class="px-4 py-2 col-span-3">
+                                    <a class="text-blue-800"
+                                       href="mailto:{{this.user.Email}}">{{this.user.Email}}</a>
+                                </div>
+                            </div>
+                        {{/if}}
                         <div class="grid grid-cols-4">
-                            <div class="px-4 py-2 font-semibold">Birthday</div>
-                            <div class="px-4 py-2 col-span-3">{{format_no_h authUsser.DOB}}</div>
+                            {{#if this.user.DOB}}
+                                <div class="px-4 py-2 font-semibold">Birthday</div>
+                                <div class="px-4 py-2 col-span-3">{{format_no_h this.user.DOB}}</div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-white p-3 shadow-sm rounded-sm bg-gray-200">
-                <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
-                    <i class="fa fa-comment fa-lg" aria-hidden="true"></i>
-                    <span class="tracking-wide">Comment</span>
-                </div>
-                <div class="text-gray-700 mb-4">
-                    <div class="font-semibold flex items-center mb-1">
-                        <div class="h-8 w-8 bg-cyan-700 rounded-full"></div>
-                        <div class="ml-2">Hoàng Như Thanh </div>
-                        <div class="ml-2 font-light">22/12/2022</div>
+            
+            {{#if this.hasReview}}
+                {{#each this.rateList}}
+                    <div class="bg-white p-3 shadow-sm rounded-sm bg-gray-200">
+                        <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
+                            <i class="fa fa-comment fa-lg" aria-hidden="true"></i>
+                            <span class="tracking-wide">Comment</span>
+                        </div>
+                        <div class="text-gray-700 mb-4">
+                            <div class="font-semibold flex items-center mb-1">
+                                <div class="h-8 w-8 bg-cyan-700">
+                                    <img class="h-auto w-full mx-auto rounded-full"
+                                         src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                                         alt="">
+                                </div>
+                                <a href="/profile/{{Seller}}"
+                                        class="ml-2 hover:text-key">{{Name}}</a>
+                                <div class="ml-2 font-light">{{format_no_h Time}}</div>
+                            </div>
+                            <div class="bg-white rounded w-full py-4 px-3">{{{Comment}}}</div>
+                        </div>
                     </div>
-                    <div class="bg-white rounded w-full py-4 px-3"> Nhận hàng nhanh </div>
-                </div>
-
-                <div class="text-gray-700 mb-4">
-                    <div class="font-semibold flex items-center mb-1">
-                        <div class="h-8 w-8 bg-cyan-700 rounded-full"></div>
-                        <div class="ml-2">Hoàng Như Thanh </div>
-                        <div class="ml-2 font-light">22/12/2022</div>
-                    </div>
-                    <div class="bg-white rounded w-full py-4 px-3"> Nhận hàng nhanh </div>
-                </div>
-
-                <div class="text-gray-700 mb-4">
-                    <div class="font-semibold flex items-center mb-1">
-                        <div class="h-8 w-8 bg-cyan-700 rounded-full"></div>
-                        <div class="ml-2">Hoàng Như Thanh </div>
-                        <div class="ml-2 font-light">22/12/2022</div>
-                    </div>
-                    <div class="bg-white rounded w-full py-4 px-3"> Nhận hàng nhanh </div>
-                </div>
-            </div>
+                {{/each}}
+            {{else}}
+                <div>No review yet!</div>
+            {{/if}}
         </div>
     </div>
 </div>
