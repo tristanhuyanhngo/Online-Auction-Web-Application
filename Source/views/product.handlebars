@@ -47,7 +47,7 @@
         setInterval(test, 1000);
     </script>
     <script>
-        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $('#formPlaceBid').on('submit', function (event) {
             event.preventDefault();
             const queryPrice = document.getElementById('txtPlaceBid').value;
@@ -57,27 +57,27 @@
             const pro = {{this.product.ProID}};
 
             const check = +queryPrice - +startPrice;
-            if(queryPrice.length <1 ){
+            if (queryPrice.length < 1) {
                 swal('Please fill the price!');
                 return;
             }
-            if(+queryPrice <= +currentPrice){
+            if (+queryPrice <= +currentPrice) {
                 swal('Your bidding must exceed current price!');
                 return;
             }
-            if (check % +stepPrice!==0) {
+            if (check % +stepPrice !== 0) {
                 swal('Please follow our step price!');
                 return;
             }
 
             $.getJSON(`/product/check-bid/?pro=${pro}&price=${queryPrice}`, function (data) {
                 if (data === false) {
-                    swal("Sorry!","There is someone who is willing to pay more!","warning").then((value) => {
+                    swal("Sorry!", "There is someone who is willing to pay more!", "warning").then((value) => {
                         $('#formPlaceBid').off('submit').submit();
                         return;
                     });
                 } else {
-                    swal("Congrats!","Your bid is accepted!","success").then((value) => {
+                    swal("Congrats!", "Your bid is accepted!", "success").then((value) => {
                         $('#formPlaceBid').off('submit').submit();
                         return;
                     });
@@ -94,13 +94,13 @@
 </div>
 <div class=" container mx-auto xl:px-10 mt-3">
 
-    <input hidden id = "txtStepPrice" value = "{{this.product.StepPrice}}">
-    <input hidden id = "txtStartPrice" value = "{{this.product.StartPrice}}">
+    <input hidden id="txtStepPrice" value="{{this.product.StepPrice}}">
+    <input hidden id="txtStartPrice" value="{{this.product.StartPrice}}">
 
     {{#if this.biddingHighest}}
-        <input hidden id = "txtCurrentPrice" value = "{{this.biddingHighest.Price}}">
+        <input hidden id="txtCurrentPrice" value="{{this.biddingHighest.Price}}">
     {{else}}
-        <input hidden id = "txtCurrentPrice" value = "{{this.product.StartPrice}}">
+        <input hidden id="txtCurrentPrice" value="{{this.product.StartPrice}}">
     {{/if}}
 
     <div class=" uppercase text-2xl font-bold">{{this.product.ProName}}</div>
@@ -175,14 +175,15 @@
                             {{#if auth}}
                                 <form id="formPlaceBid" method="post" action="/product/detail/{{this.product.ProID}}">
                                     <div x-data="{ open: false }" class="">
-                                        <div x-show="open" class="grid grid-cols-3 gap-2 mb-2" @click.away="open = false"
+                                        <div x-show="open" class="grid grid-cols-3 gap-2 mb-2"
+                                             @click.away="open = false"
                                              x-transition:enter="transition duration-300"
                                              x-transition:enter-start="opacity-0 transform scale-90"
                                              x-transition:enter-end="opacity-100 transform scale-100"
                                              x-transition:leave="transition duration-300"
                                              x-transition:leave-start="opacity-100 transform scale-100"
                                              x-transition:leave-end="opacity-0 transform scale-90">
-                                            <input id="txtPlaceBid" name = "queryPrice"
+                                            <input id="txtPlaceBid" name="queryPrice"
                                                    placeholder="Suggest price: {{format_number this.suggestPrice}}"
                                                    class="w-full col-span-2 border border-black rounded
                                             text-base font-semibold text-left px-2"
@@ -219,26 +220,42 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class=" flex items-center justify-between mt-1">
-                                            <div @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                                <div class="text-center cursor-pointer font-semibold text-base text-white rounded">Place bid</div>
+                                        {{#if allowBid}}
+                                            <div class=" flex items-center justify-between mt-1">
+                                                <div @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
+                                                    <div class="text-center cursor-pointer font-semibold
+                                                text-base text-white rounded">Place bid
+                                                    </div>
+                                                </div>
+                                                {{#if this.biddingHighest}}
+                                                    <div
+                                                            class="ml-4 text-xl text-key font-semibold">{{format_number
+                                                            this.biddingHighest.Price}}</div>
+                                                {{else}}
+                                                    <div class="ml-4 text-xl text-key font-semibold ">{{format_number
+                                                            this.product.StartPrice}}</div>
+                                                {{/if}}
                                             </div>
-                                            {{#if this.biddingHighest}}
-                                                <div
-                                                        class="ml-4 text-xl text-key font-semibold">{{format_number
-                                                        this.biddingHighest.Price}}</div>
-                                            {{else}}
-                                                <div class="ml-4 text-xl text-key font-semibold ">{{format_number
-                                                        this.product.StartPrice}}</div>
-                                            {{/if}}
-                                        </div>
+                                        {{else}}
+                                            <div class=" flex items-center justify-between mt-1">
+                                                <div class=" w-1/3 py-2 bg-gray-400">
+                                                    <div class="disable text-center cursor-pointer font-semibold
+                                                text-base text-white rounded">Place bid
+                                                    </div>
+                                                </div>
+                                                <div class="text-right text-key font-semibold py-2 font-light">
+                                                    You are the current winner!
+                                                </div>
+                                            </div>
+                                        {{/if}}
                                     </div>
                                 </form>
 
                             {{else}}
                                 <div class=" flex items-center justify-between mt-1">
                                     <a class=" w-1/3 py-2 bg-green-800" href="/login">
-                                        <div class=" font-semibold text-base text-white rounded text-center">Place bid</div>
+                                        <div class=" font-semibold text-base text-white rounded text-center">Place bid
+                                        </div>
                                     </a>
                                     {{#if if this.biddingHighest}}
                                         <div class="ml-4 text-xl text-key font-semibold ">{{format_number
@@ -346,7 +363,8 @@
                         {{#if this.product.Onair}}
                             <div x-data="{ showModal : false }">
                                 <button @click="showModal = !showModal"
-                                        class="font-semibold text-md px-4 lg:px-6 py-2  border border-cyan-700 ml-2">View
+                                        class="font-semibold text-md px-4 lg:px-6 py-2  border border-cyan-700 ml-2">
+                                    View
                                     Bids
                                 </button>
                                 <div x-show="showModal"
@@ -370,14 +388,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <!--                                            <tr class=" text-cyan-700">-->
-                                                <!--                                                <td class="pr-8 text-center">{{format_date
-                                                        biddingHighest.Time}}</td>-->
-                                                <!--                                                <td class="px-8 text-center">{{biddingHighest.Bidder}}</td>-->
-                                                <!--                                                <td class="pl-8 text-center" text-center><i class="fa fa-arrow-up animate-bounce"-->
-                                                <!--                                                                           aria-hidden="true"></i>{{format_number
-                                                        biddingHighest.Price}}</td>-->
-                                                <!--                                            </tr>-->
                                                 {{#each bidding}}
                                                     <tr class="">
                                                         <td class="pr-8 text-center">{{format_date Time}}</td>
@@ -401,7 +411,6 @@
                             </div>
                         {{/if}}
                     </div>
-
                 </div>
             </div>
         </div>
@@ -417,7 +426,7 @@
                  alt="Sunset in the mountains" class=" object-cover object-center h-full w-full max-h-28 px-4">
         </div>
 
-<!--        responsive-->
+        <!--        responsive-->
     </div>
 
     <div class="flex mt-8 border-t border-cyan-700">

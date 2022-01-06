@@ -102,6 +102,14 @@ router.get('/detail/:id', async function (req, res) {
         product.Onair = true;
     }
 
+    let allowBid = true;
+
+    if(req.session.auth===true){
+        if(product.CurrentWinner === req.session.authUser.Email) {
+            allowBid = false;
+        }
+    }
+
     console.log(product.Onair);
 
     let user = null;
@@ -140,6 +148,7 @@ router.get('/detail/:id', async function (req, res) {
     res.render('product', {
         product,
         suggestPrice,
+        allowBid,
         inWish,
         related_products,
         description: description.Content,

@@ -250,7 +250,6 @@ router.post('/review',async function(req, res) {
         Comment: comment,
         Time: moment().format(),
         ProID: product,
-        Type: true,
         Rate: true
     }
     await userModel.addReview(item);
@@ -362,6 +361,10 @@ router.get('/won-bid', async (req, res) => {
 
     const offset = (page - 1) * limit;
     const list = await wonbidModel.findPageByEmail(email, limit, offset);
+
+    for(let i in list){
+        list[i].evaluated = ((await wonbidModel.evaluated(email, list[i].ProID))[0].amount===1);
+    }
 
     let isFirst = 1;
     let isLast = 1;
