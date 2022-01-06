@@ -46,9 +46,10 @@
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data === false) {
                     swal('Email is already in use. Please choose another email!');
+                    return;
                 } else {
-                    swal("Successful");
-                    $('#addForm').off('submit').submit();
+                    swal("Added successfully").then((value) => {
+                        $('#addForm').off('submit').submit();});
                 }
             });
         });
@@ -60,10 +61,9 @@
                 swal("Name must be filled in!");
                 return;
             } else {
-                swal("Successful");
-                $('#editForm').off('submit').submit();
+                swal("Successful").then((value) => {
+                    $('#editForm').off('submit').submit();});
             }
-            swal("Successful!")
         });
         $('#txtEmail').select();
         $('#updUsername').select();
@@ -273,18 +273,43 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class=" flex justify-end mt-4 space-x-4">
+                                                    <div x-data="{ensure: false}"
+                                                            class=" flex justify-end mt-4 space-x-4">
                                                         <button type="submit" id="updateButton"
                                                                 value="Save"
                                                                 class="font-semibold text-md  px-6 py-2  border border-cyan-700">
                                                             Save
                                                         </button>
-                                                        <button @click="showModal = !showModal"
-                                                                type="submit" id="delButton"
-                                                                formaction="/admin/account/del"
-                                                                class="font-semibold text-md  px-6 py-2 text-white  bg-red-700">
+                                                        <div @click="ensure = true"
+                                                                class="font-semibold cursor-pointer text-md  px-6 py-2 text-white  bg-red-700">
                                                             Delete
-                                                        </button>
+                                                        </div>
+                                                        <div x-show="ensure"
+                                                             class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                            <div x-show="ensure"
+                                                                 class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                                 @click.away="showModal = false"
+                                                                 x-transition:enter="transition ease-out duration-300"
+                                                                 x-transition:enter-start="opacity-0 transform scale-90"
+                                                                 x-transition:enter-end="opacity-100 transform scale-100"
+                                                                 x-transition:leave="transition ease-in duration-300"
+                                                                 x-transition:leave-start="opacity-100 transform scale-100"
+                                                                 x-transition:leave-end="opacity-0 transform scale-90">
+                                                                <div>Are you sure to delete {{Username}}?</div>
+                                                                <div class=" flex justify-end mt-4 space-x-4">
+                                                                    <button
+                                                                            type="submit" id="delButton"
+                                                                            formaction="/admin/account/del"
+                                                                            class="font-semibold text-md  px-6 py-2  border border-black text-white  bg-red-700">
+                                                                        DELETE
+                                                                    </button>
+                                                                    <div @click="ensure = false"
+                                                                         class="cursor-pointer font-semibold text-md
+                                                                         px-6 py-2 border border-cyan-700">Cancel</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </form>

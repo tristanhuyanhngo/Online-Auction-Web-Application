@@ -1,29 +1,136 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
 import categoryModel from '../models/category.model.js';
-//import userModel from "../models/user.model";
+import bidModel from "../models/bid.model.js";
 import userModel from "../models/user.model.js";
+import emailModel from "../models/email.models.js";
+import moment from "moment";
+import bodyParser from "body-parser";
 
 const router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }))
 
-router.get('/detail/:id', async function(req, res) {
+router.get('/check-bid', async function (req, res) {
+    const queryPrice = req.query.price;
+    const proID = req.query.pro;
+
+    let product = await productModel.findByProID(proID);
+    let maxPrice = product.MaxPrice;
+
+    if (product.CurrentWinner === null) {
+        return res.json(true);
+    }
+
+    if (queryPrice <= maxPrice) {
+        return res.json(false);
+    }
+
+    else{
+        return res.json(true);
+    }
+});
+
+router.post('/detail/:id', async function (req, res) {
+    const queryPrice = req.body.queryPrice;
+    const ProID = req.params.id;
+    const email = req.session.authUser.Email;
+
+    let product = await productModel.findByProID(ProID);
+    let maxPrice = product.MaxPrice;
+    let step = product.StepPrice;
+
+    const url = '/product/detail/'+ProID;
+
+    if (product.CurrentWinner === null) {
+        const bid = {
+            ProID: ProID,
+            Bidder: email,
+            Time: moment().format(),
+            Price: queryPrice
+        }
+        await bidModel.addBidding(bid);
+
+        const productEntity = {
+            ProID: ProID,
+            CurrentWinner: email,
+            MaxPrice: queryPrice
+        }
+        await productModel.updateProduct(productEntity);
+        return res.redirect(url);
+    }
+
+    if (queryPrice <= maxPrice) {
+        const bid = {
+            ProID: ProID,
+            Bidder: product.CurrentWinner,
+            Time: moment().format(),
+            Price: queryPrice
+        }
+        await bidModel.updateBidding(bid);
+        return res.redirect(url);
+    }
+
+    else{
+        emailModel.sendBidDefeat(product.CurrentWinner,product.ProName);
+        const newPrice = maxPrice+step;
+        const bid = {
+            ProID: ProID,
+            Bidder: email,
+            Time: moment().format(),
+            Price: newPrice
+        }
+        const ret = await bidModel.addBidding(bid);
+        console.log(ret);
+
+        const productEntity = {
+            ProID: ProID,
+            CurrentWinner: email,
+            MaxPrice: queryPrice
+        }
+        await productModel.updateProduct(productEntity);
+        return res.redirect(url);
+    }
+});
+
+
+router.get('/detail/:id', async function (req, res) {
     req.session.retUrl = req.originalUrl;
     const pro_id = req.params.id || 0;
     const product = await productModel.findByProID(pro_id);
+
+    if(product.ProState.readInt8()===1){
+        product.Onair = true;
+    }
+
+    let allowBid = true;
+
+    if(req.session.auth===true){
+        if(product.CurrentWinner === req.session.authUser.Email) {
+            allowBid = false;
+        }
+    }
+
+    console.log(product.Onair);
 
     let user = null;
     let inWish = false;
 
     let bidding = await productModel.findBidding(pro_id);
-    let biddingHighest
-    if(bidding != null)
-        biddingHighest = bidding[0]
+    let biddingHighest = null;
+    let suggestPrice = +product.StartPrice + +product.StepPrice;
+    console.log(suggestPrice);
 
-    if(res.locals.auth != false){
+    if (bidding.length > 0){
+        biddingHighest = bidding[0];
+        console.log(bidding);
+        suggestPrice = +bidding[0].Price + +product.StepPrice;
+    }
+
+    if (res.locals.auth != false) {
         user = req.session.authUser.Email;
-        const isWish = await productModel.isInWishList(pro_id,user);
+        const isWish = await productModel.isInWishList(pro_id, user);
 
-        if(isWish.length > 0){
+        if (isWish.length > 0) {
             inWish = true;
         }
     }
@@ -35,12 +142,13 @@ router.get('/detail/:id', async function(req, res) {
     const description = await productModel.findDescriptionProduct(pro_id);
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
-    //console.log(product);
 
-    let seller  = await userModel.findByEmail(product.Seller);
+    let seller = await userModel.findByEmail(product.Seller);
 
     res.render('product', {
         product,
+        suggestPrice,
+        allowBid,
         inWish,
         related_products,
         description: description.Content,
@@ -61,8 +169,8 @@ router.get('/byBigCat/:id', async function (req, res) {
     const raw = await productModel.countBigCatId(bigCatId);
     const total = raw[0][0].amount;
 
-    let nPage = Math.floor(total/limit);
-    if(total%limit>0){
+    let nPage = Math.floor(total / limit);
+    if (total % limit > 0) {
         nPage++;
     }
 
@@ -74,15 +182,15 @@ router.get('/byBigCat/:id', async function (req, res) {
         });
     }
 
-    const offset = (page-1)*limit;
-    const list = await productModel.findPageByBigCatId(bigCatId,limit,offset);
+    const offset = (page - 1) * limit;
+    const list = await productModel.findPageByBigCatId(bigCatId, limit, offset);
 
     let isFirst = 1;
     let isLast = 1;
 
-    if(list.length != 0){
+    if (list.length != 0) {
         isFirst = page_numbers[0].isCurrent;
-        isLast = page_numbers[nPage-1].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
     }
 
     res.render('vwProduct/byCat', {
@@ -103,8 +211,8 @@ router.get('/byCat/:id', async function (req, res) {
     const raw = await productModel.countCatID(CatID);
     const total = raw[0][0].amount;
 
-    let nPage = Math.floor(total/limit);
-    if(total%limit>0){
+    let nPage = Math.floor(total / limit);
+    if (total % limit > 0) {
         nPage++;
     }
 
@@ -116,16 +224,16 @@ router.get('/byCat/:id', async function (req, res) {
         });
     }
 
-    const offset = (page-1)*limit;
-    const list = await productModel.findPageByCatID(CatID,limit,offset);
+    const offset = (page - 1) * limit;
+    const list = await productModel.findPageByCatID(CatID, limit, offset);
 
     let isFirst = 1;
     let isLast = 1;
 
 
-    if(list.length != 0){
+    if (list.length != 0) {
         isFirst = page_numbers[0].isCurrent;
-        isLast = page_numbers[nPage-1].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
     }
     res.render('vwProduct/byCat', {
         products: list,
