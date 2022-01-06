@@ -234,7 +234,7 @@ export default {
                        and P.EndDate - NOW() > 0
                      order by P.EndDate - NOW() ASC limit 0, 6`;
         const raw = await db.raw(sql);
-        return raw;
+        return raw[0];
     },
 
     async sortByBid() {
@@ -262,8 +262,7 @@ export default {
                      GROUP BY P.ProID
                      ORDER BY sum DESC limit 0, 6`;
         const raw = await db.raw(sql);
-        return raw;
-    },
+        return raw[0];    },
 
     async sortByPrice() {
         const sql = `select C.CatName,
@@ -290,6 +289,5 @@ export default {
                      GROUP BY P.ProID
                      ORDER BY max DESC limit 0, 6`;
         const raw = await db.raw(sql);
-        return raw;
-    }
+        return raw[0];    }
 }

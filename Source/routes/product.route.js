@@ -306,7 +306,7 @@ router.get('/byCat/:id', async function (req, res) {
         isLast,
         type,
         CatID,
-        catName: list.CatName,
+        catName: list[0].CatName,
         href,
         checkType
     });

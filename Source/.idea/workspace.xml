@@ -7,16 +7,10 @@
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Source.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bid.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/bid.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/product.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/product.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/card/card.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/card/card.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/vwProduct/byCat.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwProduct/byCat.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +89,7 @@
       <workItem from="1641420264372" duration="5413000" />
       <workItem from="1641426071525" duration="112000" />
       <workItem from="1641471728923" duration="15641000" />
-      <workItem from="1641489301402" duration="14441000" />
+      <workItem from="1641489301402" duration="15205000" />
     </task>
     <servers />
   </component>

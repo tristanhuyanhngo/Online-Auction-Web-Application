@@ -3,12 +3,11 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import moment from "moment";
 import reCapt from 'express-recaptcha';
-import auth from '../middlewares/auth.mdw.js'
-// import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 import emailModel from "../models/email.models.js";
+import productModel from "../models/product.model.js";
 
 const RC = reCapt.RecaptchaV3;
 const recaptcha = new RC('6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC', '6LfL_ukdAAAAAOymLm0tldwv1RZIyPDq27lmoBmt', {callback:'cb'});
@@ -24,62 +23,70 @@ router.get('/', async function (req, res) {
     const list_2 = await productHome.sortByBid();
     const list_3 = await productHome.sortByPrice();
 
+    for(let i in list_1) {
+        list_1[i].noBid = false;
+        list_1[i].user = req.session.authUser;
+        const countBidding = await productModel.countBidding(list_1[i].ProID);
+        list_1[i].countBidding = countBidding[0].count;
+        if (list_1[i].Price==null) {
+            list_1[i].noBid = true;
+        } else {
+            let bidRet = await productModel.findBidDetails(list_1[i].ProID);
+            list_1[i].biddingHighest = bidRet[0];
+        }
 
-    for(let i = 0; i < list_1[0].length; i++) {
-        let bidding = await productHome.findBidding(list_1[0][i].ProID);
-        list_1[0][i].biddingHighest = bidding.shift();
-        list_1[0][i].user = res.locals.authUser;
-        const countBidding = await productHome.countBidding(list_1[0][i].ProID);
-        list_1[0][i].countBidding = countBidding[0].count;
-
-        if(res.locals.auth != false){
-            let isWish = await productHome.isInWishList(list_1[0][i].ProID,req.session.authUser.Email);
-
-            if(isWish.length > 0){
-                list_1[0][i].isWish = true;
+        if (req.session.auth != false) {
+            let inWish = await productModel.isInWishList(list_1[i].ProID, req.session.authUser.Email);
+            if (inWish.length > 0) {
+                list_1[i].isWish = true;
             }
         }
     }
 
-    for(let i = 0; i < list_2[0].length; i++) {
-        let bidding = await productHome.findBidding(list_2[0][i].ProID);
-        list_2[0][i].biddingHighest = bidding.shift();
-        list_2[0][i].user = res.locals.authUser;
-        const countBidding = await productHome.countBidding(list_2[0][i].ProID);
-        list_2[0][i].countBidding = countBidding[0].count;
+    for(let i in list_2) {
+        list_2[i].noBid = false;
+        list_2[i].user = req.session.authUser;
+        const countBidding = await productModel.countBidding(list_2[i].ProID);
+        list_2[i].countBidding = countBidding[0].count;
+        if (list_2[i].Price==null) {
+            list_2[i].noBid = true;
+        } else {
+            let bidRet = await productModel.findBidDetails(list_2[i].ProID);
+            list_2[i].biddingHighest = bidRet[0];
+        }
 
-        if(res.locals.auth != false){
-            let isWish = await productHome.isInWishList(list_2[0][i].ProID,req.session.authUser.Email);
-
-            if(isWish.length > 0){
-                list_2[0][i].isWish = true;
+        if (req.session.auth != false) {
+            let inWish = await productModel.isInWishList(list_2[i].ProID, req.session.authUser.Email);
+            if (inWish.length > 0) {
+                list_2[i].isWish = true;
             }
         }
     }
 
-    for(let i = 0; i < list_3[0].length; i++) {
-        let bidding = await productHome.findBidding(list_3[0][i].ProID);
-        list_3[0][i].biddingHighest = bidding.shift();
-        list_3[0][i].user = res.locals.authUser;
-        const countBidding = await productHome.countBidding(list_3[0][i].ProID);
-        list_3[0][i].countBidding = countBidding[0].count;
+    for(let i in list_3) {
+        list_3[i].noBid = false;
+        list_3[i].user = req.session.authUser;
+        const countBidding = await productModel.countBidding(list_3[i].ProID);
+        list_3[i].countBidding = countBidding[0].count;
+        if (list_3[i].Price==null) {
+            list_3[i].noBid = true;
+        } else {
+            let bidRet = await productModel.findBidDetails(list_3[i].ProID);
+            list_3[i].biddingHighest = bidRet[0];
+        }
 
-        if(res.locals.auth != false){
-            let isWish = await productHome.isInWishList(list_3[0][i].ProID,req.session.authUser.Email);
-
-            if(isWish.length > 0){
-                list_3[0][i].isWish = true;
+        if (req.session.auth != false) {
+            let inWish = await productModel.isInWishList(list_3[i].ProID, req.session.authUser.Email);
+            if (inWish.length > 0) {
+                list_3[i].isWish = true;
             }
         }
     }
-
-    // list_1[0][0].user = res.locals.authUser;
-    //console.log(list_1[0][0]);
 
     res.render('home', {
-        products: list_1[0],
-        products_1: list_2[0],
-        products_2: list_3[0]
+        products: list_1,
+        products_1: list_2,
+        products_2: list_3
     });
 });
 
