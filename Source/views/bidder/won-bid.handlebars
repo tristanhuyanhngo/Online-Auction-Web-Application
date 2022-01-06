@@ -80,10 +80,10 @@
                                                         <select class ="py-2 px-1 border border-key"
                                                                 name="Rate" id="cars">
                                                             <option class = "text-center" value="1">
-                                                            👍 (+1)
+                                                                👍 (+1)
                                                             </option>
                                                             <option class = "text-center" value="0">
-                                                            👎 (-1)
+                                                                👎 (-1)
                                                             </option>
                                                         </select>
                                                         <button type="submit"
@@ -141,7 +141,5 @@
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <script>
-    function like(x) {
-        x.classList.toggle("fa-thumbs-down");
-    }
+    CKEDITOR.replace('content');
 </script>

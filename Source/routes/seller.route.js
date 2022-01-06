@@ -70,7 +70,7 @@ async function validUploadLength (req, res, next) {
         res.render('seller/post-product',{
             pActive,
             layout: 'seller.handlebars',
-            errorOfImages: true;
+            errorOfImages: true
         });
     }
 

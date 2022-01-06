@@ -11,7 +11,7 @@
                 </div>
                 <div
                         class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-                    {{countBidding}}
+                    {{countBidding}} biddings
                 </div>
             </div>
             <div class="m-5 relative ">
@@ -21,7 +21,7 @@
                     <div>{{format_number SellPrice}} VND</div>
                 </div>
                 <div class=" flex justify-between mt-2 font-light text-xs">
-                    <div class="">START: {{format_number StartPrice}}</div>
+                    <div class="">START PRICE: {{format_number StartPrice}}</div>
                     <div class="">{{format_date EndDate}}</div>
                 </div>
 
@@ -30,38 +30,63 @@
                 <div class="flex text-xs mt-1 items-center justify-center">
                     <div class="h-6 w-6 rounded-full bg-black"></div>
                     <div class=" font-thin ml-1">BY</div>
-                    <div class=" uppercase font-semibold ml-1 text-cyan-800 truncate">{{Seller}}</div>
+                    <div class=" uppercase font-semibold ml-1 text-cyan-800 truncate">{{SellerName}}</div>
                 </div>
 
             </div>
-            <div
-                    class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0 bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
-                <div class="flex justify-center items-center font-semibold text-sm">
-                    <div class="text-yellow-600">HIGHEST</div>
-                </div>
-                <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
-                    <div class="">{{format_number biddingHighest.Price}}</div>
-                    <div>VND</div>
-                </div>
-                <div class=" mt-2 font-light text-xs">
-                    <div class="">{{format_date biddingHighest.Time}}</div>
-                </div>
 
-                <div class=" h-1 border-t border-gray-400 mt-2"></div>
+            {{#if this.noBid}}
+                <div
+                        class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0
+                    bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
+                    <div class="flex justify-left items-center font-semibold text-sm">
+                        <div class="text-yellow-600">START PRICE</div>
+                    </div>
+                    <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
+                        <div class="">{{format_number StartPrice}} VND</div>
+                    </div>
+                    <div class=" mt-2 font-light text-xs">
+                        <div class="">{{format_date UploadDate}}</div>
+                    </div>
+                    <div class=" h-1 border-t border-gray-400 mt-2"></div>
 
-                <div class="flex text-xs mt-1 items-center justify-center">
-                    <div class="h-6 w-6 rounded-full bg-black"></div>
-                    <div class=" font-thin ml-1">BY</div>
-                    <div class=" uppercase font-semibold ml-1 truncate">{{biddingHighest.Bidder}}</div>
+                    <div class="flex text-xs mt-1 items-center justify-center">
+                        <div class="h-6 w-6 rounded-full bg-black"></div>
+                        <div class=" font-thin ml-1">BY</div>
+                        <div class=" uppercase font-semibold ml-1 truncate">{{SellerName}}</div>
+
+                    </div>
                 </div>
-            </div>
+            {{else}}
+                <div
+                        class=" absolute bottom-0 w-full group-hover:visible group-hover:opacity-100 invisible opacity-0
+                    bg-gray-300 duration-700 delay-200 mb-8 group-hover:mb-0 p-5">
+                    <div class="flex justify-center items-center font-semibold text-sm">
+                        <div class="text-yellow-600">HIGHEST</div>
+                    </div>
+                    <div class="flex justify-between text-yellow-600 font-semibold text-base mt-2">
+                        <div class="">{{format_number biddingHighest.Price}} VND</div>
+                    </div>
+                    <div class=" mt-2 font-light text-xs">
+                        <div class="">{{format_date biddingHighest.Time}}</div>
+                    </div>
+
+                    <div class=" h-1 border-t border-gray-400 mt-2"></div>
+
+                    <div class="flex text-xs mt-1 items-center justify-center">
+                        <div class="h-6 w-6 rounded-full bg-black"></div>
+                        <div class=" font-thin ml-1">BY</div>
+                        <div class=" uppercase font-semibold ml-1 truncate">{{biddingHighest.Name}}</div>
+                    </div>
+                </div>
+            {{/if}}
         </a>
     </div>
 
     {{#if user}}
         {{#if this.isWish}}
             <a data-id="{{ProID}}" class="delItemWish" href="#" role="button">
-                <i class="absolute top-0 right-0 fa fa-heart fa-2x cursor-pointer" style ="color:red"
+                <i class="absolute top-0 right-0 fa fa-heart fa-2x cursor-pointer" style="color:red"
                    aria-hidden="true"></i>
             </a>
         {{else}}

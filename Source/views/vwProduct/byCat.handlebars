@@ -30,7 +30,6 @@
             window.location.href = "/product/" + "{{href}}/" + "{{CatID}}" + "?page=1&type=" + valueSelect;
         }
 
-
     </script>
 {{/section}}
 
@@ -45,15 +44,15 @@
 
 <div class="container mx-auto xl:px-10">
     <div class="flex justify-between items-center my-4">
-        <div class="text-2xl font-semibold text-cyan-700">{{this.bigCategory}}</div>
+        <div class="text-2xl font-semibold text-cyan-700">{{this.catName}}</div>
         <div class="">
             <select id="mySelect" onchange="myFunctionSelect()" class="form-select block p-1 border border-cyan-700 text-center ">
                 {{#if checkType}}
-                    <option value="1" selected="selected">Sort Time</option>
-                    <option value="0">Sort Price</option>
+                    <option value="1" selected="selected">Sort by Time</option>
+                    <option value="0">Sort by Price</option>
                 {{else}}
-                    <option value="1">Sort Time</option>
-                    <option value="0" selected="selected">Sort Price</option>
+                    <option value="1">Sort by Time</option>
+                    <option value="0" selected="selected">Sort by Price</option>
                 {{/if}}
             </select>
         </div>
@@ -87,7 +86,7 @@
                                 class="h-full w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
                             {{value}}
                         </div>
-                    </a>
+                        </a>
                     {{/if}}
                 {{/each}}
                 <div
