@@ -10,6 +10,7 @@ router.get('/detail/:id', async function(req, res) {
     req.session.retUrl = req.originalUrl;
     const pro_id = req.params.id || 0;
     const product = await productModel.findByProID(pro_id);
+
     let user = null;
     let inWish = false;
 
@@ -34,7 +35,6 @@ router.get('/detail/:id', async function(req, res) {
     const description = await productModel.findDescriptionProduct(pro_id);
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
-
     //console.log(product);
 
     let seller  = await userModel.findByEmail(product.Seller);

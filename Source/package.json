@@ -27,6 +27,7 @@
     "express-mysql-session": "^2.1.7",
     "express-recaptcha": "^5.0.2",
     "faker": "^5.5.3",
+    "fs-extra": "^10.0.0",
     "handlebars": "^4.7.7",
     "jquery": "^3.6.0",
     "knex": "^0.95.14",
