@@ -132,7 +132,7 @@ router.post('/forget-password', async function(req, res) {
     }
 
     req.session.forgetUser = email;
-    console.log(req.session.forgetUser);
+    //console.log(req.session.forgetUser);
     const otp = emailModel.sendOTP(email);
     req.body.OTP = otp.toString();
     await userModel.updateUser(req.body);
@@ -150,7 +150,7 @@ router.get('/reset-success', async function(req, res) {
 
 router.post('/confirm-otp', async function(req, res) {
     const email = req.session.forgetUser;
-    console.log(email);
+    //console.log(email);
     const ret = await userModel.findOTP(email);
     const otpInput = req.body.OTP;
 

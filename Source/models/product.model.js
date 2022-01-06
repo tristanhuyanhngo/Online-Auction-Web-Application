@@ -86,29 +86,118 @@ export default {
         return raw;
     },
 
-    async findPageByBigCatId(bigCatId, limit, offset) {
-        const sql = `select p.*, b.BigCatName, c.CatName
-                     from product p
-                              join
-                          (category c join big_category b
-                              on c.BigCat = b.BigCatID)
-                          on p.CatID = c.CatID
-                     where BigCatID = ${bigCatId} limit ${limit}
-                     offset ${offset}`;
+    async findPageByBigCatId(bigCatId, limit, offset, type) {
+        let sql;
+        if(type == 0) {
+            sql = `select C.CatName,
+                          L.BigCatName,
+                          P.ProID,
+                          P.ProName,
+                          P.StartPrice,
+                          U.Name as Seller,
+                          P.SellPrice,
+                          P.EndDate,
+                          B.ProID,
+                          MAX(B.Price) AS max
+                   from product as P,
+                       user as U,
+                       category as C,
+                       big_category as L,
+                       bidding as B
+                   where P.Seller = U.Email
+                     and P.CatID = C.CatID
+                     and C.BigCat = L.BigCatID
+                     and P.EndDate - NOW() > 0
+                     and B.ProID = P.ProID
+                     and L.BigCatID = ${bigCatId}
+                   GROUP BY P.ProID
+                   ORDER BY max
+                       limit ${limit} offset ${offset}`;
+        }
+        else {
+            sql = `select P.ProID,
+                          C.CatName,
+                          L.BigCatName,
+                          P.ProID,
+                          P.ProName,
+                          P.StartPrice,
+                          U.Name as Seller,
+                          P.SellPrice,
+                          P.EndDate,
+                          B.ProID
+                   from product as P,
+                        user as U,
+                        category as C,
+                        big_category as L,
+                        bidding as B
+                   where L.BigCatID = ${bigCatId} and
+                       P.Seller = U.Email and
+                       P.CatID = C.CatID and
+                       C.BigCat = L.BigCatID and
+                       B.ProID = P.ProID and
+                       P.EndDate - NOW() > 0
+                   GROUP BY P.ProID, P.EndDate
+                   ORDER BY P.EndDate
+                       limit ${limit} offset ${offset}`;
+        }
         const raw = await db.raw(sql);
         return raw;
     },
 
-    async findPageByCatID(catId, limit, offset) {
-        const sql = `select p.*, c.CatName, bc.BigCatName
-                     from product as p,
-                          category as c,
-                          big_category as bc
-                     where p.CatID = ${catId}
-                       and c.CatID = p.CatID
-                       and bc.BigCatID = c.BigCat
-                         limit ${limit}
-                     offset ${offset}`;
+    async findPageByCatID(catId, limit, offset, type) {
+        let sql;
+        if(type == 0) {
+            sql = `select C.CatName,
+                          L.BigCatName,
+                          P.ProID,
+                          P.ProName,
+                          P.StartPrice,
+                          U.Name as Seller,
+                          P.SellPrice,
+                          P.EndDate,
+                          B.ProID,
+                          MAX(B.Price) AS max
+                   from product as P,
+                       user as U,
+                       category as C,
+                       big_category as L,
+                       bidding as B
+                   where P.Seller = U.Email
+                     and P.CatID = C.CatID
+                     and C.BigCat = L.BigCatID
+                     and P.EndDate - NOW() > 0
+                     and B.ProID = P.ProID
+                     and P.CatID = ${catId}
+                   GROUP BY P.ProID
+                   ORDER BY max
+                       limit ${limit} offset ${offset}`;
+        }
+        else {
+            sql = `select P.ProID,
+                          C.CatName,
+                          L.BigCatName,
+                          P.ProID,
+                          P.ProName,
+                          P.StartPrice,
+                          U.Name as Seller,
+                          P.SellPrice,
+                          P.EndDate,
+                          B.ProID
+                   from product as P,
+                        user as U,
+                        category as C,
+                        big_category as L,
+                        bidding as B
+                   where P.CatID = ${catId} and
+                       P.Seller = U.Email and
+                       P.CatID = C.CatID and
+                       C.BigCat = L.BigCatID and
+                       B.ProID = P.ProID and
+                       P.EndDate - NOW() > 0
+                   GROUP BY P.ProID, P.EndDate
+                   ORDER BY P.EndDate
+                       limit ${limit} offset ${offset}`;
+        }
         const raw = await db.raw(sql);
         return raw[0];
     },
@@ -155,28 +244,35 @@ export default {
                      where P.Seller = U.Email
                        and P.CatID = C.CatID
                        and C.BigCat = L.BigCatID
-                     order by P.EndDate - P.UploadDate ASC limit 0, 4`;
+                       and P.EndDate - NOW() > 0
+                     order by P.EndDate - NOW() ASC limit 0, 6`;
         const raw = await db.raw(sql);
         return raw;
     },
 
     async sortByBid() {
-        const sql = ` select C.CatName,
-                             L.BigCatName,
-                             P.ProID,
-                             P.ProName,
-                             P.StartPrice,
-                             U.Name as Seller,
-                             P.SellPrice,
-                             P.EndDate
-                      from product as P,
-                           user as U,
-                           category as C,
-                           big_category as L
-                      where P.Seller = U.Email
-                        and P.ProID = 3
-                        and P.CatID = C.CatID
-                        and C.BigCat = L.BigCatID limit 0, 4`;
+        const sql = `select C.CatName,
+                            L.BigCatName,
+                            P.ProID,
+                            P.ProName,
+                            P.StartPrice,
+                            U.Name as Seller,
+                            P.SellPrice,
+                            P.EndDate,
+                            B.ProID,
+                            COUNT(P.ProID) AS sum
+                     from product as P,
+                         user as U,
+                         category as C,
+                         big_category as L,
+                         bidding as B
+                     where P.Seller = U.Email
+                       and P.CatID = C.CatID
+                       and C.BigCat = L.BigCatID
+                       and P.EndDate - NOW() > 0
+                       and B.ProID = P.ProID
+                     GROUP BY P.ProID
+                     ORDER BY sum DESC limit 0,6`;
         const raw = await db.raw(sql);
         return raw;
     },
@@ -189,15 +285,21 @@ export default {
                             P.StartPrice,
                             U.Name as Seller,
                             P.SellPrice,
-                            P.EndDate
+                            P.EndDate,
+                            B.ProID,
+                            MAX(B.Price) AS max
                      from product as P,
-                          user as U,
-                          category as C,
-                          big_category as L
+                         user as U,
+                         category as C,
+                         big_category as L,
+                         bidding as B
                      where P.Seller = U.Email
                        and P.CatID = C.CatID
                        and C.BigCat = L.BigCatID
-                     order by P.StartPrice DESC limit 0, 4`;
+                       and P.EndDate - NOW() > 0
+                       and B.ProID = P.ProID
+                     GROUP BY P.ProID
+                     ORDER BY max DESC limit 0,6`;
         const raw = await db.raw(sql);
         return raw;
     }

@@ -3,8 +3,11 @@ import productModel from '../models/product.model.js';
 import categoryModel from '../models/category.model.js';
 //import userModel from "../models/user.model";
 import userModel from "../models/user.model.js";
+import bodyParser from "body-parser";
 
 const router = express.Router();
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/detail/:id', async function(req, res) {
     req.session.retUrl = req.originalUrl;
@@ -60,6 +63,12 @@ router.get('/detail/:id', async function(req, res) {
 router.get('/byBigCat/:id', async function (req, res) {
     const bigCatId = req.params.id || 0;
     const page = req.query.page || 1;
+    const type = req.query.type || 1; //0: price , 1: time
+    let checkType = false;
+
+    if(type == 0)
+        checkType = false;
+    else checkType = true;
 
     const bigCategory_name = await categoryModel.findBigCategoryName(bigCatId)
     const bigCat = bigCategory_name[0].BigCatName;
@@ -82,7 +91,9 @@ router.get('/byBigCat/:id', async function (req, res) {
     }
 
     const offset = (page-1)*limit;
-    const list = await productModel.findPageByBigCatId(bigCatId,limit,offset);
+    const list = await productModel.findPageByBigCatId(bigCatId,limit,offset, type);
+
+
 
     let isFirst = 1;
     let isLast = 1;
@@ -109,19 +120,32 @@ router.get('/byBigCat/:id', async function (req, res) {
         isLast = page_numbers[nPage-1].isCurrent;
     }
 
+    const href = "byBigCat"
+
     res.render('vwProduct/byCat', {
         products: list[0],
-        empty: list.length === 0,
+        empty: list[0].length === 0,
         page_numbers,
         isFirst,
         isLast,
-        bigCategory: bigCat
+        bigCategory: bigCat,
+        type,
+        href,
+        CatID: bigCatId,
+        checkType
     });
 });
 
 router.get('/byCat/:id', async function (req, res) {
     const CatID = req.params.id || 0;
     const page = req.query.page || 1;
+    const type = req.query.type || 1; //0: price , 1: time
+
+    let checkType = false;
+
+    if(type == 0)
+        checkType = false;
+    else checkType = true;
 
     const limit = 8;
     const raw = await productModel.countCatID(CatID);
@@ -141,7 +165,7 @@ router.get('/byCat/:id', async function (req, res) {
     }
 
     const offset = (page-1)*limit;
-    const list = await productModel.findPageByCatID(CatID,limit,offset);
+    const list = await productModel.findPageByCatID(CatID,limit,offset, type);
 
     let isFirst = 1;
     let isLast = 1;
@@ -162,19 +186,37 @@ router.get('/byCat/:id', async function (req, res) {
         }
     }
 
-    console.log(list);
+    //console.log(list);
 
     if(list.length != 0){
         isFirst = page_numbers[0].isCurrent;
         isLast = page_numbers[nPage-1].isCurrent;
     }
+
+    const href = "byCat"
     res.render('vwProduct/byCat', {
         products: list,
         empty: list.length === 0,
         page_numbers,
         isFirst,
-        isLast
+        isLast,
+        type,
+        CatID,
+        href,
+        checkType
     });
 });
+
+
+// router.post('/select', urlencodedParser,async function(req, res) {
+//     console.log(req.headers.referer);
+//     const url = req.headers.referer;
+//     if(url.includes("byCat")) {
+//       const arr = url.split("/");
+//       const id = arr[arr.length-1];
+//     }
+//     if(req.headers.referer.includes("byBigCat"))
+//         console.log("byBigCat")
+// });
 
 export default router;

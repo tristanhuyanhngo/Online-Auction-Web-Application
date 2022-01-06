@@ -16,12 +16,12 @@
             </div>
             <div class="m-5 relative ">
                 <div class=" items-center font-semibold text-sm text-cyan-700 truncate">{{ProName}}</div>
-                <div class="flex justify-between text-red-600 font-semibold text-base mt-2">
-                    <div class="">{{format_number StartPrice}}</div>
-                    <div>VND</div>
+                <div class="flex justify-between text-red-600 font-semibold text-base mt-2 items-center">
+                    <div class="text-xs">BUY NOW:</div>
+                    <div>{{format_number SellPrice}} VND</div>
                 </div>
                 <div class=" flex justify-between mt-2 font-light text-xs">
-                    <div class="">Buy Now: {{format_number SellPrice}}</div>
+                    <div class="">START: {{format_number StartPrice}}</div>
                     <div class="">{{format_date EndDate}}</div>
                 </div>
 
@@ -70,7 +70,7 @@
             </a>
         {{/if}}
     {{else}}
-        <a href="/login">
+        <a class="isLogin">
             <i class="absolute top-0 right-0 fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
         </a>
     {{/if}}

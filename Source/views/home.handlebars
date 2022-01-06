@@ -1,5 +1,6 @@
 {{#section 'js'}}
     <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $(".addItemWish").click(function (e) {
             const id = $(this).data('id');
             $('#txtProIDAdd').val(id);
@@ -10,6 +11,16 @@
             const id = $(this).data('id');
             $('#txtProIDDel').val(id);
             $('#formDelWishList').submit();
+        })
+
+        $('.isLogin').click(function (e) {
+            if(!{{this.auth}}) {
+                swal("You must be logged in to continue", "click OK to login")
+                        .then((value) => {
+                            if(value)
+                                window.location.href = "/login";
+                        });
+            }
         })
     </script>
 {{/section}}
