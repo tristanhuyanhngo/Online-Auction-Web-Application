@@ -1,7 +1,6 @@
 import { engine, create } from 'express-handlebars';
 import numeral from 'numeral';
 import moment from 'moment';
-import 'moment-countdown';
 import handlebars_sections from "express-handlebars-sections";
 
 export default function (app) {

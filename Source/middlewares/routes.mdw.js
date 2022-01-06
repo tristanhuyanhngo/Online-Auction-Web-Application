@@ -13,14 +13,14 @@ export default function (app) {
     app.use('/admin', auth, adminRoute);
     app.use('/account', auth, accountRoute);
     app.use('/profile', auth, accountRoute);
-    app.use('/seller', auth,sellerRoute)
+    app.use('/seller', auth,sellerRoute);
     app.use('/public',express.static('public'));
 
-    app.use(function (err, req, res, next) {
-        res.render('error/505', {
-            layout: false,
-        });
-    });
+    // app.use(function (err, req, res, next) {
+    //     res.render('error/505', {
+    //         layout: false,
+    //     });
+    // });
 
     app.use(function (req, res, next) {
         res.render('error/404', {

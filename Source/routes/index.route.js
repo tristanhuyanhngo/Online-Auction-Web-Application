@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import bcrypt from "bcryptjs";
 import moment from "moment";
 import reCapt from 'express-recaptcha';
+import auth from '../middlewares/auth.mdw.js'
 // import auth from '../middlewares/auth.mdw.js';
 import productHome from "../models/product.model.js";
 import productSearch from "../models/search.model.js";
@@ -328,32 +329,38 @@ router.post('/logout', async function(req, res) {
 });
 
 router.get('/profile/:username', async function (req, res) {
-    const Username = req.params.username || 0;
+    if (req.session.auth === false) {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/login');
+    }
+
+    const Username = req.params.username;
+
+    let viewSelf = false;
+    if(Username === req.session.authUser.Username){
+        viewSelf= true;
+    }
+
     const user = await userModel.findByUsername(Username);
-
-    //console.log(res.locals);
-
 
     if (user === null) {
         return res.redirect('/');
     }
 
-    if(res.locals.auth == true) {
-        if(res.locals.authUser.Username === Username) {
-            res.render('profile', {
-            });
-        }
-        else {
-            res.render('profileUserOther', {
-                user
-            });
-        }
+    const email = user.Email;
+    const rateList = await userModel.findRating(email);
+
+    let hasReview = false;
+    if(rateList.length>0){
+        hasReview = true;
     }
-    else {
-        res.render('profileUserOther', {
-            user
-        });
-    }
+
+    return res.render('profile', {
+        user,
+        rateList,
+        hasReview,
+        viewSelf
+    });
 });
 
 export default router;

@@ -239,6 +239,30 @@ router.post('/wishlist/add',async function(req, res) {
     return res.redirect(url);
 });
 
+router.post('/review',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const product = req.body.ProID;
+    const receiver = req.body.SellerMail;
+    const comment = req.body.content;
+    let rate = true;
+    if(req.body.Rate === '0'){
+        rate = false;
+    }
+    const item = {
+        Sender: email,
+        Receiver: receiver,
+        Comment: comment,
+        Time: moment().format(),
+        ProID: product,
+        Rate: rate,
+    }
+    await userModel.addReview(item);
+    await userModel.updateRate(receiver);
+
+    const url = req.headers.referer || '/account/won-bid';
+    return res.redirect(url);
+});
+
 router.post('/cart/checkout',async function(req, res) {
     const email = res.locals.authUser.Email;
     const today = moment().format();
@@ -252,8 +276,6 @@ router.post('/cart/checkout',async function(req, res) {
         }
         await cartModel.checkout(item);
     }
-
-    await cartModel.delCart();
     return res.redirect('/account/cart');
 });
 
@@ -344,6 +366,10 @@ router.get('/won-bid', async (req, res) => {
 
     const offset = (page - 1) * limit;
     const list = await wonbidModel.findPageByEmail(email, limit, offset);
+
+    for(let i in list){
+        list[i].evaluated = ((await wonbidModel.evaluated(email, list[i].ProID))[0].amount===1);
+    }
 
     let isFirst = 1;
     let isLast = 1;

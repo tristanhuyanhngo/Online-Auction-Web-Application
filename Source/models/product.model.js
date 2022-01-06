@@ -2,16 +2,25 @@ import db from '../utils/db.js';
 import asyncErrors from 'express-async-errors'
 
 export default {
-    async countDown() {
-
+    async updateProduct(entity) {
+        const proid = entity.ProID;
+        delete entity.ProID;
+        return db('product').where('ProID', proid).update(entity);
     },
+
     async findAll() {
         const product = await db.select().from('product');
         return product;
     },
 
     async del(id) {
+        await db('description').where('ProID',id).del();
         return db('product').where('ProID', id).del();
+    },
+
+    async delBySeller(id, seller) {
+        await db('description').where('ProID',id).del();
+        await db('product').where('Seller', seller).del();
     },
 
     async countProduct() {
