@@ -2,15 +2,23 @@ import express from 'express';
 import bodyParser from "body-parser";
 import * as fs from 'fs';
 import multer from 'multer';
+import sellerModel from '../models/seller.model.js';
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+// const ID = await sellerModel.findIDProduct();
+// const dir = './public/image/product';
+//
+// if (!fs.existsSync(dir)){
+//     fs.mkdirSync(dir);
+// };
 
 let numberOfImage = 0;
 
 const storage = multer.diskStorage({
     destination: function (request, file, callback) {
-        let path = "./uploads" ;
+        let path = "./public/images" ;
         callback(null, path);
     },
     filename: function (request, file, callback) {
@@ -20,7 +28,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage});
+const upload = multer({storage: storage}).array('img', 10);
 
 router.get('/', async (req, res) => {
     let pActive = true;
@@ -47,9 +55,37 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/',urlencodedParser, upload.array("img", 10), async(req, res) => {
+// middleware
+function validUploadLength (req, res, next) {
+    console.log(req.files.length);
+    if (req.files.length < 3 || req.files.length > 10) {
+        return res.status(400).json({ error: 'Three files is required'})
+    }
+    next()
+}
+
+router.post('/', async(req, res) => {
     let pActive = true;
-    console.log(req.body);
+
+    upload(req, res, function (err) {
+        if (req.files.length < 3) {
+            for (let i = 1; i <= numberOfImage; i++) {
+                let filePath = `./public/images/${i}.jpg`;
+                fs.unlinkSync(filePath);
+            }
+        }
+        numberOfImage = 0;
+        if (req.files.length < 3 || req.files.length > 10) {
+            return res.status(400).json({ error: 'Three files is required'})
+        }
+        if (err instanceof multer.MulterError) {
+            console.log(err);
+        } else if (err) {
+            // An unknown error occurred when uploading.
+        }
+        // Everything went fine.
+    })
+
     res.render('seller/post-product',{
         pActive,
         layout: 'seller.handlebars'

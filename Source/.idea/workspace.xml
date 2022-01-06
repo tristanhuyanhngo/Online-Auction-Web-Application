@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Script/Script Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/view.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/view.mdw.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/account.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/account.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/accountRequest.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/accountRequest.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script Database.sql" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Script-Database.sql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -87,6 +84,9 @@
       <workItem from="1641244715584" duration="6412000" />
       <workItem from="1641298849235" duration="6116000" />
       <workItem from="1641373127715" duration="7541000" />
+      <workItem from="1641385596410" duration="3788000" />
+      <workItem from="1641389491519" duration="3530000" />
+      <workItem from="1641395494848" duration="7246000" />
     </task>
     <servers />
   </component>

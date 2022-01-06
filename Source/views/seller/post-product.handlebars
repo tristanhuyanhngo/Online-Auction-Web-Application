@@ -105,18 +105,34 @@
 
                     <div class="mb-4">
                         <label class="text-xl text-gray-600">Start Price <span
-                                class="text-red-500">*</span></label></br>
+                                class="text-red-500">*</span></label>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="startPrice" id="startPrice" required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Step Price <span class="text-red-500">*</span></label></br>
+                        <label class="text-xl text-gray-600">Step Price <span class="text-red-500">*</span></label>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="stepPrice" id="stepPrice" required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Sell Price <span class="text-red-500">*</span></label></br>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice" required>
+                        <label class="text-xl text-gray-600">Sell Price</label>
+                        <input type="text" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Auto renew<span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="auto_renew" id="auto_renew"">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Allow all users<span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="allow_users" id="allow_users"">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
                     </div>
 
                     <div class="mb-8">

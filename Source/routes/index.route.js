@@ -23,9 +23,6 @@ router.get('/', async function (req, res) {
     const list_2 = await productHome.sortByBid();
     const list_3 = await productHome.sortByPrice();
 
-    // console.log(req.session.auth);
-    // console.log(req.session.authUser);
-
     res.render('home', {
         products: list_1[0],
         products_1: list_2[0],
