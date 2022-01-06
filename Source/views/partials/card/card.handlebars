@@ -1,5 +1,3 @@
-
-
 <div class="relative">
     <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
         <a href="/product/detail/{{ProID}}">
@@ -13,7 +11,7 @@
                 </div>
                 <div
                         class=" absolute left-0 bottom-0 bg-gray-200 text-black font-semibold px-3 py-1 m-2 rounded-full border border-cyan-600">
-                    95
+                    {{countBidding}}
                 </div>
             </div>
             <div class="m-5 relative ">
@@ -54,7 +52,7 @@
                 <div class="flex text-xs mt-1 items-center justify-center">
                     <div class="h-6 w-6 rounded-full bg-black"></div>
                     <div class=" font-thin ml-1">BY</div>
-                    <div class=" uppercase font-semibold ml-1">{{biddingHighest.Bidder}}</div>
+                    <div class=" uppercase font-semibold ml-1 truncate">{{biddingHighest.Bidder}}</div>
                 </div>
             </div>
         </a>

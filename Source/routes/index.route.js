@@ -28,6 +28,8 @@ router.get('/', async function (req, res) {
         let bidding = await productHome.findBidding(list_1[0][i].ProID);
         list_1[0][i].biddingHighest = bidding.shift();
         list_1[0][i].user = res.locals.authUser;
+        const countBidding = await productHome.countBidding(list_1[0][i].ProID);
+        list_1[0][i].countBidding = countBidding[0].count;
 
         if(res.locals.auth != false){
             let isWish = await productHome.isInWishList(list_1[0][i].ProID,req.session.authUser.Email);
@@ -42,6 +44,8 @@ router.get('/', async function (req, res) {
         let bidding = await productHome.findBidding(list_2[0][i].ProID);
         list_2[0][i].biddingHighest = bidding.shift();
         list_2[0][i].user = res.locals.authUser;
+        const countBidding = await productHome.countBidding(list_2[0][i].ProID);
+        list_2[0][i].countBidding = countBidding[0].count;
 
         if(res.locals.auth != false){
             let isWish = await productHome.isInWishList(list_2[0][i].ProID,req.session.authUser.Email);
@@ -56,6 +60,8 @@ router.get('/', async function (req, res) {
         let bidding = await productHome.findBidding(list_3[0][i].ProID);
         list_3[0][i].biddingHighest = bidding.shift();
         list_3[0][i].user = res.locals.authUser;
+        const countBidding = await productHome.countBidding(list_3[0][i].ProID);
+        list_3[0][i].countBidding = countBidding[0].count;
 
         if(res.locals.auth != false){
             let isWish = await productHome.isInWishList(list_3[0][i].ProID,req.session.authUser.Email);

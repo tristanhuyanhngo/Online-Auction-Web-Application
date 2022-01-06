@@ -14,6 +14,12 @@ router.get('/detail/:id', async function(req, res) {
     let inWish = false;
 
     let bidding = await productModel.findBidding(pro_id);
+
+    for(let i = 0; i < bidding.length; i++) {
+        const tempUser = await userModel.findByEmail(bidding[i].Bidder);
+        bidding[i].Name = tempUser.Name;
+    }
+
     let biddingHighest
     if(bidding != null) {
         biddingHighest = bidding.shift();
@@ -81,6 +87,23 @@ router.get('/byBigCat/:id', async function (req, res) {
     let isFirst = 1;
     let isLast = 1;
 
+
+    for(let i = 0; i < list[0].length; i++) {
+        let bidding = await productModel.findBidding(list[0][i].ProID);
+        list[0][i].biddingHighest = bidding.shift();
+        list[0][i].user = res.locals.authUser;
+        const countBidding = await productModel.countBidding(list[0][i].ProID);
+        list[0][i].countBidding = countBidding[0].count;
+
+        if(res.locals.auth != false){
+            let isWish = await productModel.isInWishList(list[0][i].ProID,req.session.authUser.Email);
+
+            if(isWish.length > 0){
+                list[0][i].isWish = true;
+            }
+        }
+    }
+
     if(list.length != 0){
         isFirst = page_numbers[0].isCurrent;
         isLast = page_numbers[nPage-1].isCurrent;
@@ -123,6 +146,23 @@ router.get('/byCat/:id', async function (req, res) {
     let isFirst = 1;
     let isLast = 1;
 
+    for(let i = 0; i < list.length; i++) {
+        let bidding = await productModel.findBidding(list[i].ProID);
+        list[i].biddingHighest = bidding.shift();
+        list[i].user = res.locals.authUser;
+        const countBidding = await productModel.countBidding(list[i].ProID);
+        list[i].countBidding = countBidding[0].count;
+
+        if(res.locals.auth != false){
+            let isWish = await productModel.isInWishList(list[i].ProID,req.session.authUser.Email);
+
+            if(isWish.length > 0){
+                list[i].isWish = true;
+            }
+        }
+    }
+
+    console.log(list);
 
     if(list.length != 0){
         isFirst = page_numbers[0].isCurrent;

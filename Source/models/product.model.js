@@ -131,6 +131,14 @@ export default {
         return raw[0];
     },
 
+    async countBidding (proID) {
+        const sql = `select count(ProID) as count
+                     from bidding b
+                     where ProID = ${proID}`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
     async sortByEndDate() {
         const sql = `select C.CatName,
                             L.BigCatName,

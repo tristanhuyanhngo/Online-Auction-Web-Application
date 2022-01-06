@@ -24,6 +24,10 @@ export default function (app) {
                 else
                     return moment().from(val);
             },
+            format_name(val) {
+                const arr = val.split(" ");
+                return "*****" + arr[arr.length - 1];
+            },
             section: handlebars_sections()
         }
     }));
