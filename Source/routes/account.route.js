@@ -285,13 +285,13 @@ router.post('/cart/checkout',async function(req, res) {
                 await emailModel.sendBidDefeatEnd(currentWinner,list[i].ProName);
             }
         }
-
-        console.log("Bidder ", bidder.Name);
-        console.log("Product ",list[i]);
-        console.log("Bidder " + email);
-        console.log("Seller",list[i].SellerMail);
-        console.log("Bidder name " + bidder.Name);
-        console.log("Product price: ",list[i].SellPrice);
+        //
+        // console.log("Bidder ", bidder.Name);
+        // console.log("Product ",list[i]);
+        // console.log("Bidder " + email);
+        // console.log("Seller",list[i].SellerMail);
+        // console.log("Bidder name " + bidder.Name);
+        // console.log("Product price: ",list[i].SellPrice);
 
         await emailModel.sendBidEndSuccess(email,bidder.Name,list[i].SellerMail,list[i].ProName,list[i].SellPrice);
         await cartModel.checkout(item);
