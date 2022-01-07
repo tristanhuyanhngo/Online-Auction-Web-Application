@@ -230,7 +230,7 @@ COMMIT;
 -- Records of Nguoi Ban
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','seller1$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$12$9SHTJ2A2i/6S7CYi.Ylt0u4pa5duhBCnka.JhKgJ3dmHj1QLADvfC','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 COMMIT;
 

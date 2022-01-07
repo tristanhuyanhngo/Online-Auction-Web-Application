@@ -5,15 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/seller.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/seller.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/product.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/product.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layouts/seller.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/seller.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/seller/additional.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/additional.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/seller/post-product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/post-product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -40,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Script/Script-Database.sql" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/seller" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -53,6 +66,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\QST\Studying\3_Year\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\seller" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\models" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\otp" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views" />
@@ -90,7 +104,8 @@
       <workItem from="1641489301402" duration="15284000" />
       <workItem from="1641505073172" duration="429000" />
       <workItem from="1641537355283" duration="13000" />
-      <workItem from="1641537415353" duration="1573000" />
+      <workItem from="1641537415353" duration="14408000" />
+      <workItem from="1641555960560" duration="5079000" />
     </task>
     <servers />
   </component>

@@ -78,6 +78,7 @@
                             x-transition:leave="transition duration-1000"
                             x-transition:leave-start="opacity-100 transform translate-y-0"
                             x-transition:leave-end="opacity-0 transform -translate-y-12">
+                            <a href="/seller/products"><div class="bg-gray-200 hover:bg-cyan-900 py-2 px-4 hover:text-white">View products</div></a>
                             <a href="/seller/selling"><div class="bg-gray-200 hover:bg-cyan-900 py-2 px-4 hover:text-white">View selling</div></a>
                             <a href="/seller/sold"><div class="bg-gray-200 hover:bg-cyan-900 py-2 px-4 hover:text-white">View sold</div></a>
                             
@@ -102,15 +103,17 @@
             {{{body}}}
         </div>
     </div>
+</body>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
         integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"
         integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</body>
+
+{{{_sections.js}}}
 
 </html>

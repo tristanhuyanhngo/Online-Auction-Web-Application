@@ -1,0 +1,168 @@
+{{#if this.empty}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        No product.
+    </div>
+{{else}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        <div class="flex justify-start">
+            <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
+                <input type="search" class="w-64 px-1 h-auto focus:outline-none " placeholder="Search">
+                <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                    <tr>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Product name</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Upload Date</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">End Date</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Status</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">Edit</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                    {{#each this.product}}
+                        <tr>
+                                <div>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="font-medium text-gray-800 form-control">
+                                            {{ProID}}
+                                        </div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="font-medium text-gray-800">{{ProName}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{format_date UploadDate}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{format_date EndDate}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ProState}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap flex justify-center">
+                                        <div x-data="{ showModal : false }">
+                                            <div @click="showModal = !showModal"
+                                                 class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-red-700
+                                                 text-white hover:bg-red-900">DELETE</div>
+                                            <div x-show="showModal"
+                                                 class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                <div x-show="showModal"
+                                                     class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                     @click.away="showModal = false"
+                                                     x-transition:enter="transition ease-out duration-300"
+                                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                                     x-transition:leave="transition ease-in duration-300"
+                                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                                    <div>Are you sure?</div>
+                                                    <div class=" flex justify-end mt-4 space-x-4">
+                                                        <button
+                                                                type="submit"
+                                                                name="ProID"
+                                                                value={{ProID}}
+                                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700"
+                                                                form action="/admin/product/del">
+                                                            DELETE
+                                                        </button>
+                                                        <div @click="showModal = !showModal"
+                                                             class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div x-data="{ showModal : false }" class="ml-2">
+                                            <div @click="showModal = !showModal"
+                                                 class=" cursor-pointer px-6 py-1
+                                         hover:bg-gray-300  border border-cyan-700 shadow">ADD DESCRIPTION
+                                            </div>
+                                            <form id="addDescriptionForm" method="post">
+                                                <div x-show="showModal"
+                                                     class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                    <div x-show="showModal"
+                                                         class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
+                                                         @click.away="showModal = false"
+                                                         x-transition:enter="transition ease-out duration-300"
+                                                         x-transition:enter-start="opacity-0 transform scale-90"
+                                                         x-transition:enter-end="opacity-100 transform scale-100"
+                                                         x-transition:leave="transition ease-in duration-300"
+                                                         x-transition:leave-start="opacity-100 transform scale-100"
+                                                         x-transition:leave-end="opacity-0 transform scale-90">
+                                                <textarea id="txtContent"
+                                                          name="Content" class="border-2 border-gray-500 w-full ckeditor">
+                                                </textarea>
+
+                                                        <input hidden name = "ProID" value="{{ProID}}">>
+
+                                                        <div class="flex justify-center items-center mt-4">
+                                                            <button type="submit"
+                                                                    class="ml-4 cursor-pointer font-semibold text-md px-6 py-2
+                                                        border border-cyan-700 bg-key hover:bg-cyan-800 text-white">Send
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </div>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex justify-end mt-5">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <div
+                                class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <div
+                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2
+                </div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

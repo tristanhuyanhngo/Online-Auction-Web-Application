@@ -3,6 +3,10 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <form id="formUploadProduct" method="post"  name="formUploadProduct" enctype="multipart/form-data">
+                    {{#if errorOfImages}}
+                        <p class="text-red-500 text-center mb-4 "><strong>You just have uploaded less than 3 images. Please read our rules carefully then submit again, Thank you! </strong></p>
+                    {{/if}}
+
                     <div class="mb-4">
                         <label class="text-xl text-gray-600">Title <span class="text-red-500">*</span></label></br>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="title" id="title" value="" required>
@@ -162,7 +166,6 @@
     CKEDITOR.replace('content');
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     function update() {

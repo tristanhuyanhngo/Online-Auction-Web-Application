@@ -27,6 +27,11 @@ export default {
         return list[0].amount;
     },
 
+    async countProductBySeller(seller) {
+        const list = await db('products').select().from('product').where('Seller', seller).count({amount: 'ProID'});
+        return list[0].amount;
+    },
+
     async countCatID(id) {
         const sql = `select count(p.ProID) as amount
                      from product p
@@ -43,14 +48,19 @@ export default {
         return product;
     },
 
+    async findBySellerLimit(seller,limit, offset) {
+        const product = await db.select().from('product').where('Seller', seller).limit(limit).offset(offset);
+        return product;
+    },
+
     async findDescriptionProduct(proId) {
-        const sql = `select d.*
+        const sql = `select d.Content
                      from product as p,
                           description as d
                      where p.ProID = ${proId}
                        and p.ProID = d.ProID`;
         const raw = await db.raw(sql);
-        return raw[0][0];
+        return raw[0];
     },
 
     async findByCatID(catId, proId) {
@@ -289,5 +299,23 @@ export default {
                      GROUP BY P.ProID
                      ORDER BY max DESC limit 0, 6`;
         const raw = await db.raw(sql);
-        return raw[0];    }
+        return raw[0];    },
+
+    async findCatID(Cat) {
+        const sql = `select CatID
+                     from category c
+                     where c.CatName = '${Cat}'`;
+        const raw = await db.raw(sql);
+        return raw[0][0].CatID;
+    },
+    async findIDProduct() {
+        const ID = await db.max(`ProID`).from(`product`);
+        return Object.values(ID[0])[0];
+    },
+    async addProduct(entity) {
+        return db('product').insert(entity);
+    },
+    async addDescription(entity) {
+        return db('description').insert(entity);
+    }
 }

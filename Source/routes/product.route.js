@@ -105,7 +105,7 @@ router.get('/detail/:id', async function (req, res) {
         }
     }
 
-    console.log(product.Onair);
+    //console.log(product.Onair);
 
     let user = null;
     let inWish = false;
@@ -120,7 +120,7 @@ router.get('/detail/:id', async function (req, res) {
     let biddingHighest = null;
 
     let suggestPrice = +product.StartPrice + +product.StepPrice;
-    console.log(suggestPrice);
+    //console.log(suggestPrice);
 
     if (bidding.length > 0) {
         suggestPrice = +bidding[0].Price + +product.StepPrice;
@@ -140,7 +140,15 @@ router.get('/detail/:id', async function (req, res) {
         return res.redirect('/');
     }
 
-    const description = await productModel.findDescriptionProduct(pro_id);
+    const listDes = await productModel.findDescriptionProduct(pro_id);
+    let description = "";
+    for (let i = 0; i < listDes.length; i++) {
+        description += listDes[i].Content;
+        if (i != listDes.length - 1) {
+            description += '\n';
+            description += "<br>";
+        }
+    }
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
@@ -152,7 +160,7 @@ router.get('/detail/:id', async function (req, res) {
         allowBid,
         inWish,
         related_products,
-        description: description.Content,
+        description,
         seller,
         bidding,
         biddingHighest
@@ -189,7 +197,7 @@ router.get('/byBigCat/:id', async function (req, res) {
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset, type);
 
-    console.log(list);
+    //console.log(list);
 
     let isFirst = 1;
     let isLast = 1;
