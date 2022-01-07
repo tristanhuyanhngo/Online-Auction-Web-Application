@@ -231,7 +231,7 @@ router.get('/selling', async (req, res) => {
             const MaxPrice = query[0].MaxPrice
             product[i].MaxPrice = MaxPrice;
         }else{
-            product[i].CurrentWinner = "No bit yet";
+            product[i].CurrentWinner = "No bid yet";
             product[i].MaxPrice = product[i].StartPrice;
             product[i].FinalBid = true;
         }
