@@ -11,7 +11,7 @@ import sellerModel from '../models/seller.model.js';
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
-router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.urlencoded({extended: false}))
 
 // ****************************************************************************************
 // --------------------------------------- POST PRODUCT -----------------------------------------
@@ -68,13 +68,16 @@ router.post('/cancel', async(req, res) => {
     const bidder = req.body.Bidder;
     const proID = req.body.ProID;
 
+    console.log(bidder);
+
     await sellerModel.cancelBid(proID, bidder);
     const ret = await bidModel.findInBidding(proID);
+    console.log(ret);
 
     if(ret.length >0){
         const entity = {
             ProID: proID,
-            CurrentWinner: ret[0].CurrentWinner
+            CurrentWinner: ret[0].Bidder
         }
         await productModel.updateProduct(entity);
     } else{
@@ -224,8 +227,15 @@ router.get('/selling', async (req, res) => {
     const product = await productModel.findBySellerNotSoldLimit(seller,limit,offset);
     for(let i in product){
         const query = await bidModel.findInBidding(product[i].ProID);
-        const MaxPrice = query[0].MaxPrice
-        product[i].MaxPrice = MaxPrice;
+        if(query.length>0){
+            const MaxPrice = query[0].MaxPrice
+            product[i].MaxPrice = MaxPrice;
+        }else{
+            product[i].CurrentWinner = "No bit yet";
+            product[i].MaxPrice = product[i].StartPrice;
+            product[i].FinalBid = true;
+        }
+
     }
 
     let isFirst = 1;
