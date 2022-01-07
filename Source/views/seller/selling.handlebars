@@ -52,6 +52,7 @@
                     <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
                         <form method="post" action="/seller/cancel">
                             <input hidden name="ProID" value="{{ProID}}">
+                            <input hidden name ="Bidder" value = "{{CurrentWinner}}">
                             <button type ="submit"
                                     class=" cursor-pointer text-white font-semibold
                                     px-6 py-1 bg-red-600 hover:bg-red-700

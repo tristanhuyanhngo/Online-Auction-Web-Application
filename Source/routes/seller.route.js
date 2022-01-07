@@ -5,12 +5,13 @@ import fsExtra from 'fs-extra';
 import multer from 'multer';
 import moment from 'moment';
 
-import sellerModel from '../models/seller.model.js';
+import bidModel from '../models/bid.model.js';
 import productModel from '../models/product.model.js';
+import sellerModel from '../models/seller.model.js';
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
-
+router.use(bodyParser.urlencoded({ extended: false }));
 
 // ****************************************************************************************
 // --------------------------------------- POST PRODUCT -----------------------------------------
@@ -62,6 +63,17 @@ router.get('/', async (req, res) => {
         layout: 'seller.handlebars'
     });
 });
+
+router.post('/cancel', async(req, res) => {
+    const bidder = req.body.Bidder;
+    const proID = req.body.ProID;
+
+    await sellerModel.cancelBid(proID, bidder);
+    const url = req.headers.referer || '/seller/selling';
+
+    return res.redirect(url);
+});
+
 
 // Validate number of pictures
 async function validUploadLength (req, res, next) {
@@ -194,6 +206,11 @@ router.get('/selling', async (req, res) => {
 
     const offset = (page-1)*limit;
     const product = await productModel.findBySellerNotSoldLimit(seller,limit,offset);
+    for(let i in product){
+        const query = await bidModel.findInBidding(product[i].ProID);
+        const MaxPrice = query[0].MaxPrice
+        product[i].MaxPrice = MaxPrice;
+    }
 
     let isFirst = 1;
     let isLast = 1;
