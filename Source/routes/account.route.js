@@ -246,14 +246,18 @@ router.post('/review',async function(req, res) {
     const product = req.body.ProID;
     const receiver = req.body.SellerMail;
     const comment = req.body.content;
+
     let rate = true;
+    let commentStr = ':) Nice. ';
     if(req.body.Rate === '0'){
         rate = false;
+        commentStr=':( Bad. '
     }
+    commentStr+=comment;
     const item = {
         Sender: email,
         Receiver: receiver,
-        Comment: comment,
+        Comment: commentStr,
         Time: moment().format(),
         ProID: product,
         Rate: rate,

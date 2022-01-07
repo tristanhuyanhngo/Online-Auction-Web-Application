@@ -284,44 +284,56 @@
 
                             <!--                        buy now-->
                             {{#if auth}}
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div x-data="{ showModal : false }" class="w-1/3">
-                                        <div @click="showModal = !showModal"
-                                             class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
-                                            Buy now
-                                        </div>
-                                        <div x-show="showModal"
-                                             class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                {{#if this.product.allowUser}}
+                                    <div class="mt-2 flex items-center justify-between">
+                                        <div x-data="{ showModal : false }" class="w-1/3">
+                                            <div @click="showModal = !showModal"
+                                                 class="cursor-pointer font-semibold text-base text-white mt-1 py-2 bg-red-500 text-center">
+                                                Buy now
+                                            </div>
                                             <div x-show="showModal"
-                                                 class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                                                 @click.away="showModal = false"
-                                                 x-transition:enter="transition ease-out duration-300"
-                                                 x-transition:enter-start="opacity-0 transform scale-90"
-                                                 x-transition:enter-end="opacity-100 transform scale-100"
-                                                 x-transition:leave="transition ease-in duration-300"
-                                                 x-transition:leave-start="opacity-100 transform scale-100"
-                                                 x-transition:leave-end="opacity-0 transform scale-90">
-                                                <div>Are you sure?</div>
-                                                <div class=" flex justify-end mt-4 space-x-4">
-                                                    <form method="post" action="/product/buynow">
-                                                        <input hidden name = "ProID" value = {{this.product.ProID}}>
-                                                        <input hidden name = "CurrentWinner" value = {{this.biddingHighest.Bidder}}>
-                                                        <button type ="submit"
-                                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                            Buy now
-                                                        </button>
-                                                        <div @click="showModal = !showModal"
-                                                             class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
-                                                            Cancel
-                                                        </div>
-                                                    </form>
+                                                 class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                <div x-show="showModal"
+                                                     class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                     @click.away="showModal = false"
+                                                     x-transition:enter="transition ease-out duration-300"
+                                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                                     x-transition:leave="transition ease-in duration-300"
+                                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                                    <div>Are you sure?</div>
+                                                    <div class=" flex justify-end mt-4 space-x-4">
+                                                        <form method="post" action="/product/buynow">
+                                                            <input hidden name = "ProID" value = {{this.product.ProID}}>
+                                                            <input hidden name = "CurrentWinner" value = {{this.biddingHighest.Bidder}}>
+                                                            <button type ="submit"
+                                                                    class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                                Buy now
+                                                            </button>
+                                                            <div @click="showModal = !showModal"
+                                                                 class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
+                                                                Cancel
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="ml-4 text-xl
+                                        <div class="ml-4 text-xl
                                 text-red-600 font-semibold ">{{format_number this.product.SellPrice}}</div>
-                                </div>
+                                    </div>
+                                {{else}}
+                                    <div class=" flex items-center justify-between mt-1">
+                                        <div class=" w-1/3"">
+                                            <div class="cursor-pointer disable font-semibold text-base text-white mt-1 py-2 bg-gray-500 text-center">
+                                                Buy now
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 text-xl text-key font-semibold ">{{format_number
+                                                this.product.SellPrice}}</div>
+                                    </div>
+                                {{/if}}
                             {{else}}
                                 <div class=" flex items-center justify-between mt-1">
                                     <a class=" w-1/3" href="/login">

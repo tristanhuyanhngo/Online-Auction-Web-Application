@@ -1,15 +1,17 @@
-{{#section 'js'}}
-    <script>
-        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
-        $(".evaluateForm").on('submit', function (event) {
-            const review = $(this).find("textarea").val();
-            if (review.length < 1) {
-                swal('Please include some comments!');
-                event.preventDefault();
-            }
-        });
-    </script>
-{{/section}}
+<!--{{#section 'js'}}-->
+<!--    <script>-->
+<!--        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';-->
+<!--        $(".evaluateForm").on('submit', function (event) {-->
+<!--            event.preventDefault();-->
+<!--            const review = $(this).find("textarea").val();-->
+<!--            if (review.length <= 0) {-->
+<!--                swal('Please include some comments!');-->
+<!--                return;-->
+<!--            }-->
+<!--            $(".evaluateForm").off('submit').submit();-->
+<!--        });-->
+<!--    </script>-->
+<!--{{/section}}-->
 
 <div class="w-full  max-w-4xl mx-auto mt-8">
     {{#if this.empty}}
@@ -70,8 +72,7 @@
                                                      x-transition:leave-start="opacity-100 transform scale-100"
                                                      x-transition:leave-end="opacity-0 transform scale-90">
                                                 <textarea id="txtContent"
-                                                          name="content" class="border-2 border-gray-500 w-full">
-                                                </textarea>
+                                                          name="content" class="border-2 border-gray-500 w-full"></textarea>
 
                                                     <input hidden name = "ProID" value="{{ProID}}">
                                                     <input hidden name = "SellerMail" value="{{SellerMail}}">
@@ -79,7 +80,7 @@
                                                     <div class="flex justify-center items-center mt-4">
                                                         <select class ="py-2 px-1 border border-key"
                                                                 name="Rate" id="cars">
-                                                            <option class = "text-center" value="1">
+                                                            <option selected class = "text-center" value="1">
                                                                 👍 (+1)
                                                             </option>
                                                             <option class = "text-center" value="0">

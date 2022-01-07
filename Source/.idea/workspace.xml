@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/account.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/account.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/bidder/won-bid.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +90,7 @@
       <workItem from="1641471728923" duration="15641000" />
       <workItem from="1641489301402" duration="15284000" />
       <workItem from="1641505073172" duration="429000" />
+      <workItem from="1641571166868" duration="6591000" />
     </task>
     <servers />
   </component>
