@@ -11,7 +11,7 @@ export default function (app) {
                 return numeral(val).format('0,0');
             },
             format_date(val) {
-                return moment(val).format('DD-MM-YYYY, hh:mm');
+                return moment(val).format('DD-MM-YYYY, hh:mm:ss');
             },
 
             format_no_h(val) {

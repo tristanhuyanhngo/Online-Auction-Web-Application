@@ -75,7 +75,7 @@ router.post('/detail/:id', async function (req, res) {
             Price: newPrice
         }
         const ret = await bidModel.addBidding(bid);
-        console.log(ret);
+        //console.log(ret);
 
         const productEntity = {
             ProID: ProID,
@@ -273,7 +273,7 @@ router.get('/byCat/:id', async function (req, res) {
 
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByCatID(CatID, limit, offset, type);
-    console.log(list);
+    //console.log(list);
 
     let isFirst = 1;
     let isLast = 1;

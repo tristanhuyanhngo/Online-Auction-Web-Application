@@ -1,3 +1,8 @@
+{{#if this.empty}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        No product.
+    </div>
+{{else}}
 <div class="w-full  max-w-4xl mx-auto mt-8 overflow-auto">
     <div class="flex justify-start">
                 <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
@@ -17,7 +22,7 @@
                             <div class="font-semibold text-left">Name's bidder</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Time</div>
+                            <div class="font-semibold text-left">End Date</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Price</div>
@@ -27,19 +32,21 @@
                         </th>
                     </tr>
                 </thead>
+
+                {{#each this.product}}
                 <tbody class="text-sm divide-y divide-gray-100">
                     <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="font-medium text-gray-800">Alex Shatov</div>
+                            <div class="font-medium text-gray-800">{{ProName}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">alexshatov@gmail.com</div>
+                            <div class="text-left">{{CurrentWinner}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">07/12/2021</div>
+                            <div class="text-left">{{format_date EndDate}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">30.000.000</div>
+                            <div class="text-left">{{format_number MaxPrice}}</div>
                         </td>
                         <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
                             <div x-data="{ showModal : false }">
@@ -71,11 +78,45 @@
                         </td>
                     </tr>
                 </tbody>
+                {{/each}}
             </table>
         </div>
     </div>
-</div>
 
+    <div class="flex justify-end mt-5">
+        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+            {{#if isFirst}}
+            {{else}}
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            {{/if}}
+        </div>
+        <div class="flex h-12 font-medium rounded ">
+            {{#each this.page_numbers}}
+                {{#if isCurrent}}
+                    <div
+                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                        {{value}}</div>
+                {{else}}
+                    <div
+                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                        <a class="page-link" href="?page={{value}}">{{value}}</a>
+                    </div>
+                {{/if}}
+            {{/each}}
+            <div
+                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                2
+            </div>
+        </div>
+        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+            {{#if isLast}}
+            {{else}}
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/if}}
 
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 

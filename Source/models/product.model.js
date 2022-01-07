@@ -317,5 +317,39 @@ export default {
     },
     async addDescription(entity) {
         return db('description').insert(entity);
+    },
+    async countProductNotSoldBySeller(seller) {
+        const sql = `select count(*) as number
+                     from product p
+                     where p.Seller = '${seller}' and
+                           p.ProState = true`;
+        const raw = await db.raw(sql);
+        return raw[0][0].number;
+    },
+    async countProductSoldBySeller(seller) {
+        const sql = `select count(*) as number
+                     from product p
+                     where p.Seller = '${seller}' and
+                           p.ProState = false`;
+        const raw = await db.raw(sql);
+        return raw[0][0].number;
+    },
+    async findBySellerNotSoldLimit(seller,limit,offset) {
+        const sql = `select *
+                     from product p
+                     where p.Seller = '${seller}' and
+                           p.ProState = true
+                     limit ${limit} offset ${offset}`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+    async findBySellerSoldLimit(seller,limit,offset) {
+        const sql = `select *
+                     from product p
+                     where p.Seller = '${seller}' and
+                           p.ProState = false
+                     limit ${limit} offset ${offset}`;
+        const raw = await db.raw(sql);
+        return raw[0];
     }
 }

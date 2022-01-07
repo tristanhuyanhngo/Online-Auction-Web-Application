@@ -11,6 +11,9 @@ import productModel from '../models/product.model.js';
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+
+// ****************************************************************************************
+// --------------------------------------- POST PRODUCT -----------------------------------------
 let ID = await productModel.findIDProduct();
 let dir = './public/images/Product/' + (ID+1).toString();
 let dir_temp;
@@ -148,32 +151,8 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
     });
 });
 
-router.get('/additional', async (req, res) => {
-    let aActive = true;
-
-    // Get information of user from session
-    const user = req.session.authUser || 0;
-    if (!user) {
-        console.log("Please login first ! ");
-        res.redirect('/');
-        return;
-    }
-
-    // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
-    const isSeller = req.session.isSeller;
-    if (!isSeller) {
-        console.log("You don't have permission to access this page ! ");
-        res.redirect('/');
-        return;
-    }
-
-    res.render('seller/additional',{
-        aActive,
-        layout: 'seller.handlebars'
-    });
-});
-
-
+// ****************************************************************************************
+// --------------------------------------- SELLING -----------------------------------------
 router.get('/selling', async (req, res) => {
     let vActive = true;
 
@@ -193,13 +172,59 @@ router.get('/selling', async (req, res) => {
         return;
     }
 
-    res.render('seller/selling',{
+    const seller = req.session.authUser.Email;
+    const page = req.query.page || 1;
+    const limit = 6;
+
+    const total = await productModel.countProductNotSoldBySeller(seller);
+
+    let nPage = Math.floor(total/limit);
+
+    if(total%limit>0){
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page-1)*limit;
+    const product = await productModel.findBySellerNotSoldLimit(seller,limit,offset);
+
+    for (let i = 0; i < product.length; i++) {
+        if (product[i].ProState[0]) {
+            product[i].ProState = "Still on sale";
+        }
+        else {
+            product[i].ProState = "Has been sold";
+        }
+    }
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (product.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    res.render('seller/selling', {
         vActive,
-        layout: 'seller.handlebars'
+        product,
+        layout: 'seller.handlebars',
+        empty: product.length === 0,
+        page_numbers,
+        isFirst,
+        isLast
     });
 });
 
-
+// ****************************************************************************************
+// --------------------------------------- SOLD-----------------------------------------
 router.get('/sold', async (req, res) => {
     let vActive = true;
 
@@ -219,12 +244,60 @@ router.get('/sold', async (req, res) => {
         return;
     }
 
-    res.render('seller/sold',{
+    const seller = req.session.authUser.Email;
+    const page = req.query.page || 1;
+    const limit = 6;
+
+    const total = await productModel.countProductSoldBySeller(seller);
+
+    let nPage = Math.floor(total/limit);
+
+    if(total%limit>0){
+        nPage++;
+    }
+
+    const page_numbers = [];
+    for (let i = 1; i <= nPage; i++) {
+        page_numbers.push({
+            value: i,
+            isCurrent: +page === i
+        });
+    }
+
+    const offset = (page-1)*limit;
+    const product = await productModel.findBySellerSoldLimit(seller,limit,offset);
+    console.log(product);
+
+    for (let i = 0; i < product.length; i++) {
+        if (product[i].ProState[0]) {
+            product[i].ProState = "Still on sale";
+        }
+        else {
+            product[i].ProState = "Has been sold";
+        }
+    }
+
+    let isFirst = 1;
+    let isLast = 1;
+
+    if (product.length != 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    res.render('seller/sold', {
         vActive,
-        layout: 'seller.handlebars'
+        product,
+        layout: 'seller.handlebars',
+        empty: product.length === 0,
+        page_numbers,
+        isFirst,
+        isLast
     });
 });
 
+// ****************************************************************************************
+// --------------------------------------- PRODUCTS -----------------------------------------
 router.get('/products', async (req, res) => {
     let vActive = true;
 
@@ -269,10 +342,10 @@ router.get('/products', async (req, res) => {
 
     for (let i = 0; i < product.length; i++) {
         if (product[i].ProState[0]) {
-            product[i].ProState = "Not sold yet";
+            product[i].ProState = "Still on sale";
         }
         else {
-            product[i].ProState = "Has sold";
+            product[i].ProState = "Has been sold";
         }
     }
 
@@ -338,10 +411,10 @@ router.post('/products',urlencodedParser, async (req, res) => {
 
     for (let i = 0; i < product.length; i++) {
         if (product[i].ProState[0]) {
-            product[i].ProState = "Not sold yet";
+            product[i].ProState = "Has sold";
         }
         else {
-            product[i].ProState = "Has sold";
+            product[i].ProState = "Not sold yet";
         }
     }
 
