@@ -303,14 +303,18 @@
                                                  x-transition:leave-end="opacity-0 transform scale-90">
                                                 <div>Are you sure?</div>
                                                 <div class=" flex justify-end mt-4 space-x-4">
-                                                    <button
-                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                        Buy now
-                                                    </button>
-                                                    <div @click="showModal = !showModal"
-                                                         class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
-                                                        Cancel
-                                                    </div>
+                                                    <form method="post" action="/product/buynow">
+                                                        <input hidden name = "ProID" value = {{this.product.ProID}}>
+                                                        <input hidden name = "CurrentWinner" value = {{this.biddingHighest.Bidder}}>
+                                                        <button type ="submit"
+                                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                            Buy now
+                                                        </button>
+                                                        <div @click="showModal = !showModal"
+                                                             class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
+                                                            Cancel
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -577,16 +581,18 @@
                                              x-transition:leave-start="opacity-100 transform scale-100"
                                              x-transition:leave-end="opacity-0 transform scale-90">
                                             <div>Are you sure?</div>
-                                            <div class=" flex justify-end mt-4 space-x-4">
-                                                <button
-                                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
-                                                    Buy now
-                                                </button>
-                                                <div @click="showModal = !showModal"
-                                                     class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
-                                                    Cancel
+                                            <form>
+                                                <div class=" flex justify-end mt-4 space-x-4">
+                                                    <button
+                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700">
+                                                        Buy now
+                                                    </button>
+                                                    <div @click="showModal = !showModal"
+                                                         class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">
+                                                        Cancel
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

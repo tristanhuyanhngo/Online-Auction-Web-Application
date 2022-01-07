@@ -50,7 +50,7 @@ export default {
             winner,
             seller
         ];
-        const otpStr = 'The bidding time for ' + proName + ' on Horizon is over!\n'
+        const otpStr = 'The bidding for ' + proName + ' on Horizon is over!\n'
             +'The success bidder is '+winnerName+'!\n'+'Final price: '+price+'VND\n'
         +'In case the payment is not complete, the success bidder have to finish it within 3 days from now!';
         const mailOptions = {
@@ -84,6 +84,19 @@ export default {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
             subject: 'Bid has been won over by another bidder!',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
+    sendBidDefeatEnd(receiver, proName) {
+        const otpStr = 'There is some one who bought ' + proName + ' with the BUY NOW price!\n' +
+            'The bid for '+proName+' is over!';
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Bid for '+proName+' is over',
             text: otpStr
         };
 
