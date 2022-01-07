@@ -31,7 +31,7 @@ router.get('/', async function (req, res) {
         if (list_1[i].Price==null) {
             list_1[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_1[i].ProID);
+            let bidRet = await productModel.findBidding(list_1[i].ProID);
             list_1[i].biddingHighest = bidRet[0];
         }
 
@@ -51,7 +51,7 @@ router.get('/', async function (req, res) {
         if (list_2[i].Price==null) {
             list_2[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_2[i].ProID);
+            let bidRet = await productModel.findBidding(list_2[i].ProID);
             list_2[i].biddingHighest = bidRet[0];
         }
 
@@ -71,7 +71,7 @@ router.get('/', async function (req, res) {
         if (list_3[i].Price==null) {
             list_3[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_3[i].ProID);
+            let bidRet = await productModel.findBidding(list_3[i].ProID);
             list_3[i].biddingHighest = bidRet[0];
         }
 

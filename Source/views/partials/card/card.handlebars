@@ -30,7 +30,7 @@
                 <div class="flex text-xs mt-1 items-center justify-center">
                     <div class="h-6 w-6 rounded-full bg-black"></div>
                     <div class=" font-thin ml-1">BY</div>
-                    <div class=" uppercase font-semibold ml-1 text-cyan-800 truncate">{{SellerName}}</div>
+                    <div class=" uppercase font-semibold ml-1 text-cyan-800 truncate">{{Seller}}</div>
                 </div>
 
             </div>
@@ -53,7 +53,7 @@
                     <div class="flex text-xs mt-1 items-center justify-center">
                         <div class="h-6 w-6 rounded-full bg-black"></div>
                         <div class=" font-thin ml-1">BY</div>
-                        <div class=" uppercase font-semibold ml-1 truncate">{{SellerName}}</div>
+                        <div class=" uppercase font-semibold ml-1 truncate">{{Seller}}</div>
 
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <div class="flex text-xs mt-1 items-center justify-center">
                         <div class="h-6 w-6 rounded-full bg-black"></div>
                         <div class=" font-thin ml-1">BY</div>
-                        <div class=" uppercase font-semibold ml-1 truncate">{{biddingHighest.Name}}</div>
+                        <div class=" uppercase font-semibold ml-1 truncate text-cyan-700">{{format_name biddingHighest.Name}}</div>
                     </div>
                 </div>
             {{/if}}
