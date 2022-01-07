@@ -69,6 +69,22 @@ router.post('/cancel', async(req, res) => {
     const proID = req.body.ProID;
 
     await sellerModel.cancelBid(proID, bidder);
+    const ret = await bidModel.findInBidding(proID);
+
+    if(ret.length >0){
+        const entity = {
+            ProID: proID,
+            CurrentWinner: ret[0].CurrentWinner
+        }
+        await productModel.updateProduct(entity);
+    } else{
+        const entity = {
+            ProID: proID,
+            CurrentWinner: 'NULL'
+        }
+        await productModel.updateProduct(entity);
+    }
+
     const url = req.headers.referer || '/seller/selling';
 
     return res.redirect(url);
