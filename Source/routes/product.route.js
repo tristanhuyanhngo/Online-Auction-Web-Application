@@ -134,6 +134,15 @@ router.get('/detail/:id', async function (req, res) {
         if (isWish.length > 0) {
             inWish = true;
         }
+
+        product.allowUser = true;
+
+        if(product.AllowAllUsers.readInt8()===0){
+            const rate = req.session.authUser.Rate;
+            if(rate<80){
+                product.allowUser = false;
+            }
+        }
     }
 
     if (product === undefined) {

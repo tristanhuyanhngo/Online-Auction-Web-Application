@@ -221,21 +221,34 @@
                                             </div>
                                         </div>
                                         {{#if allowBid}}
-                                            <div class=" flex items-center justify-between mt-1">
-                                                <div @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
-                                                    <div class="text-center cursor-pointer font-semibold
+                                            {{#if this.product.allowUser}}
+                                                <div class=" flex items-center justify-between mt-1">
+                                                    <div @click=" open = !open " class=" w-1/3 py-2 bg-green-800">
+                                                        <div class="text-center cursor-pointer font-semibold
                                                 text-base text-white rounded">Place bid
+                                                        </div>
+                                                    </div>
+                                                    {{#if this.biddingHighest}}
+                                                        <div
+                                                                class="ml-4 text-xl text-key font-semibold">{{format_number
+                                                                this.biddingHighest.Price}}</div>
+                                                    {{else}}
+                                                        <div class="ml-4 text-xl text-key font-semibold ">{{format_number
+                                                                this.product.StartPrice}}</div>
+                                                    {{/if}}
+                                                </div>
+                                            {{else}}
+                                                <div class=" flex items-center justify-between mt-1">
+                                                    <div class=" w-1/3 py-2 bg-gray-400">
+                                                        <div class="disable text-center cursor-pointer font-semibold
+                                                text-base text-white rounded">Place bid
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right text-key font-semibold py-2 font-light">
+                                                        Please gain more than 80% good ratings!
                                                     </div>
                                                 </div>
-                                                {{#if this.biddingHighest}}
-                                                    <div
-                                                            class="ml-4 text-xl text-key font-semibold">{{format_number
-                                                            this.biddingHighest.Price}}</div>
-                                                {{else}}
-                                                    <div class="ml-4 text-xl text-key font-semibold ">{{format_number
-                                                            this.product.StartPrice}}</div>
-                                                {{/if}}
-                                            </div>
+                                            {{/if}}
                                         {{else}}
                                             <div class=" flex items-center justify-between mt-1">
                                                 <div class=" w-1/3 py-2 bg-gray-400">
