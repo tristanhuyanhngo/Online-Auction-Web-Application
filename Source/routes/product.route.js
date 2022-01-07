@@ -31,8 +31,11 @@ router.post('/detail/:id', async function (req, res) {
     const queryPrice = req.body.queryPrice;
     const ProID = req.params.id;
     const email = req.session.authUser.Email;
+    const bidder = await userModel.findByEmail(email);
+    const bidderName = bidder.Name;
 
     let product = await productModel.findByProID(ProID);
+    const seller = product.Seller;
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
 
@@ -53,6 +56,9 @@ router.post('/detail/:id', async function (req, res) {
             MaxPrice: queryPrice
         }
         await productModel.updateProduct(productEntity);
+
+        emailModel.sendSuccessBid(email,bidderName,seller,product.ProName,queryPrice);
+
         return res.redirect(url);
     }
 
@@ -66,8 +72,11 @@ router.post('/detail/:id', async function (req, res) {
         await bidModel.updateBidding(bid);
         return res.redirect(url);
     } else {
-        emailModel.sendBidDefeat(product.CurrentWinner, product.ProName);
         const newPrice = maxPrice + step;
+
+        emailModel.sendSuccessBid(email,bidderName,seller,product.ProName,newPrice);
+        emailModel.sendBidDefeat(product.CurrentWinner, product.ProName);
+
         const bid = {
             ProID: ProID,
             Bidder: email,
