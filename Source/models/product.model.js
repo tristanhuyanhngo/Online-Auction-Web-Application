@@ -49,7 +49,10 @@ export default {
     },
 
     async findBySellerLimit(seller,limit, offset) {
-        const product = await db.select().from('product').where('Seller', seller).limit(limit).offset(offset);
+        const product = await db.select().from('product').where({
+            Seller: seller,
+            ProState: true
+        }).limit(limit).offset(offset);
         return product;
     },
 
