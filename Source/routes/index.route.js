@@ -121,7 +121,7 @@ router.get('/search', async function (req, res) {
 });
 
 // ---------------- REGISTER ---------------- //
-router.get('/register', async function(req, res) {
+router.get('/register', recaptcha.middleware.render, async function(req, res) {
     res.render('register');
 });
 
@@ -177,31 +177,39 @@ router.post('/confirm-otp', async function(req, res) {
     return res.redirect('/reset-success');
 });
 
-router.post('/register',urlencodedParser,async function(req, res) {
-    const rawPassword = req.body.password;
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(rawPassword, salt);
-    const today = moment().format();
-    const otp = emailModel.sendOTPRegister(req.body.email);
+router.post('/register', recaptcha.middleware.verify,async function(req, res) {
+    if (!req.recaptcha.error) {
+        const rawPassword = req.body.password;
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(rawPassword, salt);
+        const today = moment().format();
+        const otp = emailModel.sendOTPRegister(req.body.email);
 
-    const user = {
-        Email: req.body.email,
-        Username: req.body.username,
-        Password: hash,
-        Name: req.body.fullName,
-        Address: null,
-        DOB: null,
-        RegisterDate: today,
-        Type: 2,
-        Rate: 0,
-        OTP: otp.toString(),
-        Valid: false
+        const user = {
+            Email: req.body.email,
+            Username: req.body.username,
+            Password: hash,
+            Name: req.body.fullName,
+            Address: null,
+            DOB: null,
+            RegisterDate: today,
+            Type: 2,
+            Rate: 0,
+            OTP: otp.toString(),
+            Valid: false
+        }
+
+        await userModel.addUser(user);
+        req.session.registerUser = req.body.email;
+
+        res.redirect('/confirm-register');
+    }
+    else {
+        return res.render('register',{
+            error: 'Please check the captcha! !'
+        });
     }
 
-    await userModel.addUser(user);
-    req.session.registerUser = req.body.email;
-
-    res.redirect('/confirm-register');
 });
 
 router.get('/confirm-register', async function(req, res) {
@@ -279,44 +287,51 @@ router.get('/username-available', async function (req, res) {
 });
 
 // ---------------- LOGIN ---------------- //
-router.get('/login', async function(req, res){
+router.get('/login', recaptcha.middleware.render, async function(req, res){
     res.render('login', { captcha:recaptcha.render() });
 });
 
-router.post('/login',urlencodedParser, async function (req, res) {
-    const email = req.body.email;
-    const user = await userModel.findByEmail(email);
+router.post('/login', recaptcha.middleware.verify, async function (req, res) {
+    if (!req.recaptcha.error) {
+        const email = req.body.email;
+        const user = await userModel.findByEmail(email);
 
-    if(user === null){
+        if(user === null){
+            return res.render('login',{
+                error: 'Invalid username or password !'
+            });
+        }
+
+        const ret = bcrypt.compareSync(req.body.password, user.Password);
+        if(ret === false){
+            return res.render('login',{
+                error: 'Invalid username or password!'
+            });
+        }
+
+        delete user.Password;
+
+        // 1 - Seller , 2 - Bidder, 3 - Admin
+        req.session.auth=true;
+        req.session.authUser=user;
+
+        if (user.Type === '3') {
+            req.session.isSeller = true;
+            req.session.isAdmin = true;
+        }
+        else if (user.Type === '1') {
+            req.session.isSeller = true;
+            req.session.isAdmin = false;
+        }
+
+        const url = req.session.retUrl||'/';
+        res.redirect(url);
+    }
+    else {
         return res.render('login',{
-            error: 'Invalid username or password !'
+            error: 'Please check the captcha! !'
         });
     }
-
-    const ret = bcrypt.compareSync(req.body.password, user.Password);
-    if(ret === false){
-        return res.render('login',{
-            error: 'Invalid username or password!'
-        });
-    }
-
-    delete user.Password;
-
-    // 1 - Seller , 2 - Bidder, 3 - Admin
-    req.session.auth=true;
-    req.session.authUser=user;
-
-    if (user.Type === '3') {
-        req.session.isSeller = true;
-        req.session.isAdmin = true;
-    }
-    else if (user.Type === '1') {
-        req.session.isSeller = true;
-        req.session.isAdmin = false;
-    }
-
-    const url = req.session.retUrl||'/';
-    res.redirect(url);
 });
 
 // ---------------- LOGOUT ---------------- //

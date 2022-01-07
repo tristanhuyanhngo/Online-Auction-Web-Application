@@ -75,7 +75,6 @@ router.post('/detail/:id', async function (req, res) {
             Price: newPrice
         }
         const ret = await bidModel.addBidding(bid);
-        console.log(ret);
 
         const productEntity = {
             ProID: ProID,
@@ -105,7 +104,6 @@ router.get('/detail/:id', async function (req, res) {
         }
     }
 
-    console.log(product.Onair);
 
     let user = null;
     let inWish = false;
@@ -120,11 +118,11 @@ router.get('/detail/:id', async function (req, res) {
     let biddingHighest = null;
 
     let suggestPrice = +product.StartPrice + +product.StepPrice;
-    console.log(suggestPrice);
 
     if (bidding.length > 0) {
         suggestPrice = +bidding[0].Price + +product.StepPrice;
         biddingHighest = bidding[0];
+        bidding[0].isBiddingHighest = true;
     }
 
     if (res.locals.auth != false) {
@@ -291,7 +289,6 @@ router.get('/byCat/:id', async function (req, res) {
         isLast = page_numbers[nPage - 1].isCurrent;
     }
 
-    console.log(list)
     const href = "byCat"
     res.render('vwProduct/byCat', {
         products: list,

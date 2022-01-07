@@ -63,12 +63,16 @@
 
         $('#txtFullName').select();
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {{/section}}
 
 <form id="formRegister" method="post">
     <div class="min-h-screen h-100">
         <div class="container mx-auto flex justify-center pt-5">
             <div class="w-96  p-8 border border-cyan-700 shadow-2xl">
+                {{#if error}}
+                    <p class="text-red-600 text-center mb-4 "><strong>{{error}}</strong></p>
+                {{/if}}
                 <input
                         id="txtFullName" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none"
                         placeholder="Full name" name="fullName"/>
@@ -86,6 +90,7 @@
                 <input
                         id="txtConfirmPassword" class="flex-1 appearance-none border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none mt-4"
                         type="password" placeholder="Confirm password" name="confirm_password"/>
+                <div class="g-recaptcha" data-sitekey="6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC"></div>
                 <button
                         type="submit" class="bg-cyan-700 w-full mt-2 shadow-md py-2 px-4 hover:bg-cyan-800 font-medium transition duration-500 text-white" name="register_button">REGISTER</button>
 
