@@ -109,7 +109,8 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
         EndDate: end_date,
         AutoExtend: auto_extend,
         ProState: true,
-        SuccessBidder: null
+        CurrentWinner: null,
+        MaxPrice: 0
     }
 
     // Description
