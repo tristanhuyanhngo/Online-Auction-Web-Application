@@ -8,6 +8,8 @@ import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 import emailModel from "../models/email.models.js";
 import productModel from "../models/product.model.js";
+import passport from "passport";
+import '../auth/authG.js'
 
 const RC = reCapt.RecaptchaV3;
 const recaptcha = new RC('6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC', '6LfL_ukdAAAAAOymLm0tldwv1RZIyPDq27lmoBmt', {callback:'cb'});
@@ -301,6 +303,59 @@ router.get('/username-available', async function (req, res) {
 router.get('/login', recaptcha.middleware.render, async function(req, res){
     res.render('login', { captcha:recaptcha.render() });
 });
+
+router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', 'profile' ] }
+    ));
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+    async function (req, res) {
+        const email = req.user.emails[0].value
+        const user = await userModel.findByEmail("phucthai0108@gmail.com");
+        console.log(email+".")
+        if(user === null) {
+            const today = moment().format();
+            const username = email.split("@")[0]
+
+            const userRegister = {
+                Email: req.user.emails[0].value,
+                Username: username,
+                Password: null,
+                Name: req.user.name.familyName + " " + req.user.name.givenName,
+                Address: null,
+                DOB: null,
+                RegisterDate: today,
+                Type: 2,
+                Rate: 0,
+                Valid: false
+            }
+
+            await userModel.addUser(userRegister);
+
+            req.session.auth=true;
+            req.session.authUser=userRegister;
+
+            const url = req.session.retUrl||'/';
+            res.redirect(url);
+        }
+        else {
+            // 1 - Seller , 2 - Bidder, 3 - Admin
+            req.session.auth=true;
+            req.session.authUser=user;
+
+            if (user.Type === '3') {
+                req.session.isSeller = true;
+                req.session.isAdmin = true;
+            }
+            else if (user.Type === '1') {
+                req.session.isSeller = true;
+                req.session.isAdmin = false;
+            }
+
+            const url = req.session.retUrl||'/';
+            res.redirect(url);
+        }
+    }
+);
 
 router.post('/login', recaptcha.middleware.verify, async function (req, res) {
     if (!req.recaptcha.error) {
