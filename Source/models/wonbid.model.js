@@ -15,6 +15,7 @@ export default {
                                            on w.ProID = p.ProID
                                       join user u on p.Seller = u.Email
                      where Bidder = '${email}'
+                     order by OrderDate desc
                      limit ${limit} offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];

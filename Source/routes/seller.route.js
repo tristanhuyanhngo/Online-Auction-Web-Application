@@ -43,20 +43,18 @@ const upload = multer({storage: storage});
 router.get('/', async (req, res) => {
     let pActive = true;
 
-    // Get information of user from session
-    const user = req.session.authUser || 0;
-    if (!user) {
-        console.log("Please login first ! ");
-        res.redirect('/');
-        return;
-    }
+    // // Get information of user from session
+    // const user = req.session.authUser || 0;
+    // if (!user) {
+    //     console.log("Please login first ! ");
+    //     res.redirect('/');
+    //     return;
+    // }
 
     // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
-        console.log("You don't have permission to access this page ! ");
-        res.redirect('/');
-        return;
+        return res.redirect('/');
     }
 
     res.render('seller/post-product',{
@@ -191,6 +189,9 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
         pActive,
         layout: 'seller.handlebars'
     });
+
+    const url = req.headers.referer || '/';
+    return res.redirect(url);
 });
 
 // ****************************************************************************************
@@ -209,9 +210,7 @@ router.get('/selling', async (req, res) => {
     // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
-        console.log("You don't have permission to access this page ! ");
-        res.redirect('/');
-        return;
+        return res.redirect('/');
     }
 
     const seller = req.session.authUser.Email;
@@ -276,19 +275,17 @@ router.get('/sold', async (req, res) => {
     let vActive = true;
 
     // Get information of user from session
-    const user = req.session.authUser || 0;
-    if (!user) {
-        console.log("Please login first ! ");
-        res.redirect('/');
-        return;
-    }
+    // const user = req.session.authUser || 0;
+    // if (!user) {
+    //     console.log("Please login first ! ");
+    //     res.redirect('/');
+    //     return;
+    // }
 
     // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
-        console.log("You don't have permission to access this page ! ");
-        res.redirect('/');
-        return;
+        return res.redirect('/');
     }
 
     const seller = req.session.authUser.Email;
@@ -359,9 +356,7 @@ router.get('/products', async (req, res) => {
     // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
-        console.log("You don't have permission to access this page ! ");
-        res.redirect('/');
-        return;
+        return res.redirect('/');
     }
 
     const seller = req.session.authUser.Email;
@@ -425,57 +420,6 @@ router.post('/products',urlencodedParser, async (req, res) => {
 
     const url = req.headers.referer || '/seller/products';
     return res.redirect(url);
-
-    // // Render
-    // const seller = req.session.authUser.Email;
-    // const page = req.query.page || 1;
-    // const limit = 6;
-    //
-    // const total = await productModel.countProductBySeller(seller);
-    //
-    // let nPage = Math.floor(total/limit);
-    // if(total%limit>0){
-    //     nPage++;
-    // }
-    //
-    // const page_numbers = [];
-    // for (let i = 1; i <= nPage; i++) {
-    //     page_numbers.push({
-    //         value: i,
-    //         isCurrent: +page === i
-    //     });
-    // }
-    //
-    // const offset = (page-1)*limit;
-    //
-    // const product = await productModel.findBySellerLimit(seller,limit,offset);
-    //
-    // for (let i = 0; i < product.length; i++) {
-    //     if (product[i].ProState[0]) {
-    //         product[i].ProState = "Has sold";
-    //     }
-    //     else {
-    //         product[i].ProState = "Not sold yet";
-    //     }
-    // }
-    //
-    // let isFirst = 1;
-    // let isLast = 1;
-    //
-    // if (product.length != 0) {
-    //     isFirst = page_numbers[0].isCurrent;
-    //     isLast = page_numbers[nPage - 1].isCurrent;
-    // }
-    //
-    // res.render('seller/products', {
-    //     vActive,
-    //     product,
-    //     layout: 'seller.handlebars',
-    //     empty: product.length === 0,
-    //     page_numbers,
-    //     isFirst,
-    //     isLast
-    // });
 });
 
 export default router;

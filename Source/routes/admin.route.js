@@ -10,6 +10,11 @@ const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }))
 router.get('/', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let cActive = true;
 
     const bigcat = await categoryModel.findAllWithDetails();
@@ -22,6 +27,11 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/category-parent', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let cActive = true;
 
     const bigcat = await categoryModel.findAllWithDetails();
@@ -82,6 +92,11 @@ router.post('/account/del',   async (req, res) => {
 });
 
 router.get('/category-child', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let cActive = true;
     const category = await categoryModel.findAllCat();
     const bigcat = await categoryModel.findAllWithDetails();
@@ -152,6 +167,11 @@ router.post('/product/del',   async (req, res) => {
 });
 
 router.get('/product', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let pActive = true;
     const page = req.query.page || 1;
     const limit = 6;
@@ -196,6 +216,11 @@ router.get('/product', async (req, res) => {
 });
 
 router.get('/account', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let aActive = true;
     const page = req.query.page || 1;
     const limit = 6;
@@ -277,6 +302,11 @@ router.post('/account-request/accept',   async (req, res) => {
 });
 
 router.get('/account-request', async (req, res) => {
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        return res.redirect('/');
+    }
+
     let aActive = true;
     const page = req.query.page || 1;
     const limit = 6;
