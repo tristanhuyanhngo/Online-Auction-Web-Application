@@ -68,6 +68,8 @@ router.post('/cancel', async(req, res) => {
     const bidder = req.body.Bidder;
     const proID = req.body.ProID;
 
+    const product = productModel.findByProID(proID);
+
     console.log(bidder);
 
     await sellerModel.cancelBid(proID, bidder);
@@ -77,13 +79,15 @@ router.post('/cancel', async(req, res) => {
     if(ret.length >0){
         const entity = {
             ProID: proID,
-            CurrentWinner: ret[0].Bidder
+            CurrentWinner: ret[0].Bidder,
+            // MaxPrice: ret[0].Price
         }
         await productModel.updateProduct(entity);
     } else{
         const entity = {
             ProID: proID,
-            CurrentWinner: 'NULL'
+            CurrentWinner: 'NULL',
+            MaxPrice: product.StartPrice
         }
         await productModel.updateProduct(entity);
     }

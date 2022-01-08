@@ -35,6 +35,7 @@ router.post('/detail/:id', async function (req, res) {
     let product = await productModel.findByProID(ProID);
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
+    let start = product.StartPrice;
 
     const url = '/product/detail/' + ProID;
 
@@ -43,7 +44,7 @@ router.post('/detail/:id', async function (req, res) {
             ProID: ProID,
             Bidder: email,
             Time: moment().format(),
-            Price: queryPrice
+            Price: +start+ +step
         }
         await bidModel.addBidding(bid);
 
