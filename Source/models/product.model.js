@@ -84,19 +84,36 @@ export default {
     },
 
     async findByProID(proId) {
-        const sql = `SELECT product.*, category.CatName, big_category.BigCatName, bidding.MaxPrice
+        const sql = `SELECT product.ProID,
+                            product.CatID,
+                            product.Seller,
+                            product.ProName,
+                            product.StartPrice,
+                            product.StepPrice,
+                            product.SellPrice,
+                            product.UploadDate,
+                            product.EndDate,
+                            product.AutoExtend,
+                            product.ProState,
+                            product.AllowAllUsers,
+                            category.CatName,
+                            big_category.BigCatName,
+                            bidding.MaxPrice,
+                            bidding.Time,
+                            bidding.Price,
+                            bidding.Bidder as CurrentWinner
                      FROM product
                               JOIN category ON product.CatID=category.CatID
                               JOIN big_category ON category.BigCat=big_category.BigCatID
-                              JOIN bidding ON product.ProID=bidding.ProID
-                     WHERE product.ProID=${proId}
-                       and bidding.Time = (
+                              LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
                          SELECT max(b.Time)
                          FROM product as p
                                   JOIN bidding as b ON p.ProID=b.ProID
                          WHERE p.ProID=${proId}
-                     )`;
+                     )
+                     WHERE product.ProID=${proId}`;
         const raw = await db.raw(sql);
+        // console.log(raw[0][0]);
         return raw[0][0];
     },
 

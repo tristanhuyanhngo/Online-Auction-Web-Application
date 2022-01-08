@@ -25,7 +25,7 @@ export default {
     },
 
     async findInBidding (proID) {
-        const sql = `select ProID, Bidder, MAX(Price) as MaxPrice
+        const sql = `select ProID, Bidder, MAX(Time), MAX(Price) as CurPrice, MaxPrice
                         from bidding
                         group by ProID
                         having ProID = ${proID}`;

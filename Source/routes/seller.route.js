@@ -80,14 +80,12 @@ router.post('/cancel', async(req, res) => {
         const entity = {
             ProID: proID,
             CurrentWinner: ret[0].Bidder,
-            // MaxPrice: ret[0].Price
         }
         await productModel.updateProduct(entity);
     } else{
         const entity = {
             ProID: proID,
-            CurrentWinner: 'NULL',
-            MaxPrice: product.StartPrice
+            CurrentWinner: 'NULL'
         }
         await productModel.updateProduct(entity);
     }
@@ -230,13 +228,15 @@ router.get('/selling', async (req, res) => {
     const offset = (page-1)*limit;
     const product = await productModel.findBySellerNotSoldLimit(seller,limit,offset);
     for(let i in product){
-        const query = await bidModel.findInBidding(product[i].ProID);
-        if(query.length>0){
-            const MaxPrice = query[0].MaxPrice
-            product[i].MaxPrice = MaxPrice;
+        // console.log(product[i].ProID)
+        const query = await productModel.findByProID(product[i].ProID);
+        // console.log(query);
+        if(query.CurrentWinner!=null){
+            product[i].CurrentWinner = query.CurrentWinner;
+            product[i].CurPrice = query.Price;
         }else{
             product[i].CurrentWinner = "No bid yet";
-            product[i].MaxPrice = product[i].StartPrice;
+            product[i].CurPrice = product[i].StartPrice;
             product[i].FinalBid = true;
         }
 

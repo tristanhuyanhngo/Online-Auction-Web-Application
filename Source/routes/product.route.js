@@ -68,11 +68,15 @@ cron.schedule("0 */1 * * * *", async function() {
 });
 
 router.get('/check-bid', async function (req, res) {
-    const queryPrice = req.query.price;
+    const queryPrice = +req.query.price;
     const proID = req.query.pro;
 
     let product = await productModel.findByProID(proID);
     let maxPrice = product.MaxPrice;
+
+    console.log(queryPrice);
+    console.log(maxPrice);
+
 
     if (product.CurrentWinner === null) {
         return res.json(true);
@@ -116,7 +120,7 @@ router.post('/buynow', async function (req, res) {
 });
 
 router.post('/detail/:id', async function (req, res) {
-    const queryPrice = req.body.queryPrice;
+    const queryPrice = +req.body.queryPrice;
     const ProID = req.params.id;
     const email = req.session.authUser.Email;
     const bidder = await userModel.findByEmail(email);
@@ -124,7 +128,7 @@ router.post('/detail/:id', async function (req, res) {
 
     let product = await productModel.findByProID(ProID);
     const seller = product.Seller;
-
+    console.log(product)
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
     let start = product.StartPrice;
@@ -136,14 +140,14 @@ router.post('/detail/:id', async function (req, res) {
             ProID: ProID,
             Bidder: email,
             Time: moment().format(),
-            Price: +start+ +step
+            Price: +start+ +step,
+            MaxPrice: queryPrice
         }
         await bidModel.addBidding(bid);
 
         const productEntity = {
             ProID: ProID,
-            CurrentWinner: email,
-            MaxPrice: queryPrice
+            CurrentWinner: email
         }
         await productModel.updateProduct(productEntity);
 
@@ -157,9 +161,11 @@ router.post('/detail/:id', async function (req, res) {
             ProID: ProID,
             Bidder: product.CurrentWinner,
             Time: moment().format(),
-            Price: queryPrice
+            Price: queryPrice,
+            MaxPrice: product.MaxPrice
         }
-        await bidModel.updateBidding(bid);
+        console.log(bid)
+        await bidModel.addBidding(bid);
         return res.redirect(url);
     } else {
         const newPrice = maxPrice + step;
@@ -171,15 +177,15 @@ router.post('/detail/:id', async function (req, res) {
             ProID: ProID,
             Bidder: email,
             Time: moment().format(),
-            Price: newPrice
+            Price: newPrice,
+            MaxPrice: queryPrice
         }
         const ret = await bidModel.addBidding(bid);
         //console.log(ret);
 
         const productEntity = {
             ProID: ProID,
-            CurrentWinner: email,
-            MaxPrice: queryPrice
+            CurrentWinner: email
         }
         await productModel.updateProduct(productEntity);
         return res.redirect(url);
