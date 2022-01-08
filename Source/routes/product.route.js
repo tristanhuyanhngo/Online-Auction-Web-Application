@@ -106,7 +106,7 @@ router.post('/buynow', async function (req, res) {
 
     // console.log("Current",currentWinner);
     if(currentWinner != null){
-        if(currentWinner!=email){
+        if(currentWinner!==email){
             // console.log("Current",currentWinner);
             await emailModel.sendBidDefeatEnd(currentWinner,product.ProName);
         }
@@ -203,14 +203,18 @@ router.get('/detail/:id', async function (req, res) {
     }
 
     let allowBid = true;
-
+    let isRestrict = false;
     if (req.session.auth === true) {
         if (product.CurrentWinner === req.session.authUser.Email) {
             allowBid = false;
         }
-    }
+        const checkRestrict = await productModel.findRestrict(product.ProID,req.session.authUser.Email)
 
-    //console.log(product.Onair);
+        console.log("Restrict?",checkRestrict);
+        if(checkRestrict!=null){
+            isRestrict = true;
+        }
+    }
 
     let user = null;
     let inWish = false;
@@ -232,7 +236,7 @@ router.get('/detail/:id', async function (req, res) {
         biddingHighest = bidding[0];
     }
 
-    if (res.locals.auth != false) {
+    if (res.locals.auth !== false) {
         user = req.session.authUser.Email;
         const isWish = await productModel.isInWishList(pro_id, user);
 
@@ -258,7 +262,7 @@ router.get('/detail/:id', async function (req, res) {
     let description = "";
     for (let i = 0; i < listDes.length; i++) {
         description += listDes[i].Content;
-        if (i != listDes.length - 1) {
+        if (i !== listDes.length - 1) {
             description += '\n';
             description += "<br>";
         }
@@ -277,7 +281,8 @@ router.get('/detail/:id', async function (req, res) {
         description,
         seller,
         bidding,
-        biddingHighest
+        biddingHighest,
+        isRestrict
     });
 });
 
@@ -328,7 +333,7 @@ router.get('/byBigCat/:id', async function (req, res) {
             list[i].biddingHighest = bidRet[0];
         }
 
-        if (req.session.auth != false) {
+        if (req.session.auth !== false) {
             let inWish = await productModel.isInWishList(list[i].ProID, req.session.authUser.Email);
             if (inWish.length > 0) {
                 list[i].isWish = true;
@@ -336,7 +341,7 @@ router.get('/byBigCat/:id', async function (req, res) {
         }
     }
 
-    if (list.length != 0) {
+    if (list.length !== 0) {
         isFirst = page_numbers[0].isCurrent;
         isLast = page_numbers[nPage - 1].isCurrent;
     }
@@ -364,7 +369,7 @@ router.get('/byCat/:id', async function (req, res) {
 
     let checkType = false;
 
-    if (type == 0)
+    if (type === 0)
         checkType = false;
     else checkType = true;
 
@@ -412,7 +417,7 @@ router.get('/byCat/:id', async function (req, res) {
         }
     }
 
-    if (list.length != 0) {
+    if (list.length !== 0) {
         isFirst = page_numbers[0].isCurrent;
         isLast = page_numbers[nPage - 1].isCurrent;
     }

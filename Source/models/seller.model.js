@@ -7,4 +7,8 @@ export default {
             Bidder: bidder
         }).del();
     },
+
+    async restrict(entity){
+        await db('restrict').insert(entity);
+    },
 };

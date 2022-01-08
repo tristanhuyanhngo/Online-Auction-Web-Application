@@ -8,6 +8,7 @@ import moment from 'moment';
 import bidModel from '../models/bid.model.js';
 import productModel from '../models/product.model.js';
 import sellerModel from '../models/seller.model.js';
+import emailModel from '../models/email.models.js';
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -68,13 +69,20 @@ router.post('/cancel', async(req, res) => {
     const bidder = req.body.Bidder;
     const proID = req.body.ProID;
 
-    const product = productModel.findByProID(proID);
+    const product = await productModel.findByProID(proID);
+    console.log("ProID",proID);
+    console.log(product);
 
-    console.log(bidder);
+    const restrictEntity = {
+        ProID: proID,
+        Bidder: bidder,
+    }
 
+    await sellerModel.restrict(restrictEntity);
+    await emailModel.sendBidCancel(bidder, product.ProName)
     await sellerModel.cancelBid(proID, bidder);
     const ret = await bidModel.findInBidding(proID);
-    console.log(ret);
+    // console.log(ret);
 
     if(ret.length >0){
         const entity = {
@@ -82,6 +90,7 @@ router.post('/cancel', async(req, res) => {
             CurrentWinner: ret[0].Bidder,
         }
         await productModel.updateProduct(entity);
+        await emailModel.sendBidRevive(ret[0].Bidder, product.ProName,ret[0].CurPrice);
     } else{
         const entity = {
             ProID: proID,
@@ -145,9 +154,9 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
         UploadDate: upload_date,
         EndDate: end_date,
         AutoExtend: auto_extend,
+        AllowAllUsers: allow_users,
         ProState: true,
         CurrentWinner: null,
-        MaxPrice: 0
     }
 
     // Description

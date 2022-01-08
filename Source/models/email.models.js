@@ -32,13 +32,25 @@ export default {
     },
 
     //Người mua bị từ chối ra giá
-    sendBidRestrict(receiver, proName) {
+    sendBidCancel(receiver, proName) {
         const otpStr = 'We are sorry that your bid for product ' + proName + ' on Horizon has been restricted and canceled by seller!\n'
-            +'Please try with another product.';
+            +'Please try bidding with another product!';
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
-            subject: 'Bid for '+proName+' has been restricted!',
+            subject: 'Bid for '+proName+' has been canceled!',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
+    sendBidRevive(receiver, proName, price) {
+        const otpStr = `Your bidding on' + proName + ' has been brought back on stage with ${price}VND!!\nPlease check it out!`;
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Bid for '+proName+' has been revived!',
             text: otpStr
         };
 
@@ -149,11 +161,11 @@ export default {
     },
 
     sendSellerEndBidWithoutWinner(receiver, proName, proID, endDate) {
-        const otpStr = `Your product: [${proID} - ${proName}] on Horizon has been expired at ${endDate} without a winner \n`;
+        const otpStr = `We are sorry!\nYour product: [${proID} - ${proName}] on Horizon has been expired at ${endDate} without any bid! \n`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
-            subject: 'Product has been expired',
+            subject: 'Bid for '+proName+' finished!',
             text: otpStr
         };
 
@@ -162,11 +174,11 @@ export default {
 
     sendSellerEndBidWithWinner(receiver, proName, proID, endDate, winner, price) {
         const formatPrice = numeral(price).format('0,0')
-        const otpStr = `Your product: [${proID} - ${proName}] on Horizon has been expired at ${endDate} with a winner is ${winner} (${formatPrice} VND) \n`;
+        const otpStr = `Your product: [${proID} - ${proName}] on Horizon has expired at ${endDate} with the winner is ${winner} (${formatPrice} VND) \n`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
-            subject: 'Product has been expired',
+            subject: 'Product has expired',
             text: otpStr
         };
 
@@ -174,11 +186,11 @@ export default {
     },
 
     sendWinnerBid(receiver, proName, price, seller) {
-        const otpStr = `Congratulations ! You are the winner \n You have successfully auctioned ${proName} of ${seller} \n`;
+        const otpStr = `Congratulations! You are the winner of ${proName}\n`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
-            subject: 'Auction successfully',
+            subject: `You have won ${proName}!`,
             text: otpStr
         };
 

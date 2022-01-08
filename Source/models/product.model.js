@@ -7,6 +7,14 @@ export default {
         return db('product').where('ProID', proid).update(entity);
     },
 
+    async findRestrict(proID,bidder) {
+        const product = await db.select().from('restrict').where({
+            ProID: proID,
+            Bidder: bidder
+        });
+        return product[0] || null;
+    },
+
     async findAll() {
         const product = await db.select().from('product');
         return product;
@@ -84,23 +92,23 @@ export default {
     },
 
     async findByProID(proId) {
-        const sql = `SELECT product.ProID,
-                            product.CatID,
-                            product.Seller,
-                            product.ProName,
-                            product.StartPrice,
-                            product.StepPrice,
-                            product.SellPrice,
-                            product.UploadDate,
-                            product.EndDate,
-                            product.AutoExtend,
-                            product.ProState,
-                            product.AllowAllUsers,
-                            category.CatName,
-                            big_category.BigCatName,
-                            bidding.MaxPrice,
-                            bidding.Time,
-                            bidding.Price,
+        const sql = `SELECT product.ProID as ProID,
+                            product.CatID as CatID,
+                            product.Seller as Seller,
+                            product.ProName as ProName,
+                            product.StartPrice as StartPrice,
+                            product.StepPrice as StepPrice,
+                            product.SellPrice as SellPrice,
+                            product.UploadDate as UploadDate,
+                            product.EndDate as EndDate,
+                            product.AutoExtend as AutoExtend,
+                            product.ProState as ProState,
+                            product.AllowAllUsers as AllowAllUsers,
+                            category.CatName as CatName,
+                            big_category.BigCatName as BigCatName,
+                            bidding.MaxPrice as MaxPrice,
+                            bidding.Time as Time,
+                            bidding.Price as Price,
                             bidding.Bidder as CurrentWinner
                      FROM product
                               JOIN category ON product.CatID=category.CatID
