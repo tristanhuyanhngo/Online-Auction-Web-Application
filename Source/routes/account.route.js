@@ -5,7 +5,9 @@ import bcrypt from "bcryptjs";
 import wishlistModel from "../models/wishlist.model.js";
 import cartModel from "../models/cart.model.js";
 import wonbidModel from "../models/wonbid.model.js";
+import bidModel from "../models/bid.model.js";
 import moment from "moment";
+import emailModel from "../models/email.models.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -244,14 +246,18 @@ router.post('/review',async function(req, res) {
     const product = req.body.ProID;
     const receiver = req.body.SellerMail;
     const comment = req.body.content;
+
     let rate = true;
+    let commentStr = ':) Nice. ';
     if(req.body.Rate === '0'){
         rate = false;
+        commentStr=':( Bad. '
     }
+    commentStr+=comment;
     const item = {
         Sender: email,
         Receiver: receiver,
-        Comment: comment,
+        Comment: commentStr,
         Time: moment().format(),
         ProID: product,
         Rate: rate,
@@ -265,6 +271,7 @@ router.post('/review',async function(req, res) {
 
 router.post('/cart/checkout',async function(req, res) {
     const email = res.locals.authUser.Email;
+    const bidder = await userModel.findByEmail(email);
     const today = moment().format();
     const list = await cartModel.findProductToCheckout(email);
 
@@ -274,6 +281,23 @@ router.post('/cart/checkout',async function(req, res) {
             Bidder: email,
             OrderDate: today
         }
+
+        const highestBid = await bidModel.findMaxByID(list[i].ProID);
+        const currentWinner = highestBid.Bidder;
+        if(currentWinner != null){
+            if(currentWinner!=email){
+                await emailModel.sendBidDefeatEnd(currentWinner,list[i].ProName);
+            }
+        }
+        //
+        // console.log("Bidder ", bidder.Name);
+        // console.log("Product ",list[i]);
+        // console.log("Bidder " + email);
+        // console.log("Seller",list[i].SellerMail);
+        // console.log("Bidder name " + bidder.Name);
+        // console.log("Product price: ",list[i].SellPrice);
+
+        await emailModel.sendBidEndSuccess(email,bidder.Name,list[i].SellerMail,list[i].ProName,list[i].SellPrice);
         await cartModel.checkout(item);
     }
     return res.redirect('/account/cart');

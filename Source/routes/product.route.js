@@ -6,6 +6,7 @@ import emailModel from "../models/email.models.js";
 import moment from "moment";
 import bodyParser from "body-parser";
 import cron from 'node-cron';
+import cartModel from "../models/cart.model.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({extended: false}))
@@ -84,12 +85,46 @@ router.get('/check-bid', async function (req, res) {
     }
 });
 
+router.post('/buynow', async function (req, res) {
+    const email = req.session.authUser.Email;
+    const ProID = req.body.ProID;
+    const today = moment().format();
+    const bidder = await userModel.findByEmail(email);
+    const  product = await productModel.findByProID(ProID);
+    const Price = product.SellPrice;
+    const currentWinner = req.body.CurrentWinner || null;
+
+    let item = {
+        ProID: ProID,
+        Bidder: email,
+        OrderDate: today
+    }
+
+    // console.log("Current",currentWinner);
+    if(currentWinner != null){
+        if(currentWinner!=email){
+            // console.log("Current",currentWinner);
+            await emailModel.sendBidDefeatEnd(currentWinner,product.ProName);
+        }
+    }
+    await emailModel.sendBidEndSuccess(email,bidder.Name,product.Seller,product.ProName,Price);
+    await cartModel.checkout(item);
+
+    const ret = '/product/detail/'+ProID;
+    const url = req.headers.referer || ret;
+    return res.redirect(url);
+});
+
 router.post('/detail/:id', async function (req, res) {
     const queryPrice = req.body.queryPrice;
     const ProID = req.params.id;
     const email = req.session.authUser.Email;
+    const bidder = await userModel.findByEmail(email);
+    const bidderName = bidder.Name;
 
     let product = await productModel.findByProID(ProID);
+    const seller = product.Seller;
+
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
     let start = product.StartPrice;
@@ -111,6 +146,9 @@ router.post('/detail/:id', async function (req, res) {
             MaxPrice: queryPrice
         }
         await productModel.updateProduct(productEntity);
+
+        emailModel.sendSuccessBid(email, bidderName, seller, product.ProName, queryPrice);
+
         return res.redirect(url);
     }
 
@@ -124,8 +162,11 @@ router.post('/detail/:id', async function (req, res) {
         await bidModel.updateBidding(bid);
         return res.redirect(url);
     } else {
-        emailModel.sendBidDefeat(product.CurrentWinner, product.ProName);
         const newPrice = maxPrice + step;
+
+        emailModel.sendSuccessBid(email, bidderName, seller, product.ProName, newPrice);
+        emailModel.sendBidDefeat(product.CurrentWinner, product.ProName);
+
         const bid = {
             ProID: ProID,
             Bidder: email,
@@ -191,6 +232,15 @@ router.get('/detail/:id', async function (req, res) {
 
         if (isWish.length > 0) {
             inWish = true;
+        }
+
+        product.allowUser = true;
+
+        if (product.AllowAllUsers.readInt8() === 0) {
+            const rate = req.session.authUser.Rate;
+            if (rate < 80) {
+                product.allowUser = false;
+            }
         }
     }
 
@@ -265,7 +315,7 @@ router.get('/byBigCat/:id', async function (req, res) {
         list[i].user = req.session.authUser;
         const countBidding = await productModel.countBidding(list[i].ProID);
         list[i].countBidding = countBidding[0].count;
-        if (list[i].Price==null) {
+        if (list[i].Price == null) {
             list[i].noBid = true;
         } else {
             let bidRet = await productModel.findBidDetails(list[i].ProID);
@@ -341,7 +391,7 @@ router.get('/byCat/:id', async function (req, res) {
         list[i].user = req.session.authUser;
         const countBidding = await productModel.countBidding(list[i].ProID);
         list[i].countBidding = countBidding[0].count;
-        if (list[i].Price==null) {
+        if (list[i].Price == null) {
             list[i].noBid = true;
         } else {
             let bidRet = await productModel.findBidDetails(list[i].ProID);
