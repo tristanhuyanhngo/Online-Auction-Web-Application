@@ -311,16 +311,20 @@ export default {
         const raw = await db.raw(sql);
         return raw[0][0].CatID;
     },
+
     async findIDProduct() {
         const ID = await db.max(`ProID`).from(`product`);
         return Object.values(ID[0])[0];
     },
+
     async addProduct(entity) {
         return db('product').insert(entity);
     },
+
     async addDescription(entity) {
         return db('description').insert(entity);
     },
+
     async countProductNotSoldBySeller(seller) {
         const sql = `select count(*) as number
                      from product p
@@ -329,6 +333,7 @@ export default {
         const raw = await db.raw(sql);
         return raw[0][0].number;
     },
+
     async countProductSoldBySeller(seller) {
         const sql = `select count(*) as number
                      from product p
@@ -337,6 +342,7 @@ export default {
         const raw = await db.raw(sql);
         return raw[0][0].number;
     },
+
     async findBySellerNotSoldLimit(seller,limit,offset) {
         const sql = `select *
                      from product p
@@ -346,6 +352,7 @@ export default {
         const raw = await db.raw(sql);
         return raw[0];
     },
+
     async findBySellerSoldLimit(seller,limit,offset) {
         const sql = `select *
                      from product p
@@ -354,5 +361,17 @@ export default {
                      limit ${limit} offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async getProductNotSoldForMailing() {
+        const sql = `select p.ProID, p.ProName, p.Seller, p.EndDate, p.AutoExtend, p.CurrentWinner, p.MaxPrice
+                     from product p
+                     where p.ProState = true`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async updateProState(proID) {
+        return db('product').where('ProID', proID).update('ProState',false);
     }
 }

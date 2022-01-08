@@ -1,5 +1,6 @@
 import sender from "../utils/email.js";
 import bcrypt from "bcryptjs";
+import numeral from 'numeral';
 
 export default {
     sendOTP(receiver) {
@@ -67,6 +68,43 @@ export default {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
         return hash;
+    },
+
+    sendSellerEndBidWithoutWinner(receiver, proName, proID, endDate) {
+        const otpStr = `Your product: [${proID} - ${proName}] on Horizon has been expired at ${endDate} without a winner \n`;
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Product has been expired',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
+    sendSellerEndBidWithWinner(receiver, proName, proID, endDate, winner, price) {
+        const formatPrice = numeral(price).format('0,0')
+        const otpStr = `Your product: [${proID} - ${proName}] on Horizon has been expired at ${endDate} with a winner is ${winner} (${formatPrice} VND) \n`;
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Product has been expired',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
+    sendWinnerBid(receiver, proName, price, seller) {
+        const otpStr = `Congratulations ! You are the winner \n You have successfully auctioned ${proName} of ${seller} \n`;
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: receiver,
+            subject: 'Auction successfully',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
     }
 }
 

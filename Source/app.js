@@ -1,5 +1,4 @@
 import express from 'express';
-
 import { dirname } from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,7 +13,6 @@ const app = express();
 app.use(express.static('res')); 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/public', express.static('public'));
-
 
 activate_session_middleware(app);
 activate_view_middleware(app);

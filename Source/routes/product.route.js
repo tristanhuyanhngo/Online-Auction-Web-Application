@@ -5,9 +5,66 @@ import userModel from "../models/user.model.js";
 import emailModel from "../models/email.models.js";
 import moment from "moment";
 import bodyParser from "body-parser";
+import cron from 'node-cron';
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({extended: false}))
+
+function checkTimeOut(time) {
+    const now = new Date().getTime();
+    const then = new Date(time).getTime();
+    const gap = then - now;
+
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    let textDay = Math.floor(gap / day);
+    let textHour = Math.floor((gap % day) / hour);
+    let textMinute = Math.floor((gap % hour) / minute);
+    let textSecond = Math.floor((gap % minute) / second);
+
+    if (textDay < 0) {
+        textDay = 0;
+    }
+    if (textHour < 0) {
+        textHour = 0;
+    }
+    if (textMinute < 0) {
+        textMinute = 0;
+    }
+    if (textSecond < 0) {
+        textSecond = 0;
+    }
+
+    if (textDay === 0 && textHour === 0 && textMinute === 0 && textSecond === 0) {
+        return true;
+    }
+
+    return false;
+}
+
+// * * * Check time out after 1 minutes then send mail
+cron.schedule("0 */1 * * * *", async function() {
+    const listProduct = await productModel.getProductNotSoldForMailing();
+
+    for (let i = 0; i < listProduct.length; i++) {
+        if (checkTimeOut(listProduct[i].EndDate)) {
+
+            await productModel.updateProState(listProduct[i].ProID);
+            let endDate = moment(listProduct[i].EndDate).format('dddd, MMMM Do YYYY - h:mm a');
+
+            if (listProduct[i].CurrentWinner != null) {
+                emailModel.sendSellerEndBidWithWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate, listProduct[i].CurrentWinner, listProduct[i].MaxPrice);
+                emailModel.sendWinnerBid(listProduct[i].CurrentWinner, listProduct[i].ProName, listProduct[i].MaxPrice, listProduct[i].Seller);
+            }
+            else {
+                emailModel.sendSellerEndBidWithoutWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate);
+            }
+        }
+    }
+});
 
 router.get('/check-bid', async function (req, res) {
     const queryPrice = req.query.price;
