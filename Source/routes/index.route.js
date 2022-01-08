@@ -41,6 +41,9 @@ router.get('/', async function (req, res) {
                 list_1[i].isWish = true;
             }
         }
+        // smaller 10 minutes is new
+        if(moment.now() - list_1[i].UploadDate <= 600000)
+            list_1[i].isNew = true;
     }
 
     for(let i in list_2) {
@@ -61,6 +64,10 @@ router.get('/', async function (req, res) {
                 list_2[i].isWish = true;
             }
         }
+
+        // smaller 10 minutes is new
+        if(moment.now() - list_2[i].UploadDate <= 600000)
+            list_2[i].isNew = true;
     }
 
     for(let i in list_3) {
@@ -81,6 +88,10 @@ router.get('/', async function (req, res) {
                 list_3[i].isWish = true;
             }
         }
+
+        // smaller 10 minutes is new
+        if(moment.now() - list_3[i].UploadDate <= 600000)
+            list_3[i].isNew = true;
     }
 
     res.render('home', {

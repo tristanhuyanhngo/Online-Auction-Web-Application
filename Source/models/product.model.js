@@ -104,6 +104,7 @@ export default {
                           P.StartPrice,
                           U.Name as Seller,
                           P.SellPrice,
+                          P.UploadDate,
                           P.EndDate,
                           MAX(B.Price) AS Price
                    from product as P left join bidding B on P.ProID = B.ProID,
@@ -128,6 +129,7 @@ export default {
                           P.StartPrice,
                           U.Name as Seller,
                           P.SellPrice,
+                          P.UploadDate,
                           P.EndDate,
                           MAX(B.Price) AS Price
                    from product as P left join bidding B on P.ProID = B.ProID,
@@ -158,6 +160,7 @@ export default {
                           U.Name as Seller,
                           P.SellPrice,
                           P.EndDate,
+                          P.UploadDate,
                           MAX(B.Price) AS Price
                    from user as U,
                        category as C,
@@ -181,6 +184,7 @@ export default {
                           P.StartPrice,
                           U.Name as Seller,
                           P.SellPrice,
+                          P.UploadDate,
                           P.EndDate,
                           MAX(B.Price) AS Price
                    from product as P left join bidding B on P.ProID = B.ProID,
@@ -246,6 +250,7 @@ export default {
                             P.StartPrice,
                             U.Name as Seller,
                             P.SellPrice,
+                            P.UploadDate,
                             P.EndDate, u.Name as SellerName,
                             Max(B.Price) as Price
                      from product as P left join bidding B on P.ProID = B.ProID,
@@ -271,6 +276,7 @@ export default {
                             U.Name as Seller,
                             P.SellPrice,
                             P.EndDate,
+                            P.UploadDate,
                             B.ProID,
                             COUNT(P.ProID) AS sum,
                             MAX(B.Price) as Price
@@ -299,6 +305,7 @@ export default {
                             U.Name as Seller,
                             P.SellPrice,
                             P.EndDate,
+                            P.UploadDate,
                             B.ProID,u.Name as SellerName,
                             MAX(B.Price) AS Price
                      from product as P,

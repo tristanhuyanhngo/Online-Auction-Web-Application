@@ -1,5 +1,5 @@
 <div class="relative">
-    <div class="border border-gray-300 shadow group relative text-sm overflow-hidden w-full">
+    <div class="border border-gray-400 shadow group relative text-sm overflow-hidden w-full">
         <a href="/product/detail/{{ProID}}">
             <div class=" relative">
                 <img class="object-cover h-52 w-full border-b border-gray-300"
@@ -21,8 +21,8 @@
                     <div>{{format_number SellPrice}} VND</div>
                 </div>
                 <div class=" flex justify-between mt-2 font-light text-xs">
-                    <div class="">START PRICE: {{format_number StartPrice}}</div>
-                    <div class="">{{format_date EndDate}}</div>
+                    <div class="">START: {{format_number StartPrice}}</div>
+                    <div class="">{{format_no_h EndDate}}</div>
                 </div>
 
                 <div class=" h-1 border-t border-gray-400 mt-2"></div>
@@ -99,4 +99,11 @@
             <i class="absolute top-0 right-0 fa fa-heart-o fa-2x cursor-pointer" aria-hidden="true"></i>
         </a>
     {{/if}}
+
+    {{#if isNew}}
+        <div class="absolute top-7 -left-2 h-3 w-2 bg-cyan-600"></div>
+        <div class="absolute top-8 -left-2 h-3 w-2 bg-black rounded-l-full"></div>
+        <div class="absolute top-0 -left-2 bg-cyan-600 px-4 py-1 rounded-r-lg rounded-tl-lg text-white font-semibold h-8">New</div>
+    {{/if}}
+
 </div>

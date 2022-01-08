@@ -207,6 +207,9 @@ router.get('/byBigCat/:id', async function (req, res) {
                 list[i].isWish = true;
             }
         }
+
+        if(moment.now() - list[i].UploadDate <= 600000)
+            list[i].isNew = true;
     }
 
     if (list.length != 0) {
@@ -282,6 +285,9 @@ router.get('/byCat/:id', async function (req, res) {
                 list[i].isWish = true;
             }
         }
+
+        if(moment.now() - list[i].UploadDate <= 600000)
+            list[i].isNew = true;
     }
 
     if (list.length != 0) {
