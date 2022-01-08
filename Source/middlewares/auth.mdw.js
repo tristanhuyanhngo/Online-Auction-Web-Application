@@ -11,7 +11,7 @@ export default async function auth(req, res, next) {
         let type = req.session.authUser.Type;
         let reqTime = req.session.authUser.RequestTime;
         req.session.requested = true;
-        if (type == '2' && reqTime == null) {
+        if (type === '1' && reqTime == null) {
             req.session.bidder = true;
             req.session.requested = false;
         }
