@@ -424,7 +424,7 @@ router.post('/products',urlencodedParser, async (req, res) => {
 });
 
 router.post('/products/del',  async (req, res) => {
-    const information = await productModel.findBigCatAndCatByProID(req.body.ProID)
+    const information = await productModel.findBigCatAndCatByProID(req.body.ProID);
     const ret = await productModel.del(req.body.ProID);
 
     let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;

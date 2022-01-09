@@ -5,6 +5,8 @@ import categoryModel from '../models/category.model.js';
 import bodyParser from 'body-parser';
 import bcrypt from "bcryptjs";
 import moment from "moment";
+import * as fs from 'fs';
+
 import userModel from "../models/user.model.js";
 const router = express.Router();
 
@@ -160,8 +162,19 @@ router.post('/category-child/update',async function(req, res) {
 });
 
 router.post('/product/del',   async (req, res) => {
+    const information = await productModel.findBigCatAndCatByProID(req.body.ProID);
     const ret = await productModel.del(req.body.ProID);
     console.log(ret);
+
+    let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
+
+    if (fs.existsSync(filePath)) {
+        //console.log('Directory exists!');
+        fs.rmSync(filePath, { recursive: true });
+    } else {
+        console.log('Directory not found.');
+    }
+
     const url = req.headers.referer || '/admin/product';
     return res.redirect(url);
 });
