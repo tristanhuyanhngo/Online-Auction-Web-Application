@@ -33,12 +33,12 @@ export default {
 
     //Người mua bị từ chối ra giá
     sendBidCancel(receiver, proName) {
-        const otpStr = 'We are sorry that your bid for product ' + proName + ' on Horizon has been restricted and canceled by seller!\n'
+        const otpStr = 'We are sorry that your bidding for product ' + proName + ' on Horizon has been restricted and canceled by seller!\n'
             +'Please try bidding with another product!';
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
-            subject: 'Bid for '+proName+' has been canceled!',
+            subject: 'Bidding for '+proName+' has been canceled!',
             text: otpStr
         };
 
@@ -46,7 +46,8 @@ export default {
     },
 
     sendBidRevive(receiver, proName, price) {
-        const otpStr = `Your bidding on' + proName + ' has been brought back on stage with ${price}VND!!\nPlease check it out!`;
+        const curPrice = new Intl.NumberFormat('en-US').format(price);
+        const otpStr = `Your bidding on' + proName + ' has been brought back on stage with ${curPrice}VND!!\nPlease check it out!`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,
@@ -59,12 +60,13 @@ export default {
 
     //Dau gia ket thuc
     sendBidEndSuccess(winner, winnerName,seller, proName,price) {
+        const curPrice = new Intl.NumberFormat('en-US').format(price);
         const maillist = [
             winner,
             seller
         ];
         const otpStr = 'The bidding for ' + proName + ' on Horizon is over!\n'
-            +'The success bidder is '+winnerName+'!\n'+'Final price: '+price+'VND\n'
+            +'The success bidder is '+winnerName+'!\n'+'Final price: '+curPrice+'VND\n'
         +'In case the payment is not complete, the success bidder have to finish it within 3 days from now!';
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
@@ -121,7 +123,8 @@ export default {
             bidder,
             seller
         ];
-        const curPrice = new Intl.NumberFormat().format(price);
+        const curPrice = new Intl.NumberFormat('en-US').format(price);
+
         const otpStr = bidderName+' has successfully placed bid for product ' + proName + ' on Horizon! \n' +
             'Current price: '+curPrice+'VND';
         const mailOptions = {
@@ -173,7 +176,7 @@ export default {
     },
 
     sendSellerEndBidWithWinner(receiver, proName, proID, endDate, winner, price) {
-        const formatPrice = numeral(price).format('0,0')
+        const formatPrice = new Intl.NumberFormat('en-US').format(price);
         const otpStr = `Your product: [${proID} - ${proName}] on Horizon has expired at ${endDate} with the winner is ${winner} (${formatPrice} VND) \n`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
@@ -185,8 +188,10 @@ export default {
         sender.sendMail(mailOptions);
     },
 
-    sendWinnerBid(receiver, proName, price, seller) {
-        const otpStr = `Congratulations! You are the winner of ${proName}\n`;
+    sendWinnerBid(receiver, proName, price) {
+        const otpStr = `Congratulations! You are the winner of ${proName}\n
+        Final price: ${price}\n
+        In case the payment is not complete, please finish it within 3 days from now!`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,

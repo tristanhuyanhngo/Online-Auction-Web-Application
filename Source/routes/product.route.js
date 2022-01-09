@@ -58,8 +58,8 @@ cron.schedule("0 */1 * * * *", async function() {
             let endDate = moment(listProduct[i].EndDate).format('dddd, MMMM Do YYYY - h:mm a');
 
             if (listProduct[i].CurrentWinner != null) {
-                emailModel.sendSellerEndBidWithWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate, listProduct[i].CurrentWinner, listProduct[i].MaxPrice);
-                emailModel.sendWinnerBid(listProduct[i].CurrentWinner, listProduct[i].ProName, listProduct[i].MaxPrice, listProduct[i].Seller);
+                emailModel.sendSellerEndBidWithWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate, listProduct[i].CurrentWinner, listProduct[i].Price);
+                emailModel.sendWinnerBid(listProduct[i].CurrentWinner, listProduct[i].ProName, listProduct[i].Price);
             }
             else {
                 emailModel.sendSellerEndBidWithoutWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate);
