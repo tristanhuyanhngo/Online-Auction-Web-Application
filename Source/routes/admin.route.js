@@ -25,8 +25,6 @@ router.get('/', async (req, res) => {
         res.redirect('/');
         return;
     }
-
-    const isAdmin = req.session.isAdmin;
     if (!isAdmin) {
         console.log("You don't have permission to access this page ! ");
         res.redirect('/');
