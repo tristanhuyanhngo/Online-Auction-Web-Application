@@ -7,10 +7,7 @@
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/email.models.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/email.models.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/wonbid.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/wonbid.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/seller.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/seller.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/seller/sold.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/sold.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <workItem from="1641571166868" duration="6591000" />
       <workItem from="1641666223088" duration="830000" />
       <workItem from="1641694738653" duration="5969000" />
-      <workItem from="1641721141341" duration="4066000" />
+      <workItem from="1641721141341" duration="4203000" />
     </task>
     <servers />
   </component>
