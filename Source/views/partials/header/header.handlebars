@@ -132,7 +132,7 @@
             </div>
             <div class=" text-cyan-700 hidden md:flex md:flex-1 md:items-center md:justify-end">
                 <form method="post" action="/search">
-                    <div class="rounded-full mr-5 bg-white flex items-center pl-5 pr-2 border border-cyan-700">
+                    <div class="rounded-full mr-2 bg-white flex items-center pl-5 pr-2 border border-cyan-700">
                         <select id="filterSearch" name="filterSearch" class="rounded mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
                             <option value="category">Category</option>
                             <option value="product" selected="selected">Product</option>
@@ -144,7 +144,7 @@
 
                 {{#if auth}}
                     <div class="hidden lg:block">
-                        <a href="/profile/{{authUser.Username}}"><div class="mr-2">Hi, <span class="font-bold truncate">{{authUser.Username}}</span>!</div></a>
+                        <a href="/profile/{{authUser.Username}}"><div class="mr-2 flex"><div class="mr-1">Hi, </div><span class="font-bold truncate">{{authUser.Username}}</span>!</div></a>
                     </div>
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
