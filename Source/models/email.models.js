@@ -189,8 +189,9 @@ export default {
     },
 
     sendWinnerBid(receiver, proName, price) {
+        const formatPrice = new Intl.NumberFormat('en-US').format(price);
         const otpStr = `Congratulations! You are the winner of ${proName}\n
-        Final price: ${price}\n
+        Final price: ${formatPrice}VND\n
         In case the payment is not complete, please finish it within 3 days from now!`;
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
