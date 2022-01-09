@@ -9,6 +9,8 @@ import bidModel from '../models/bid.model.js';
 import productModel from '../models/product.model.js';
 import sellerModel from '../models/seller.model.js';
 import emailModel from '../models/email.models.js';
+import userModel from "../models/user.model.js";
+import wonbidModel from "../models/wonbid.model.js";
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -197,6 +199,60 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
     return res.redirect(url);
 });
 
+router.post('/review',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const product = req.body.ProID;
+    const receiver = req.body.CurrentWinner;
+    const comment = req.body.content;
+
+    let rate = true;
+    let commentStr = ':) Nice. ';
+    if(req.body.Rate === '0'){
+        rate = false;
+        commentStr=':( Bad. '
+    }
+    commentStr+=comment;
+    const item = {
+        Sender: email,
+        Receiver: receiver,
+        Comment: commentStr,
+        Time: moment().format(),
+        ProID: product,
+        Rate: rate,
+    }
+    await userModel.addReview(item);
+    await userModel.updateRate(receiver);
+
+    const url = req.headers.referer || '/seller/sold';
+    return res.redirect(url);
+});
+
+router.post('/cancel-final',async function(req, res) {
+    const email = res.locals.authUser.Email;
+    const product = req.body.ProID;
+    const receiver = req.body.Bidder;
+
+    const pro = productModel.findByProID(product);
+
+    let commentStr = 'Bidder did not receive product!';
+
+    const item = {
+        Sender: email,
+        Receiver: receiver,
+        Comment: commentStr,
+        Time: moment().format(),
+        ProID: product,
+        Rate: false,
+        Cancel: true
+    }
+    await userModel.addReview(item);
+    await userModel.updateRate(receiver);
+
+    await emailModel.sendBidCancel(receiver,pro.ProName);
+    const url = req.headers.referer || '/seller/sold';
+    return res.redirect(url);
+});
+
 // ****************************************************************************************
 // --------------------------------------- SELLING -----------------------------------------
 router.get('/selling', async (req, res) => {
@@ -311,31 +367,30 @@ router.get('/sold', async (req, res) => {
     }
 
     const offset = (page-1)*limit;
-    const product = await productModel.findBySellerSoldLimit(seller,limit,offset);
+    const products = await productModel.findBySellerSoldLimit(seller,limit,offset);
     //console.log(product);
-
-    for (let i = 0; i < product.length; i++) {
-        if (product[i].ProState[0]) {
-            product[i].ProState = "Still on sale";
-        }
-        else {
-            product[i].ProState = "Has been sold";
-        }
-    }
 
     let isFirst = 1;
     let isLast = 1;
 
-    if (product.length != 0) {
+    if (products.length != 0) {
         isFirst = page_numbers[0].isCurrent;
         isLast = page_numbers[nPage - 1].isCurrent;
     }
 
+    for(let i in products){
+        console.log(products[i]);
+        products[i].canceled = ((await wonbidModel.cancelBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount===1);
+        products[i].evaluated = ((await wonbidModel.evaluatedBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount===1);
+        console.log(products[i].evaluated);
+        console.log(products[i].canceled);
+    }
+
     res.render('seller/sold', {
         vActive,
-        product,
+        products,
         layout: 'seller.handlebars',
-        empty: product.length === 0,
+        empty: products.length === 0,
         page_numbers,
         isFirst,
         isLast

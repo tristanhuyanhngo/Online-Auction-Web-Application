@@ -323,7 +323,7 @@ router.post('/login',urlencodedParser, async function (req, res) {
     if (user.Type === '3') {
         req.session.isAdmin = true;
     }
-    else if (user.Type === '2') {
+    else if (user.Type === '1') {
         req.session.isSeller = true;
         req.session.isAdmin = false;
     }

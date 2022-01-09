@@ -10,13 +10,13 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Product Name</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Winner</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Final Price</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center">&nbsp;</div>
@@ -24,54 +24,84 @@
                     </tr>
                 </thead>
 
-                {{#each this.product}}
                 <tbody class="text-sm divide-y divide-gray-100">
+                {{#each this.products}}
                     <tr>
                         <td class="p-2 whitespace-nowrap">
-                            <a href="/product/detail/{{ProID}}">
-                                <div class="font-medium hover:text-key text-gray-800"><strong>{{ProName}}</strong></div>
-                            </a>
+                            <div class="text-left">{{ProID}}</div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <a target="_blank" href="/product/detail/{{ProID}}"
+                               class="hover:text-key wishlist_link font-medium text-gray-800">{{ProName}}</a>
                         </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-left">{{CurrentWinner}}</div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">{{format_date EndDate}}</div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left">{{format_number MaxPrice}}</div>
-                        </td>
                         <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
-                            <div x-data="{ showModal : false }">
-                                <div @click="showModal = !showModal"
-                                     class=" cursor-pointer px-6 py-1  hover:bg-gray-300  border border-cyan-700 shadow">Evaluate</div>
-                                <div x-show="showModal"
-                                     class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
-                                    <div x-show="showModal"
-                                         class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
-                                         @click.away="showModal = false"
-                                         x-transition:enter="transition ease-out duration-300"
-                                         x-transition:enter-start="opacity-0 transform scale-90"
-                                         x-transition:enter-end="opacity-100 transform scale-100"
-                                         x-transition:leave="transition ease-in duration-300"
-                                         x-transition:leave-start="opacity-100 transform scale-100"
-                                         x-transition:leave-end="opacity-0 transform scale-90">
-                                        <textarea name="content" class="border-2 border-gray-500 w-full"></textarea>
-
-                                        <div class="flex justify-center items-center mt-4">
-                                            <i onclick="like(this)" class="fa fa-thumbs-up fa-2x cursor-pointer"></i>
-                                            <button @click="showModal = !showModal"
-                                                    class="ml-4 cursor-pointer font-semibold text-md  px-6 py-2  border border-cyan-700 hover:bg-gray-300">Send</button>
-                                            <button @click="showModal = !showModal"
-                                                 class="ml-4 cursor-pointer font-semibold text-md text-white  px-6 py-2 bg-red-500 hover:bg-red-700  border border-cyan-700">Cancel</button>
+                            {{#if evaluated}}
+                                <div class = "text-green-600 font-semibold text-sm">Evaluated</div>
+                            {{else}}
+                                {{#if canceled}}
+                                    <div class = "text-red-600 font-semibold text-sm">Canceled</div>
+                                {{else}}
+                                    <div x-data="{ showModal : false }">
+                                        <div @click="showModal = !showModal"
+                                             class=" cursor-pointer px-6 py-1
+                                         hover:bg-gray-300  border border-cyan-700 shadow">Evaluate
                                         </div>
+                                        <form class="evaluateForm" method="post"
+                                              action="/seller/review">
+                                            <div x-show="showModal"
+                                                 class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                <div x-show="showModal"
+                                                     class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
+                                                     @click.away="showModal = false"
+                                                     x-transition:enter="transition ease-out duration-300"
+                                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                                     x-transition:leave="transition ease-in duration-300"
+                                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                                <textarea id="txtContent"
+                                                          name="content" class="border-2 border-gray-500 w-full"></textarea>
+
+                                                    <input hidden name = "ProID" value="{{ProID}}">
+                                                    <input hidden name = "CurrentWinner" value="{{CurrentWinner}}">
+
+                                                    <div class="flex justify-center items-center mt-4">
+                                                        <select class ="py-2 px-1 border border-key"
+                                                                name="Rate" id="cars">
+                                                            <option selected class = "text-center" value="1">
+                                                                👍 (+1)
+                                                            </option>
+                                                            <option class = "text-center" value="0">
+                                                                👎 (-1)
+                                                            </option>
+                                                        </select>
+                                                        <button type="submit"
+                                                                class="ml-4 cursor-pointer font-semibold text-md px-6 py-2
+                                                        border border-cyan-700 bg-key hover:bg-cyan-800 text-white">Send
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
-                            </div>
+                                    <form method="post" action="/seller/cancel-final">
+                                        <input hidden name="ProID" value="{{ProID}}">
+                                        <input hidden name ="Bidder" value = "{{CurrentWinner}}">
+                                        <button type ="submit"
+                                                class=" cursor-pointer text-white font-semibold
+                                    px-6 py-1 bg-red-600 hover:bg-red-700
+                                    border shadow">Cancel
+                                        </button>
+                                    </form>
+                                {{/if}}
+                            {{/if}}
                         </td>
                     </tr>
-                </tbody>
                 {{/each}}
+                </tbody>
             </table>
         </div>
     </div>

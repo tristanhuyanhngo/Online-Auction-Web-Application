@@ -92,6 +92,7 @@
       <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/5.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/6.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +201,8 @@
       <workItem from="1641731262777" duration="1060000" />
       <workItem from="1641735730791" duration="834000" />
       <workItem from="1641736820530" duration="54000" />
+      <workItem from="1641694738653" duration="5969000" />
+      <workItem from="1641721141341" duration="4203000" />
     </task>
     <servers />
   </component>

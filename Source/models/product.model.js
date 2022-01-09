@@ -399,9 +399,37 @@ export default {
     },
 
     async getProductNotSoldForMailing() {
-        const sql = `select p.ProID, p.ProName, p.Seller, p.EndDate, p.AutoExtend, p.CurrentWinner, p.MaxPrice
-                     from product p
-                     where p.ProState = true`;
+        // const sql = `select p.ProID, p.ProName, p.Seller, p.EndDate, p.AutoExtend, p.CurrentWinner, p.MaxPrice
+        //              from product p
+        //              where p.ProState = true`;
+
+        const sql = `SELECT product.ProID as ProID,
+                           product.CatID as CatID,
+                           product.Seller as Seller,
+                           product.ProName as ProName,
+                           product.StartPrice as StartPrice,
+                           product.StepPrice as StepPrice,
+                           product.SellPrice as SellPrice,
+                           product.UploadDate as UploadDate,
+                           product.EndDate as EndDate,
+                           product.AutoExtend as AutoExtend,
+                           product.ProState as ProState,
+                           product.AllowAllUsers as AllowAllUsers,
+                           category.CatName as CatName,
+                           big_category.BigCatName as BigCatName,
+                           bidding.MaxPrice as MaxPrice,
+                           bidding.Time as Time,
+                           bidding.Price as Price,
+                           bidding.Bidder as CurrentWinner
+                    FROM product
+                             JOIN category ON product.CatID=category.CatID
+                             JOIN big_category ON category.BigCat=big_category.BigCatID
+                             LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
+                        SELECT max(b.Time)
+                        FROM product as p
+                                 JOIN bidding as b ON p.ProID=b.ProID
+                    )
+                    WHERE product.ProState = true`;
         const raw = await db.raw(sql);
         return raw[0];
     },

@@ -51,7 +51,7 @@ export default {
 
         const sql = `update user
                      set RequestTime = NULL,
-                         Type = '2',
+                         Type = '1',
                          AcceptTime = '${time}'
                      where Email = '${email}'`;
         await db.raw(sql);
