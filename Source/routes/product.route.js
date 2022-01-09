@@ -7,6 +7,7 @@ import moment from "moment";
 import bodyParser from "body-parser";
 import cron from 'node-cron';
 import cartModel from "../models/cart.model.js";
+import adminModel from "../models/admin.model.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({extended: false}))
@@ -145,12 +146,25 @@ router.post('/detail/:id', async function (req, res) {
         }
         await bidModel.addBidding(bid);
 
-        const productEntity = {
+        let productEntity = {
             ProID: ProID,
             CurrentWinner: email
         }
-        await productModel.updateProduct(productEntity);
 
+        if(product.AutoExtend.readInt8()===1){
+            const now = moment();
+            const endDate = moment(product.EndDate);
+            const gap = now.diff(endDate, 'seconds');
+            if (gap <= 300) {
+                productEntity = {
+                    ProID: ProID,
+                    CurrentWinner: email,
+                    EndDate: endDate.add(10,'minutes').format()
+                }
+            }
+        }
+
+        await productModel.updateProduct(productEntity);
         emailModel.sendSuccessBid(email, bidderName, seller, product.ProName, queryPrice);
 
         return res.redirect(url);
@@ -183,10 +197,24 @@ router.post('/detail/:id', async function (req, res) {
         const ret = await bidModel.addBidding(bid);
         //console.log(ret);
 
-        const productEntity = {
+        let productEntity = {
             ProID: ProID,
             CurrentWinner: email
         }
+
+        if(product.AutoExtend.readInt8()===1){
+            const now = moment();
+            const endDate = moment(product.EndDate);
+            const gap = now.diff(endDate, 'seconds');
+            if (gap <= 300) { //equal 5 minutes
+                productEntity = {
+                    ProID: ProID,
+                    CurrentWinner: email,
+                    EndDate: endDate.add(10,'minutes').format()
+                }
+            }
+        }
+
         await productModel.updateProduct(productEntity);
         return res.redirect(url);
     }
