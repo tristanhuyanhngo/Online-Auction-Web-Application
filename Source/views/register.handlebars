@@ -47,14 +47,16 @@
                             swal('Email already in use. Please choose another email!');
                         }
                         else {
-                            swal("Congrats!","You have registered successfully! Please verify your account with an OTP that has been sent to your email!","success",{
-                                buttons:{
-                                    text: "Verify"
-                                }
-                            })
-                                    .then((value) => {
-                                        $('#formRegister').off('submit').submit();
-                                    });
+                            // swal("Congrats!","You have registered successfully! Please verify your account with an OTP that has been sent to your email!","success",{
+                            //     buttons:{
+                            //         text: "Verify"
+                            //     }
+                            // })
+                            //         .then((value) => {
+                            //             $('#formRegister').off('submit').submit();
+                            //         });
+
+                            $('#formRegister').off('submit').submit();
                         }
                     });
                 }
@@ -102,17 +104,14 @@
                     <div class="h-3 w-full border-b border-black"></div>
                 </div>
 
-                <div class="grid gap-4 grid-cols-2">
-                    <button type="button"
-                            class="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
-                        <i class="fa fa-facebook mr-2" aria-hidden="true"></i>
-                        Facebook
-                    </button>
-                    <button type="button"
-                            class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
+                <div class="">
+                    <a type="button" href="/auth/google"
+                       class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  ">
+
                         <i class="fa fa-google mr-2" aria-hidden="true"></i>
+                        </svg>
                         Google
-                    </button>
+                    </a>
                 </div>
 
             </div>

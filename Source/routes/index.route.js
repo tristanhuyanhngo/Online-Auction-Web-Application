@@ -135,7 +135,11 @@ router.get('/search', async function (req, res) {
 
 // ---------------- REGISTER ---------------- //
 router.get('/register', recaptcha.middleware.render, async function(req, res) {
-    res.render('register');
+    if(req.session.auth === true) {
+        res.redirect("/");
+    }
+    else
+        res.render('register');
 });
 
 router.get('/forget-password', async function(req, res) {
@@ -301,7 +305,11 @@ router.get('/username-available', async function (req, res) {
 
 // ---------------- LOGIN ---------------- //
 router.get('/login', recaptcha.middleware.render, async function(req, res){
-    res.render('login', { captcha:recaptcha.render() });
+    if(req.session.auth === true) {
+        res.redirect("/");
+    }
+    else
+        res.render('login', { captcha:recaptcha.render() });
 });
 
 router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', 'profile' ] }
@@ -310,8 +318,7 @@ router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', '
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
     async function (req, res) {
         const email = req.user.emails[0].value
-        const user = await userModel.findByEmail("phucthai0108@gmail.com");
-        console.log(email+".")
+        const user = await userModel.findByEmail(email);
         if(user === null) {
             const today = moment().format();
             const username = email.split("@")[0]
@@ -319,14 +326,14 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
             const userRegister = {
                 Email: req.user.emails[0].value,
                 Username: username,
-                Password: null,
+                Password: "null",
                 Name: req.user.name.familyName + " " + req.user.name.givenName,
                 Address: null,
                 DOB: null,
                 RegisterDate: today,
                 Type: 2,
                 Rate: 0,
-                Valid: false
+                Valid: true
             }
 
             await userModel.addUser(userRegister);
