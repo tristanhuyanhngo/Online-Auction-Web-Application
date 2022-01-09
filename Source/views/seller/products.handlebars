@@ -10,6 +10,9 @@
                     <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Product Name</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
@@ -28,8 +31,11 @@
                         <tr>
                                 <div>
                                     <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{ProID}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
                                         <a href="/product/detail/{{ProID}}">
-                                            <div class="font-medium hover:text-key text-gray-800">{{ProName}}</div>
+                                            <div class="font-medium hover:text-key text-gray-800"><strong>{{ProName}}</strong></div>
                                         </a>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">

@@ -408,5 +408,38 @@ export default {
 
     async updateProState(proID) {
         return db('product').where('ProID', proID).update('ProState',false);
+    },
+
+    async countByCategoryFTX(name) {
+        const sql = `SELECT count(*) as amount
+                     FROM product p
+                          INNER JOIN category c on p.CatID = c.CatID
+                     WHERE
+                         MATCH(c.CatName)
+                         AGAINST('${name}')`;
+        const raw = await db.raw(sql);
+        return raw[0][0].amount;
+    },
+
+    async countByProductNameFTX(name) {
+        const sql = `SELECT count(*) as amount
+                     FROM product
+                     WHERE
+                         MATCH(ProName)
+                         AGAINST('${name}')`;
+        const raw = await db.raw(sql);
+        return raw[0][0].amount;
+    },
+
+    async findProductByNameFTX(name, limit, offset) {
+        const sql = `SELECT count(*) as amount
+                     FROM product
+                     WHERE
+                         MATCH(ProName)
+                         AGAINST('${name}')
+                     LIMIT ${limit} OFFSET ${offset}`;
+
+        const raw = await db.raw(sql);
+        return raw[0];
     }
 }

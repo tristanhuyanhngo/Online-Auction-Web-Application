@@ -129,14 +129,16 @@
                 </div>
             </div>
             <div class=" text-cyan-700 hidden md:flex md:flex-1 md:items-center md:justify-end">
-                <select id="mySelect" class="form-select block p-1 border border-cyan-700 text-center ">
-                        <option value="1" selected="selected">Sort by Time</option>
-                        <option value="0">Sort by Price</option>
-                </select>
-                <div class="rounded-full mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
-                    <input type="search" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
-                    <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
-                </div>
+                <form method="post" action="/search">
+                    <div class="rounded-full mr-5 bg-white flex items-center pl-5 pr-2 border border-cyan-700">
+                        <select id="filterSearch" name="filterSearch" class="rounded mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
+                            <option value="category">Category</option>
+                            <option value="product" selected="selected">Product</option>
+                        </select>
+                        <input type="search" name="searchContent" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
+                        <button type="submit" class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></button>
+                    </div>
+                </form>
 
                 {{#if auth}}
                     <div class="hidden lg:block">

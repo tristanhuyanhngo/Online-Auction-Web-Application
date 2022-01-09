@@ -1,6 +1,6 @@
 <div class="container mx-auto xl:px-10">
     <div class="flex justify-between items-center my-4">
-        <div class="text-2xl font-semibold text-cyan-700">Search: </div>
+        <div class="text-2xl font-semibold text-cyan-700">Search by </div>
         <div class="">
             <select class="form-select block p-1 border border-cyan-700 text-center ">
                 <option>Giá tăng</option>
@@ -29,7 +29,7 @@
                 {{else}}
                     <div
                             class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                        <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        <a class="page-link" href="/search?page={{value}}">{{value}}</a>
                     </div>
                 {{/if}}
             {{/each}}

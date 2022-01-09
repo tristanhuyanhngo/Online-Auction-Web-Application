@@ -16,6 +16,8 @@ const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 router.use(bodyParser.urlencoded({ extended: false }));
 
+let filterSearch = "";
+let searchContent = "product";
 
 // ---------------- HOME ---------------- //
 router.get('/', async function (req, res) {
@@ -95,9 +97,15 @@ router.get('/search', async function (req, res) {
     const limit = 8;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
+    let total = 0;
 
-    const total = await productSearch.countAllProducts();
-    //console.log(total);
+    if (filterSearch == 'category') {
+        total = await productModel.countByCategoryFTX(searchContent);
+    }
+    else {
+        total = await productModel.countByProductNameFTX(searchContent);
+    }
+
     let nPages = Math.floor(total / limit);
     if (total % limit > 0) {
         nPages++;
@@ -112,13 +120,19 @@ router.get('/search', async function (req, res) {
     }
 
     const list = await productSearch.findAllPage(limit, offset);
+
     res.render('search', {
         products: list[0],
-        page_numbers,
-        isFirst: page_numbers[0].isCurrent,
-        isLast: page_numbers[nPages-1].isCurrent
+        page_numbers
     });
 });
+
+router.post('/search', async function (req, res) {
+    filterSearch = req.body.filterSearch;
+    searchContent = req.body.searchContent;
+
+    res.redirect('search');
+})
 
 // ---------------- REGISTER ---------------- //
 router.get('/register', async function(req, res) {
