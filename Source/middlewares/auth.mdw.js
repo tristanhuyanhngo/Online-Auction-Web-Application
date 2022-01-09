@@ -9,12 +9,16 @@ export default async function auth(req, res, next) {
         return res.redirect('/login');
     } else {
         let type = req.session.authUser.Type;
+        console.log(type);
         let reqTime = req.session.authUser.RequestTime;
         req.session.requested = true;
-        if (type === '1' && reqTime == null) {
+        if (type === '2' && reqTime == null) {
             req.session.bidder = true;
             req.session.requested = false;
+        } else{
+            req.session.bidder = false;
         }
+        console.log(req.session.bidder);
         const accTime = moment(req.session.authUser.AcceptTime);
         if (accTime != null) {
             const now = moment();

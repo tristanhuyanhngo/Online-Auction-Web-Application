@@ -20,8 +20,11 @@ export default function (app) {
             format_relative(val) {
                 if(val - moment.now() < 0)
                     return 'Time Out';
-                else
-                    return moment().from(val);
+                else{
+                    const endDate = moment(val);
+                    return endDate.diff(moment(), 'days');
+                }
+                // return moment().from(val);
             },
             format_name(val) {
                 const arr = val.split(" ");
