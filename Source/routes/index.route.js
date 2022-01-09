@@ -107,9 +107,15 @@ router.get('/', async function (req, res) {
 
 // ---------------- SEARCH ---------------- //
 router.get('/search', async function (req, res) {
-    const limit = 8;
     const page = req.query.page || 1;
-    const offset = (page - 1) * limit;
+    const type = req.query.type || 1; //0: price , 1: time
+    let checkType = false;
+
+    if (type == 0)
+        checkType = false;
+    else checkType = true;
+
+    const limit = 8;
     let total = 0;
 
     if (filterSearch == 'category') {
@@ -119,24 +125,73 @@ router.get('/search', async function (req, res) {
         total = await productModel.countByProductNameFTX(searchContent);
     }
 
-    let nPages = Math.floor(total / limit);
+    let nPage = Math.floor(total / limit);
     if (total % limit > 0) {
-        nPages++;
+        nPage++;
     }
 
     const page_numbers = [];
-    for (let i = 1; i <= nPages; i++) {
+    for (let i = 1; i <= nPage; i++) {
         page_numbers.push({
             value: i,
             isCurrent: +page === i
         });
     }
 
-    const list = await productSearch.findAllPage(limit, offset);
+    const offset = (page - 1) * limit;
+    let list;
+
+    if (filterSearch == 'category') {
+        list = await productModel.findByCategoryFTX(searchContent, limit, offset);
+    }
+    else {
+        list = await productModel.findByNameFTX(searchContent, limit, offset);
+    }
+
+    let isFirst = 1;
+    let isLast = 1;
+    for (let i in list) {
+        list[i].noBid = false;
+        list[i].user = req.session.authUser;
+        const countBidding = await productModel.countBidding(list[i].ProID);
+        list[i].countBidding = countBidding[0].count;
+        if (list[i].Price == null) {
+            list[i].noBid = true;
+        } else {
+            let bidRet = await productModel.findBidding(list[i].ProID);
+            list[i].biddingHighest = bidRet[0];
+        }
+
+        if (req.session.auth !== false) {
+            let inWish = await productModel.isInWishList(list[i].ProID, req.session.authUser.Email);
+            if (inWish.length > 0) {
+                list[i].isWish = true;
+            }
+        }
+
+        if(moment.now() - list[i].UploadDate <= 600000)
+            list[i].isNew = true;
+    }
+
+    if (list.length !== 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
+
+    const href = "search"
 
     res.render('search', {
-        products: list[0],
-        page_numbers
+        products: list,
+        empty: list.length === 0,
+        page_numbers,
+        isFirst,
+        isLast,
+        catName: list.BigCatName,
+        type,
+        href,
+        checkType,
+        filterSearch,
+        searchContent
     });
 });
 

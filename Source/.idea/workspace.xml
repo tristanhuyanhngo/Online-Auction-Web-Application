@@ -13,6 +13,11 @@
       <change beforePath="$PROJECT_DIR$/views/partials/card/card.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/card/card.handlebars" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.handlebars" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/profile.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/search.handlebars" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +56,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Script-Database (1).sql" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views" />
+>>>>>>> 6ec889640da94dc619f1087d116c5bca4408fcd7
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -64,11 +73,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\QST\Studying\3_Year\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views" />
       <recent name="D:\QST\Studying\3_Year\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\seller" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\models" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\otp" />
       <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views" />
-      <recent name="C:\Users\Thanh\Desktop\HCMUS_PTUDW_Final-Project_Online-Auction\Source\views\bidder" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\QST\Studying\3_Year\HCMUS_PTUDW_Final-Project_Online-Auction\Source\public\images\Product" />
@@ -123,7 +132,11 @@
       <workItem from="1641736820530" duration="54000" />
       <workItem from="1641694738653" duration="5969000" />
       <workItem from="1641721141341" duration="4203000" />
+<<<<<<< HEAD
       <workItem from="1641743102989" duration="1570000" />
+=======
+      <workItem from="1641743141266" duration="5176000" />
+>>>>>>> 6ec889640da94dc619f1087d116c5bca4408fcd7
     </task>
     <servers />
   </component>
