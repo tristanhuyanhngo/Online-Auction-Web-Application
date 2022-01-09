@@ -257,11 +257,11 @@ router.get('/detail/:id', async function (req, res) {
     let biddingHighest = null;
 
     let suggestPrice = +product.StartPrice + +product.StepPrice;
-    //console.log(suggestPrice);
 
     if (bidding.length > 0) {
         suggestPrice = +bidding[0].Price + +product.StepPrice;
         biddingHighest = bidding[0];
+        bidding[0].isBiddingHighest = true;
     }
 
     if (res.locals.auth !== false) {
@@ -344,11 +344,8 @@ router.get('/byBigCat/:id', async function (req, res) {
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset, type);
 
-    //console.log(list);
-
     let isFirst = 1;
     let isLast = 1;
-
     for (let i in list) {
         list[i].noBid = false;
         list[i].user = req.session.authUser;
@@ -357,7 +354,7 @@ router.get('/byBigCat/:id', async function (req, res) {
         if (list[i].Price == null) {
             list[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list[i].ProID);
+            let bidRet = await productModel.findBidding(list[i].ProID);
             list[i].biddingHighest = bidRet[0];
         }
 
@@ -367,6 +364,9 @@ router.get('/byBigCat/:id', async function (req, res) {
                 list[i].isWish = true;
             }
         }
+
+        if(moment.now() - list[i].UploadDate <= 600000)
+            list[i].isNew = true;
     }
 
     if (list.length !== 0) {
@@ -382,7 +382,7 @@ router.get('/byBigCat/:id', async function (req, res) {
         page_numbers,
         isFirst,
         isLast,
-        catName: list[0].BigCatName,
+        catName: list.BigCatName,
         type,
         href,
         CatID: bigCatId,
@@ -420,7 +420,6 @@ router.get('/byCat/:id', async function (req, res) {
 
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByCatID(CatID, limit, offset, type);
-    //console.log(list);
 
     let isFirst = 1;
     let isLast = 1;
@@ -433,7 +432,7 @@ router.get('/byCat/:id', async function (req, res) {
         if (list[i].Price == null) {
             list[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list[i].ProID);
+            let bidRet = await productModel.findBidding(list[i].ProID);
             list[i].biddingHighest = bidRet[0];
         }
 
@@ -443,6 +442,9 @@ router.get('/byCat/:id', async function (req, res) {
                 list[i].isWish = true;
             }
         }
+
+        if(moment.now() - list[i].UploadDate <= 600000)
+            list[i].isNew = true;
     }
 
     if (list.length !== 0) {
@@ -459,7 +461,7 @@ router.get('/byCat/:id', async function (req, res) {
         isLast,
         type,
         CatID,
-        catName: list[0].CatName,
+        catName: list.CatName,
         href,
         checkType
     });

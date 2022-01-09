@@ -19,6 +19,20 @@ router.get('/', async (req, res) => {
 
     let cActive = true;
 
+    const user = req.session.authUser || 0;
+    if (!user) {
+        console.log("Please login first ! ");
+        res.redirect('/');
+        return;
+    }
+
+    const isAdmin = req.session.isAdmin;
+    if (!isAdmin) {
+        console.log("You don't have permission to access this page ! ");
+        res.redirect('/');
+        return;
+    }
+
     const bigcat = await categoryModel.findAllWithDetails();
     console.log(bigcat);
     res.render('admin/category-parent', {
@@ -268,16 +282,16 @@ router.get('/account', async (req, res) => {
 
     let color = [];
     for(let i=0;i<user.length;i++){
-        if(user[i].Type==='0'){
-            user[i].Type = "admin";
+        if(user[i].Type==='1'){
+            user[i].Type = "seller";
             color.push(true);
         }
-        else if(user[i].Type==='1'){
-            user[i].Type="seller";
+        else if(user[i].Type==='2'){
+            user[i].Type="bidder";
             color.push(false);
         }
         else {
-            user[i].Type = "bidder";
+            user[i].Type = "admin";
             color.push(false);
         }
     }

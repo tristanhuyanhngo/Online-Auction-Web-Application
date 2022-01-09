@@ -8,6 +8,8 @@ import productSearch from "../models/search.model.js";
 import userModel from "../models/user.model.js";
 import emailModel from "../models/email.models.js";
 import productModel from "../models/product.model.js";
+import passport from "passport";
+import '../auth/authG.js'
 
 const RC = reCapt.RecaptchaV3;
 const recaptcha = new RC('6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC', '6LfL_ukdAAAAAOymLm0tldwv1RZIyPDq27lmoBmt', {callback:'cb'});
@@ -33,7 +35,7 @@ router.get('/', async function (req, res) {
         if (list_1[i].Price==null) {
             list_1[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_1[i].ProID);
+            let bidRet = await productModel.findBidding(list_1[i].ProID);
             list_1[i].biddingHighest = bidRet[0];
         }
 
@@ -43,6 +45,9 @@ router.get('/', async function (req, res) {
                 list_1[i].isWish = true;
             }
         }
+        // smaller 10 minutes is new
+        if(moment.now() - list_1[i].UploadDate <= 600000)
+            list_1[i].isNew = true;
     }
 
     for(let i in list_2) {
@@ -53,7 +58,7 @@ router.get('/', async function (req, res) {
         if (list_2[i].Price==null) {
             list_2[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_2[i].ProID);
+            let bidRet = await productModel.findBidding(list_2[i].ProID);
             list_2[i].biddingHighest = bidRet[0];
         }
 
@@ -63,6 +68,10 @@ router.get('/', async function (req, res) {
                 list_2[i].isWish = true;
             }
         }
+
+        // smaller 10 minutes is new
+        if(moment.now() - list_2[i].UploadDate <= 600000)
+            list_2[i].isNew = true;
     }
 
     for(let i in list_3) {
@@ -73,7 +82,7 @@ router.get('/', async function (req, res) {
         if (list_3[i].Price==null) {
             list_3[i].noBid = true;
         } else {
-            let bidRet = await productModel.findBidDetails(list_3[i].ProID);
+            let bidRet = await productModel.findBidding(list_3[i].ProID);
             list_3[i].biddingHighest = bidRet[0];
         }
 
@@ -83,6 +92,10 @@ router.get('/', async function (req, res) {
                 list_3[i].isWish = true;
             }
         }
+
+        // smaller 10 minutes is new
+        if(moment.now() - list_3[i].UploadDate <= 600000)
+            list_3[i].isNew = true;
     }
 
     res.render('home', {
@@ -135,8 +148,12 @@ router.post('/search', async function (req, res) {
 })
 
 // ---------------- REGISTER ---------------- //
-router.get('/register', async function(req, res) {
-    res.render('register');
+router.get('/register', recaptcha.middleware.render, async function(req, res) {
+    if(req.session.auth === true) {
+        res.redirect("/");
+    }
+    else
+        res.render('register');
 });
 
 router.get('/forget-password', async function(req, res) {
@@ -191,31 +208,39 @@ router.post('/confirm-otp', async function(req, res) {
     return res.redirect('/reset-success');
 });
 
-router.post('/register',urlencodedParser,async function(req, res) {
-    const rawPassword = req.body.password;
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(rawPassword, salt);
-    const today = moment().format();
-    const otp = emailModel.sendOTPRegister(req.body.email);
+router.post('/register', recaptcha.middleware.verify,async function(req, res) {
+    if (!req.recaptcha.error) {
+        const rawPassword = req.body.password;
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(rawPassword, salt);
+        const today = moment().format();
+        const otp = emailModel.sendOTPRegister(req.body.email);
 
-    const user = {
-        Email: req.body.email,
-        Username: req.body.username,
-        Password: hash,
-        Name: req.body.fullName,
-        Address: null,
-        DOB: null,
-        RegisterDate: today,
-        Type: 2,
-        Rate: 0,
-        OTP: otp.toString(),
-        Valid: false
+        const user = {
+            Email: req.body.email,
+            Username: req.body.username,
+            Password: hash,
+            Name: req.body.fullName,
+            Address: null,
+            DOB: null,
+            RegisterDate: today,
+            Type: 2,
+            Rate: 0,
+            OTP: otp.toString(),
+            Valid: false
+        }
+
+        await userModel.addUser(user);
+        req.session.registerUser = req.body.email;
+
+        res.redirect('/confirm-register');
+    }
+    else {
+        return res.render('register',{
+            error: 'Please check the captcha! !'
+        });
     }
 
-    await userModel.addUser(user);
-    req.session.registerUser = req.body.email;
-
-    res.redirect('/confirm-register');
 });
 
 router.get('/confirm-register', async function(req, res) {
@@ -293,43 +318,105 @@ router.get('/username-available', async function (req, res) {
 });
 
 // ---------------- LOGIN ---------------- //
-router.get('/login', async function(req, res){
-    res.render('login', { captcha:recaptcha.render() });
+router.get('/login', recaptcha.middleware.render, async function(req, res){
+    if(req.session.auth === true) {
+        res.redirect("/");
+    }
+    else
+        res.render('login', { captcha:recaptcha.render() });
 });
 
-router.post('/login',urlencodedParser, async function (req, res) {
-    const email = req.body.email;
-    const user = await userModel.findByEmail(email);
+router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', 'profile' ] }
+    ));
 
-    if(user === null){
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+    async function (req, res) {
+        const email = req.user.emails[0].value
+        const user = await userModel.findByEmail(email);
+        if(user === null) {
+            const today = moment().format();
+            const username = email.split("@")[0]
+
+            const userRegister = {
+                Email: req.user.emails[0].value,
+                Username: username,
+                Password: "null",
+                Name: req.user.name.familyName + " " + req.user.name.givenName,
+                Address: null,
+                DOB: null,
+                RegisterDate: today,
+                Type: 2,
+                Rate: 0,
+                Valid: true
+            }
+
+            await userModel.addUser(userRegister);
+
+            req.session.auth=true;
+            req.session.authUser=userRegister;
+
+            const url = req.session.retUrl||'/';
+            res.redirect(url);
+        }
+        else {
+            // 1 - Seller , 2 - Bidder, 3 - Admin
+            req.session.auth=true;
+            req.session.authUser=user;
+
+            if (user.Type === '3') {
+                req.session.isSeller = true;
+                req.session.isAdmin = true;
+            }
+            else if (user.Type === '1') {
+                req.session.isSeller = true;
+                req.session.isAdmin = false;
+            }
+
+            const url = req.session.retUrl||'/';
+            res.redirect(url);
+        }
+    }
+);
+
+router.post('/login', recaptcha.middleware.verify, async function (req, res) {
+    if (!req.recaptcha.error) {
+        const email = req.body.email;
+        const user = await userModel.findByEmail(email);
+
+        if(user === null){
+            return res.render('login',{
+                error: 'Invalid username or password !'
+            });
+        }
+
+        const ret = bcrypt.compareSync(req.body.password, user.Password);
+        if(ret === false){
+            return res.render('login',{
+                error: 'Invalid username or password!'
+            });
+        }
+
+        delete user.Password;
+
+        req.session.auth=true;
+        req.session.authUser=user;
+    
+        if (user.Type === '3') {
+            req.session.isAdmin = true;
+        }
+        else if (user.Type === '1') {
+            req.session.isSeller = true;
+            req.session.isAdmin = false;
+        }
+    
+        const url = req.session.retUrl||'/';
+        res.redirect(url);
+    } 
+    else {
         return res.render('login',{
-            error: 'Invalid username or password !'
+            error: 'Please check the captcha!'
         });
     }
-
-    const ret = bcrypt.compareSync(req.body.password, user.Password);
-    if(ret === false){
-        return res.render('login',{
-            error: 'Invalid username or password!'
-        });
-    }
-
-    delete user.Password;
-
-    // 1 - Seller , 2 - Bidder, 3 - Admin
-    req.session.auth=true;
-    req.session.authUser=user;
-
-    if (user.Type === '3') {
-        req.session.isAdmin = true;
-    }
-    else if (user.Type === '1') {
-        req.session.isSeller = true;
-        req.session.isAdmin = false;
-    }
-
-    const url = req.session.retUrl||'/';
-    res.redirect(url);
 });
 
 // ---------------- LOGOUT ---------------- //
