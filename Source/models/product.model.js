@@ -7,6 +7,16 @@ export default {
         return db('product').where('ProID', proid).update(entity);
     },
 
+    async findBigCatAndCatByProID(id) {
+        const sql = `select b.BigCatName as bigCatName, c.CatName as catName
+                     from product p
+                          join category c on p.CatID = c.CatID
+                          join big_category b on c.BigCat = b.BigCatID
+                     where p.ProID = ${id}`;
+        const raw = await db.raw(sql);
+        return raw[0][0];
+    },
+
     async findRestrict(proID,bidder) {
         const product = await db.select().from('restrict').where({
             ProID: proID,
@@ -32,11 +42,6 @@ export default {
 
     async countProduct() {
         const list = await db('products').select().from('product').count({amount: 'ProID'});
-        return list[0].amount;
-    },
-
-    async countProductBySeller(seller) {
-        const list = await db('products').select().from('product').where('Seller', seller).count({amount: 'ProID'});
         return list[0].amount;
     },
 

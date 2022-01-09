@@ -51,7 +51,6 @@ router.get('/', async (req, res) => {
     //     return;
     // }
 
-    // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
         return res.redirect('/');
@@ -68,8 +67,8 @@ router.post('/cancel', async(req, res) => {
     const proID = req.body.ProID;
 
     const product = await productModel.findByProID(proID);
-    console.log("ProID",proID);
-    console.log(product);
+    //console.log("ProID",proID);
+    //console.log(product);
 
     const restrictEntity = {
         ProID: proID,
@@ -125,7 +124,7 @@ async function validUploadLength (req, res, next) {
         fs.mkdirSync(dir_temp);
     };
 
-    next()
+     next()
 }
 
 router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], async(req, res) => {
@@ -207,7 +206,6 @@ router.get('/selling', async (req, res) => {
     //     return;
     // }
 
-    // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
         return res.redirect('/');
@@ -310,7 +308,7 @@ router.get('/sold', async (req, res) => {
 
     const offset = (page-1)*limit;
     const product = await productModel.findBySellerSoldLimit(seller,limit,offset);
-    console.log(product);
+    //console.log(product);
 
     for (let i = 0; i < product.length; i++) {
         if (product[i].ProState[0]) {
@@ -353,7 +351,6 @@ router.get('/products', async (req, res) => {
     //     return;
     // }
 
-    // Get type of User: 1 -> Seller | 2 -> Bidder | 3 -> Admin
     const isSeller = req.session.isSeller;
     if (!isSeller) {
         return res.redirect('/');
@@ -363,7 +360,7 @@ router.get('/products', async (req, res) => {
     const page = req.query.page || 1;
     const limit = 6;
 
-    const total = await productModel.countProductBySeller(seller);
+    const total = await productModel.countProductNotSoldBySeller(seller);
 
     let nPage = Math.floor(total/limit);
     if(total%limit>0){
@@ -380,7 +377,7 @@ router.get('/products', async (req, res) => {
 
     const offset = (page-1)*limit;
 
-    const product = await productModel.findBySellerLimit(seller,limit,offset);
+    const product = await productModel.findBySellerNotSoldLimit(seller,limit,offset);
 
     let isFirst = 1;
     let isLast = 1;
@@ -418,6 +415,17 @@ router.post('/products',urlencodedParser, async (req, res) => {
 
     await productModel.addDescription(description);
 
+    const url = req.headers.referer || '/seller/products';
+    return res.redirect(url);
+});
+
+router.post('/products/del',  async (req, res) => {
+    const information = await productModel.findBigCatAndCatByProID(req.body.ProID)
+    //const ret = await productModel.del(req.body.ProID);
+    console.log(information);
+    //let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
+    let filePath = './test';
+    fs.rmSync(filePath, { recursive: true });
     const url = req.headers.referer || '/seller/products';
     return res.redirect(url);
 });

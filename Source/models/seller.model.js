@@ -10,5 +10,5 @@ export default {
 
     async restrict(entity){
         await db('restrict').insert(entity);
-    },
+    }
 };

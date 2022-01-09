@@ -212,28 +212,28 @@ INSERT INTO `category` VALUES (6, 'Clothing',3);
 INSERT INTO `category` VALUES (7, 'Shoes',3);
 COMMIT;
 
--- Admin (0) - Seller (1) - Bidder (2) 
+-- Admin (3) - Seller (1) - Bidder (2) 
 -- ----------------------------
 -- Records of Nguoi Ban
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','2',0,NULL,NULL,true,NULL);
-INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('kysutainangqsb@gmail.com','seller1','$2a$10$bytUUlvOH89TYwEaqCKetORNU.5yORWqp6WdF774p4ecym9WOSU82','Ngô Minh Quân','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','2',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('abc@gmail.com','seller2','$2a$10$bytUUlvOH89TYwEaqCKetORNU.5yORWqp6WdF774p4ecym9WOSU82','Ngô Ngọc Đăng Khoa','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-02-01','2021-12-07','2',0,NULL,NULL,true,NULL);
 COMMIT;
 
 -- ----------------------------
 -- Records of Admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('huyanhngo@gmail.com','Horizon_Administrator_1','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','3',0,NULL,NULL,true,NULL);
-INSERT INTO `user` VALUES ('ngohuyanh@gmail.com','Horizon_Administrator_2','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','3',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('huyanhngo@gmail.com','Horizon_Administrator_1','$2a$10$bytUUlvOH89TYwEaqCKetORNU.5yORWqp6WdF774p4ecym9WOSU82','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','3',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('ngohuyanh@gmail.com','Horizon_Administrator_2','$2a$10$bytUUlvOH89TYwEaqCKetORNU.5yORWqp6WdF774p4ecym9WOSU82','Ngô Huy Anh','153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','2001-01-01','2021-12-07','3',0,NULL,NULL,true,NULL);
 COMMIT;
 
 -- ----------------------------
 -- Records of Nguoi Mua
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('springfieldcaptain@gmail.com','bidder1','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Minh Triết','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL,true,NULL);
+INSERT INTO `user` VALUES ('springfieldcaptain@gmail.com','bidder1','$2a$10$bytUUlvOH89TYwEaqCKetORNU.5yORWqp6WdF774p4ecym9WOSU82','Ngô Minh Triết','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-01-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 INSERT INTO `user` VALUES ('xyz@gmail.com','bidder2','$2a$10$xetnvdbPChlxPad9GhQ3Y.LQVoxD5UF1FJ.4gtlPU7z3nr1UaXDdK','Ngô Ngọc Đăng Khôi','157 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-03-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 INSERT INTO `user` VALUES ('a@gmail.com','bidder3','$2a$12$ByiS6Z1yxCa6RT5TmQFueOtPath3trUECegh8JQGdoFP8YwtrbDTC','Ngô Ngọc Đăng Minh','158 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-04-01','2021-12-07','1',0,NULL,NULL,true,NULL);
 INSERT INTO `user` VALUES ('b@gmail.com','bidder4','$2a$12$nz8f4u/XW3p4yDjwus6wIeTQv0pS1CXXgwQ2Yxx4GI/t1PHlDjsXG','Ngô Ngọc Đăng Khánh','159 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','1990-05-01','2021-12-07','1',0,NULL,NULL,true,NULL);
