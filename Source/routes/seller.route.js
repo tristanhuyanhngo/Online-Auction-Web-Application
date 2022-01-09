@@ -107,7 +107,11 @@ async function validUploadLength (req, res, next) {
     if (req.files.length < 3) {
         for (let i = 1; i <= numberOfImage; i++) {
             let filePath = dir + `/${i}.jpg`;
-            fs.unlinkSync(filePath);
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath);
+            } else {
+                console.log('Directory not found.');
+            }
         }
         numberOfImage = 0;
         res.render('seller/post-product',{
@@ -421,11 +425,17 @@ router.post('/products',urlencodedParser, async (req, res) => {
 
 router.post('/products/del',  async (req, res) => {
     const information = await productModel.findBigCatAndCatByProID(req.body.ProID)
-    //const ret = await productModel.del(req.body.ProID);
-    console.log(information);
-    //let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
-    let filePath = './test';
-    fs.rmSync(filePath, { recursive: true });
+    const ret = await productModel.del(req.body.ProID);
+
+    let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
+
+    if (fs.existsSync(filePath)) {
+        //console.log('Directory exists!');
+        fs.rmSync(filePath, { recursive: true });
+    } else {
+        console.log('Directory not found.');
+    }
+
     const url = req.headers.referer || '/seller/products';
     return res.redirect(url);
 });
