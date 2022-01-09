@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/auth.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/auth.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/view.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/view.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/admin.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/card/card.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/card/card.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/product.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,8 @@
       <workItem from="1641736820530" duration="54000" />
       <workItem from="1641694738653" duration="5969000" />
       <workItem from="1641721141341" duration="4203000" />
-      <workItem from="1641743102989" duration="1570000" />
+      <workItem from="1641743102989" duration="1838000" />
+      <workItem from="1641745014752" duration="2074000" />
     </task>
     <servers />
   </component>
