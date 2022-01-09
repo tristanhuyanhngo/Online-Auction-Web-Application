@@ -7,15 +7,91 @@
     <list default="true" id="e7d645cd-fb37-4c89-ac3d-79388543fc1c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Script/Script-Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/Script-Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/product.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Product/61/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/46/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/47/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/48/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/49/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/49/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/49/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/49/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/49/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/50/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/50/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/50/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/50/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/51/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/51/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/51/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/51/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/51/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/52/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/53/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/53/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/53/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/53/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/53/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/54/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/55/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/56/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/57/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/57/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/57/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/57/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/57/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/58/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/59/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/Product/Fashion/Shoes/60/6.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/header/header.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header/header.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/search.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/search.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/seller/products.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/products.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/seller/selling.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/selling.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/seller/sold.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/seller/sold.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +196,10 @@
       <workItem from="1641571166868" duration="6591000" />
       <workItem from="1641666223088" duration="830000" />
       <workItem from="1641694738653" duration="21391000" />
+      <workItem from="1641729705017" duration="237000" />
+      <workItem from="1641731262777" duration="1060000" />
+      <workItem from="1641735730791" duration="834000" />
+      <workItem from="1641736820530" duration="54000" />
     </task>
     <servers />
   </component>
