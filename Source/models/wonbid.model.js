@@ -30,5 +30,27 @@ export default {
                        and w.ProID = ${proid}`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async evaluatedBySeller(email,proid){
+        const sql = `select count(*) as amount from
+                        success_bid w join rating r
+                        on w.ProID = r.ProID
+                        and w.Bidder = r.Receiver
+                     where w.Bidder = '${email}' 
+                       and w.ProID = ${proid} and r.Cancel is null`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async cancelBySeller(email,proid){
+        const sql = `select count(*) as amount from
+                        success_bid w join rating r
+                        on w.ProID = r.ProID
+                        and w.Bidder = r.Receiver
+                     where w.Bidder = '${email}' 
+                       and w.ProID = ${proid} and r.Cancel=true`;
+        const raw = await db.raw(sql);
+        return raw[0];
     }
 }

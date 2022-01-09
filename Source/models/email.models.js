@@ -31,7 +31,6 @@ export default {
         return otp;
     },
 
-    //Người mua bị từ chối ra giá
     sendBidCancel(receiver, proName) {
         const otpStr = 'We are sorry that your bidding for product ' + proName + ' on Horizon has been restricted and canceled by seller!\n'
             +'Please try bidding with another product!';
