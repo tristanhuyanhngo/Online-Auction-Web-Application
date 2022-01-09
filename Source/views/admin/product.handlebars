@@ -25,7 +25,7 @@
                             <div class="font-semibold text-left">Seller</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Date</div>
+                            <div class="font-semibold text-left">Upload Date</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center">Edit</div>
@@ -43,13 +43,16 @@
                                         </div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="font-medium text-gray-800">{{ProName}}</div>
+                                        <a href = "/product/detail/{{ProID}}">
+                                            <div class="font-medium hover:text-key text-gray-800">{{ProName}}</div>
+
+                                        </a>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{Seller}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{format_date UploadDate}}</div>
+                                        <div class="text-left">{{format_no_h UploadDate}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap flex justify-center">
                                         <div x-data="{ showModal : false }">

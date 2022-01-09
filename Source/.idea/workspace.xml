@@ -18,6 +18,7 @@
       <change beforePath="$PROJECT_DIR$/routes/index.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/search.handlebars" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/product.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/product.handlebars" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,10 +134,15 @@
       <workItem from="1641694738653" duration="5969000" />
       <workItem from="1641721141341" duration="4203000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1641743102989" duration="1570000" />
 =======
       <workItem from="1641743141266" duration="5176000" />
 >>>>>>> 6ec889640da94dc619f1087d116c5bca4408fcd7
+=======
+      <workItem from="1641743102989" duration="1838000" />
+      <workItem from="1641745014752" duration="2074000" />
+>>>>>>> user
     </task>
     <servers />
   </component>
