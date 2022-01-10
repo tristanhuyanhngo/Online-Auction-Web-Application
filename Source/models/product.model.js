@@ -504,7 +504,7 @@ export default {
         return raw[0];
     },
 
-    async findByNameFTX(name, limit, offset) {
+    async findByNameFTX(name, limit, offset,factor) {
         const sql = `SELECT product.ProID as ProID,
                             product.CatID as CatID,
                             product.Seller as Seller,
@@ -521,26 +521,27 @@ export default {
                             big_category.BigCatName as BigCatName,
                             bidding.MaxPrice as MaxPrice,
                             bidding.Time as Time,
-                            bidding.Price as Price,
-                            bidding.Bidder as CurrentWinner
+       bidding.Price as Price,
+       bidding.Bidder as CurrentWinner
                      FROM product
-                              JOIN category ON product.CatID=category.CatID
-                              JOIN big_category ON category.BigCat=big_category.BigCatID
-                              LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
+                         JOIN category ON product.CatID=category.CatID
+                         JOIN big_category ON category.BigCat=big_category.BigCatID
+                         LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
                          SELECT max(b.Time)
                          FROM product as p
-                                  JOIN bidding as b ON p.ProID=b.ProID
+                         JOIN bidding as b ON p.ProID=b.ProID
                          )
-                         WHERE product.ProState = true and
-                            MATCH(product.ProName)
-                            AGAINST('${name}')
+                     WHERE product.ProState = true and
+                         MATCH(product.ProName)
+                         AGAINST('${name}')
+                         order by ${factor}
                          LIMIT ${limit} OFFSET ${offset}`;
         const raw = await db.raw(sql);
         // console.log(raw[0][0]);
         return raw[0];
     },
 
-    async findByCategoryFTX(name, limit, offset) {
+    async findByCategoryFTX(name, limit, offset,factor) {
         const sql = `SELECT product.ProID as ProID,
                             product.CatID as CatID,
                             product.Seller as Seller,
@@ -570,6 +571,7 @@ export default {
                          WHERE product.ProState = true and
                             MATCH(category.CatName)
                             AGAINST('${name}')
+                            order by ${factor}
                          LIMIT ${limit} OFFSET ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
