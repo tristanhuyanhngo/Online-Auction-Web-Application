@@ -22,7 +22,11 @@ export default function (app) {
                     return 'Time Out';
                 else{
                     const endDate = moment(val);
-                    return endDate.from(moment());
+                    if(val - moment.now()  < 259200000) {
+                        return endDate.from(moment());
+                    }
+                    else
+                        return "End: " + endDate.format("DD/MM/YYYY");
                 }
                 //     return moment().from(val);
             },
