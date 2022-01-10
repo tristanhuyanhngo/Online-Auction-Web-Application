@@ -300,6 +300,11 @@ router.get('/detail/:id', async function (req, res) {
 
     let seller = await userModel.findByEmail(product.Seller);
 
+    let isSellerProduct = false
+    if(res.locals.auth !== false)
+        if(seller.Username == req.session.authUser.Username)
+            isSellerProduct = true;
+    console.log(isSellerProduct)
     res.render('product', {
         product,
         suggestPrice,
@@ -310,7 +315,8 @@ router.get('/detail/:id', async function (req, res) {
         seller,
         bidding,
         biddingHighest,
-        isRestrict
+        isRestrict,
+        isSellerProduct
     });
 });
 
@@ -382,7 +388,7 @@ router.get('/byBigCat/:id', async function (req, res) {
         page_numbers,
         isFirst,
         isLast,
-        catName: list.BigCatName,
+        catName: list[0].BigCatName,
         type,
         href,
         CatID: bigCatId,
@@ -397,7 +403,7 @@ router.get('/byCat/:id', async function (req, res) {
 
     let checkType = false;
 
-    if (type === 0)
+    if (type == 0)
         checkType = false;
     else checkType = true;
 
@@ -461,7 +467,7 @@ router.get('/byCat/:id', async function (req, res) {
         isLast,
         type,
         CatID,
-        catName: list.CatName,
+        catName: list[0].CatName,
         href,
         checkType
     });

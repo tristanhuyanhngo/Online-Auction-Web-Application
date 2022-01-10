@@ -180,13 +180,15 @@ router.get('/search', async function (req, res) {
 
     const href = "search"
 
+    console.log(list[3])
+
     res.render('search', {
         products: list,
         empty: list.length === 0,
         page_numbers,
         isFirst,
         isLast,
-        catName: list.BigCatName,
+        catName: "SEARCH: " + searchContent,
         type,
         href,
         checkType,
