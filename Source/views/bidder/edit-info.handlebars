@@ -9,7 +9,7 @@
         $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
             const email = document.getElementById('txtEmail').value;
-            const username = document.getElementById('txtUsername').value;
+            // const username = document.getElementById('txtUsername').value;
             if (email.length < 1) {
                 swal('Email must be filled in!');
                 return;
@@ -168,7 +168,7 @@
                                                             text-gray-500 px-2 rounded border-2 border-key
                                                     focus:outline-none"
                                            name="Email"
-                                           placeholder="{{authUser.Email}}" autofocus>
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
@@ -225,6 +225,8 @@
                                    class="py-2 text-sm font-medium text-gray-500">
                                 {{authUser.Name}}
                             </label>
+
+                            <input hidden name="Email" value="{{authUser.Email}}">
 
                             <div x-show="edit"
                                  class="flex items-center">

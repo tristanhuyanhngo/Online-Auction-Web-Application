@@ -59,6 +59,7 @@ cron.schedule("0 */1 * * * *", async function() {
 
             if (listProduct[i].CurrentWinner != null) {
                 emailModel.sendSellerEndBidWithWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate, listProduct[i].CurrentWinner, listProduct[i].Price);
+                console.log(listProduct[i].CurrentWinner);
                 emailModel.sendWinnerBid(listProduct[i].CurrentWinner, listProduct[i].ProName, listProduct[i].Price);
             }
             else {
@@ -265,18 +266,19 @@ router.get('/detail/:id', async function (req, res) {
     }
 
     if (res.locals.auth !== false) {
-        user = req.session.authUser.Email;
-        const isWish = await productModel.isInWishList(pro_id, user);
+        const email = req.session.authUser.Email;
+        const isWish = await productModel.isInWishList(pro_id, email);
 
         if (isWish.length > 0) {
             inWish = true;
         }
 
         product.allowUser = true;
+        user = await userModel.findByEmail(req.session.authUser.Email);
 
         if (product.AllowAllUsers.readInt8() === 0) {
-            const rate = req.session.authUser.Rate;
-            if (rate < 80) {
+            const rate = user.Rate;
+            if (+rate < 80) {
                 product.allowUser = false;
             }
         }

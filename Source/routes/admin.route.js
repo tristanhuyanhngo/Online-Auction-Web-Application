@@ -33,11 +33,7 @@ router.get('/', async (req, res) => {
 
     const bigcat = await categoryModel.findAllWithDetails();
     console.log(bigcat);
-    res.render('admin/category-parent', {
-        cActive,
-        bigcat,
-        layout: 'admin.handlebars'
-    });
+    return res.redirect('admin/category-parent');
 });
 
 router.get('/category-parent', async (req, res) => {

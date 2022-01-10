@@ -22,9 +22,9 @@ export default function (app) {
                     return 'Time Out';
                 else{
                     const endDate = moment(val);
-                    return endDate.diff(moment(), 'days');
+                    return endDate.from(moment());
                 }
-                // return moment().from(val);
+                //     return moment().from(val);
             },
             format_name(val) {
                 const arr = val.split(" ");

@@ -108,12 +108,20 @@ router.get('/', async function (req, res) {
 // ---------------- SEARCH ---------------- //
 router.get('/search', async function (req, res) {
     const page = req.query.page || 1;
-    const type = req.query.type || 1; //0: price , 1: time
-    let checkType = false;
+    // const type = req.query.type || 1; //0: price , 1: time
+    let type = req.query.type;
+    if (type===undefined){
+        type=1;
+    }
+    let factor = "Time desc";
+    if (type == 0){
+        factor = "Price";
+    }
+
+    let checkType = true;
 
     if (type == 0)
         checkType = false;
-    else checkType = true;
 
     const limit = 8;
     let total = 0;
@@ -142,10 +150,10 @@ router.get('/search', async function (req, res) {
     let list;
 
     if (filterSearch == 'category') {
-        list = await productModel.findByCategoryFTX(searchContent, limit, offset);
+        list = await productModel.findByCategoryFTX(searchContent, limit, offset,factor);
     }
     else {
-        list = await productModel.findByNameFTX(searchContent, limit, offset);
+        list = await productModel.findByNameFTX(searchContent, limit, offset,factor);
     }
 
     let isFirst = 1;
@@ -294,7 +302,7 @@ router.post('/register', recaptcha.middleware.verify,async function(req, res) {
     }
     else {
         return res.render('register',{
-            error: 'Please check the captcha! !'
+            error: 'Please check the captcha!'
         });
     }
 
@@ -314,7 +322,7 @@ router.post('/confirm-register', async function(req, res) {
     const otpInput = req.body.OTP;
 
     if(otpInput !== ret.OTP){
-        return res.render('otp/confirm-otp',{
+        return res.render('otp/confirm-otp-register',{
             error: 'OTP is incorrect!'
         });
     }

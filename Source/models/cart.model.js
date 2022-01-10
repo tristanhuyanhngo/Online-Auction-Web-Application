@@ -42,7 +42,6 @@ export default {
                               join product p
                                    on c.ProID = p.ProID
                               join user u on p.Seller = u.Email
-
                      where Bidder = '${email}'
                        and p.ProState = 1`;
         const raw = await db.raw(sql);

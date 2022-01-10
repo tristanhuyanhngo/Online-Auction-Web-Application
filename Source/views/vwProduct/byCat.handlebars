@@ -15,7 +15,7 @@
 
         $('.isLogin').click(function (e) {
             if(!{{this.auth}}) {
-                swal("You must be logged in to continue", "click OK to login")
+                swal("You must be logged in to continue")
                         .then((value) => {
                             if(value)
                                 window.location.href = "/login";
@@ -42,7 +42,7 @@
     <input x-show ="false" name = "ProID" id="txtProIDDel">
 </form>
 
-<div class="container mx-auto xl:px-10">
+<div class="container min-h-screen h-100 mx-auto xl:px-10">
     <div class="flex justify-between items-center my-4">
         <div class="text-2xl font-semibold text-cyan-700">{{this.catName}}</div>
         <div class="">

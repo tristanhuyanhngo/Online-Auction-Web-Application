@@ -77,6 +77,7 @@ router.post('/cancel', async(req, res) => {
         Bidder: bidder,
     }
 
+    // console.log(product.ProName);
     await sellerModel.restrict(restrictEntity);
     await emailModel.sendBidCancel(bidder, product.ProName)
     await sellerModel.cancelBid(proID, bidder);
