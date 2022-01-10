@@ -56,7 +56,7 @@ CREATE TABLE `product` (
   `ProName` nvarchar(50) COLLATE utf8_general_ci NOT NULL,
   `StartPrice` int unsigned NOT NULL,
   `StepPrice` int unsigned NOT NULL,
-  `SellPrice` int unsigned NOT NULL, 
+  `SellPrice` int unsigned, 
   `UploadDate` datetime NOT NULL,
   `EndDate` datetime,
   `AutoExtend` bit NOT NULL, 
