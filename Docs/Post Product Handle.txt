@@ -1,0 +1,14 @@
+Check lỗi Post Product
+OK - 1. Title bỏ trống
+OK - 2. Category parent bỏ trống
+OK - 3. Upload ảnh ít hơn 3 tấm
+OK - 4. Upload ảnh nhiều hơn 10 tấm
+OK - 5. Start Price chỉ có số và lớn hơn 1000
+OK - 6. Step Price chỉ có số và lớn hơn 1000 
+OK - 7. Sell price > 1000 & lớn hơn start price
+OK - 8. Sell price nếu bỏ trống là bằng null
+OK - 9. End date không được chọn ngày nhỏ hơn hiện tại
+OK - 10. Content không bỏ trống, không xuống hàng, trim khoảng trắng chính giữa 2 từ
+
+Upload thành công:
+OK - Thông báo thành công

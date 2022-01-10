@@ -3,10 +3,24 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <form id="formUploadProduct" method="post"  name="formUploadProduct" enctype="multipart/form-data">
-                    {{#if errorOfImages}}
-                        <p class="text-red-500 text-center mb-4 "><strong>You just have uploaded less than 3 images. Please read our rules carefully then submit again, Thank you! </strong></p>
+                    {{#if congratulations}}
+                        <p class="text-green-500 text-center mb-4 "><strong>Congratulations ! Your product has been uploaded </strong></p>
                     {{/if}}
-
+                    {{#if errorCategory}}
+                        <p class="text-red-500 text-center mb-4 "><strong>1. You must select the parent category. Please submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorImages}}
+                        <p class="text-red-500 text-center mb-4 "><strong>2. You just have uploaded less than 3 images. Please read our rules carefully then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorSellPriceLessThanStartPrice}}
+                        <p class="text-red-500 text-center mb-4 "><strong>3. Sell price must bigger than start price. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorSellPriceLessThanStepPrice}}
+                        <p class="text-red-500 text-center mb-4 "><strong>4. Sell price must bigger than step price. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorEmptyContent}}
+                        <p class="text-red-500 text-center mb-4 "><strong>5. You must fill in the content. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Title <span class="text-red-500">*</span></label></br>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="title" id="title" value="" required>
@@ -110,17 +124,17 @@
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Start Price <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="startPrice" id="startPrice" required>
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="startPrice" id="startPrice" min="0" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Step Price <span class="text-red-500">*</span></label>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="stepPrice" id="stepPrice" required>
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="stepPrice" id="stepPrice" min="1000" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Sell Price</label>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice">
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice" min="1000">
                     </div>
 
                     <div class="mb-4">
@@ -141,7 +155,7 @@
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">End Date<span class="text-red-500">*</span></label></br>
-                        <input type="date" id="end_date" name="end_date" value="2022-01-06" min="2022-01-06" max="2022-01-15">
+                        <input type="date" id="end_date" name="end_date" value="2022-01-15" min="2022-01-15" max="2022-01-31">
                     </div>
 
                     <div class="mb-8">

@@ -59,7 +59,7 @@ cron.schedule("0 */1 * * * *", async function() {
 
             if (listProduct[i].CurrentWinner != null) {
                 emailModel.sendSellerEndBidWithWinner(listProduct[i].Seller, listProduct[i].ProName, listProduct[i].ProID, endDate, listProduct[i].CurrentWinner, listProduct[i].Price);
-                console.log(listProduct[i].CurrentWinner);
+                // console.log(listProduct[i].CurrentWinner);
                 emailModel.sendWinnerBid(listProduct[i].CurrentWinner, listProduct[i].ProName, listProduct[i].Price);
             }
             else {
@@ -76,8 +76,8 @@ router.get('/check-bid', async function (req, res) {
     let product = await productModel.findByProID(proID);
     let maxPrice = product.MaxPrice;
 
-    console.log(queryPrice);
-    console.log(maxPrice);
+    // console.log(queryPrice);
+    // console.log(maxPrice);
 
 
     if (product.CurrentWinner === null) {

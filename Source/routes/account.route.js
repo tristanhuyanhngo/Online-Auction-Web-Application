@@ -31,7 +31,7 @@ router.get('/profile', async function (req, res) {
 router.get('/is-available', async function (req, res) {
     const email = req.query.user;
     const user = await userModel.findByEmail(email);
-    console.log(user);
+    //console.log(user);
     if(user ==null){
         return res.json(true);
     }
@@ -70,7 +70,7 @@ router.post('/setting/edit-info',async (req, res) => {
     const ret = await userModel.updateUser(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
-    console.log(ret[0]);
+    // console.log(ret[0]);
     res.redirect('/account/setting');
 });
 
@@ -78,8 +78,8 @@ router.post('/setting/edit-email',async (req, res) => {
     const ret = await userModel.updateEmail(req.body);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
-    console.log(ret[0]);
-    console.log(req.session.authUser.Username);
+    // console.log(ret[0]);
+    // console.log(req.session.authUser.Username);
     res.redirect('/account/setting');
 });
 
@@ -106,7 +106,7 @@ router.post('/setting/password', async (req, res) => {
     const ret = await userModel.updatePassword(user);
     res.locals.authUser = ret[0];
     req.session.authUser = ret[0];
-    console.log(ret[0]);
+    // console.log(ret[0]);
     return res.render('bidder/change-password', {
         pActive: true,
         success: 'Password changed!',

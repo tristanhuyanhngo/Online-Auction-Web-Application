@@ -107,6 +107,28 @@ router.post('/cancel', async(req, res) => {
 
 // Validate number of pictures
 async function validUploadLength (req, res, next) {
+    let errorCategory = false;
+    let errorImages = false;
+    let errorSellPriceLessThanStartPrice = false;
+    let errorSellPriceLessThanStepPrice = false;
+    let errorEmptyContent = false;
+
+    // Validate category
+    if (req.body.parent_category === 'Empty') {
+        errorCategory = true;
+    }
+
+    // Validate price
+    if (req.body.sellPrice != '') {
+        if (+req.body.startPrice >= +req.body.sellPrice) {
+            errorSellPriceLessThanStartPrice = true;
+        }
+        if (+req.body.stepPrice >= +req.body.sellPrice) {
+            errorSellPriceLessThanStepPrice = true;
+        }
+    }
+
+    // Validate images
     if (req.files.length < 3) {
         for (let i = 1; i <= numberOfImage; i++) {
             let filePath = dir + `/${i}.jpg`;
@@ -117,13 +139,43 @@ async function validUploadLength (req, res, next) {
             }
         }
         numberOfImage = 0;
+        errorImages = true;
+    }
+
+    // Validate description
+    const split = req.body.content.split('&nbsp;');
+    let contentDescription = "";
+    let countSpacebar = 0;
+    let countEnter = 0;
+
+    if (split.toString() === '') {
+        errorEmptyContent = true;
+    }
+
+    for (let i = 0; i < split.length; i++) {
+        if ((split[i] != ' ') && split[i] != '</p>\r\n\r\n<p>') {
+            contentDescription += split[i];
+        }
+    }
+
+    if (contentDescription === '<p></p>\r\n') {
+        errorEmptyContent = true;
+    }
+
+    // Error -> render
+    if (errorCategory || errorImages || errorSellPriceLessThanStartPrice || errorSellPriceLessThanStepPrice || errorEmptyContent) {
         res.render('seller/post-product',{
             layout: 'seller.handlebars',
-            errorOfImages: true
+            errorImages,
+            errorCategory,
+            errorSellPriceLessThanStartPrice,
+            errorSellPriceLessThanStepPrice,
+            errorEmptyContent
         });
         return;
     }
 
+    // If error doesn't exist -> Create a folder then next to post function
     ID = await productModel.findIDProduct();
     dir_temp = './public/images/Product/' + await (ID+2).toString();
 
@@ -140,7 +192,7 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
     // Product
     ID = await productModel.findIDProduct();
     const cat_id = await productModel.findCatID(req.body.child_category);
-    const sell_price = +req.body.sellPrice || 0;
+    const sell_price = +req.body.sellPrice || null;
     const date = new Date();
     const upload_date = moment(date).format('YYYY-MM-DD hh:mm:ss');
     const auto_extend = req.body.auto_renew === "Yes" ? true : false;
@@ -193,11 +245,9 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
 
     res.render('seller/post-product',{
         pActive,
-        layout: 'seller.handlebars'
+        layout: 'seller.handlebars',
+        congratulations: true
     });
-
-    const url = req.headers.referer || '/';
-    return res.redirect(url);
 });
 
 router.post('/review',async function(req, res) {
@@ -380,11 +430,11 @@ router.get('/sold', async (req, res) => {
     }
 
     for(let i in products){
-        console.log(products[i]);
+        // console.log(products[i]);
         products[i].canceled = ((await wonbidModel.cancelBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount===1);
         products[i].evaluated = ((await wonbidModel.evaluatedBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount===1);
-        console.log(products[i].evaluated);
-        console.log(products[i].canceled);
+        // console.log(products[i].evaluated);
+        // console.log(products[i].canceled);
     }
 
     res.render('seller/sold', {
