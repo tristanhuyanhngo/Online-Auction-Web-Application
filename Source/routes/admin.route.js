@@ -8,6 +8,8 @@ import moment from "moment";
 import * as fs from 'fs';
 
 import userModel from "../models/user.model.js";
+import emailModel from "../models/email.models.js";
+
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -97,6 +99,17 @@ router.post('/account/update',async function(req, res) {
 router.post('/account/del',   async (req, res) => {
     const ret = await userModel.delUser(req.body.Email);
     console.log(ret);
+    const url = req.headers.referer || '/admin/account';
+    return res.redirect(url);
+});
+
+router.post('/account/reset',   async (req, res) => {
+    const email = req.body.Email;
+
+    req.body.Password = await emailModel.sendNewPasswordByAdmin(email);
+    console.log("Pass:",req.body.Password);
+    await userModel.updateUser(req.body);
+
     const url = req.headers.referer || '/admin/account';
     return res.redirect(url);
 });
