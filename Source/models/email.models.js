@@ -17,6 +17,20 @@ export default {
         return otp;
     },
 
+    sendSellerDelPro(name,seller) {
+        const otp = Math.floor(100000 + Math.random() * 900000);
+        const otpStr = `We are sorry to inform that your product ${name} has been removed by admin!`
+        const mailOptions = {
+            from: "Horizon <horizon@gmail.com>",
+            to: seller,
+            subject: 'Product removed by admin!',
+            text: otpStr
+        };
+
+        sender.sendMail(mailOptions);
+        return otp;
+    },
+
     sendOTPRegister(receiver) {
         const otp = Math.floor(100000 + Math.random() * 900000);
         const otpStr = 'This is your OTP. Please do not share it with anyone.\n' + otp;

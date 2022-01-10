@@ -27,6 +27,10 @@ router.get('/', async function (req, res) {
     const list_2 = await productHome.sortByBid();
     const list_3 = await productHome.sortByPrice();
 
+    console.log("Seller?",req.session.isSeller);
+    console.log("Admin?",req.session.isAdmin);
+
+
     for(let i in list_1) {
         list_1[i].noBid = false;
         list_1[i].user = req.session.authUser;
@@ -428,11 +432,11 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
             req.session.auth=true;
             req.session.authUser=user;
 
-            if (user.Type === '3') {
+            if (user.Type == '3') {
                 req.session.isSeller = true;
                 req.session.isAdmin = true;
             }
-            else if (user.Type === '1') {
+            else if (user.Type == '1') {
                 req.session.isSeller = true;
                 req.session.isAdmin = false;
             }
@@ -468,9 +472,13 @@ router.post('/login', recaptcha.middleware.verify, async function (req, res) {
     
         if (user.Type === '3') {
             req.session.isAdmin = true;
+            req.session.isSeller = true;
         }
         else if (user.Type === '1') {
             req.session.isSeller = true;
+            req.session.isAdmin = false;
+        }else{
+            req.session.isSeller = false;
             req.session.isAdmin = false;
         }
     

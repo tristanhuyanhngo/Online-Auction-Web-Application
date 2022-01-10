@@ -19,8 +19,6 @@ router.get('/', async (req, res) => {
         return res.redirect('/');
     }
 
-    let cActive = true;
-
     const user = req.session.authUser || 0;
     if (!user) {
         console.log("Please login first ! ");
@@ -184,7 +182,14 @@ router.post('/category-child/update',async function(req, res) {
 
 router.post('/product/del',   async (req, res) => {
     const information = await productModel.findBigCatAndCatByProID(req.body.ProID);
+    const pro = await productModel.findByProID(req.body.ProID);
+
+    console.log(req.body.ProID);
+    console.log("Pro:",pro);
+
     const ret = await productModel.del(req.body.ProID);
+
+    emailModel.sendSellerDelPro(pro.ProName,pro.Seller);
     console.log(ret);
 
     let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
