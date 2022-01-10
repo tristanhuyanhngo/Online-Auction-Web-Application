@@ -14,19 +14,19 @@
         <div>
             <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
                 h-10 flex items-center px-4">
-                My cart
+                Currently bidding
             </div>
-            <div class="text-gray-700 h-10 ml-5">Your cart is empty!</div>
+            <div class="text-gray-700 h-10 ml-5">You have not placed any bid!</div>
 
             <a href="/" class="ml-5 bg-key hover:bg-cyan-800 text-white font-semibold mt-5 py-1 px-3 rounded">
                 <i class="fa fa-arrow-right"></i>
-                <span class="text-white ml-2">Shop now</span>
+                <span class="text-white ml-2">Bid now</span>
             </a>
         </div>
     {{else}}
         <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
                 h-10 flex items-center px-4">
-            My cart
+            Currently bidding
         </div>
         <div class="flex w-full">
             <div class="w-3/5 divide-y w-full pr-4">
@@ -34,13 +34,17 @@
                     <h3 class="font-semibold text-gray-600 text-xs
                 h-5 flex item-center uppercase w-3/4">Product</h3>
                     <h3 class="font-semibold h-5 text-center
-            text-gray-600 text-xs uppercase w-1/4">Buy-now Price</h3>
+                    text-gray-600 text-xs uppercase w-1/4">Buy-now Price</h3>
                 </div>
 
                 {{#each this.products}}
-                    <div class="items-center flex py-5 pl-2">
-                        <div class="flex w-3/4">
-                            <div class="w-20">
+                    <div class="items-center flex
+                    {{#if selfWin}}
+                        bg-green-50
+                    {{/if}}
+                    py-5 pl-2">
+                        <div class="flex w-3/4 items-center">
+                            <div class="w-20 h-20 border border-black">
                                 <img src="/public/images/Product/{{BigCatName}}/{{CatName}}/{{ProID}}/1.jpg?auto=compress&w=100&q=90&dpr=2&updated_at=1635280285&h=320&fm=webp"
                                      alt="Sunset in the mountains" class=" object-cover object-center h-full w-full">
                             </div>
@@ -49,13 +53,15 @@
                                 <a target="_blank" href="/product/detail/{{ProID}}"
                                    class="font-bold hover:text-key text-sm py-1">{{ProName}}</a>
                                 <span class="font-semibold text-gray-500 text-xs py-1">Status: <span
-                                        class="text-key">{{ProState}}</span></span>
-                                <span class="font-semibold text-gray-900 text-xs py-1">Seller: <span
-                                        class="text-key">{{Seller}}</span></span>
+                                        class="text-black">{{ProState}}</span></span>
                             </div>
                         </div>
-                        <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number
-                                SellPrice}}</span>
+                        {{#if allowBuyNow}}
+                            <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number
+                                    SellPrice}} VND</span>
+                        {{else}}
+                            <span class="text-center w-1/4 font-semibold text-red-700 text-sm">Not allowed</span>
+                        {{/if}}
                     </div>
                 {{/each}}
             </div>
@@ -63,7 +69,7 @@
                 <div>
                     <div class="border border-key bg-gray-100 py-3 px-8">
                         <h1 class="font-semibold mb-3 text-lg text-gray-700 tracking-wide
-                h-5 flex item-center">Order Summary</h1>
+                h-5 flex item-center">Summary</h1>
                         <div class="flex justify-between pt-5 mb-5 border-t">
                             <span class="font-semibold text-sm uppercase">Items ({{this.amountProduct}})</span>
                         </div>
@@ -74,14 +80,14 @@
                         <div class="border-t">
                             <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                                 <span>Total</span>
-                                <span class="ml-5 text-red-700">{{format_number this.totalPrice}}</span>
+                                <span class="ml-5 text-red-700">{{format_number this.totalPrice}} VND</span>
                             </div>
 
                             <form method="post" action="/account/cart/checkout">
                                 <input hidden name = "SellerMail" value="{{SellerMail}}">
                                 <button type="submit"
                                         class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
-                                    Checkout
+                                    BUY NOW
                                 </button>
                             </form>
                         </div>

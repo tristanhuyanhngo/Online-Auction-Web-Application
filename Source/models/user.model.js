@@ -86,11 +86,11 @@ export default {
 
     async delUser(email) {
         const listPro = await db('bidding').where('Bidder',email);
+
         for(let i in listPro){
             const entity = {
                 ProID: listPro[i].ProID,
                 CurrentWinner: 'NULL',
-                MaxPrice: 'NULL'
             }
             await productModel.updateProduct(entity);
         }
@@ -100,8 +100,7 @@ export default {
         for(let i in listMaxBid){
             const entity = {
                 ProID: listMaxBid[i].ProID,
-                CurrentWinner: listMaxBid[i].Bidder,
-                MaxPrice: listMaxBid[i].MaxPrice
+                CurrentWinner: listMaxBid[i].Bidder
             }
             await productModel.updateProduct(entity);
         }

@@ -10,7 +10,8 @@ export default {
     },
 
     async findPageByEmail(email, limit, offset) {
-        const sql = `select c.*, p.ProName, ct.CatName, b.BigCatName, u.Name as Seller,u.Email as SellerMail, p.ProState, p.SellPrice
+        const sql = `select c.*, p.ProName, p.CurrentWinner,ct.CatName, b.BigCatName, p.SellPrice,
+       u.Name as Seller,u.Email as SellerMail, p.ProState, p.SellPrice, Max(c.Time)
                      from bidding c
                               join product p
                                    on c.ProID = p.ProID
@@ -21,6 +22,7 @@ export default {
                                    on ct.BigCat = b.BigCatID
 
                      where Bidder = '${email}'
+                     group by c.ProID
                          limit ${limit}
                      offset ${offset}`;
         const raw = await db.raw(sql);

@@ -343,6 +343,16 @@ router.get('/cart', async (req, res) => {
     }
 
     for (let i in list) {
+        list[i].allowBuyNow = true;
+        list[i].selfWin = false;
+        if(list[i].SellPrice == null){
+            list[i].allowBuyNow = false;
+        }
+        if(list[i].CurrentWinner === email){
+            list[i].selfWin = true;
+        }
+        console.log("Winner?",list[i].CurrentWinner);
+        console.log("Win?",list[i].selfWin);
         if(list[i].ProState.readInt8()===1){
             totalPrice+=+list[i].SellPrice;
             amountProduct++;
@@ -351,6 +361,16 @@ router.get('/cart', async (req, res) => {
             list[i].ProState = 'Sold';
         }
     }
+
+    list.sort((a,b)=>{
+        if (a.selfWin>b.selfWin) {
+            return -1;
+        }
+        if (a.selfWin<b.selfWin) {
+            return 1;
+        }
+        return 0;
+    })
 
     res.render('bidder/cart', {
         cActive,

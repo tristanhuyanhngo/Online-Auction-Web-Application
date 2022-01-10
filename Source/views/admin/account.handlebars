@@ -148,11 +148,11 @@
 
                             <div class=" flex justify-end mt-4 space-x-4">
                                 <button type="submit" id="btnAdd" value="Save"
-                                        class="font-semibold text-md  px-6 py-2  border border-cyan-700">
+                                        class="font-semibold text-md hover:bg-gray-200 px-6 py-2  border border-cyan-700">
                                     Add
                                 </button>
                                 <button @click="showModal = !showModal" type="button"
-                                        class="font-semibold text-md  px-6 py-2 text-white bg-red-700">Cancel
+                                        class="font-semibold text-md hover:bg-red-800 px-6 py-2 text-white bg-red-700">Cancel
                                 </button>
                             </div>
                         </form>
@@ -204,7 +204,7 @@
                                 <div class="text-left">{{Type}}</div>
                             </td>
                             <td class="p-2 whitespace-nowrap">
-                                <div class="text-left">{{format_date RegisterDate}}</div>
+                                <div class="text-left">{{format_no_h RegisterDate}}</div>
                             </td>
 
                             <td class="p-2 flex justify-center">
@@ -224,11 +224,8 @@
                                              x-transition:leave="transition ease-in duration-300"
                                              x-transition:leave-start="opacity-100 transform scale-100"
                                              x-transition:leave-end="opacity-0 transform scale-90">
-                                            <form id="editForm" method="post"
-                                                  action="/admin/account/update">
+                                            <form id="editForm_{{index}}" method="post">
                                                 <div>
-                                                    <div class="h-24 w-24 bg-cyan-700 mx-auto rounded-full mb-4">
-                                                    </div>
                                                     <div class="flex justify-between font-normal text-base mt-2 space-x-8">
                                                         <div>Email</div>
                                                         <input type="text"
@@ -275,13 +272,20 @@
 
                                                     <div x-data="{ensure: false}"
                                                             class=" flex justify-end mt-4 space-x-4">
+                                                        <button type="submit" id="resetButton"
+                                                                value="Save" formaction="/admin/account/reset"
+                                                                class="font-semibold text-md hover:bg-cyan-800 px-6 py-2 bg-key text-white border border-cyan-700">
+                                                            Reset password
+                                                        </button>
+
                                                         <button type="submit" id="updateButton"
-                                                                value="Save"
-                                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700">
+                                                                value="Save" formaction="/admin/account/update"
+                                                                class="font-semibold text-md hover:bg-gray-200 px-6 py-2  border border-cyan-700">
                                                             Save
                                                         </button>
+
                                                         <div @click="ensure = true"
-                                                                class="font-semibold cursor-pointer text-md  px-6 py-2 text-white  bg-red-700">
+                                                                class="font-semibold cursor-pointer text-md hover:bg-red-800 px-6 py-2 text-white  bg-red-700">
                                                             Delete
                                                         </div>
                                                         <div x-show="ensure"
@@ -300,7 +304,7 @@
                                                                     <button
                                                                             type="submit" id="delButton"
                                                                             formaction="/admin/account/del"
-                                                                            class="font-semibold text-md  px-6 py-2  border border-black text-white  bg-red-700">
+                                                                            class="font-semibold text-md  px-6 py-2 hover:bg-red-800 border border-black text-white  bg-red-700">
                                                                         DELETE
                                                                     </button>
                                                                     <div @click="ensure = false"
@@ -309,7 +313,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </form>

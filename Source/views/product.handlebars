@@ -92,7 +92,7 @@
     <script>
         $('.isLogin').click(function (e) {
             if(!{{this.auth}}) {
-                swal("You must be logged in to continue", "click OK to login")
+                swal("Please log in to continue!")
                         .then((value) => {
                             if(value)
                                 window.location.href = "/login";
@@ -456,13 +456,13 @@
                                                                 {{#if isBiddingHighest}}
                                                                     <tr class=" text-cyan-700">
                                                                         <td class="pr-4">{{format_date Time}}</td>
-                                                                        <td class="px-4"><a href="/profile/{{Username}}">{{Name}}</a></td>
+                                                                        <td class="px-4"><a target = "_blank" href="/profile/{{Username}}">{{Name}}</a></td>
                                                                         <td class="pl-4" text-center>{{format_number Price}}<i class="fa fa-arrow-up animate-bounce ml-2" aria-hidden="true"></i></td>
                                                                     </tr>
                                                                 {{else}}
                                                                     <tr class="">
                                                                         <td class="pr-4">{{format_date Time}}</td>
-                                                                        <td class="px-4"><a href="/profile/{{Username}}">{{Name}}</a></td>
+                                                                        <td class="px-4"><a class = "hover:text-cyan-800" href="/profile/{{Username}}">{{Name}}</a></td>
                                                                         <td class="pl-4">{{format_number Price}}</td>
 
                                                                     </tr>
@@ -833,7 +833,7 @@
                                                                 {{#if isBiddingHighest}}
                                                                     <tr class=" text-cyan-700">
                                                                         <td class="pr-4">{{format_date Time}}</td>
-                                                                        <td class="px-4"><a href="/profile/{{Username}}">{{Name}}</a></td>
+                                                                        <td class="px-4"><a target = "_blank" href="/profile/{{Username}}">{{Name}}</a></td>
                                                                         <td class="pl-4" text-center>{{format_number Price}}<i class="fa fa-arrow-up animate-bounce ml-2" aria-hidden="true"></i></td>
                                                                     </tr>
                                                                 {{else}}
