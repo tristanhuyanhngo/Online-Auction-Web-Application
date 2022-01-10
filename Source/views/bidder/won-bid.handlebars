@@ -1,212 +1,146 @@
+<!--{{#section 'js'}}-->
+<!--    <script>-->
+<!--        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';-->
+<!--        $(".evaluateForm").on('submit', function (event) {-->
+<!--            event.preventDefault();-->
+<!--            const review = $(this).find("textarea").val();-->
+<!--            if (review.length <= 0) {-->
+<!--                swal('Please include some comments!');-->
+<!--                return;-->
+<!--            }-->
+<!--            $(".evaluateForm").off('submit').submit();-->
+<!--        });-->
+<!--    </script>-->
+<!--{{/section}}-->
+
 <div class="w-full  max-w-4xl mx-auto mt-8">
-    <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                <tr>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Product's name</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Seller's name</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Day</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Price</div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr>
+    {{#if this.empty}}
+        No bid won.
+    {{else}}
+        <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                    <tr>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Product name</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Seller</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Purchase date</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">&nbsp;</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                    {{#each this.products}}
+                        <tr>
+                            <td class="p-2 whitespace-nowrap">
+                                <a target="_blank" href="/product/detail/{{ProID}}"
+                                   class="hover:text-key wishlist_link font-medium text-gray-800">{{ProName}}</a>
+                            </td>
+                            <td class="p-2 whitespace-nowrap">
+                                <div class="text-left">{{Seller}}</div>
+                            </td>
+                            <td class="p-2 whitespace-nowrap">
+                                <div class="text-left">{{format_date OrderDate}}</div>
+                            </td>
+                            <td class="p-2 whitespace-nowrap flex justify-center space-x-4">
+                                {{#if evaluated}}
+                                    <div class = "text-green-600 font-semibold text-sm">Evaluated</div>
+                                {{else}}
+                                    <div x-data="{ showModal : false }">
+                                        <div @click="showModal = !showModal"
+                                             class=" cursor-pointer px-6 py-1
+                                         hover:bg-gray-300  border border-cyan-700 shadow">Evaluate
+                                        </div>
+                                        <form class="evaluateForm" method="post"
+                                              action="/account/review">
+                                            <div x-show="showModal"
+                                                 class="fixed text-gray-500 flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                <div x-show="showModal"
+                                                     class="bg-white shadow-2xl p-6 pb-4 w-auto mx-10 border border-cyan-700 rounded"
+                                                     @click.away="showModal = false"
+                                                     x-transition:enter="transition ease-out duration-300"
+                                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                                     x-transition:leave="transition ease-in duration-300"
+                                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                                <textarea id="txtContent"
+                                                          name="content" class="border-2 border-gray-500 w-full ckeditor"></textarea>
 
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr><tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="font-medium text-gray-800">Iphone 13</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">Hoang Nhu Thanh</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">12/12/2021</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">32.000.000</div>
-                    </td>
-                </tr>
+                                                    <input hidden name = "ProID" value="{{ProID}}">
+                                                    <input hidden name = "SellerMail" value="{{SellerMail}}">
 
-
-
-
-
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="flex justify-end mt-5">
-        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
-            {{#if isFirst}}
-            {{else}}
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            {{/if}}
-        </div>
-        <div class="flex h-12 font-medium rounded ">
-            {{#each this.page_numbers}}
-                {{#if isCurrent}}
-                    <div
-                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
-                        {{value}}</div>
-                {{else}}
-                    <div
-                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                        <a class="page-link" href="?page={{value}}">{{value}}</a>
-                    </div>
-                {{/if}}
-            {{/each}}
-            <div
-                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
-                2
+                                                    <div class="flex justify-center items-center mt-4">
+                                                        <select class ="py-2 px-1 border border-key"
+                                                                name="Rate" id="cars">
+                                                            <option selected class = "text-center" value="1">
+                                                                👍 (+1)
+                                                            </option>
+                                                            <option class = "text-center" value="0">
+                                                                👎 (-1)
+                                                            </option>
+                                                        </select>
+                                                        <button type="submit"
+                                                                class="ml-4 cursor-pointer font-semibold text-md px-6 py-2
+                                                        border border-cyan-700 bg-key hover:bg-cyan-800 text-white">Send
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
-            {{#if isLast}}
-            {{else}}
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            {{/if}}
+        <div class="flex justify-end mt-5">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <div
+                                class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <div
+                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2
+                </div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
+            </div>
         </div>
-    </div>
+    {{/if}}
 </div>
+
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('content');
+</script>

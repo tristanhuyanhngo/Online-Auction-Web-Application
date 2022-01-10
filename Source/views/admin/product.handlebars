@@ -1,121 +1,128 @@
-<div class="w-full  max-w-4xl mx-auto mt-8">
-    <div class="flex justify-start">
-        <div class="bg-white flex items-center pl-4 pr-2 border border-gray-200 shadow-lg py-2">
-            <input type="search" class="w-64 px-1 h-auto focus:outline-none " placeholder="Search">
-            <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
-        </div>
+{{#if this.empty}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        No product.
     </div>
-    <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                <tr>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">ID</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Product name</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Seller</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-left">Date</div>
-                    </th>
-                    <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-center">Edit</div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
-                {{#each this.product}}
+{{else}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        <div class="flex justify-start">
+            <div class="text-2xl font-semibold my-4 text-cyan-700">Product</div>
+        </div>
+        <div class="p-3 bg-white shadow-lg rounded-sm border border-gray-200 mt-4">
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full">
+                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                        <form method="post">
-                            <div>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-gray-800 form-control">
-                                        {{ProID}}
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-gray-800">{{ProName}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{Seller}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left">{{format_date UploadDate}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap flex justify-center">
-                                    <div x-data="{ showModal : false }">
-                                        <div @click="showModal = !showModal"
-                                             class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-red-700 text-white hover:bg-red-900">DELETE</div>
-                                        <div x-show="showModal"
-                                             class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">ID</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Product name</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Seller</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Upload Date</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">Edit</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                    {{#each this.product}}
+                        <tr>
+                            <form method="post">
+                                <div>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="font-medium text-gray-800 form-control">
+                                            {{ProID}}
+                                        </div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <a href = "/product/detail/{{ProID}}">
+                                            <div class="font-medium hover:text-key text-gray-800">{{ProName}}</div>
+
+                                        </a>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{Seller}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{format_no_h UploadDate}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap flex justify-center">
+                                        <div x-data="{ showModal : false }">
+                                            <div @click="showModal = !showModal"
+                                                 class="cursor-pointer font-semibold text-md  px-4 py-1  border border-cyan-700 ml-2 bg-red-700
+                                                 text-white hover:bg-red-900">DELETE</div>
                                             <div x-show="showModal"
-                                                 class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
-                                                 @click.away="showModal = false"
-                                                 x-transition:enter="transition ease-out duration-300"
-                                                 x-transition:enter-start="opacity-0 transform scale-90"
-                                                 x-transition:enter-end="opacity-100 transform scale-100"
-                                                 x-transition:leave="transition ease-in duration-300"
-                                                 x-transition:leave-start="opacity-100 transform scale-100"
-                                                 x-transition:leave-end="opacity-0 transform scale-90">
-                                                <div>Are you sure?</div>
-                                                <div class=" flex justify-end mt-4 space-x-4">
-                                                    <button
-                                                            type="submit"
-                                                            name="ProID"
-                                                            value={{ProID}}
-                                                            class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700"
-                                                            formaction="/admin/product/del">
-                                                        DELETE
-                                                    </button>
-                                                    <div @click="showModal = !showModal"
-                                                         class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                                 class="fixed flex items-center justify-center overflow-auto z-50 bg-black bg-opacity-40 left-0 right-0 top-0 bottom-0">
+                                                <div x-show="showModal"
+                                                     class="bg-white shadow-2xl p-6 pb-4  w-auto mx-10 border border-cyan-700 rounded"
+                                                     @click.away="showModal = false"
+                                                     x-transition:enter="transition ease-out duration-300"
+                                                     x-transition:enter-start="opacity-0 transform scale-90"
+                                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                                     x-transition:leave="transition ease-in duration-300"
+                                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                                     x-transition:leave-end="opacity-0 transform scale-90">
+                                                    <div>Are you sure?</div>
+                                                    <div class=" flex justify-end mt-4 space-x-4">
+                                                        <button
+                                                                type="submit"
+                                                                name="ProID"
+                                                                value={{ProID}}
+                                                                class="font-semibold text-md  px-6 py-2  border border-cyan-700 text-white  bg-red-700"
+                                                                formaction="/admin/product/del">
+                                                            DELETE
+                                                        </button>
+                                                        <div @click="showModal = !showModal"
+                                                             class=" cursor-pointer font-semibold text-md  px-6 py-2 border border-cyan-700">Cancel</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </div>
-                        </form>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="flex justify-end mt-5">
-        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
-            {{#if isFirst}}
-            {{else}}
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            {{/if}}
-        </div>
-        <div class="flex h-12 font-medium rounded ">
-            {{#each this.page_numbers}}
-                {{#if isCurrent}}
-                    <div
-                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
-                        {{value}}</div>
-                {{else}}
-                    <div
-                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                        <a class="page-link" href="?page={{value}}">{{value}}</a>
-                    </div>
-                {{/if}}
-            {{/each}}
-            <div
-                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
-                2
+                                    </td>
+                                </div>
+                            </form>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
-            {{#if isLast}}
-            {{else}}
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            {{/if}}
+        <div class="flex justify-end mt-5">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <div
+                                class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            <a class="page-link" href="?page={{value}}">{{value}}</a>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <div
+                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2
+                </div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
+{{/if}}

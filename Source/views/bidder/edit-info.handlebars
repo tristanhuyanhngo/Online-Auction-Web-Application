@@ -1,19 +1,27 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}
+
 {{#section 'js'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script>
+        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $('#editEmailForm').on('submit', function (event) {
             event.preventDefault();
             const email = document.getElementById('txtEmail').value;
+            // const username = document.getElementById('txtUsername').value;
             if (email.length < 1) {
-                alert('Email must be filled in!');
+                swal('Email must be filled in!');
                 return;
             }
             if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-                alert("Invalid email!");
+                swal("Invalid email!");
                 return;
             }
+
             $.getJSON(`/account/is-available?user=${email}`, function (data) {
                 if (data == false) {
-                    alert('Email is already in use. Please choose another email!');
+                    swal('Email is already in use. Please choose another one!');
                     return;
                 } else {
                     $('#editEmailForm').off('submit').submit();
@@ -21,22 +29,22 @@
             });
         });
 
+        $('#editNameForm').on('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('txtName').value;
+            if (name.length < 1) {
+                swal('Name must be filled in!');
+                return;
+            } else {
+                $('#editNameForm').off('submit').submit();
+            }
+        });
 
-        // $('#editUsernameForm').on('submit', function (event) {
-        //     event.preventDefault();
-        //     const username = document.getElementById('txtUsername').value;
-        //     if (username.length < 1) {
-        //         alert('Username must be filled in!');
-        //         return;
-        //     }
-        //     $.getJSON(`/account/username-available?user=${username}`, function (data) {
-        //         if (data === false) {
-        //             alert('Username is already in use. Please choose another one!');
-        //         } else {
-        //             $('#editUsernameForm').off('submit').submit();
-        //         }
-        //     });
-        // });
+        $('#txtDOB').datetimepicker({
+            timepicker:false,
+            format:'d/m/Y',
+            mask:true
+        });
     </script>
 {{/section}}
 
@@ -62,25 +70,12 @@
                 </div>
             </td>
 
-            <!--            <form id="editEmailForm" method="post" action="/account/setting/edit-info">-->
             <td class="py-4 whitespace-nowrap">
                 <div class="flex items-center">
                     <div class="ml-2">
                         <label x-show="!edit"
                                class="py-2 text-sm font-medium text-gray-500">
-                            {{authUser.Username}}
-                        </label>
-
-                        <!--                            <div x-show="edit"-->
-                        <!--                                 class="flex items-center">-->
-                        <!--                                <div class="ml-2">-->
-                        <!--                                    <input id="txtEmail" class="py-2 text-sm font-medium-->
-                        <!--                                text-gray-500 px-2 rounded border-2 border-key-->
-                        <!--                        focus:outline-none"-->
-                        <!--                                           name="Email"-->
-                        <!--                                           placeholder="{{authUser.Email}}" autofocus>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
+                            {{authUser.Username}}</label>
                     </div>
                 </div>
             </td>
@@ -116,6 +111,33 @@
             <!--            </form>-->
         </tr>
 
+        <tr
+            class="hover:bg-gray-200">
+            <td class="py-4 whitespace-nowrap">
+                <div class="items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-medium text-gray-900">
+                            Account type
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td class="py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                    <div class="ml-2">
+                        <label
+                               class="py-2 text-sm font-medium text-gray-500">
+                            {{this.Type}}
+                        </label>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div></div>
+            </td>
+        </tr>
 
         <tr x-data="{ edit: false }"
             @click.away="edit=false"
@@ -146,7 +168,7 @@
                                                             text-gray-500 px-2 rounded border-2 border-key
                                                     focus:outline-none"
                                            name="Email"
-                                           placeholder="{{authUser.Email}}" autofocus>
+                                           autofocus>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +190,7 @@
                             <span class="ml-2">Edit</span>
                         </div>
                         <input x-show="false"
-                                name = "Username" value = {{authUser.Username}}>
+                               name="Username" value= {{authUser.Username}}>
                         <button x-show="edit"
                                 @click="edit = false"
                                 type="submit"
@@ -204,6 +226,8 @@
                                 {{authUser.Name}}
                             </label>
 
+                            <input hidden name="Email" value="{{authUser.Email}}">
+
                             <div x-show="edit"
                                  class="flex items-center">
                                 <div class="ml-2">
@@ -212,6 +236,73 @@
                             focus:outline-none"
                                            name="Name"
                                            placeholder="{{authUser.Name}}" autofocus>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="flex items-center justify-end mr-2">
+                        <div x-show="!edit"
+                             @click="edit = true"
+                             class="flex items-center bg-white hover:bg-key text-key
+                            font-semibold text-sm hover:text-white py-1 px-2 border border-key hover:border-key rounded">
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                            <span class="ml-2">Edit</span>
+                        </div>
+
+                        <button x-show="edit"
+                                @click="edit = false"
+                                type="submit"
+                                name="Email"
+                                value="{{authUser.Email}}"
+                                class="flex items-center bg-key hover:bg-cyan-800 text-white
+                                    font-semibold text-sm py-1 px-2 border border-key hover:border-key rounded">
+                            Save
+                        </button>
+                    </div>
+                </td>
+            </form>
+        </tr>
+
+        <tr x-data="{ edit: false }"
+            @click.away="edit=false"
+            class="hover:bg-gray-200">
+            <td class="py-4 whitespace-nowrap">
+                <div class="items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-medium text-gray-900">
+                            Birthday
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <form id="editDOBForm" method="post" action="/account/setting/edit-info">
+                <td class="py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="ml-2">
+                            <label x-show="!edit"
+                                   class="py-2 text-sm font-medium text-gray-500">
+                                {{format_no_h authUser.DOB}}
+                            </label>
+
+                            <div x-show="edit"
+                                 class="flex items-center">
+                                <div class="ml-2">
+                                    <input id="txtDOB" type="text"
+                                           name = "DOB"
+                                           class="py-2 text-sm font-medium
+                                    text-gray-500 px-2 rounded border-2 border-key
+                                    focus:outline-none"
+                                           name="Name"
+                                           autofocus>
                                 </div>
                             </div>
                         </div>

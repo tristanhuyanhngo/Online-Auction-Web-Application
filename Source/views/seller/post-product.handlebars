@@ -2,25 +2,43 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form method="POST" id="formUploadProduct" enctype="multipart/form-data">
+                <form id="formUploadProduct" method="post"  name="formUploadProduct" enctype="multipart/form-data">
+                    {{#if congratulations}}
+                        <p class="text-green-500 text-center mb-4 "><strong>Congratulations ! Your product has been uploaded </strong></p>
+                    {{/if}}
+                    {{#if errorCategory}}
+                        <p class="text-red-500 text-center mb-4 "><strong>1. You must select the parent category. Please submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorImages}}
+                        <p class="text-red-500 text-center mb-4 "><strong>2. You just have uploaded less than 3 images. Please read our rules carefully then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorSellPriceLessThanStartPrice}}
+                        <p class="text-red-500 text-center mb-4 "><strong>3. Sell price must bigger than start price. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorSellPriceLessThanStepPrice}}
+                        <p class="text-red-500 text-center mb-4 "><strong>4. Sell price must bigger than step price. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
+                    {{#if errorEmptyContent}}
+                        <p class="text-red-500 text-center mb-4 "><strong>5. You must fill in the content. Please revise it then submit again, Thank you! </strong></p>
+                    {{/if}}
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Title <span class="text-red-500">*</span></label></br>
+                        <label class="text-xl text-cyan-700">Title <span class="text-red-500">*</span></label></br>
                         <input type="text" class="border border-gray-300 p-2 w-full" name="title" id="title" value="" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Category parent<span class="text-red-500">*</span></label></br>
-                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="parent_category" id="parent_category" onChange="update()">
+                            <option value="Empty"></option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
                         </select>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-xl text-cyan-700">Category child <span class="text-red-500">*</span></label></br>
-                        <select class="form-select block mt-1 w-full p-2 border border-gray-500">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="child_category" id="child_category" >
                         </select>
                     </div>
 
@@ -34,6 +52,9 @@
                             <section class="h-full overflow-auto p-8 w-full h-full flex flex-col">
                                 <header
                                     class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                                    <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center text-red-500">
+                                        <span>You must upload at least <strong>3 images</strong> and less than <strong>10 images</strong></span>
+                                    </p>
                                     <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                         <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
                                     </p>
@@ -101,29 +122,50 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Start Price <span
-                                class="text-red-500">*</span></label></br>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="startPrice" id="startPrice" required>
+                        <label class="text-xl text-cyan-700">Start Price <span
+                                class="text-red-500">*</span></label>
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="startPrice" id="startPrice" min="0" required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Step Price <span class="text-red-500">*</span></label></br>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="stepPrice" id="stepPrice" required>
+                        <label class="text-xl text-cyan-700">Step Price <span class="text-red-500">*</span></label>
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="stepPrice" id="stepPrice" min="1000" required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="text-xl text-gray-600">Sell Price</label></br>
-                        <input type="text" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice" required>
+                        <label class="text-xl text-cyan-700">Sell Price</label>
+                        <input type="number" class="border border-gray-300 p-2 w-full" name="sellPrice" id="sellPrice" min="1000">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Auto renew<span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="auto_renew" id="auto_renew"">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">Allow all users<span class="text-red-500">*</span></label></br>
+                        <select class="form-select block mt-1 w-full p-2 border border-gray-500" name="allow_users" id="allow_users"">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-xl text-cyan-700">End Date<span class="text-red-500">*</span></label></br>
+                        <input type="date" id="end_date" name="end_date" value="2022-01-15" min="2022-01-15" max="2022-01-31">
                     </div>
 
                     <div class="mb-8">
-                        <label class="text-xl text-gray-600">Content <span class="text-red-500">*</span></label></br>
-                        <textarea name="content" id="content" class="border border-gray-300 w-full" required></textarea>
+                        <label class="text-xl text-cyan-700">Content <span class="text-red-500">*</span></label></br>
+                        <textarea name="content" id="content" class="border border-gray-300 w-full"></textarea>
                     </div>
 
                     <div class="flex justify-center">
                         <button
-                            class="px-6 py-1 bg-white text-black border border-cyan-700 hover:bg-gray-300 shadow">Submit</button>
+                                class="px-6 py-1 bg-white text-black border border-cyan-700 hover:bg-gray-300 shadow" id="submit">Submit</button>
                     </div>
 
                 </form>
@@ -136,6 +178,31 @@
 
 <script>
     CKEDITOR.replace('content');
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function update() {
+        const child_category = {
+          Empty: [],
+          Accessories: ['Ring', 'Watch'],
+          Electronics: ['Laptop', 'Mobile', 'Smart Watch'],
+          Fashion: ['Clothing', 'Shoes']
+        };
+        const select = document.getElementById('parent_category');
+        const option = select.options[select.selectedIndex].value;
+
+        $("#child_category").empty();
+
+        let selectOption = "";
+        const list_option = child_category[option];
+        for (let i = 0; i < list_option.length; i++) {
+            selectOption = "";
+            selectOption += "<option value='" + list_option[i] + "'>" + list_option[i] + "</option>";
+            $('#child_category').append(selectOption);
+        }
+    }
+    update();
 </script>
 
 <script>
@@ -186,8 +253,21 @@
     const hidden = document.getElementById("hidden-input");
     document.getElementById("button").onclick = () => hidden.click();
     hidden.onchange = (e) => {
-        for (const file of e.target.files) {
-            addFile(gallery, file);
+        if (gallery.children.length > 10) {
+            swal({
+                title: "Your select file is more than 10",
+                icon: "warning",
+                button: true,
+                dangerMode: true,
+            })
+        }
+        else {
+            for (const file of e.target.files) {
+                if (gallery.children.length > 10) {
+                    break;
+                }
+                addFile(gallery, file);
+            }
         }
     };
 
@@ -240,22 +320,27 @@
         }
     };
 
-    // print all selected files
-    document.getElementById("submit").onclick = () => {
-        alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
-        console.log(FILES);
-    };
+    // Submit
+    if (gallery.children.length > 3) {
+        document.getElementById("submit").onclick = () => {
+            swal({
+                title: "Congrats!",
+                text: "Your product has been uploaded",
+                icon: "success",
+                button: "OK",
+            });
+        };
+    }
 
-    // clear entire selection
-    document.getElementById("cancel").onclick = () => {
-        while (gallery.children.length > 0) {
-            gallery.lastChild.remove();
-        }
-        FILES = {};
-        empty.classList.remove("hidden");
-        gallery.append(empty);
-    };
-
+    //clear entire selection
+    // document.getElementById("cancel").onclick = () => {
+    //     while (gallery.children.length > 0) {
+    //         gallery.lastChild.remove();
+    //     }
+    //     FILES = {};
+    //     empty.classList.remove("hidden");
+    //     gallery.append(empty);
+    // };
 </script>
 
 <style>

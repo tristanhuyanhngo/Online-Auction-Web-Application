@@ -1,48 +1,103 @@
-<div class="container mx-auto xl:px-10">
+{{#section 'js'}}
+    <script>
+        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+        $(".addItemWish").click(function (e) {
+            const id = $(this).data('id');
+            $('#txtProIDAdd').val(id);
+            $('#formAddWishList').submit();
+        })
+
+        $(".delItemWish").click(function (e) {
+            const id = $(this).data('id');
+            $('#txtProIDDel').val(id);
+            $('#formDelWishList').submit();
+        })
+
+        $('.isLogin').click(function (e) {
+            if(!{{this.auth}}) {
+                swal("You must be logged in to continue", "click OK to login")
+                        .then((value) => {
+                            if(value)
+                                window.location.href = "/login";
+                        });
+            }
+        })
+
+        let valueSelect = 0;
+        function myFunctionSelect() {
+            valueSelect = document.getElementById("mySelect").value;
+            window.location.href = "/search" + "?type=" + valueSelect;
+        }
+
+    </script>
+{{/section}}
+
+
+<form class="hidden" id="formAddWishList" action = "/account/wishlist/add" method = "post">
+    <input x-show ="false" name = "ProID" id="txtProIDAdd">
+</form>
+
+<form class="hidden" id="formDelWishList" action = "/account/wishlist/del" method = "post">
+    <input x-show ="false" name = "ProID" id="txtProIDDel">
+</form>
+
+<div class="container min-h-screen h-100 mx-auto xl:px-10">
     <div class="flex justify-between items-center my-4">
-        <div class="text-2xl font-semibold text-cyan-700">Search: </div>
+        <div class="text-2xl font-semibold text-cyan-700">{{this.catName}}</div>
         <div class="">
-            <select class="form-select block p-1 border border-cyan-700 text-center ">
-                <option>Giá tăng</option>
-                <option>Thời gian giảm</option>
+            <select id="mySelect" onchange="myFunctionSelect()" class="form-select block p-1 border border-cyan-700 text-center ">
+                {{#if checkType}}
+                    <option value="1" selected="selected">Sort by Time</option>
+                    <option value="0">Sort by Price</option>
+                {{else}}
+                    <option value="1">Sort by Time</option>
+                    <option value="0" selected="selected">Sort by Price</option>
+                {{/if}}
             </select>
         </div>
     </div>
-    <div class="grid grid-cols-1 gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-        {{#each this.products}}
-            {{> card/card}}
-        {{/each}}
-    </div>
-    <div class="flex justify-end mt-8">
-        <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
-            {{#if isFirst}}
-            {{else}}
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            {{/if}}
+    {{#if empty}}
+        <div>
+            No product.
         </div>
-        <div class="flex h-12 font-medium rounded ">
-            {{#each this.page_numbers}}
-                {{#if isCurrent}}
-                    <div
-                            class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
-                        {{value}}</div>
-                {{else}}
-                    <div
-                            class="w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
-                        <a class="page-link" href="?page={{value}}">{{value}}</a>
-                    </div>
-                {{/if}}
+    {{else}}
+        <div class="grid grid-cols-1 gap-4 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+            {{#each this.products}}
+                {{> card/card}}
             {{/each}}
-            <div
-                    class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
-                2
+        </div>
+        <div class="flex justify-end mt-8 ">
+            <div class="h-12 w-12 mr-1 flex justify-center items-center rounded cursor-pointer">
+                {{#if isFirst}}
+                {{else}}
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+            <div class="flex h-12 font-medium rounded ">
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <div
+                                class="font-bold w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded bg-teal-600 text-cyan-700">
+                            {{value}}</div>
+                    {{else}}
+                        <a class="page-link" href="?page={{value}}&type={{../type}}">
+                        <div
+                                class="h-full w-12 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded  ">
+                            {{value}}
+                        </div>
+                        </a>
+                    {{/if}}
+                {{/each}}
+                <div
+                        class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded bg-teal-600 text-white">
+                    2</div>
+            </div>
+            <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
+                {{#if isLast}}
+                {{else}}
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                {{/if}}
             </div>
         </div>
-        <div class="h-12 w-12 ml-1 flex justify-center items-center rounded  cursor-pointer">
-            {{#if isLast}}
-            {{else}}
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            {{/if}}
-        </div>
-    </div>
+    {{/if}}
 </div>

@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Horizon</title>
+    <link rel = "icon" href =
+            "https://i.imgur.com/WXpbdEa.png"
+          type = "image/x-icon">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
           integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
@@ -22,6 +25,7 @@
             font-family: 'Montserrat', sans-serif;
         }
     </style>
+    {{{_sections.css}}}
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
@@ -31,11 +35,11 @@
 
 <div class="flex bg-white w-full min-h-screen height-200 pb-72 md:pb-40">
     <div class="w-2/12 md:w-3/12 bg-white rounded p-3 shadow-lg">
-<!--        <div class="flex items-center space-x-4 p-2 mb-1">-->
-<!--            <div class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide h-10 flex items-center">-->
-<!--                Account Management-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="flex items-center space-x-4 p-2 mb-1">-->
+        <!--            <div class="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide h-10 flex items-center">-->
+        <!--                Account Management-->
+        <!--            </div>-->
+        <!--        </div>-->
         <ul class="space-y-2 text-sm">
             <li>
                 <a href="/account/setting"
@@ -105,7 +109,7 @@
                                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </span>
-                    <div class="hidden md:block">My cart</div>
+                    <div class="hidden md:block">Currently bidding</div>
                 </a>
             </li>
             <li>
@@ -125,6 +129,26 @@
                     <div class="hidden md:block">Won bids</div>
                 </a>
             </li>
+
+            {{#if bidder}}
+                <li>
+                    <a href="/account/request"
+                       class="flex items-center
+                   {{#if rActive}}
+                       bg-gray-200
+                   {{/if}}
+                   space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline">
+                    <span class="text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </span>
+                        <div class="hidden md:block">Upgrade account</div>
+                    </a>
+                </li>
+            {{/if}}
         </ul>
     </div>
 
