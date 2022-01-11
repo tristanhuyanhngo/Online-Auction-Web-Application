@@ -593,5 +593,9 @@ export default {
                            and p.STT = 1`
         const raw = await db.raw(sql);
         return raw[0][0].URL;
+    },
+
+    async addPicture(entity) {
+        return db('picture').insert(entity);
     }
 }
