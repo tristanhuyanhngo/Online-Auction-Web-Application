@@ -30,14 +30,20 @@ router.get('/', async function (req, res) {
     for (let i = 0; i < list_1.length; i++) {
         const pic = await productModel.findFirstImageByProID(list_1[i].ProID);
         list_1[i].url = pic;
+        if(list_1[i].SellPrice != null)
+            list_1[i].isBuyNow = true;
     }
     for (let i = 0; i < list_2.length; i++) {
         const pic = await productModel.findFirstImageByProID(list_2[i].ProID);
         list_2[i].url = pic;
+        if(list_2[i].SellPrice != null)
+            list_2[i].isBuyNow = true;
     }
     for (let i = 0; i < list_3.length; i++) {
         const pic = await productModel.findFirstImageByProID(list_3[i].ProID);
         list_3[i].url = pic;
+        if(list_3[i].SellPrice != null)
+            list_3[i].isBuyNow = true;
     }
     //console.log("Seller?",req.session.isSeller);
     //console.log("Admin?",req.session.isAdmin);

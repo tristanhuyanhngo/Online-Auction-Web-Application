@@ -40,10 +40,14 @@
                                  x-transition:leave-end="opacity-0 transform scale-90">
                                 <ul>
                                     <li class="dropdown">
-                                        <a href="/user/{{authUser.Username}}" class="bg-gray-200 hover:bg-cyan-700
+                                        <a href="/profile/{{authUser.Username}}" class="bg-gray-200 hover:bg-cyan-700
                                         hover:text-white py-2 px-4 block whitespace-no-wrap">My profile</a>
-                                        <a href="/seller" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">Manage product</a>
-                                        <a href="/admin" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">Admin page</a>
+                                        {{#if isSeller}}
+                                            <a href="/seller" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Manage product</a>
+                                        {{/if}}
+                                        {{#if isAdmin}}
+                                            <a href="/admin" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">Admin page</a>
+                                        {{/if}}
                                         <a href="/account/setting" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">Setting</a>
                                         <a href="/account/cart" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My cart</a>
                                         <a href="/account/wishlist" class="bg-gray-200 hover:bg-cyan-700 hover:text-white py-2 px-4 block whitespace-no-wrap">My wishlist</a>
@@ -200,10 +204,16 @@
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform translate-y-0"
                      x-transition:leave-end="opacity-0 transform -translate-y-60">
-                    <div class="rounded-full bg-white flex items-center w-2/3 pl-4 pr-2 py-1 border border-cyan-700">
-                        <input type="search" class="w-full p-1 focus:outline-none text-base" placeholder="Search">
-                        <i class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></i>
-                    </div>
+                    <form method="post" action="/search">
+                        <div class="rounded-full mr-2 bg-white flex items-center pl-5 pr-2 border border-cyan-700">
+                            <select id="filterSearch" name="filterSearch" class="rounded mr-5 bg-white flex items-center pl-4 pr-2 border border-cyan-700">
+                                <option value="category">Category</option>
+                                <option value="product" selected="selected">Product</option>
+                            </select>
+                            <input type="search" name="searchContent" class="w-64 p-1 h-auto focus:outline-none " placeholder="Search">
+                            <button type="submit" class="fa fa-search px-2 cursor-pointer" aria-hidden="true"></button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

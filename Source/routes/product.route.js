@@ -318,6 +318,9 @@ router.get('/detail/:id', async function (req, res) {
         if(seller.Username == req.session.authUser.Username)
             isSellerProduct = true;
     // console.log(isSellerProduct);
+    let isBuyNow = false
+    if(product.SellPrice != null)
+        isBuyNow = true;
 
     res.render('product', {
         product,
@@ -332,7 +335,8 @@ router.get('/detail/:id', async function (req, res) {
         isRestrict,
         isSellerProduct,
         pictures,
-        first_pictures
+        first_pictures,
+        isBuyNow
     });
 });
 
@@ -393,6 +397,9 @@ router.get('/byBigCat/:id', async function (req, res) {
 
         if(moment.now() - list[i].UploadDate <= 600000)
             list[i].isNew = true;
+
+        if(list[i].SellPrice != null)
+            list[i].isBuyNow = true;
     }
 
     if (list.length !== 0) {
@@ -475,6 +482,9 @@ router.get('/byCat/:id', async function (req, res) {
 
         if(moment.now() - list[i].UploadDate <= 600000)
             list[i].isNew = true;
+
+        if(list[i].SellPrice != null)
+            list[i].isBuyNow = true;
     }
 
     if (list.length !== 0) {
