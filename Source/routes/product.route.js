@@ -237,6 +237,8 @@ router.get('/detail/:id', async function (req, res) {
         if (product.CurrentWinner === req.session.authUser.Email) {
             allowBid = false;
         }
+        console.log("Email",req.session.authUser.Email);
+        console.log("Winner",product.CurrentWinner);
         const checkRestrict = await productModel.findRestrict(product.ProID,req.session.authUser.Email)
 
         console.log("Restrict?",checkRestrict);
