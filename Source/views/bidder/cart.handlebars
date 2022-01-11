@@ -24,17 +24,17 @@
             </a>
         </div>
     {{else}}
-        <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide
-                h-10 flex items-center px-4">
-            Currently bidding
-        </div>
-        <div class="flex w-full">
-            <div class="w-3/5 divide-y w-full pr-4">
+<!--        <div class="font-semibold mb-2 text-lg text-gray-700 tracking-wide-->
+<!--                h-10 flex items-center px-4">-->
+<!--            Currently bidding-->
+<!--        </div>-->
+        <div class="flex w-full pl-5">
+            <div class="divide-y w-full pr-4">
                 <div class="flex py-3">
-                    <h3 class="font-semibold text-gray-600 text-xs
-                h-5 flex item-center uppercase w-3/4">Product</h3>
+                    <h3 class="font-semibold text-gray-600 text-sm
+                h-5 flex item-center uppercase w-3/4">Currently bidding</h3>
                     <h3 class="font-semibold h-5 text-center
-                    text-gray-600 text-xs uppercase w-1/4">Buy-now Price</h3>
+                    text-gray-600 text-sm uppercase w-1/4">Current Price</h3>
                 </div>
 
                 {{#each this.products}}
@@ -58,42 +58,42 @@
                         </div>
                         {{#if allowBuyNow}}
                             <span class="text-center w-1/4 font-semibold text-red-700 text-sm">{{format_number
-                                    SellPrice}} VND</span>
+                                    CurrentPrice}} VND</span>
                         {{else}}
                             <span class="text-center w-1/4 font-semibold text-red-700 text-sm">Not allowed</span>
                         {{/if}}
                     </div>
                 {{/each}}
             </div>
-            <div class="w-2/5 flex">
-                <div>
-                    <div class="border border-key bg-gray-100 py-3 px-8">
-                        <h1 class="font-semibold mb-3 text-lg text-gray-700 tracking-wide
-                h-5 flex item-center">Summary</h1>
-                        <div class="flex justify-between pt-5 mb-5 border-t">
-                            <span class="font-semibold text-sm uppercase">Items ({{this.amountProduct}})</span>
-                        </div>
-                        <!--                    <div class="flex justify-between pt-5 mb-5 border-t">-->
-                        <!--                        <span class="text-sm">Standard shipping</span>-->
-                        <!--                        <span class="text-sm">10$</span>-->
-                        <!--                    </div>-->
-                        <div class="border-t">
-                            <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-                                <span>Total</span>
-                                <span class="ml-5 text-red-700">{{format_number this.totalPrice}} VND</span>
-                            </div>
+<!--            <div class="w-2/5 flex">-->
+<!--                <div>-->
+<!--                    <div class="border border-key bg-gray-100 py-3 px-8">-->
+<!--                        <h1 class="font-semibold mb-3 text-lg text-gray-700 tracking-wide-->
+<!--                h-5 flex item-center">Summary</h1>-->
+<!--                        <div class="flex justify-between pt-5 mb-5 border-t">-->
+<!--                            <span class="font-semibold text-sm uppercase">Items ({{this.amountProduct}})</span>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash;                    <div class="flex justify-between pt-5 mb-5 border-t">&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <span class="text-sm">Standard shipping</span>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        <span class="text-sm">10$</span>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                        <div class="border-t">-->
+<!--                            <div class="flex font-semibold justify-between py-6 text-sm uppercase">-->
+<!--                                <span>Total</span>-->
+<!--                                <span class="ml-5 text-red-700">{{format_number this.totalPrice}} VND</span>-->
+<!--                            </div>-->
 
-                            <form method="post" action="/account/cart/checkout">
-                                <input hidden name = "SellerMail" value="{{SellerMail}}">
-                                <button type="submit"
-                                        class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">
-                                    BUY NOW
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--                            <form method="post" action="/account/cart/checkout">-->
+<!--                                <input hidden name = "SellerMail" value="{{SellerMail}}">-->
+<!--                                <button type="submit"-->
+<!--                                        class="bg-key font-semibold hover:bg-cyan-800 py-3 text-sm text-white uppercase w-full">-->
+<!--                                    BUY NOW-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <div class="flex justify-end mt-5">
