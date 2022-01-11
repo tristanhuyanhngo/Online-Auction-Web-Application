@@ -5,6 +5,7 @@ export const connectionInfo={
     port: 3306,
     user: 'root',
     password: 'PhuC010800',
+    // password: '1234',
     database: 'online-auction'
 }
 

@@ -178,6 +178,13 @@ router.get('/search', async function (req, res) {
         list = await productModel.findByNameFTX(searchContent, limit, offset,factor);
     }
 
+    for (let i in list) {
+        const pic = await productModel.findFirstImageByProID(list[i].ProID);
+        list[i].url = pic;
+    }
+
+    console.log(list);
+
     let isFirst = 1;
     let isLast = 1;
     for (let i in list) {

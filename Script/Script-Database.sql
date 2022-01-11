@@ -406,6 +406,24 @@ COMMIT;
 -- ----------------------------
 
 BEGIN;
+INSERT INTO `bidding` VALUES (1, 'vminathanhv@gmail.com','2021-12-07 12:45:00',950000,1050000);
+INSERT INTO `bidding` VALUES (1, 'springfieldcaptain@gmail.com','2021-12-07 12:42:00',850000,900000);
+INSERT INTO `bidding` VALUES (1, 'springfieldcaptain@gmail.com','2021-12-07 12:40:00',800000,900000);
+INSERT INTO `bidding` VALUES (1, 'tristan.hcmus.study@gmail.com','2021-12-07 12:36:00',750000,750000);
+INSERT INTO `bidding` VALUES (1, 'springfieldcaptain@gmail.com','2021-12-07 12:35:00',250000,700000);
+
+INSERT INTO `bidding` VALUES (2, 'springfieldcaptain@gmail.com','2021-12-07 12:45:00',1305000,1500000);
+INSERT INTO `bidding` VALUES (2, 'vminathanhv@gmail.com','2021-12-07 12:42:00',1100000,1300000);
+INSERT INTO `bidding` VALUES (2, 'vminathanhv@gmail.com','2021-12-07 12:40:00',800000,1300000);
+INSERT INTO `bidding` VALUES (2, 'tristan.hcmus.study@gmail.com','2021-12-07 12:36:00',750000,750000);
+INSERT INTO `bidding` VALUES (2, 'springfieldcaptain@gmail.com','2021-12-07 12:35:00',250000,700000);
+
+INSERT INTO `bidding` VALUES (3, 'vminathanhv@gmail.com','2021-12-07 12:45:00',950000,1050000);
+INSERT INTO `bidding` VALUES (3, 'huyanhngo@gmail.com','2021-12-07 12:42:00',850000,900000);
+INSERT INTO `bidding` VALUES (3, 'huyanhngo@gmail.com','2021-12-07 12:40:00',800000,900000);
+INSERT INTO `bidding` VALUES (3, 'tristan.hcmus.study@gmail.com','2021-12-07 12:36:00',750000,750000);
+INSERT INTO `bidding` VALUES (3, 'sinsin.4869@gmail.com','2021-12-07 12:35:00',250000,700000);
+
 INSERT INTO `bidding` VALUES (4,'thanhhoang4869@gmail.com','2021-12-10 23:35:26',600000,900000);
 INSERT INTO `bidding` VALUES (4,'thanhhoang4869@gmail.com','2021-12-14 23:10:52',700000,900000);
 INSERT INTO `bidding` VALUES (4,'springfieldcaptain@gmail.com','2021-12-18 22:46:18',1000000,1200000);

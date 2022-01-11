@@ -250,7 +250,7 @@ router.get('/detail/:id', async function (req, res) {
     let user = null;
     let inWish = false;
 
-    let bidding = await productModel.findBidding(pro_id);
+    let bidding = await productModel.findBiddingDetailView(pro_id);
 
     for (let i = 0; i < bidding.length; i++) {
         const tempUser = await userModel.findByEmail(bidding[i].Bidder);
