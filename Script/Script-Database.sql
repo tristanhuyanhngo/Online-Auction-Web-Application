@@ -76,11 +76,11 @@ CREATE TABLE `product` (
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
   `ProID` int unsigned NOT NULL,
-  `STT` int unsigned NOT NULL,
-  `URL` char(50) NOT NULL,
+  `STT` int unsigned NOT NULL AUTO_INCREMENT,
+  `URL` char(200) NOT NULL,
   PRIMARY KEY (`ProID`,`STT`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Table structure for Description of Products
@@ -750,6 +750,287 @@ INSERT INTO `bidding` VALUES (45,'tristan.hcmus.study@gmail.com','2022-01-07 10:
 INSERT INTO `bidding` VALUES (45,'tristan.hcmus.study@gmail.com','2022-01-15 06:51:25',1000000,1400000);
 
 COMMIT;
+
+
+-- ----------------------------
+-- Records of images
+-- ----------------------------
+INSERT INTO `picture`(ProID, URL) VALUES (1,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873404/horizon/products/1/1_loz7bu.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (1,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873404/horizon/products/1/2_uuixge.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (1,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873404/horizon/products/1/3_zyr80c.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (1,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873404/horizon/products/1/4_kzhbfs.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (2,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873449/horizon/products/2/1_pjz3la.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (2,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873449/horizon/products/2/2_fcbs8f.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (2,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873449/horizon/products/2/3_ej51l3.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (2,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873451/horizon/products/2/4_xvipsi.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (3,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873464/horizon/products/3/1_acbhzb.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (3,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873464/horizon/products/3/2_gjqzpp.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (3,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873464/horizon/products/3/3_eqhakr.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (3,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873466/horizon/products/3/4_mps669.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (4,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873501/horizon/products/4/1_c20o1a.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (4,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873501/horizon/products/4/2_cdyh5o.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (4,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873501/horizon/products/4/3_sufsb8.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (4,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873503/horizon/products/4/4_wdqicq.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (5,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873515/horizon/products/5/1_yn3lfg.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (5,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873515/horizon/products/5/2_i1po4r.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (5,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873515/horizon/products/5/3_c0irqt.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (5,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873516/horizon/products/5/4_x9iwh4.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (6,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873536/horizon/products/6/1_rxoodv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (6,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873536/horizon/products/6/2_mdvzmv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (6,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873536/horizon/products/6/3_u5rqsr.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (6,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873536/horizon/products/6/4_ngdfca.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (6,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873541/horizon/products/6/5_l6p5nv.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (7,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873557/horizon/products/7/1_qzjphh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (7,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873556/horizon/products/7/2_j6s3kc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (7,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873561/horizon/products/7/3_vj5s6j.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (7,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873560/horizon/products/7/4_t7cuui.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (7,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873557/horizon/products/7/5_vu7ert.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (8,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873620/horizon/products/8/1_f6mfaz.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (8,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873620/horizon/products/8/2_u8fi25.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (8,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873620/horizon/products/8/3_auvvtj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (8,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873621/horizon/products/8/4_bu1na4.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (9,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873669/horizon/products/9/1_rxh5u7.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (9,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873669/horizon/products/9/2_bilfc1.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (9,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873671/horizon/products/9/3_q15cdl.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (9,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873673/horizon/products/9/4_ugw0mj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (9,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641873671/horizon/products/9/5_xzsluf.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (10,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874016/horizon/products/10/1_wrxjw3.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (10,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874016/horizon/products/10/2_wqznsl.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (10,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874016/horizon/products/10/3_hdsbzv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (10,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874016/horizon/products/10/4_x6f615.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (10,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874016/horizon/products/10/5_s1cnzl.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (11,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874078/horizon/products/11/1_rojfta.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (11,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874078/horizon/products/11/2_bv1lge.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (11,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874078/horizon/products/11/3_omwlrh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (11,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874078/horizon/products/11/4_oiuoay.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (11,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874078/horizon/products/11/5_swgquo.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (12,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874235/horizon/products/12/1_jy2cnq.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (12,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874236/horizon/products/12/2_sxm93d.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (12,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874234/horizon/products/12/3_xxihce.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (12,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874235/horizon/products/12/4_dxpjqh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (12,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874236/horizon/products/12/5_ha9pdl.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (13,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874244/horizon/products/13/1_dwb2wo.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (13,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874244/horizon/products/13/2_o6jzhw.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (13,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874243/horizon/products/13/3_lolvko.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (13,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874243/horizon/products/13/4_kz8ipq.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (13,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874244/horizon/products/13/5_gnlosb.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (14,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874262/horizon/products/14/1_tuhjup.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (14,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874260/horizon/products/14/2_efb7fm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (14,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874259/horizon/products/14/3_bszh2u.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (14,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874259/horizon/products/14/4_cnzlrn.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (14,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874260/horizon/products/14/5_dsrrzb.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (15,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874270/horizon/products/15/1_dyy3yv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (15,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874269/horizon/products/15/2_xokoom.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (15,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874267/horizon/products/15/3_m4bzqc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (15,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874266/horizon/products/15/4_qytgyg.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (15,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874267/horizon/products/15/5_jkant3.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (16,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874278/horizon/products/16/1_xaxthg.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (16,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874276/horizon/products/16/2_mdhvbb.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (16,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874275/horizon/products/16/3_k6feee.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (16,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874278/horizon/products/16/4_glhrry.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (16,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874279/horizon/products/16/5_ncw3bo.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (17,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874284/horizon/products/17/1_fhavjt.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (17,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874284/horizon/products/17/2_rtzkgm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (17,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874283/horizon/products/17/3_zzfk9g.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (17,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874284/horizon/products/17/4_vloc2v.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (17,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874284/horizon/products/17/5_a4cvx3.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (18,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874299/horizon/products/18/1_hrvemf.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (18,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874295/horizon/products/18/2_oip3wk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (18,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874296/horizon/products/18/3_kv9ouk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (18,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874294/horizon/products/18/4_s8xwfn.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (18,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874294/horizon/products/18/5_ysbage.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (19,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874302/horizon/products/19/1_io2f3c.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (19,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874303/horizon/products/19/2_kesqvh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (19,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874302/horizon/products/19/3_vlkdbn.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (19,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874302/horizon/products/19/4_edylsb.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (19,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874303/horizon/products/19/5_hdbc2q.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (20,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874315/horizon/products/20/1_v2nuw7.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (20,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874314/horizon/products/20/2_m58fxs.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (20,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874314/horizon/products/20/3_nuoaur.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (20,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874314/horizon/products/20/4_rnierx.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (20,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874315/horizon/products/20/5_ipnilb.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (21,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874323/horizon/products/21/1_xefkqd.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (21,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874324/horizon/products/21/2_klz0j6.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (21,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874323/horizon/products/21/3_k51sgw.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (21,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874323/horizon/products/21/4_obpfcc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (21,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874323/horizon/products/21/5_syyojl.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (22,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874331/horizon/products/22/1_rwiwoo.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (22,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874336/horizon/products/22/2_repgbm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (22,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874334/horizon/products/22/3_rtzim7.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (22,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874331/horizon/products/22/4_qkknii.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (22,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874329/horizon/products/22/5_fq1ddw.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (23,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874338/horizon/products/23/1_uv3qky.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (23,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874340/horizon/products/23/2_ktjo2d.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (23,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874338/horizon/products/23/3_r6tyap.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (23,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874339/horizon/products/23/4_oacpom.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (23,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874338/horizon/products/23/5_gxn199.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (24,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874345/horizon/products/24/1_xceqq2.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (24,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874346/horizon/products/24/2_izifco.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (24,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874347/horizon/products/24/3_cp7lj1.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (24,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874345/horizon/products/24/4_xdihui.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (24,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874346/horizon/products/24/5_jko0ut.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (25,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874355/horizon/products/25/1_aowzg8.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (25,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874361/horizon/products/25/2_jvankm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (25,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874353/horizon/products/25/3_czz1ds.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (25,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874353/horizon/products/25/4_ezayjo.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (25,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874355/horizon/products/25/5_mzrmtv.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (26,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874381/horizon/products/26/1_yptwei.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (26,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874381/horizon/products/26/2_bu1pxt.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (26,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874382/horizon/products/26/3_ztpybj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (26,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874382/horizon/products/26/4_vhi2uo.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (26,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874386/horizon/products/26/5_cfiqpr.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (27,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874394/horizon/products/27/1_unpxam.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (27,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874389/horizon/products/27/2_c7elfa.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (27,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874389/horizon/products/27/3_hickzk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (27,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874397/horizon/products/27/4_fzt2ye.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (27,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874391/horizon/products/27/5_kdc13x.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (28,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874398/horizon/products/28/1_y4zw2c.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (28,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874397/horizon/products/28/2_eabp0k.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (28,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874398/horizon/products/28/3_ggahsk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (28,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874398/horizon/products/28/4_llh7db.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (28,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874398/horizon/products/28/5_ozy4wy.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (29,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874405/horizon/products/29/1_yfteyu.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (29,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874404/horizon/products/29/2_uswaf6.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (29,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874405/horizon/products/29/3_ei5r29.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (29,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874407/horizon/products/29/4_phsgcv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (29,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874406/horizon/products/29/5_uiko6l.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (30,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874414/horizon/products/30/1_rx88us.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (30,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874412/horizon/products/30/2_dygf80.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (30,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874413/horizon/products/30/3_qmribk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (30,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874412/horizon/products/30/4_irkyax.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (30,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874413/horizon/products/30/5_u9ulis.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874431/horizon/products/31/1_jz0ovy.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874430/horizon/products/31/2_m0430a.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874432/horizon/products/31/3_kfh0wp.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874431/horizon/products/31/4_zhuhkd.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874431/horizon/products/31/5_z40ihp.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874431/horizon/products/31/6_c3jwxf.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874432/horizon/products/31/7_ld1tt0.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (31,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874433/horizon/products/31/8_keqlg3.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (32,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874439/horizon/products/32/1_ujoaig.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (32,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874439/horizon/products/32/2_jva28g.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (32,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874439/horizon/products/32/3_iy4shl.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (32,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874440/horizon/products/32/4_zbm4uc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (32,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874440/horizon/products/32/5_rtoph6.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874453/horizon/products/33/1_x69nc7.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874453/horizon/products/33/2_bwul1q.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874452/horizon/products/33/3_cfz6ya.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874456/horizon/products/33/4_agxkg8.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874459/horizon/products/33/5_uh9ven.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874457/horizon/products/33/6_ik35ta.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (33,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874455/horizon/products/33/7_vog7mb.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (34,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874463/horizon/products/34/1_ljbgrj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (34,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874462/horizon/products/34/2_isclh0.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (34,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874463/horizon/products/34/3_wlznsq.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874471/horizon/products/35/1_aucmcc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874469/horizon/products/35/2_yz9uxa.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874469/horizon/products/35/3_gm4ef3.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874468/horizon/products/35/4_asdtbx.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874469/horizon/products/35/5_krkubu.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874469/horizon/products/35/6_iltai9.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (35,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874469/horizon/products/35/7_xvqvt3.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (36,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874482/horizon/products/36/1_mudevp.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (36,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874482/horizon/products/36/2_v4ann4.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (36,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874483/horizon/products/36/3_pwm5bs.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (36,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874483/horizon/products/36/4_ilfvia.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (36,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874483/horizon/products/36/5_ezkplu.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874490/horizon/products/37/1_ieqdtv.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874491/horizon/products/37/2_dzs9cl.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874491/horizon/products/37/3_d87kn1.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874491/horizon/products/37/4_ddizct.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874491/horizon/products/37/5_gykczj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (37,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874492/horizon/products/37/6_yjdso4.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874501/horizon/products/38/1_txzq5e.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874501/horizon/products/38/2_dilfdk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874501/horizon/products/38/3_a3z56i.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874501/horizon/products/38/4_nbbclg.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874502/horizon/products/38/5_xteqq4.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (38,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874501/horizon/products/38/6_oydeey.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874507/horizon/products/39/1_rkq3ml.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874507/horizon/products/39/2_w3nix9.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874507/horizon/products/39/3_t6b79y.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874508/horizon/products/39/4_edv0ol.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874508/horizon/products/39/5_pp69ek.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (39,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874508/horizon/products/39/6_m9fbow.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874516/horizon/products/40/1_wgpfnx.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874516/horizon/products/40/2_jpufwe.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874517/horizon/products/40/3_cmhlm2.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874517/horizon/products/40/4_vogtl7.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874517/horizon/products/40/5_lghbag.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (40,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874516/horizon/products/40/6_wpcrbm.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874522/horizon/products/41/1_cpztgj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874523/horizon/products/41/2_w71u37.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874522/horizon/products/41/3_avgzff.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874524/horizon/products/41/4_z8utwp.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874523/horizon/products/41/5_q6iklj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (41,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874522/horizon/products/41/6_cblu6b.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874530/horizon/products/42/1_lvqjcg.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874530/horizon/products/42/2_qlwsfz.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874529/horizon/products/42/3_wsj5vh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874530/horizon/products/42/4_m6mpva.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874532/horizon/products/42/5_e5ljaw.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (42,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874530/horizon/products/42/6_fc67nd.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874540/horizon/products/43/1_mdcxzm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874541/horizon/products/43/2_fzzaws.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874541/horizon/products/43/3_q2go7r.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874542/horizon/products/43/4_sps31k.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874542/horizon/products/43/5_rszbng.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (43,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874543/horizon/products/43/6_g72xax.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874548/horizon/products/44/1_doqqdh.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874547/horizon/products/44/2_qde9jm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874548/horizon/products/44/3_ip4ifj.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874548/horizon/products/44/4_bqbjto.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874549/horizon/products/44/5_qe7aoc.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (44,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874549/horizon/products/44/6_das0kv.jpg');
+
+INSERT INTO `picture`(ProID, URL) VALUES (45,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874555/horizon/products/45/1_j6atto.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (45,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874556/horizon/products/45/2_eag3bd.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (45,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874556/horizon/products/45/3_b1pxrk.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (45,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874556/horizon/products/45/4_uruxzm.jpg');
+INSERT INTO `picture`(ProID, URL) VALUES (45,'https://res.cloudinary.com/horizon-web-online-auction/image/upload/v1641874557/horizon/products/45/5_aeoqlm.jpg');
 
 -- Full text search
 

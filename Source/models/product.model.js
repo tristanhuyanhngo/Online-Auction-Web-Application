@@ -575,5 +575,23 @@ export default {
                          LIMIT ${limit} OFFSET ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async findImageByProID(id) {
+        const sql = `select p.URL
+                     from picture p
+                     where p.ProID = ${id}
+                           and p.STT <> 1`
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async findFirstImageByProID(id) {
+        const sql = `select p.URL
+                     from picture p
+                     where p.ProID = ${id}
+                           and p.STT = 1`
+        const raw = await db.raw(sql);
+        return raw[0][0].URL;
     }
 }
