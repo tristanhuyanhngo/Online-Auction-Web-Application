@@ -272,6 +272,17 @@ export default {
         return raw[0];
     },
 
+    async findBiddingDetailView(proID) {
+        const sql = `select *
+                     from bidding b,
+                          user u
+                     where ProID = ${proID} and
+                         b.Bidder = u.Email
+                     order by b.Price DESC`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
     async findBidDetails(proID) {
         const sql = `select ProID, Bidder, Time, u.Name, MAX (Price) as Price
                      from bidding b join user u
@@ -308,7 +319,7 @@ export default {
                      where P.Seller = U.Email
                        and P.CatID = C.CatID
                        and C.BigCat = L.BigCatID
-                       and P.EndDate - NOW() > 0
+                       and P.EndDate - NOW() > 0 and ProState = true
                      GROUP BY P.ProID, P.EndDate
                      order by P.EndDate - NOW() ASC limit 0, 6`;
         const raw = await db.raw(sql);
@@ -336,7 +347,7 @@ export default {
                      where P.Seller = U.Email
                        and P.CatID = C.CatID
                        and C.BigCat = L.BigCatID
-                       and P.EndDate - NOW()
+                       and P.EndDate - NOW() and ProState = true
                          > 0
                        and B.ProID = P.ProID
                      GROUP BY P.ProID
@@ -366,7 +377,7 @@ export default {
                        and C.BigCat = L.BigCatID
                        and P.EndDate - NOW()
                          > 0
-                       and B.ProID = P.ProID
+                       and B.ProID = P.ProID and ProState = true
                      GROUP BY P.ProID
                      ORDER BY Price DESC limit 0, 6`;
         const raw = await db.raw(sql);
@@ -505,37 +516,60 @@ export default {
     },
 
     async findByNameFTX(name, limit, offset,factor) {
-        const sql = `SELECT product.ProID as ProID,
-                            product.CatID as CatID,
-                            product.Seller as Seller,
-                            product.ProName as ProName,
-                            product.StartPrice as StartPrice,
-                            product.StepPrice as StepPrice,
-                            product.SellPrice as SellPrice,
-                            product.UploadDate as UploadDate,
-                            product.EndDate as EndDate,
-                            product.AutoExtend as AutoExtend,
-                            product.ProState as ProState,
-                            product.AllowAllUsers as AllowAllUsers,
-                            category.CatName as CatName,
-                            big_category.BigCatName as BigCatName,
-                            bidding.MaxPrice as MaxPrice,
-                            bidding.Time as Time,
-       bidding.Price as Price,
-       bidding.Bidder as CurrentWinner
-                     FROM product
-                         JOIN category ON product.CatID=category.CatID
-                         JOIN big_category ON category.BigCat=big_category.BigCatID
-                         LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
-                         SELECT max(b.Time)
-                         FROM product as p
-                         JOIN bidding as b ON p.ProID=b.ProID
-                         )
-                     WHERE product.ProState = true and
-                         MATCH(product.ProName)
-                         AGAINST('${name}')
-                         order by ${factor}
-                         LIMIT ${limit} OFFSET ${offset}`;
+       //  const sql = `SELECT product.ProID as ProID,
+       //                      product.CatID as CatID,
+       //                      product.Seller as Seller,
+       //                      product.ProName as ProName,
+       //                      product.StartPrice as StartPrice,
+       //                      product.StepPrice as StepPrice,
+       //                      product.SellPrice as SellPrice,
+       //                      product.UploadDate as UploadDate,
+       //                      product.EndDate as EndDate,
+       //                      product.AutoExtend as AutoExtend,
+       //                      product.ProState as ProState,
+       //                      product.AllowAllUsers as AllowAllUsers,
+       //                      category.CatName as CatName,
+       //                      big_category.BigCatName as BigCatName,
+       //                      bidding.MaxPrice as MaxPrice,
+       //                      bidding.Time as Time,
+       // bidding.Price as Price,
+       // bidding.Bidder as CurrentWinner
+       //               FROM product
+       //                   JOIN category ON product.CatID=category.CatID
+       //                   JOIN big_category ON category.BigCat=big_category.BigCatID
+       //                   LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
+       //                   SELECT max(b.Time)
+       //                   FROM product as p
+       //                   JOIN bidding as b ON p.ProID=b.ProID
+       //                   )
+       //               WHERE product.ProState = true and
+       //                   MATCH(product.ProName)
+       //                   AGAINST('${name}')
+       //                   order by ${factor}
+       //                   LIMIT ${limit} OFFSET ${offset}`;
+
+        const sql = `select C.CatName,
+                                   L.BigCatName,
+                                   P.ProID,
+                                   P.ProName,
+                                   P.StartPrice,
+                                   U.Name as Seller,
+                                   P.SellPrice,
+                                   P.EndDate,
+                                   P.UploadDate,
+                                   MAX(B.Price) AS Price
+                            from user as U,
+                                 category as C,
+                                 big_category as L,
+                                 product as P LEFT JOIN bidding as B on P.ProID = B.ProID
+                            where P.Seller = U.Email
+                              and P.CatID = C.CatID
+                              and C.BigCat = L.BigCatID
+                              and P.EndDate - NOW() > 0 and ProState = true
+                                and MATCH(ProName)
+                                    AGAINST('${name}')
+                            GROUP BY P.ProID order by ${factor}
+                                                     LIMIT ${limit} OFFSET ${offset}`
         const raw = await db.raw(sql);
         // console.log(raw[0][0]);
         return raw[0];
@@ -575,5 +609,27 @@ export default {
                          LIMIT ${limit} OFFSET ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async findImageByProID(id) {
+        const sql = `select p.URL
+                     from picture p
+                     where p.ProID = ${id}
+                           and p.STT <> 1`
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async findFirstImageByProID(id) {
+        const sql = `select p.URL
+                     from picture p
+                     where p.ProID = ${id}
+                           and p.STT = 1`
+        const raw = await db.raw(sql);
+        return raw[0][0].URL;
+    },
+
+    async addPicture(entity) {
+        return db('picture').insert(entity);
     }
 }

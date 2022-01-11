@@ -4,6 +4,8 @@ import * as fs from 'fs';
 import fsExtra from 'fs-extra';
 import multer from 'multer';
 import moment from 'moment';
+import {v2 as cloudinary} from 'cloudinary';
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 import bidModel from '../models/bid.model.js';
 import productModel from '../models/product.model.js';
@@ -16,42 +18,33 @@ const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(bodyParser.urlencoded({extended: false}))
 
-// ****************************************************************************************
-// --------------------------------------- POST PRODUCT -----------------------------------------
-let ID = await productModel.findIDProduct();
-let dir = './public/images/Product/' + (ID+1).toString();
-let dir_temp;
-
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-};
-
-let numberOfImage = 0;
-
-const storage = multer.diskStorage({
-    destination: function (request, file, callback) {
-        let path = dir ;
-        callback(null, path);
-    },
-    filename: function (request, file, callback) {
-        ++numberOfImage
-        const name = numberOfImage.toString() + ".jpg"
-        callback(null, name);
-    }
+cloudinary.config({
+    cloud_name: "horizon-web-online-auction",
+    api_key: "277635668285695",
+    api_secret: "u0Qd-zfF5T4nKMsKI4H6TWrJyBQ"
 });
 
-const upload = multer({storage: storage});
+// ****************************************************************************************
+// --------------------------------------- POST PRODUCT -----------------------------------------
+let numberOfImage = 0;
+let ID = await productModel.findIDProduct();
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: `horizon/product/${ID+1}`,
+        allowedFormats: ['jpg', 'png'],
+        public_id: (req, file) => {
+            ++numberOfImage;
+            return numberOfImage.toString() +`-${ID + 1}`;
+        }
+    },
+});
+
+const upload = multer({ storage: storage });
 
 router.get('/', async (req, res) => {
     let pActive = true;
-
-    // // Get information of user from session
-    // const user = req.session.authUser || 0;
-    // if (!user) {
-    //     console.log("Please login first ! ");
-    //     res.redirect('/');
-    //     return;
-    // }
 
     const isSeller = req.session.isSeller;
     if (!isSeller) {
@@ -84,7 +77,7 @@ router.post('/cancel', async(req, res) => {
     const ret = await bidModel.findInBidding(proID);
     // console.log(ret);
 
-    if(ret.length >0){
+    if(ret.length > 0){
         const entity = {
             ProID: proID,
             CurrentWinner: ret[0].Bidder,
@@ -106,7 +99,30 @@ router.post('/cancel', async(req, res) => {
 
 
 // Validate number of pictures
-async function validUploadLength (req, res, next) {
+async function validUploadLength(req, res, next) {
+    ID = await productModel.findIDProduct();
+
+    const fileExisted = await (cloudinary.api.sub_folders("horizon/products/", function(error, result){
+        if (error) {
+            console.log("Error read file existed - Cloudinary");
+        } else {
+            console.log("Read file existed succesfully - Cloudinary");
+        }
+    }));
+
+    const fileList = fileExisted.folders;
+    const checkExists = fileList.find( ({ name }) => name == `${ID+1}` );
+    console.log(fileList);
+    console.log(checkExists);
+
+    if (checkExists != undefined) {
+        let path = `horizon/products/${ID+1}`;
+        console.log(path);
+        cloudinary.api.delete_folder(path, function (error, result) {
+            console.log(error);
+        });
+    }
+
     let errorCategory = false;
     let errorImages = false;
     let errorSellPriceLessThanStartPrice = false;
@@ -130,14 +146,6 @@ async function validUploadLength (req, res, next) {
 
     // Validate images
     if (req.files.length < 3) {
-        for (let i = 1; i <= numberOfImage; i++) {
-            let filePath = dir + `/${i}.jpg`;
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            } else {
-                console.log('Directory not found.');
-            }
-        }
         numberOfImage = 0;
         errorImages = true;
     }
@@ -175,22 +183,20 @@ async function validUploadLength (req, res, next) {
         return;
     }
 
-    // If error doesn't exist -> Create a folder then next to post function
-    ID = await productModel.findIDProduct();
-    dir_temp = './public/images/Product/' + await (ID+2).toString();
-
-    if (!fs.existsSync(dir_temp)){
-        fs.mkdirSync(dir_temp);
-    };
-
      next()
 }
 
-router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], async(req, res) => {
+router.post('/', urlencodedParser, [upload.array('img',10), validUploadLength], async function(req, res) {
     let pActive = true;
+    ID = await productModel.findIDProduct();
+    let imageURLList = [];
+
+    for (let i = 0; i < req.files.length; i++) {
+        let url = req.files[i].path;
+        imageURLList.push(url);
+    }
 
     // Product
-    ID = await productModel.findIDProduct();
     const cat_id = await productModel.findCatID(req.body.child_category);
     const sell_price = +req.body.sellPrice || null;
     const date = new Date();
@@ -225,25 +231,19 @@ router.post('/',urlencodedParser, [upload.array('img', 10),validUploadLength], a
         Content: content
     }
 
-    // Images
-    const cat_name = req.body.child_category;
-    const bigCat_name = req.body.parent_category;
-    const new_dir = './public/images/Product/' + bigCat_name + '/' + cat_name + '/' + (ID+1).toString();
 
-    fsExtra.move(dir, new_dir, err => {
-        if (err) {
-            return console.error(err);
+    for (let i = 0; i < imageURLList.length; i++) {
+        const picture = {
+            ProID: ID+1,
+            URL: imageURLList[i]
         }
-        console.log(`Move to ${new_dir} successfully !`);
-    });
+        await productModel.addPicture(picture);
+    }
 
     await productModel.addProduct(product);
     await productModel.addDescription(description);
 
-    dir = dir_temp;
-    numberOfImage = 0;
-
-    res.render('seller/post-product',{
+    return res.render('seller/post-product',{
         pActive,
         layout: 'seller.handlebars',
         congratulations: true

@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form id="formUploadProduct" method="post"  name="formUploadProduct" enctype="multipart/form-data">
+                <form id="formUploadProduct" method="post" name="formUploadProduct" enctype="multipart/form-data">
                     {{#if congratulations}}
                         <p class="text-green-500 text-center mb-4 "><strong>Congratulations ! Your product has been uploaded </strong></p>
                     {{/if}}
@@ -58,7 +58,7 @@
                                     <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                         <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
                                     </p>
-                                    <input id="hidden-input" name="img" type="file" multiple class="hidden" />
+                                    <input id="hidden-input" name="img" type="file" class="hidden" multiple/>
                                     <div id="button"
                                         class="cursor-pointer mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                         Upload a file

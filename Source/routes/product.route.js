@@ -96,7 +96,7 @@ router.post('/buynow', async function (req, res) {
     const ProID = req.body.ProID;
     const today = moment().format();
     const bidder = await userModel.findByEmail(email);
-    const  product = await productModel.findByProID(ProID);
+    const product = await productModel.findByProID(ProID);
     const Price = product.SellPrice;
     const currentWinner = req.body.CurrentWinner || null;
 
@@ -130,7 +130,7 @@ router.post('/detail/:id', async function (req, res) {
 
     let product = await productModel.findByProID(ProID);
     const seller = product.Seller;
-    console.log(product)
+    // console.log(product)
     let maxPrice = product.MaxPrice;
     let step = product.StepPrice;
     let start = product.StartPrice;
@@ -237,6 +237,8 @@ router.get('/detail/:id', async function (req, res) {
         if (product.CurrentWinner === req.session.authUser.Email) {
             allowBid = false;
         }
+        console.log("Email",req.session.authUser.Email);
+        console.log("Winner",product.CurrentWinner);
         const checkRestrict = await productModel.findRestrict(product.ProID,req.session.authUser.Email)
 
         console.log("Restrict?",checkRestrict);
@@ -248,7 +250,7 @@ router.get('/detail/:id', async function (req, res) {
     let user = null;
     let inWish = false;
 
-    let bidding = await productModel.findBidding(pro_id);
+    let bidding = await productModel.findBiddingDetailView(pro_id);
 
     for (let i = 0; i < bidding.length; i++) {
         const tempUser = await userModel.findByEmail(bidding[i].Bidder);
@@ -260,7 +262,7 @@ router.get('/detail/:id', async function (req, res) {
     let suggestPrice = +product.StartPrice + +product.StepPrice;
 
     if (bidding.length > 0) {
-        suggestPrice = +bidding[0].Price + +product.StepPrice;
+        suggestPrice = +bidding[0].Price + + product.StepPrice;
         biddingHighest = bidding[0];
         bidding[0].isBiddingHighest = true;
     }
@@ -284,6 +286,11 @@ router.get('/detail/:id', async function (req, res) {
         }
     }
 
+    const first_pictures = await productModel.findFirstImageByProID(pro_id);
+    // console.log(first_pictures);
+    const pictures = await productModel.findImageByProID(pro_id);
+    // console.log(pictures)
+
     if (product === undefined) {
         return res.redirect('/');
     }
@@ -299,6 +306,10 @@ router.get('/detail/:id', async function (req, res) {
     }
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
+    for (let i = 0; i < related_products.length; i++) {
+        const pic = await productModel.findFirstImageByProID(related_products[i].ProID);
+        related_products[i].url = pic;
+    }
 
     let seller = await userModel.findByEmail(product.Seller);
 
@@ -306,7 +317,11 @@ router.get('/detail/:id', async function (req, res) {
     if(res.locals.auth !== false)
         if(seller.Username == req.session.authUser.Username)
             isSellerProduct = true;
-    console.log(isSellerProduct)
+    // console.log(isSellerProduct);
+    let isBuyNow = false
+    if(product.SellPrice != null)
+        isBuyNow = true;
+
     res.render('product', {
         product,
         suggestPrice,
@@ -318,7 +333,10 @@ router.get('/detail/:id', async function (req, res) {
         bidding,
         biddingHighest,
         isRestrict,
-        isSellerProduct
+        isSellerProduct,
+        pictures,
+        first_pictures,
+        isBuyNow
     });
 });
 
@@ -351,6 +369,10 @@ router.get('/byBigCat/:id', async function (req, res) {
 
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset, type);
+    for (let i = 0; i < list.length; i++) {
+        const pic = await productModel.findFirstImageByProID(list[i].ProID);
+        list[i].url = pic;
+    }
 
     let isFirst = 1;
     let isLast = 1;
@@ -375,6 +397,9 @@ router.get('/byBigCat/:id', async function (req, res) {
 
         if(moment.now() - list[i].UploadDate <= 600000)
             list[i].isNew = true;
+
+        if(list[i].SellPrice != null)
+            list[i].isBuyNow = true;
     }
 
     if (list.length !== 0) {
@@ -428,6 +453,10 @@ router.get('/byCat/:id', async function (req, res) {
 
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByCatID(CatID, limit, offset, type);
+    for (let i = 0; i < list.length; i++) {
+        const pic = await productModel.findFirstImageByProID(list[i].ProID);
+        list[i].url = pic;
+    }
 
     let isFirst = 1;
     let isLast = 1;
@@ -453,6 +482,9 @@ router.get('/byCat/:id', async function (req, res) {
 
         if(moment.now() - list[i].UploadDate <= 600000)
             list[i].isNew = true;
+
+        if(list[i].SellPrice != null)
+            list[i].isBuyNow = true;
     }
 
     if (list.length !== 0) {
