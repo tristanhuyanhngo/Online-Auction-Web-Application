@@ -4,7 +4,7 @@ export const connectionInfo = {
     host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: '1234',
+    password: 'PhuC010800',
     database: 'online-auction'
     // host: 'us-cdbr-east-05.cleardb.net',
     // user: 'bb68f9aba0ba4f',
