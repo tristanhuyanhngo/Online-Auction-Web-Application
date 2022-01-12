@@ -11,8 +11,8 @@ import productModel from "../models/product.model.js";
 import passport from "passport";
 import '../auth/authG.js'
 
-const RC = reCapt.RecaptchaV3;
-const recaptcha = new RC('6LdYWAseAAAAABrwHXddaMY8TKIMrUh0tXC-Hdy3', '6LdYWAseAAAAABHhbFK2GF1KOLmEkannd5Wcvha4', {callback:'cb'});
+const RC = reCapt.RecaptchaV2;
+const recaptcha = new RC('6LfQWwseAAAAAFMz1X9wwspVTVduwZVCxnREloNd', '6LfQWwseAAAAAEh8seo1271ygLJ93UI7cTRvfzse', {callback:'cb'});
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });

@@ -577,36 +577,27 @@ export default {
     },
 
     async findByCategoryFTX(name, limit, offset,factor) {
-        const sql = `SELECT product.ProID as ProID,
-                            product.CatID as CatID,
-                            product.Seller as Seller,
-                            product.ProName as ProName,
-                            product.StartPrice as StartPrice,
-                            product.StepPrice as StepPrice,
-                            product.SellPrice as SellPrice,
-                            product.UploadDate as UploadDate,
-                            product.EndDate as EndDate,
-                            product.AutoExtend as AutoExtend,
-                            product.ProState as ProState,
-                            product.AllowAllUsers as AllowAllUsers,
-                            category.CatName as CatName,
-                            big_category.BigCatName as BigCatName,
-                            bidding.MaxPrice as MaxPrice,
-                            bidding.Time as Time,
-                            bidding.Price as Price,
-                            bidding.Bidder as CurrentWinner
-                     FROM product
-                              JOIN category ON product.CatID=category.CatID
-                              JOIN big_category ON category.BigCat=big_category.BigCatID
-                              LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
-                         SELECT max(b.Time)
-                         FROM product as p
-                                  JOIN bidding as b ON p.ProID=b.ProID
-                         )
-                         WHERE product.ProState = true and
-                            MATCH(category.CatName)
-                            AGAINST('${name}')
-                            order by ${factor}
+        const sql = `select C.CatName,
+                            L.BigCatName,
+                            P.ProID,
+                            P.ProName,
+                            P.StartPrice,
+                            U.Name as Seller,
+                            P.SellPrice,
+                            P.EndDate,
+                            P.UploadDate,
+                            MAX(B.Price) AS Price
+                     from user as U,
+                          category as C,
+                          big_category as L,
+                          product as P LEFT JOIN bidding as B on P.ProID = B.ProID
+                     where P.Seller = U.Email
+                               and P.CatID = C.CatID
+                               and C.BigCat = L.BigCatID
+                               and P.EndDate - NOW() > 0 and ProState = true
+                               and MATCH(C.CatName)
+                             AGAINST('${name}')
+                     GROUP BY P.ProID order by ${factor}
                          LIMIT ${limit} OFFSET ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];

@@ -27,7 +27,7 @@
                                     </button>
                                 </div>
                                 <div class="flex justify-center mt-1">
-                                    <div class="font-semibold mr-2">Hi,{{authUser.Username}}!</div>
+                                    <div class="font-semibold mr-2">Hi,{{authUser.Name}}!</div>
                                 </div>
                             </div>
 
@@ -148,7 +148,7 @@
 
                 {{#if auth}}
                     <div class="hidden lg:block">
-                        <a href="/profile/{{authUser.Username}}"><div class="mr-2 flex"><div class="mr-1">Hi, </div><span class="font-bold truncate">{{authUser.Username}}</span>!</div></a>
+                        <a href="/profile/{{authUser.Username}}"><div class="mr-2 flex"><div class="mr-1">Hi, </div><span class="font-bold truncate">{{authUser.Name}}</span>!</div></a>
                     </div>
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="h-12 w-12 rounded-full border-2 bg-white">
