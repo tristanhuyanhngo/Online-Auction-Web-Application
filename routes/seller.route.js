@@ -207,7 +207,7 @@ router.post('/', urlencodedParser, [upload.array('img',10), validUploadLength], 
     for (let i = 0; i < imageURLList.length; i++) {
         const picture = {
             ProID: ID+1,
-            URL: imageURLList[i]
+            LinkURL: imageURLList[i]
         }
         await productModel.addPicture(picture);
     }
