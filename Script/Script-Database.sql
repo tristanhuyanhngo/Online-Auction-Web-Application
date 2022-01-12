@@ -75,12 +75,12 @@ CREATE TABLE `product` (
 -- ----------------------------
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
-  `ProID` int unsigned NOT NULL,
+  `ProID` int unsigned NOT NULL AUTO_INCREMENT, 
   `STT` int unsigned NOT NULL,
-  `URL` char(50) NOT NULL,
+  `URL` char(200) NOT NULL,
   PRIMARY KEY (`ProID`,`STT`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Table structure for Description of Products

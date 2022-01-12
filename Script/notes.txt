@@ -8,5 +8,5 @@ Test chính trên Laptop + Mobile
 
 Laptop -> Auto extend, AllowAllUsers là 1
 
-ProState -> Tất cả đều 1 (Các sản phẩm phải có lịch sử đấu giá của    ít nhất là 5 lượt ra giá) 
+ProState -> Tất cả đều 1 (Các sản phẩm phải có lịch sử đấu giá của ít nhất là 5 lượt ra giá) 
   
