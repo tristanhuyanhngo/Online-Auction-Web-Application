@@ -16,15 +16,15 @@ export default function (app) {
     app.use('/seller', auth,sellerRoute);
     app.use('/public',express.static('public'));
 
-    app.use(function (err, req, res, next) {
-        res.render('error/505', {
-            layout: false,
-        });
-    });
-
-    app.use(function (req, res, next) {
-        res.render('error/404', {
-            layout: false,
-        });
-    });
+    // app.use(function (err, req, res, next) {
+    //     res.render('error/505', {
+    //         layout: false,
+    //     });
+    // });
+    //
+    // app.use(function (req, res, next) {
+    //     res.render('error/404', {
+    //         layout: false,
+    //     });
+    // });
 }
