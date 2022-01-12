@@ -12,7 +12,7 @@ import passport from "passport";
 import '../auth/authG.js'
 
 const RC = reCapt.RecaptchaV3;
-const recaptcha = new RC('6LcQIwseAAAAAFiZ0ji7QkYS2OOTzoC3_A8RxDT3', '6LcQIwseAAAAAOcMhBaQr140l0XXJ9T5m7pUvQQA', {callback:'cb'});
+const recaptcha = new RC('6LfxSQseAAAAAMyGn4pcIgD-sXSaA4KxzPLEQf0k', '6LfxSQseAAAAAGUWsMdGKFK02MWaBAsao6CVhLaL', {callback:'cb'});
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });

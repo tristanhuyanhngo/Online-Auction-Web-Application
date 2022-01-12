@@ -60,7 +60,7 @@ export default {
 
     sendBidRevive(receiver, proName, price) {
         const curPrice = new Intl.NumberFormat('en-US').format(price);
-        const otpStr = `Your bidding on' + proName + ' has been brought back on stage with ${curPrice}VND!!\nPlease check it out!`;
+        const otpStr = 'Your bidding on' + proName + ' has been brought back on stage with ${curPrice}VND!!\nPlease check it out!';
         const mailOptions = {
             from: "Horizon <horizon@gmail.com>",
             to: receiver,

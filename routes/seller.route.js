@@ -172,7 +172,7 @@ router.post('/', urlencodedParser, [upload.array('img',10), validUploadLength], 
     const cat_id = await productModel.findCatID(req.body.child_category);
     const sell_price = +req.body.sellPrice || null;
     const date = new Date();
-    const upload_date = moment(date).format('YYYY-MM-DD hh:mm:ss');
+    const upload_date = moment(date).format('YYYY-MM-DD HH:mm:ss ');
     const auto_extend = req.body.auto_renew === "Yes" ? true : false;
     const allow_users = req.body.allow_users === "Yes" ? true : false;
     const end_date = moment(req.body.end_date).format('YYYY-MM-DD 00:00:00');
