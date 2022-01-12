@@ -11,13 +11,12 @@ import productModel from "../models/product.model.js";
 import passport from "passport";
 import '../auth/authG.js'
 
-const router = express.Router();
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-router.use(bodyParser.urlencoded({ extended: false }));
-
 const RC = reCapt.RecaptchaV3;
 const recaptcha = new RC('6LcQIwseAAAAAFiZ0ji7QkYS2OOTzoC3_A8RxDT3', '6LcQIwseAAAAAOcMhBaQr140l0XXJ9T5m7pUvQQA', {callback:'cb'});
 
+const router = express.Router();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+router.use(bodyParser.urlencoded({ extended: false }));
 
 let filterSearch = "";
 let searchContent = "product";
@@ -251,7 +250,7 @@ router.get('/register', recaptcha.middleware.render, async function(req, res) {
         res.redirect("/");
     }
     else
-        res.render('register', { captcha:res.recaptcha });
+        res.render('register');
 });
 
 router.get('/forget-password', async function(req, res) {
@@ -421,7 +420,7 @@ router.get('/login', recaptcha.middleware.render, async function(req, res){
         return res.redirect("/");
     }
     else
-        return res.render('login', { captcha:res.recaptcha });
+        return res.render('login', { captcha:recaptcha.render() });
 });
 
 router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', 'profile' ] }
