@@ -308,7 +308,7 @@ router.get('/detail/:id', async function (req, res) {
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
     for (let i = 0; i < related_products.length; i++) {
         const pic = await productModel.findFirstImageByProID(related_products[i].ProID);
-        related_products[i].url = pic;
+        related_products[i].url = pic.LinkURL || '';;
     }
 
     let seller = await userModel.findByEmail(product.Seller);
@@ -371,7 +371,7 @@ router.get('/byBigCat/:id', async function (req, res) {
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset, type);
     for (let i = 0; i < list.length; i++) {
         const pic = await productModel.findFirstImageByProID(list[i].ProID);
-        list[i].url = pic;
+        list[i].url = pic.LinkURL || '';;
     }
 
     let isFirst = 1;
@@ -455,7 +455,7 @@ router.get('/byCat/:id', async function (req, res) {
     const list = await productModel.findPageByCatID(CatID, limit, offset, type);
     for (let i = 0; i < list.length; i++) {
         const pic = await productModel.findFirstImageByProID(list[i].ProID);
-        list[i].url = pic;
+        list[i].url = pic.LinkURL || '';;
     }
 
     let isFirst = 1;

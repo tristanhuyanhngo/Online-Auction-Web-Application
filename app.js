@@ -19,6 +19,8 @@ activate_view_middleware(app);
 activate_locals_middleware(app);
 activate_route_middleware(app);
 
-app.listen(process.env.PORT || 3000, function () {
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+    console.log(port);
 });
 

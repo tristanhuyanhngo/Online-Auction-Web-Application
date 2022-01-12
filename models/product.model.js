@@ -613,7 +613,7 @@ export default {
     },
 
     async findImageByProID(id) {
-        const sql = `select p.URL
+        const sql = `select p.LinkURL
                      from picture p
                      where p.ProID = ${id}
                            and p.STT <> 1`
@@ -622,12 +622,12 @@ export default {
     },
 
     async findFirstImageByProID(id) {
-        const sql = `select p.URL
+        const sql = `select *
                      from picture p
                      where p.ProID = ${id}
-                           and p.STT = 1`
+                           and p.STT = 4`
         const raw = await db.raw(sql);
-        return raw[0][0].URL;
+        return raw[0][0];
     },
 
     async addPicture(entity) {
