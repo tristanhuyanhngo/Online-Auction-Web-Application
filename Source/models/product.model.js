@@ -32,6 +32,7 @@ export default {
 
     async del(id) {
         await db('description').where('ProID', id).del();
+        await db('picture').where('ProID', id).del();
         return db('product').where('ProID', id).del();
     },
 

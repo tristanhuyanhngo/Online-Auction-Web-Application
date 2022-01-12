@@ -27,17 +27,12 @@ cloudinary.config({
 // ****************************************************************************************
 // --------------------------------------- POST PRODUCT -----------------------------------------
 let numberOfImage = 0;
-let ID = await productModel.findIDProduct();
 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: `horizon/product/${ID+1}`,
+        folder: `horizon/product`,
         allowedFormats: ['jpg', 'png'],
-        public_id: (req, file) => {
-            ++numberOfImage;
-            return numberOfImage.toString() +`-${ID + 1}`;
-        }
     },
 });
 
@@ -100,29 +95,6 @@ router.post('/cancel', async(req, res) => {
 
 // Validate number of pictures
 async function validUploadLength(req, res, next) {
-    ID = await productModel.findIDProduct();
-
-    const fileExisted = await (cloudinary.api.sub_folders("horizon/products/", function(error, result){
-        if (error) {
-            console.log("Error read file existed - Cloudinary");
-        } else {
-            console.log("Read file existed succesfully - Cloudinary");
-        }
-    }));
-
-    const fileList = fileExisted.folders;
-    const checkExists = fileList.find( ({ name }) => name == `${ID+1}` );
-    console.log(fileList);
-    console.log(checkExists);
-
-    if (checkExists != undefined) {
-        let path = `horizon/products/${ID+1}`;
-        console.log(path);
-        cloudinary.api.delete_folder(path, function (error, result) {
-            console.log(error);
-        });
-    }
-
     let errorCategory = false;
     let errorImages = false;
     let errorSellPriceLessThanStartPrice = false;
@@ -188,7 +160,7 @@ async function validUploadLength(req, res, next) {
 
 router.post('/', urlencodedParser, [upload.array('img',10), validUploadLength], async function(req, res) {
     let pActive = true;
-    ID = await productModel.findIDProduct();
+    const ID = await productModel.findIDProduct();
     let imageURLList = [];
 
     for (let i = 0; i < req.files.length; i++) {
@@ -433,8 +405,8 @@ router.get('/sold', async (req, res) => {
         // console.log(products[i]);
         products[i].canceled = ((await wonbidModel.cancelBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
         products[i].evaluated = ((await wonbidModel.evaluatedBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
-        console.log(products[i].evaluated);
-        console.log(products[i].canceled);
+        //console.log(products[i].evaluated);
+        //console.log(products[i].canceled);
     }
 
     res.render('seller/sold', {
@@ -532,15 +504,6 @@ router.post('/products',urlencodedParser, async (req, res) => {
 router.post('/products/del',  async (req, res) => {
     const information = await productModel.findBigCatAndCatByProID(req.body.ProID);
     const ret = await productModel.del(req.body.ProID);
-
-    let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
-
-    if (fs.existsSync(filePath)) {
-        //console.log('Directory exists!');
-        fs.rmSync(filePath, { recursive: true });
-    } else {
-        console.log('Directory not found.');
-    }
 
     const url = req.headers.referer || '/seller/products';
     return res.redirect(url);
