@@ -625,7 +625,7 @@ export default {
         const sql = `select *
                      from picture p
                      where p.ProID = ${id}
-                           and p.STT = 4`
+                     limit 1`
         const raw = await db.raw(sql);
         return raw[0][0];
     },

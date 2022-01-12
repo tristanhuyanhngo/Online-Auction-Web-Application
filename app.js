@@ -20,7 +20,5 @@ activate_locals_middleware(app);
 activate_route_middleware(app);
 
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
-    console.log(port);
-});
+app.listen(port, function () {});
 

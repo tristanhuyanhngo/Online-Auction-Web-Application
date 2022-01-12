@@ -286,8 +286,8 @@ router.get('/detail/:id', async function (req, res) {
         }
     }
 
-    const first_pictures = await productModel.findFirstImageByProID(pro_id);
-    // console.log(first_pictures);
+    const temp = await productModel.findFirstImageByProID(pro_id);
+    const first_pictures = temp.LinkURL || '';
     const pictures = await productModel.findImageByProID(pro_id);
     // console.log(pictures)
 
@@ -308,7 +308,7 @@ router.get('/detail/:id', async function (req, res) {
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
     for (let i = 0; i < related_products.length; i++) {
         const pic = await productModel.findFirstImageByProID(related_products[i].ProID);
-        related_products[i].url = pic.LinkURL || '';;
+        related_products[i].url = pic.LinkURL || '';
     }
 
     let seller = await userModel.findByEmail(product.Seller);

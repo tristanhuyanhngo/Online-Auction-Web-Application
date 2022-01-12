@@ -2,7 +2,7 @@
   "type": "module",
   "name": "nodejs-tailwind",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the final project of the course Web Application Development in HCMUS. In this project, we build an online auction market using Tailwind for UI and Raspberry Pi as a back-end server.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -54,5 +54,13 @@
   "devDependencies": {
     "express-session": "^1.17.2",
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tristanhuyanhngo/HCMUS_PTUDW_Final-Project_Online-Auction.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tristanhuyanhngo/HCMUS_PTUDW_Final-Project_Online-Auction/issues"
+  },
+  "homepage": "https://github.com/tristanhuyanhngo/HCMUS_PTUDW_Final-Project_Online-Auction#readme"
 }
