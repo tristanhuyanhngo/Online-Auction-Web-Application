@@ -12,7 +12,7 @@ import passport from "passport";
 import '../auth/authG.js'
 
 const RC = reCapt.RecaptchaV3;
-const recaptcha = new RC('6LfL_ukdAAAAAG6NMUqQsNLhSnhD9X2IVAB24XiC', '6LfL_ukdAAAAAOymLm0tldwv1RZIyPDq27lmoBmt', {callback:'cb'});
+const recaptcha = new RC('6LcO4QoeAAAAAJm0ZJqLnY_LBD9vyge-7YJ-Be2B', '6LcO4QoeAAAAAJKMgzLWUydy3KtgaK6i3FJ68tY1', {callback:'cb'});
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -417,10 +417,10 @@ router.get('/username-available', async function (req, res) {
 // ---------------- LOGIN ---------------- //
 router.get('/login', recaptcha.middleware.render, async function(req, res){
     if(req.session.auth === true) {
-        res.redirect("/");
+        return res.redirect("/");
     }
     else
-        res.render('login', { captcha:recaptcha.render() });
+        return res.render('login', { captcha:recaptcha.render() });
 });
 
 router.get('/auth/google', passport.authenticate('google', { scope: [ 'email', 'profile' ] }
