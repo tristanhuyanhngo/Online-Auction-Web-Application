@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
     }
 
     const bigcat = await categoryModel.findAllWithDetails();
-    console.log(bigcat);
+    //console.log(bigcat);
     return res.redirect('admin/category-parent');
 });
 
@@ -54,7 +54,7 @@ router.get('/category-parent', async (req, res) => {
         }
     }
 
-    console.log(bigcat);
+    //console.log(bigcat);
     res.render('admin/category-parent', {
         cActive,
         bigcat,
@@ -81,14 +81,14 @@ router.post('/account/add',async function(req, res)  {
         Rate: 0
     }
     const ret = await userModel.addUser(user);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/account';
     return res.redirect(url);
 });
 
 router.post('/account/update',async function(req, res) {
     const ret = await userModel.updateUser(req.body);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/account';
     return res.redirect(url);
 });
@@ -96,7 +96,7 @@ router.post('/account/update',async function(req, res) {
 
 router.post('/account/del',   async (req, res) => {
     const ret = await userModel.delUser(req.body.Email);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/account';
     return res.redirect(url);
 });
@@ -105,7 +105,7 @@ router.post('/account/reset',   async (req, res) => {
     const email = req.body.Email;
 
     req.body.Password = await emailModel.sendNewPasswordByAdmin(email);
-    console.log("Pass:",req.body.Password);
+    //console.log("Pass:",req.body.Password);
     await userModel.updateUser(req.body);
 
     const url = req.headers.referer || '/admin/account';
@@ -140,42 +140,42 @@ router.get('/category-child', async (req, res) => {
 
 router.post('/category-parent/add', async (req, res) => {
     const ret = await categoryModel.addBigCat(req.body);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-parent';
     return res.redirect(url);
 });
 
 router.post('/category-child/add',async function(req, res)  {
     const ret = await categoryModel.addCat(req.body);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-child';
     return res.redirect(url);
 });
 
 router.post('/category-parent/update',async function(req, res) {
     const ret = await categoryModel.updateBigCat(req.body);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-parent';
     return res.redirect(url);
 });
 
 router.post('/category-parent/del',async function(req, res) {
     const ret = await categoryModel.delBigCat(req.body.BigCatID);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-parent';
     return res.redirect(url);
 });
 
 router.post('/category-child/del',async function(req, res) {
     const ret = await categoryModel.delCat(req.body.CatID);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-child';
     return res.redirect(url);
 });
 
 router.post('/category-child/update',async function(req, res) {
     const ret = await categoryModel.updateCat(req.body);
-    console.log(ret);
+    //console.log(ret);
     const url = req.headers.referer || '/admin/category-child';
     return res.redirect(url);
 });
@@ -184,22 +184,13 @@ router.post('/product/del',   async (req, res) => {
     const information = await productModel.findBigCatAndCatByProID(req.body.ProID);
     const pro = await productModel.findByProID(req.body.ProID);
 
-    console.log(req.body.ProID);
-    console.log("Pro:",pro);
+    //console.log(req.body.ProID);
+   // console.log("Pro:",pro);
 
     const ret = await productModel.del(req.body.ProID);
 
     emailModel.sendSellerDelPro(pro.ProName,pro.Seller);
-    console.log(ret);
-
-    let filePath = './public/images/Product/' + `${information.bigCatName}/` + `${information.catName}/` + `${req.body.ProID}`;
-
-    if (fs.existsSync(filePath)) {
-        //console.log('Directory exists!');
-        fs.rmSync(filePath, { recursive: true });
-    } else {
-        console.log('Directory not found.');
-    }
+   // console.log(ret);
 
     const url = req.headers.referer || '/admin/product';
     return res.redirect(url);

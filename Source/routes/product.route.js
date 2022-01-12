@@ -179,7 +179,7 @@ router.post('/detail/:id', async function (req, res) {
             Price: queryPrice,
             MaxPrice: product.MaxPrice
         }
-        console.log(bid)
+       // console.log(bid)
         await bidModel.addBidding(bid);
         return res.redirect(url);
     } else {
@@ -237,11 +237,11 @@ router.get('/detail/:id', async function (req, res) {
         if (product.CurrentWinner === req.session.authUser.Email) {
             allowBid = false;
         }
-        console.log("Email",req.session.authUser.Email);
-        console.log("Winner",product.CurrentWinner);
+       // console.log("Email",req.session.authUser.Email);
+       // console.log("Winner",product.CurrentWinner);
         const checkRestrict = await productModel.findRestrict(product.ProID,req.session.authUser.Email)
 
-        console.log("Restrict?",checkRestrict);
+       // console.log("Restrict?",checkRestrict);
         if(checkRestrict!=null){
             isRestrict = true;
         }

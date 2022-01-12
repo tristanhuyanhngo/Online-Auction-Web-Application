@@ -183,7 +183,7 @@ router.get('/search', async function (req, res) {
         list[i].url = pic;
     }
 
-    console.log(list);
+    // console.log(list);
 
     let isFirst = 1;
     let isLast = 1;
@@ -208,6 +208,9 @@ router.get('/search', async function (req, res) {
 
         if(moment.now() - list[i].UploadDate <= 600000)
             list[i].isNew = true;
+
+        if(list[i].SellPrice != null)
+            list[i].isBuyNow = true;
     }
 
     if (list.length !== 0) {
@@ -217,7 +220,7 @@ router.get('/search', async function (req, res) {
 
     const href = "search"
 
-    console.log(list[3])
+    // console.log(list[3])
 
     res.render('search', {
         products: list,

@@ -139,7 +139,7 @@ router.get('/setting/password', (req, res) => {
 
 router.get('/request', (req, res) => {
     let rActive = true;
-    console.log(res.locals.requested);
+    //console.log(res.locals.requested);
     res.render('bidder/request',{
         rActive,
         layout: 'account.handlebars'
@@ -220,7 +220,7 @@ router.get('/wishlist',async (req, res) => {
 router.post('/wishlist/del',async function(req, res) {
     const email = res.locals.authUser.Email;
     const ret = await wishlistModel.delPro(req.body.ProID,email);
-    console.log(ret);
+    //console.log(ret);
 
     const url = req.headers.referer || '/account/wishlist';
     return res.redirect(url);
@@ -235,7 +235,7 @@ router.post('/wishlist/add',async function(req, res) {
         Bidder: email
     }
     const ret = await wishlistModel.add(item);
-    console.log(ret);
+    //console.log(ret);
 
     const url = req.headers.referer || '/account/wishlist';
     return res.redirect(url);
@@ -331,7 +331,7 @@ router.get('/cart', async (req, res) => {
 
     const offset = (page - 1) * limit;
     const list = await cartModel.findPageByEmail(email, limit, offset);
-    console.log(list);
+    //console.log(list);
 
     let isFirst = 1;
     let isLast = 1;
@@ -351,8 +351,8 @@ router.get('/cart', async (req, res) => {
         if(list[i].CurrentWinner === email){
             list[i].selfWin = true;
         }
-        console.log("Winner?",list[i].CurrentWinner);
-        console.log("Win?",list[i].selfWin);
+        //console.log("Winner?",list[i].CurrentWinner);
+        //console.log("Win?",list[i].selfWin);
         if(list[i].ProState.readInt8()===1){
             totalPrice+=+list[i].SellPrice;
             amountProduct++;

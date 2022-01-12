@@ -405,8 +405,8 @@ router.get('/sold', async (req, res) => {
         // console.log(products[i]);
         products[i].canceled = ((await wonbidModel.cancelBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
         products[i].evaluated = ((await wonbidModel.evaluatedBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
-        console.log(products[i].evaluated);
-        console.log(products[i].canceled);
+        //console.log(products[i].evaluated);
+        //console.log(products[i].canceled);
     }
 
     res.render('seller/sold', {
