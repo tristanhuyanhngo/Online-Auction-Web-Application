@@ -52,7 +52,7 @@ export default {
                               join
                           category c
                           on p.CatID = c.CatID
-                     where c.CatID = ${id}`;
+                     where c.CatID = ${id} and p.ProState = true`;
         const raw = await db.raw(sql);
         return raw;
     },
@@ -138,7 +138,7 @@ export default {
                           (category c join big_category b
                               on c.BigCat = b.BigCatID)
                           on p.CatID = c.CatID
-                     where BigCatID = ${bigCatId}`;
+                     where BigCatID = ${bigCatId} and p.ProState = true`;
         const raw = await db.raw(sql);
         return raw;
     },
@@ -163,7 +163,7 @@ export default {
                    where P.Seller = U.Email
                      and P.CatID = C.CatID
                      and C.BigCat = L.BigCatID
-                     and P.EndDate - NOW() > 0
+                     and P.EndDate - NOW() > 0 and P.ProState = true
                      and L.BigCatID = ${bigCatId}
                    GROUP BY P.ProID
                    ORDER BY Price
@@ -189,7 +189,7 @@ export default {
                        P.Seller = U.Email and
                        P.CatID = C.CatID and
                        C.BigCat = L.BigCatID and
-                       P.EndDate - NOW() > 0
+                       P.EndDate - NOW() > 0 and P.ProState = true
                    GROUP BY P.ProID, P.EndDate
                    ORDER BY P.EndDate
                        limit ${limit} offset ${offset}`;
@@ -218,7 +218,7 @@ export default {
                    where P.Seller = U.Email
                      and P.CatID = C.CatID
                      and C.BigCat = L.BigCatID
-                     and P.EndDate - NOW() > 0
+                     and P.EndDate - NOW() > 0 and P.ProState = true
                      and P.CatID = ${catId}
                    GROUP BY P.ProID
                    ORDER BY Price
@@ -244,7 +244,7 @@ export default {
                        P.Seller = U.Email and
                        P.CatID = C.CatID and
                        C.BigCat = L.BigCatID and
-                       P.EndDate - NOW() > 0
+                       P.EndDate - NOW() > 0 and P.ProState = true
                    GROUP BY P.ProID, P.EndDate
                    ORDER BY P.EndDate
                        limit ${limit} offset ${offset}`;
@@ -449,32 +449,32 @@ export default {
         //              where p.ProState = true`;
 
         const sql = `SELECT product.ProID as ProID,
-                           product.CatID as CatID,
-                           product.Seller as Seller,
-                           product.ProName as ProName,
-                           product.StartPrice as StartPrice,
-                           product.StepPrice as StepPrice,
-                           product.SellPrice as SellPrice,
-                           product.UploadDate as UploadDate,
-                           product.EndDate as EndDate,
-                           product.AutoExtend as AutoExtend,
-                           product.ProState as ProState,
-                           product.AllowAllUsers as AllowAllUsers,
-                           category.CatName as CatName,
-                           big_category.BigCatName as BigCatName,
-                           bidding.MaxPrice as MaxPrice,
-                           bidding.Time as Time,
-                           bidding.Price as Price,
-                           bidding.Bidder as CurrentWinner
-                    FROM product
-                             JOIN category ON product.CatID=category.CatID
-                             JOIN big_category ON category.BigCat=big_category.BigCatID
-                             LEFT JOIN bidding ON product.ProID=bidding.ProID  and bidding.Time = (
-                        SELECT max(b.Time)
-                        FROM product as p
-                                 JOIN bidding as b ON p.ProID=b.ProID
-                    )
-                    WHERE product.ProState = true`;
+                            product.CatID as CatID,
+                            product.Seller as Seller,
+                            product.ProName as ProName,
+                            product.StartPrice as StartPrice,
+                            product.StepPrice as StepPrice,
+                            product.SellPrice as SellPrice,
+                            product.UploadDate as UploadDate,
+                            product.EndDate as EndDate,
+                            product.AutoExtend as AutoExtend,
+                            product.ProState as ProState,
+                            product.AllowAllUsers as AllowAllUsers,
+                            category.CatName as CatName,
+                            big_category.BigCatName as BigCatName,
+                            bidding.MaxPrice as MaxPrice,
+                            bidding.Time as Time,
+       bidding.Price as Price,
+       bidding.Bidder as CurrentWinner
+                     FROM product
+                         JOIN category ON product.CatID=category.CatID
+                         JOIN big_category ON category.BigCat=big_category.BigCatID
+                         LEFT JOIN bidding ON product.ProID=bidding.ProID and bidding.Time = (
+                         SELECT max(b.Time)
+                         FROM bidding as b
+                         WHERE b.ProID=product.ProID
+                         )
+                     WHERE product.ProState = true`;
         const raw = await db.raw(sql);
         return raw[0];
     },
@@ -488,6 +488,7 @@ export default {
                      FROM product p
                           INNER JOIN category c on p.CatID = c.CatID
                      WHERE
+                     p.ProState = true and
                          MATCH(c.CatName)
                          AGAINST('${name}')`;
         const raw = await db.raw(sql);
@@ -496,8 +497,8 @@ export default {
 
     async countByProductNameFTX(name) {
         const sql = `SELECT count(*) as amount
-                     FROM product
-                     WHERE
+                     FROM product p
+                     WHERE p.ProState = true and
                          MATCH(ProName)
                          AGAINST('${name}')`;
         const raw = await db.raw(sql);

@@ -255,8 +255,7 @@ router.post('/cancel-final',async function(req, res) {
     const product = req.body.ProID;
     const receiver = req.body.Bidder;
 
-    const pro = productModel.findByProID(product);
-
+    const pro = await productModel.findByProID(product);
     let commentStr = 'Bidder did not receive product!';
 
     const item = {
@@ -405,7 +404,7 @@ router.get('/sold', async (req, res) => {
         // console.log(products[i]);
         products[i].canceled = ((await wonbidModel.cancelBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
         products[i].evaluated = ((await wonbidModel.evaluatedBySeller(products[i].CurrentWinner, products[i].ProID))[0].amount==1);
-        //console.log(products[i].evaluated);
+        console.log("Evaluated?",products[i].evaluated);
         //console.log(products[i].canceled);
     }
 
