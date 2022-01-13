@@ -12,8 +12,8 @@ import passport from "passport";
 import '../auth/authG.js'
 
 const RC = reCapt.RecaptchaV2;
-// const recaptcha = new RC('6LfQWwseAAAAAFMz1X9wwspVTVduwZVCxnREloNd', '6LfQWwseAAAAAEh8seo1271ygLJ93UI7cTRvfzse', {callback:'cb'});
-const recaptcha = new RC('6LfkWwseAAAAANU8zFk2zy0v_d3hzMAvss6BSr4u', '6LfkWwseAAAAAJuEmvTs8IUJPMQZbctGJhH-pAXX', {callback:'cb'});
+const recaptcha = new RC('6LfQWwseAAAAAFMz1X9wwspVTVduwZVCxnREloNd', '6LfQWwseAAAAAEh8seo1271ygLJ93UI7cTRvfzse', {callback:'cb'});
+// const recaptcha = new RC('6LfkWwseAAAAANU8zFk2zy0v_d3hzMAvss6BSr4u', '6LfkWwseAAAAAJuEmvTs8IUJPMQZbctGJhH-pAXX', {callback:'cb'});
 
 const router = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
