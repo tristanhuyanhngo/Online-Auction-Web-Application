@@ -4,22 +4,21 @@ This is the final project of the course Web Application Development in HCMUS. In
 - See detail requirements at: https://hackmd.io/@nndkhoa9/BJKMTpH5r.
 - See source codes in directory `Source`.
 
-## Web application
-This is an online commerce web application which allows people to sell by aution.
-
 ### Tools
 
 - IntelliJ/Visual Studio Code, MySQL Server, XAMPP
-- Still updating ...
+- ...
 
 ### Libraries
 
-- Knex.js, Tailwind, handlebars, express, morgan
-- Still updating ...
+- Knex.js, Tailwind, handlebars, express, morgan, momentjs, passportjs, swal (SweetAlerts)
+- ...
 
 ## Server side
 
-The server relies on Raspberry Pi which is in-charge of a Nodejs server connecting to MySQL.
+- The server relies on Heroku
+- Pictures are uploaded on Cloudinary 
+- Database is deployed to ClearD
 
 ## Authors
 - [Thái Trần Hồng Phúc - 19KTPM - FIT HCMUS](https://github.com/phucthaii1820)
