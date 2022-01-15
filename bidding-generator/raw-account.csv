@@ -1,0 +1,9 @@
+Email,Username,Password,Name,Address,DOB,RegisterDate,Type,Rate,RequestTime,AcceptTime,Valid,OTP,kysutainangqsb@gmail.com,seller1,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Ngô Huy Anh,154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-01-01,2021-12-07,1,0,NULL,NULL,true,NULL
+tristanhuyanhngo@gmail.com,seller2,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Tristan Anh Ngô,155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-02-01,2021-12-07,1,0,NULL,NULL,true,NULL
+thanhhoang4869@gmail.com,seller3,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Hoàng Như Thanh,155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-03-01,2021-12-07,1,0,NULL,NULL,true,NULL
+huyanhngo@gmail.com,admin1,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Ngô Huy Anh,153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,2001-01-01,2021-12-07,3,0,NULL,NULL,true,NULL
+sinsin.4869@gmail.com,admin2,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Hoàng Như Thanh,153 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,2001-01-01,2021-12-07,3,0,NULL,NULL,true,NULL
+springfieldcaptain@gmail.com,bidder1,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Ngô Minh Triết,156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-01-01,2021-12-07,2,0,NULL,NULL,true,NULL
+tristan.hcmus.study@gmail.com,bidder2,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Ngô Ngọc Đăng Khôi,157 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-03-01,2021-12-07,2,0,NULL,NULL,true,NULL
+vminathanhv@gmail.com,bidder3,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Thanh V,160 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-06-01,2021-12-07,2,0,NULL,NULL,true,NULL
+phucthai0108@gmail.com,phuc,$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG,Phuc Thai,156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM,1990-01-01,2021-12-07,2,0,NULL,NULL,true,NULL

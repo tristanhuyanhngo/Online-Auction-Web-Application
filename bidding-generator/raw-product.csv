@@ -1,0 +1,46 @@
+ProID,CatID,Seller,ProName,StartPrice,StepPrice,SellPrice,UploadDate,EndDate,AutoExtend,ProState,AllowAllUsers,CurrentWinner
+1,1,thanhhoang4869@gmail.com,Silver Ring STYLE By PNJ 0000H000007,250000,50000,2000000,2021-12-07,2022-01-31,0,1,0,vminathanhv@gmail.com
+2,1,thanhhoang4869@gmail.com,Ruby Ring STYLE By PNJ XM00X000009,250000,50000,2000000,2021-12-07,2022-01-31,0,1,0,springfieldcaptain@gmail.com
+3,1,kysutainangqsb@gmail.com,Gold Ring with Ruby STYLE By PNJ XM00C060000,250000,50000,2000000,2021-12-07,2022-01-31,0,1,0,vminathanhv@gmail.com
+4,1,kysutainangqsb@gmail.com,Diamond Ring STYLE By PNJ DNA XMXMX000004,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+5,1,kysutainangqsb@gmail.com,10K White Gold Ring PNJ XMXMW001741,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+6,2,kysutainangqsb@gmail.com,Citizen C7 NH8395-77E,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+7,2,thanhhoang4869@gmail.com,MVW MS074-01,500000,100000,2000000,2021-12-07,2022-01-31,0,0,0,vminathanhv@gmail.com
+8,2,thanhhoang4869@gmail.com,G-SHOCK GBA-900-1ADR,500000,100000,2000000,2021-12-07,2022-01-31,0,0,0,vminathanhv@gmail.com
+9,2,kysutainangqsb@gmail.com,Smile Kid SL215L-9,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+10,2,kysutainangqsb@gmail.com,Fossil ES4836 for Woman,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+11,3,thanhhoang4869@gmail.com,Apple Macbook Pro 16 M1 Max 2021,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+12,3,thanhhoang4869@gmail.com,Apple Macbook Pro 14 M1 Max 2021,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+13,3,thanhhoang4869@gmail.com,Apple Macbook Air 2020,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+14,3,thanhhoang4869@gmail.com,Asus Rog Zephyrus Gaming G14,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+15,3,thanhhoang4869@gmail.com,Asus Zenbook UX371EA i7,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+16,3,thanhhoang4869@gmail.com,Asus Zenbook Duo UX482EA i7,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+17,3,thanhhoang4869@gmail.com,HP Omen 15 EK0078TX i7,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+18,3,thanhhoang4869@gmail.com,HP Wow 8TX i5,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+19,3,thanhhoang4869@gmail.com,HP White,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+20,3,kysutainangqsb@gmail.com,Acer Predator Helios,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+21,3,kysutainangqsb@gmail.com,Acer Triton,2000000,500000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+22,3,kysutainangqsb@gmail.com,Dell Gaming,2000000,1000000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+23,3,kysutainangqsb@gmail.com,Dell Blue,2000000,1000000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+24,3,tristanhuyanhngo@gmail.com,LG Gram,2000000,1000000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+25,3,tristanhuyanhngo@gmail.com,Lenovo Idea Pad Gaming 3,2000000,1000000,20000000,2021-12-07,2022-01-31,1,1,1,NULL
+26,4,thanhhoang4869@gmail.com,Iphone 13 Pro,2000000,500000,20000000,2021-12-07,2022-01-31,0,1,0,NULL
+27,4,thanhhoang4869@gmail.com,Xiaomi 10T Pro,2000000,500000,20000000,2021-12-07,2022-01-31,0,1,0,NULL
+28,4,tristanhuyanhngo@gmail.com,Samsung Galaxy Z Flip 3 5G 256GB,2000000,1000000,20000000,2021-12-07,2022-01-31,0,1,0,NULL
+29,4,tristanhuyanhngo@gmail.com,Itel IT2171,2000000,1000000,20000000,2021-12-07,2022-01-31,0,1,0,NULL
+30,4,kysutainangqsb@gmail.com,Energizer E20,2000000,1000000,20000000,2021-12-07,2022-01-31,0,0,0,vminathanhv@gmail.com
+31,5,thanhhoang4869@gmail.com,Mi Band 5,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+32,5,thanhhoang4869@gmail.com,Samsung Galaxy Watch 4,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+33,5,tristanhuyanhngo@gmail.com,Garmin Fenix 4,500000,100000,2000000,2021-12-07,2022-01-31,0,0,0,vminathanhv@gmail.com
+34,5,kysutainangqsb@gmail.com,Beu KW03,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+35,5,kysutainangqsb@gmail.com,Garmin Lily Day,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+36,6,kysutainangqsb@gmail.com,T Shirt,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+37,6,kysutainangqsb@gmail.com,Jeans,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+38,7,thanhhoang4869@gmail.com,Nike Air Force 1 07 QS,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+39,7,thanhhoang4869@gmail.com,Nike Blazer Mid 77 Cozi Brown,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+40,7,thanhhoang4869@gmail.com,Nike Spagetti,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+41,7,thanhhoang4869@gmail.com,Nike Cookies,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+42,7,thanhhoang4869@gmail.com,Nike Blazer Mid 77 Cozi RB,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+43,7,thanhhoang4869@gmail.com,Nike Try,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+44,7,tristanhuyanhngo@gmail.com,Nike Rice,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
+45,7,kysutainangqsb@gmail.com,Nike Kentucky,500000,100000,2000000,2021-12-07,2022-01-31,0,1,0,NULL
