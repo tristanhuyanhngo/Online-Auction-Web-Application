@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/tristanhuyanhngo/Online-Auction-Web-Application">
+    <img src="https://github.com/tristanhuyanhngo/Online-Auction-Web-Application/blob/main/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Web Application Development - Online Auction</h3>
@@ -13,7 +13,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About the Project</a>
+      <a href="#about-the-web-application">About the Web Application</a>
     </li>
     <li>
       <a href="#tools">Tools</a>
@@ -33,9 +33,13 @@
   </ol>
 </details>
 
-# About the Project
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
+# About the Web Application
+<div align="center">
+  <a href="https://github.com/tristanhuyanhngo/Online-Auction-Web-Application">
+    <img src="https://github.com/tristanhuyanhngo/Online-Auction-Web-Application/blob/main/demo.png" alt="demo">
+  </a>
+</div>
+<br>
 This is the final project of the course Web Application Development in HCMUS. In this project, we build an online auction market using Tailwind for UI and Heroku as a host for server.
 
 - See our web app at: https://horizon-online-auction.herokuapp.com/
