@@ -1,27 +1,64 @@
-# Web Application Development - Online Auction
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Web Application Development - Online Auction</h3>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About the Project</a>
+    </li>
+    <li>
+      <a href="#tools">Tools</a>
+    </li>
+    <li>
+      <a href="#usage-libraries">Usage libraries</a>
+    </li>
+    <li>
+      <a href="#server-side">Server-side</a>
+    </li>
+    <li>
+      <a href="#how-to-run-this-project">How to run this project</a>
+    </li>
+    <li>
+      <a href="#authors">Authors</a>
+    </li>
+  </ol>
+</details>
+
+# About the Project
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
 This is the final project of the course Web Application Development in HCMUS. In this project, we build an online auction market using Tailwind for UI and Heroku as a host for server.
 
 - See our web app at: https://horizon-online-auction.herokuapp.com/
 - See detail requirements at: https://hackmd.io/@nndkhoa9/BJKMTpH5r.
 - See source codes in directory `Source`.
 
-### Tools
+# Tools
 
 - IntelliJ/Visual Studio Code, MySQL Server, XAMPP
 - ...
 
-### Libraries
+# Usage libraries
 
 - Knex.js, Tailwind, handlebars, express, morgan, momentjs, passportjs, swal (SweetAlerts)
 - ...
 
-## Server side
+# Server-side
 
 - The server relies on Heroku
 - Pictures are uploaded on Cloudinary 
 - Database is deployed to ClearDB
 
-## How to run this project
+# How to run this project
 This project requires install [Node.js](https://nodejs.org/) and npm first
 
 Install NodeJS through this link:
@@ -84,7 +121,7 @@ Use this command to run the project:
 npm start
 ```
 
-## Authors
+# Authors
 - [Thái Trần Hồng Phúc - 19KTPM - FIT HCMUS](https://github.com/phucthaii1820)
 - [Hoàng Như Thanh - 19KTPM - FIT HCMUS](https://github.com/thanhhoang4869)
 - [Ngô Huy Anh - 19HTTT - FIT HCMUS](https://github.com/tristanhuyanhngo)
